@@ -179,19 +179,25 @@ Verpacke den Preis zwischen zwei starken Argumenten:
 2. Preis: Nenne den Preis
 3. Argument 2 (Nutzen): Beende mit einem weiteren Vorteil
 
-**Kundentypen:**
-- Der Besserwisser: Will alles besser wissen
-- Strategie: Um Hilfe bitten, Bestätigung geben, nicht widersprechen`,
+**Kundentypen (Wichtig für die Klausur!):**
+
+1. Der Besserwisser: Will alles besser wissen. Strategie: Um Hilfe bitten, Bestätigung geben.
+2. Der Zauderer: Unsicher, braucht lange für Entscheidungen. Strategie: Geduld, Sicherheit, Schritt für Schritt.
+3. Der Ungeduldig-Impulsive: Schnell, ungeduldig. Strategie: Kurz und prägnant, schnelle Ergebnisse.
+4. Der Emotionale: Gefühlsorientiert. Strategie: Emotionale Geschichten, Vertrauen aufbauen.
+5. Der Sachliche/Analytiker: Logisch, datenorientiert. Strategie: Fakten, Statistiken, Beweise.
+6. Der Freundliche/Kooperative: Hilfsbereit, leicht zu überzeugen. Strategie: Einfach, klar, Bestätigung.`,
     keyPoints: [
       'Sprechausdruck: Tempo, Lautstärke, Intonation, Aussprache',
       'Körpersprache: Mimik und Gestik unterstützen Aussage',
       'Nutzenargumentation: Merkmal → Vorteil → Nutzen',
-      'Sandwich-Methode: Nutzen → Preis → Nutzen'
+      'Sandwich-Methode: Nutzen → Preis → Nutzen',
+      'Kundentypen: Besserwisser, Zauderer, Impulsiv, Emotional, Analytiker, Kooperativ'
     ]
   }
 ];
 
-// Flashcards (50+)
+// Flashcards (60+)
 export const flashcards: Flashcard[] = [
   // Perception Types
   { id: 'fc1', question: 'Was ist das Hauptmerkmal des Visuellen Typs?', answer: 'Er achtet auf das Äußere und spricht bildhaft.', category: 'Wahrnehmungstypen' },
@@ -258,6 +264,18 @@ export const flashcards: Flashcard[] = [
   { id: 'fc48', question: 'Was ist die Argumentation mit Statistiken?', answer: 'Man nutzt Zahlen und Daten, um die Aussage zu belegen.', category: 'Rhetorik' },
   { id: 'fc49', question: 'Was ist die Pausen-Technik?', answer: 'Ein Gesprächsförderer, der dem Gesprächspartner Zeit zum Nachdenken gibt.', category: 'Aktives Zuhören' },
   { id: 'fc50', question: 'Was ist die Zustimmung?', answer: 'Ein Gesprächsförderer, der die Beziehungsebene stärkt.', category: 'Aktives Zuhören' },
+  
+  // Kundentypen (NEW)
+  { id: 'fc51', question: 'Wie reagierst du auf den Zauderer?', answer: 'Mit Geduld, Sicherheit und Schritt-für-Schritt Erklärungen.', category: 'Kundentypen' },
+  { id: 'fc52', question: 'Was ist die beste Strategie für den Ungeduldig-Impulsiven?', answer: 'Kurz und prägnant argumentieren, schnelle Ergebnisse zeigen.', category: 'Kundentypen' },
+  { id: 'fc53', question: 'Welcher Kundentyp reagiert am besten auf emotionale Geschichten?', answer: 'Der Emotionale Typ.', category: 'Kundentypen' },
+  { id: 'fc54', question: 'Was braucht der Sachliche/Analytiker?', answer: 'Fakten, Statistiken und Beweise.', category: 'Kundentypen' },
+  { id: 'fc55', question: 'Wie behandelst du den Freundlichen/Kooperativen?', answer: 'Einfach, klar und mit Bestätigung.', category: 'Kundentypen' },
+  { id: 'fc56', question: 'Warum ist es wichtig, Kundentypen zu erkennen?', answer: 'Um die Kommunikationsstrategie anzupassen und erfolgreicher zu verkaufen.', category: 'Kundentypen' },
+  { id: 'fc57', question: 'Was ist das Hauptmerkmal des Zauderers?', answer: 'Unsicherheit und lange Entscheidungsfindung.', category: 'Kundentypen' },
+  { id: 'fc58', question: 'Welcher Kundentyp möchte schnelle Ergebnisse?', answer: 'Der Ungeduldig-Impulsive.', category: 'Kundentypen' },
+  { id: 'fc59', question: 'Wie erkennst du den Emotionalen Typ?', answer: 'Er spricht über Gefühle und reagiert auf persönliche Geschichten.', category: 'Kundentypen' },
+  { id: 'fc60', question: 'Was ist die Gefahr bei zu viel Argumentation beim Freundlichen Typ?', answer: 'Er stimmt schnell zu, um Konflikte zu vermeiden, auch wenn er nicht überzeugt ist.', category: 'Kundentypen' },
 ];
 
 // Quiz Questions (60+)
@@ -289,7 +307,7 @@ export const quizQuestions: QuizQuestion[] = [
     type: 'multiple-choice',
     options: ['Ihn korrigieren und Fakten präsentieren.', 'Ihm widersprechen und die eigene Kompetenz betonen.', 'Ihm zustimmen und um Hilfe bitten.', 'Das Gespräch sofort beenden.'],
     correctAnswer: 'Ihm zustimmen und um Hilfe bitten.',
-    explanation: 'Bei einem Besserwisser solltest du um Hilfe bitten und ihm Bestätigung geben. So fühlst er sich wertvoll und kooperiert besser.',
+    explanation: 'Bei einem Besserwisser solltest du um Hilfe bitten und ihm Bestätigung geben. So fühlt er sich wertvoll und kooperiert besser.',
     difficulty: 'easy',
     category: 'Wahrnehmungstypen'
   },
@@ -442,6 +460,426 @@ export const quizQuestions: QuizQuestion[] = [
     explanation: 'Wenn verbale und nonverbale Signale nicht übereinstimmen, spricht man von inkongruenter Kommunikation. Das wirkt unglaubwürdig.',
     difficulty: 'hard',
     category: 'Ausdruck & Verkauf'
+  },
+
+  // NEW QUESTIONS - Customer Types (18-35)
+  {
+    id: 'q18',
+    question: 'Der Zauderer braucht in der Kommunikation vor allem:',
+    type: 'multiple-choice',
+    options: ['Schnelle Entscheidungen', 'Geduld und Sicherheit', 'Emotionale Geschichten', 'Statistiken und Daten'],
+    correctAnswer: 'Geduld und Sicherheit',
+    explanation: 'Der Zauderer ist unsicher und braucht Zeit. Geduld und Sicherheit sind daher die wichtigsten Faktoren.',
+    difficulty: 'easy',
+    category: 'Kundentypen'
+  },
+  {
+    id: 'q19',
+    question: 'Wie erkennst du den Ungeduldig-Impulsiven?',
+    type: 'multiple-choice',
+    options: ['Er stellt viele Fragen', 'Er will schnell auf den Punkt kommen', 'Er erzählt lange Geschichten', 'Er möchte alle Daten sehen'],
+    correctAnswer: 'Er will schnell auf den Punkt kommen',
+    explanation: 'Der Ungeduldig-Impulsive wirkt gehetzt und möchte schnelle Ergebnisse. Er unterbricht oft und will nicht lange zuhören.',
+    difficulty: 'easy',
+    category: 'Kundentypen'
+  },
+  {
+    id: 'q20',
+    question: 'Der Emotionale Kundentyp reagiert am besten auf:',
+    type: 'multiple-choice',
+    options: ['Technische Daten', 'Persönliche Geschichten und Gefühle', 'Schnelle Entscheidungen', 'Logische Argumente'],
+    correctAnswer: 'Persönliche Geschichten und Gefühle',
+    explanation: 'Der Emotionale Typ ist gefühlsorientiert und lässt sich von Emotionen leiten. Persönliche Geschichten wirken daher am besten.',
+    difficulty: 'easy',
+    category: 'Kundentypen'
+  },
+  {
+    id: 'q21',
+    question: 'Was ist das Hauptmerkmal des Sachlichen/Analytikers?',
+    type: 'multiple-choice',
+    options: ['Er ist gefühlsorientiert', 'Er braucht Fakten und Zahlen', 'Er möchte schnelle Entscheidungen', 'Er ist leicht zu überzeugen'],
+    correctAnswer: 'Er braucht Fakten und Zahlen',
+    explanation: 'Der Analytiker ist logisch und datenorientiert. Er fragt nach Beweisen und möchte Statistiken sehen.',
+    difficulty: 'easy',
+    category: 'Kundentypen'
+  },
+  {
+    id: 'q22',
+    question: 'Der Freundliche/Kooperative Kundentyp hat welche Schwäche?',
+    type: 'multiple-choice',
+    options: ['Er ist zu kritisch', 'Er stimmt schnell zu, um Konflikte zu vermeiden', 'Er braucht zu lange für Entscheidungen', 'Er ist zu emotional'],
+    correctAnswer: 'Er stimmt schnell zu, um Konflikte zu vermeiden',
+    explanation: 'Der Freundliche Typ möchte allen gefallen und vermeidet Konflikte. Er kann daher zu schnell zustimmen, ohne wirklich überzeugt zu sein.',
+    difficulty: 'medium',
+    category: 'Kundentypen'
+  },
+  {
+    id: 'q23',
+    question: 'Welche Strategie ist FALSCH für den Zauderer?',
+    type: 'multiple-choice',
+    options: ['Geduld zeigen', 'Schritt für Schritt erklären', 'Schnelle Entscheidungen erzwingen', 'Sicherheit geben'],
+    correctAnswer: 'Schnelle Entscheidungen erzwingen',
+    explanation: 'Der Zauderer braucht Zeit. Schnelle Entscheidungen zu erzwingen, führt zu Frustration und Ablehnung.',
+    difficulty: 'medium',
+    category: 'Kundentypen'
+  },
+  {
+    id: 'q24',
+    question: 'Wie solltest du mit dem Ungeduldig-Impulsiven kommunizieren?',
+    type: 'open',
+    correctAnswer: 'Kurz und prägnant, schnelle Ergebnisse zeigen, auf den Punkt kommen',
+    explanation: 'Der Ungeduldig-Impulsive hat keine Geduld für lange Erklärungen. Kurze, prägnante Argumente mit schnellen Ergebnissen wirken am besten.',
+    difficulty: 'medium',
+    category: 'Kundentypen'
+  },
+  {
+    id: 'q25',
+    question: 'Was ist der Unterschied zwischen dem Emotionalen und dem Analytiker?',
+    type: 'open',
+    correctAnswer: 'Der Emotionale braucht Gefühle und Geschichten, der Analytiker braucht Fakten und Daten',
+    explanation: 'Der Emotionale Typ wird von Gefühlen geleitet, der Analytiker von Logik und Daten. Sie brauchen völlig unterschiedliche Strategien.',
+    difficulty: 'hard',
+    category: 'Kundentypen'
+  },
+  {
+    id: 'q26',
+    question: 'Welcher Kundentyp ist am leichtesten zu überzeugen?',
+    type: 'multiple-choice',
+    options: ['Der Besserwisser', 'Der Zauderer', 'Der Freundliche/Kooperative', 'Der Analytiker'],
+    correctAnswer: 'Der Freundliche/Kooperative',
+    explanation: 'Der Freundliche Typ ist hilfsbereit und leicht zu überzeugen. Er möchte Konflikte vermeiden und stimmt schnell zu.',
+    difficulty: 'easy',
+    category: 'Kundentypen'
+  },
+  {
+    id: 'q27',
+    question: 'Wie reagiert der Besserwisser auf direkte Kritik?',
+    type: 'multiple-choice',
+    options: ['Er akzeptiert sie sofort', 'Er wird defensiv und widerspricht', 'Er ignoriert sie', 'Er fragt nach Beweisen'],
+    correctAnswer: 'Er wird defensiv und widerspricht',
+    explanation: 'Der Besserwisser will alles besser wissen. Direkte Kritik führt zu Defensivität. Besser: um Hilfe bitten und Bestätigung geben.',
+    difficulty: 'medium',
+    category: 'Kundentypen'
+  },
+  {
+    id: 'q28',
+    question: 'Der Zauderer stellt typischerweise:',
+    type: 'multiple-choice',
+    options: ['Wenige Fragen', 'Viele Fragen', 'Keine Fragen', 'Nur kritische Fragen'],
+    correctAnswer: 'Viele Fragen',
+    explanation: 'Der Zauderer ist unsicher und möchte alles genau wissen. Er stellt daher viele Fragen, bevor er eine Entscheidung trifft.',
+    difficulty: 'easy',
+    category: 'Kundentypen'
+  },
+  {
+    id: 'q29',
+    question: 'Welcher Kundentyp braucht die meiste Zeit für eine Entscheidung?',
+    type: 'multiple-choice',
+    options: ['Der Emotionale', 'Der Ungeduldig-Impulsive', 'Der Zauderer', 'Der Analytiker'],
+    correctAnswer: 'Der Zauderer',
+    explanation: 'Der Zauderer ist unsicher und vorsichtig. Er braucht die meiste Zeit, um eine Entscheidung zu treffen.',
+    difficulty: 'easy',
+    category: 'Kundentypen'
+  },
+  {
+    id: 'q30',
+    question: 'Der Analytiker möchte vor einer Entscheidung:',
+    type: 'multiple-choice',
+    options: ['Eine emotionale Geschichte hören', 'Alle Daten und Statistiken sehen', 'Schnell zum Punkt kommen', 'Mit anderen Kunden sprechen'],
+    correctAnswer: 'Alle Daten und Statistiken sehen',
+    explanation: 'Der Analytiker ist logisch und datenorientiert. Er möchte alle Fakten und Zahlen sehen, bevor er eine Entscheidung trifft.',
+    difficulty: 'easy',
+    category: 'Kundentypen'
+  },
+  {
+    id: 'q31',
+    question: 'Wie solltest du mit dem Freundlichen/Kooperativen umgehen?',
+    type: 'open',
+    correctAnswer: 'Einfach und klar kommunizieren, Bestätigung geben, keine zu langen Diskussionen',
+    explanation: 'Der Freundliche Typ möchte einfache, klare Informationen und Bestätigung. Lange, komplizierte Diskussionen verwirren ihn.',
+    difficulty: 'medium',
+    category: 'Kundentypen'
+  },
+  {
+    id: 'q32',
+    question: 'Welcher Kundentyp ist am ehesten bereit, deine Meinung zu akzeptieren?',
+    type: 'multiple-choice',
+    options: ['Der Besserwisser', 'Der Zauderer', 'Der Freundliche/Kooperative', 'Der Analytiker'],
+    correctAnswer: 'Der Freundliche/Kooperative',
+    explanation: 'Der Freundliche Typ möchte Konflikte vermeiden und ist daher am ehesten bereit, deine Meinung zu akzeptieren.',
+    difficulty: 'medium',
+    category: 'Kundentypen'
+  },
+  {
+    id: 'q33',
+    question: 'Der Emotionale Kundentyp entscheidet hauptsächlich basierend auf:',
+    type: 'multiple-choice',
+    options: ['Logischen Argumenten', 'Gefühlen und Bauchgefühl', 'Statistiken', 'Schnelligkeit'],
+    correctAnswer: 'Gefühlen und Bauchgefühl',
+    explanation: 'Der Emotionale Typ ist gefühlsorientiert und lässt sich von Emotionen leiten. Er entscheidet basierend auf seinem Bauchgefühl.',
+    difficulty: 'easy',
+    category: 'Kundentypen'
+  },
+  {
+    id: 'q34',
+    question: 'Welche Fehler machst du beim Ungeduldig-Impulsiven?',
+    type: 'multiple-choice',
+    options: ['Du sprichst zu schnell', 'Du erklärst zu viel und zu lange', 'Du fragst zu viele Fragen', 'Du zeigst zu viele Daten'],
+    correctAnswer: 'Du erklärst zu viel und zu lange',
+    explanation: 'Der Ungeduldig-Impulsive hat keine Geduld für lange Erklärungen. Zu viel Text führt zu Ungeduld und Ablehnung.',
+    difficulty: 'medium',
+    category: 'Kundentypen'
+  },
+  {
+    id: 'q35',
+    question: 'Der Besserwisser fühlt sich am wohlsten, wenn:',
+    type: 'multiple-choice',
+    options: ['Er schnell eine Entscheidung treffen kann', 'Er seine Kompetenz zeigen kann', 'Er lange Zeit zum Nachdenken hat', 'Er emotionale Geschichten hört'],
+    correctAnswer: 'Er seine Kompetenz zeigen kann',
+    explanation: 'Der Besserwisser will alles besser wissen. Er fühlt sich am wohlsten, wenn er seine Kompetenz zeigen kann. Strategie: um Hilfe bitten.',
+    difficulty: 'medium',
+    category: 'Kundentypen'
+  },
+
+  // MORE QUESTIONS - Extended Quiz (36-60+)
+  {
+    id: 'q36',
+    question: 'Welche Wahrnehmungstyp-Strategie ist am wirksamsten für den Visuellen Typ?',
+    type: 'multiple-choice',
+    options: ['Lange mündliche Erklärungen', 'Visuelle Prospekte und Diagramme', 'Anfassen und Probieren', 'Schnelle Entscheidungen'],
+    correctAnswer: 'Visuelle Prospekte und Diagramme',
+    explanation: 'Der Visuelle Typ achtet auf das Äußere. Prospekte, Diagramme und visuelles Material sind daher sehr wirksam.',
+    difficulty: 'easy',
+    category: 'Wahrnehmungstypen'
+  },
+  {
+    id: 'q37',
+    question: 'Was ist das Risiko bei der Sandwich-Methode?',
+    type: 'open',
+    correctAnswer: 'Der Preis könnte trotzdem zu dominant wirken oder der Kunde könnte die Nutzenargumente nicht ernst nehmen',
+    explanation: 'Die Sandwich-Methode ist effektiv, aber wenn die Nutzenargumente nicht stark genug sind, wirkt der Preis trotzdem zu dominant.',
+    difficulty: 'hard',
+    category: 'Ausdruck & Verkauf'
+  },
+  {
+    id: 'q38',
+    question: 'Welcher Bauplan ist am besten für eine Klausur-Argumentation?',
+    type: 'multiple-choice',
+    options: ['Kettenbauplan', 'Fünfsatz-Technik', 'Dialektischer Aufbau', 'Vergleich'],
+    correctAnswer: 'Fünfsatz-Technik',
+    explanation: 'Die Fünfsatz-Technik ist der Standard-Bauplan und am besten für klausurrelevante Argumentationen geeignet.',
+    difficulty: 'medium',
+    category: 'Rhetorik'
+  },
+  {
+    id: 'q39',
+    question: 'Wie unterscheiden sich Gesprächsförderer und Gesprächsstörer?',
+    type: 'open',
+    correctAnswer: 'Förderer öffnen die Kommunikation und bauen Vertrauen auf, Störer blockieren die Kommunikation und führen zu Abwehrhaltung',
+    explanation: 'Gesprächsförderer ermutigen den Gesprächspartner weiterzusprechen, während Störer die Kommunikation blockieren.',
+    difficulty: 'hard',
+    category: 'Aktives Zuhören'
+  },
+  {
+    id: 'q40',
+    question: 'Welche Frage-Technik solltest du am Anfang eines Gesprächs nutzen?',
+    type: 'multiple-choice',
+    options: ['Geschlossene Fragen', 'Offene Fragen', 'Alternativfragen', 'Suggestivfragen'],
+    correctAnswer: 'Offene Fragen',
+    explanation: 'Am Anfang solltest du offene Fragen stellen, um Informationen zu sammeln und den Gesprächspartner zum Erzählen zu bringen.',
+    difficulty: 'easy',
+    category: 'Fragetechniken'
+  },
+  {
+    id: 'q41',
+    question: 'Was ist der Unterschied zwischen Merkmal und Vorteil?',
+    type: 'open',
+    correctAnswer: 'Merkmal ist die Eigenschaft des Produkts, Vorteil ist was das Merkmal dem Kunden ermöglicht',
+    explanation: 'Merkmal: "128 GB Speicher". Vorteil: "Sie können viele Fotos speichern". Der Vorteil zeigt, was das Merkmal kann.',
+    difficulty: 'medium',
+    category: 'Ausdruck & Verkauf'
+  },
+  {
+    id: 'q42',
+    question: 'Wann solltest du eine Gegenfrage stellen?',
+    type: 'multiple-choice',
+    options: ['Am Anfang des Gesprächs', 'Wenn du Zeit gewinnen oder Unklarheiten klären möchtest', 'Am Ende des Gesprächs', 'Nie'],
+    correctAnswer: 'Wenn du Zeit gewinnen oder Unklarheiten klären möchtest',
+    explanation: 'Gegenfragen sind nützlich, um Zeit zu gewinnen oder Missverständnisse zu vermeiden. Sie sollten aber nicht zu oft verwendet werden.',
+    difficulty: 'medium',
+    category: 'Fragetechniken'
+  },
+  {
+    id: 'q43',
+    question: 'Welche Rolle spielt die Körpersprache in der Kommunikation?',
+    type: 'open',
+    correctAnswer: 'Sie unterstützt und bekräftigt die gesprochene Aussage. Wenn Körpersprache und Worte nicht übereinstimmen, wirkt es unglaubwürdig',
+    explanation: 'Körpersprache ist ein wichtiger Teil der Kommunikation. Sie sollte die Worte unterstützen, nicht widersprechen.',
+    difficulty: 'hard',
+    category: 'Ausdruck & Verkauf'
+  },
+  {
+    id: 'q44',
+    question: 'Was ist das Hauptziel des Aktiven Zuhörens?',
+    type: 'multiple-choice',
+    options: ['Schnell eine Antwort zu geben', 'Vertrauen aufzubauen und Missverständnisse zu vermeiden', 'Den anderen zu unterbrechen', 'Die eigene Meinung zu zeigen'],
+    correctAnswer: 'Vertrauen aufzubauen und Missverständnisse zu vermeiden',
+    explanation: 'Aktives Zuhören ist die Königsdisziplin, um Vertrauen aufzubauen und Missverständnisse zu vermeiden.',
+    difficulty: 'easy',
+    category: 'Aktives Zuhören'
+  },
+  {
+    id: 'q45',
+    question: 'Wie viele Argumente sollte die Fünfsatz-Technik haben?',
+    type: 'multiple-choice',
+    options: ['Zwei', 'Drei', 'Vier', 'Fünf'],
+    correctAnswer: 'Drei',
+    explanation: 'Die Fünfsatz-Technik hat fünf Teile: Einstieg, 3 Argumente und Schluss. Also 3 Argumente insgesamt.',
+    difficulty: 'easy',
+    category: 'Rhetorik'
+  },
+  {
+    id: 'q46',
+    question: 'Was ist der Unterschied zwischen These und Antithese?',
+    type: 'open',
+    correctAnswer: 'These ist die Hauptaussage, Antithese ist der Gegenargument oder die gegenteilige Aussage',
+    explanation: 'These: "Produkt A ist besser". Antithese: "Produkt B ist besser". Die Synthese vereint beide zu einer neuen Erkenntnis.',
+    difficulty: 'hard',
+    category: 'Rhetorik'
+  },
+  {
+    id: 'q47',
+    question: 'Welche Strategie ist am besten für den Auditiven Typ?',
+    type: 'multiple-choice',
+    options: ['Prospekte zeigen', 'Klangvolle, klare Argumentation', 'Etwas zum Anfassen geben', 'Schnelle Entscheidungen'],
+    correctAnswer: 'Klangvolle, klare Argumentation',
+    explanation: 'Der Auditive Typ achtet auf den Klang und die Wortwahl. Klangvolle, klare Argumentation ist daher am wirksamsten.',
+    difficulty: 'easy',
+    category: 'Wahrnehmungstypen'
+  },
+  {
+    id: 'q48',
+    question: 'Was ist das Ziel einer Alternativfrage?',
+    type: 'multiple-choice',
+    options: ['Informationen sammeln', 'Die Entscheidung in eine bestimmte Richtung lenken', 'Zeit gewinnen', 'Den anderen zu verwirren'],
+    correctAnswer: 'Die Entscheidung in eine bestimmte Richtung lenken',
+    explanation: 'Alternativfragen geben zwei Optionen vor und lenken die Entscheidung in eine bestimmte Richtung. Beispiel: "Modell A oder B?"',
+    difficulty: 'medium',
+    category: 'Fragetechniken'
+  },
+  {
+    id: 'q49',
+    question: 'Wie erkennst du den Kinästhetischen Typ?',
+    type: 'multiple-choice',
+    options: ['Er spricht über Zahlen', 'Er spricht über Gefühle und Bauchgefühl', 'Er spricht über Farben', 'Er spricht über Logik'],
+    correctAnswer: 'Er spricht über Gefühle und Bauchgefühl',
+    explanation: 'Der Kinästhetische Typ spricht über Gefühle. Ausdrücke wie "Das fühlt sich richtig an" sind typisch für diesen Typ.',
+    difficulty: 'easy',
+    category: 'Wahrnehmungstypen'
+  },
+  {
+    id: 'q50',
+    question: 'Was ist der Unterschied zwischen Logos und Pathos?',
+    type: 'open',
+    correctAnswer: 'Logos ist die logische, sachliche Begründung. Pathos ist die emotionale Ansprache',
+    explanation: 'Logos: Fakten und Logik. Pathos: Gefühle und Emotionen. Beide sind wichtig für eine gute Argumentation.',
+    difficulty: 'hard',
+    category: 'Rhetorik'
+  },
+  {
+    id: 'q51',
+    question: 'Welche Fehler machst du beim Zauderer?',
+    type: 'multiple-choice',
+    options: ['Du erklärst zu viel', 'Du erzwingst schnelle Entscheidungen', 'Du gibst ihm nicht genug Zeit', 'Alle oben genannten'],
+    correctAnswer: 'Alle oben genannten',
+    explanation: 'Der Zauderer braucht Zeit und Geduld. Alle diese Fehler führen zu Frustration und Ablehnung.',
+    difficulty: 'hard',
+    category: 'Kundentypen'
+  },
+  {
+    id: 'q52',
+    question: 'Wie solltest du den Analytiker überzeugen?',
+    type: 'open',
+    correctAnswer: 'Mit Fakten, Statistiken, Daten und wissenschaftlichen Beweisen',
+    explanation: 'Der Analytiker ist logisch und datenorientiert. Nur Fakten und Beweise überzeugen ihn.',
+    difficulty: 'medium',
+    category: 'Kundentypen'
+  },
+  {
+    id: 'q53',
+    question: 'Was ist das Risiko bei zu viel Zustimmung beim Freundlichen Typ?',
+    type: 'multiple-choice',
+    options: ['Er wird ungeduldig', 'Er stimmt zu schnell zu, ohne wirklich überzeugt zu sein', 'Er wird kritisch', 'Er fragt zu viele Fragen'],
+    correctAnswer: 'Er stimmt zu schnell zu, ohne wirklich überzeugt zu sein',
+    explanation: 'Der Freundliche Typ möchte Konflikte vermeiden. Zu viel Zustimmung kann dazu führen, dass er zu schnell zustimmt.',
+    difficulty: 'hard',
+    category: 'Kundentypen'
+  },
+  {
+    id: 'q54',
+    question: 'Welche Frage-Technik solltest du am Ende eines Gesprächs nutzen?',
+    type: 'multiple-choice',
+    options: ['Offene Fragen', 'Geschlossene Fragen', 'Gegenfragen', 'Suggestivfragen'],
+    correctAnswer: 'Geschlossene Fragen',
+    explanation: 'Am Ende solltest du geschlossene Fragen stellen, um eine Entscheidung herbeizuführen. Beispiel: "Sind Sie damit einverstanden?"',
+    difficulty: 'medium',
+    category: 'Fragetechniken'
+  },
+  {
+    id: 'q55',
+    question: 'Was ist die wichtigste Regel beim Umgang mit dem Besserwisser?',
+    type: 'open',
+    correctAnswer: 'Nicht widersprechen, um Hilfe bitten, Bestätigung geben',
+    explanation: 'Der Besserwisser will alles besser wissen. Wenn du ihn nicht widersprichst und um Hilfe bittest, fühlt er sich wertvoll.',
+    difficulty: 'medium',
+    category: 'Kundentypen'
+  },
+  {
+    id: 'q56',
+    question: 'Wie unterscheiden sich die 3 Wahrnehmungstypen in ihrer Entscheidungsfindung?',
+    type: 'open',
+    correctAnswer: 'Visueller: nach Aussehen und Diagrammen. Auditiver: nach Klang und Argumentation. Kinästhetischer: nach Gefühl und Bauchgefühl',
+    explanation: 'Jeder Typ entscheidet basierend auf seiner bevorzugten Wahrnehmung. Das ist wichtig für die richtige Kommunikationsstrategie.',
+    difficulty: 'hard',
+    category: 'Wahrnehmungstypen'
+  },
+  {
+    id: 'q57',
+    question: 'Was ist das Hauptproblem bei Suggestivfragen?',
+    type: 'open',
+    correctAnswer: 'Sie sind manipulativ und führen zu Misstrauen. Der Gesprächspartner fühlt sich unter Druck gesetzt',
+    explanation: 'Suggestivfragen legen die Antwort in den Mund. Das wirkt manipulativ und führt zu Misstrauen.',
+    difficulty: 'hard',
+    category: 'Fragetechniken'
+  },
+  {
+    id: 'q58',
+    question: 'Welcher Kundentyp ist am schwierigsten zu handhaben?',
+    type: 'multiple-choice',
+    options: ['Der Emotionale', 'Der Besserwisser', 'Der Zauderer', 'Der Analytiker'],
+    correctAnswer: 'Der Besserwisser',
+    explanation: 'Der Besserwisser ist am schwierigsten, weil er alles besser weiß und ständig widerspricht. Man muss sehr vorsichtig mit ihm umgehen.',
+    difficulty: 'hard',
+    category: 'Kundentypen'
+  },
+  {
+    id: 'q59',
+    question: 'Was ist die Synthese im Dialektischen Aufbau?',
+    type: 'multiple-choice',
+    options: ['Die These', 'Die Antithese', 'Die Zusammenführung von These und Antithese zu einer neuen Erkenntnis', 'Der Beweis'],
+    correctAnswer: 'Die Zusammenführung von These und Antithese zu einer neuen Erkenntnis',
+    explanation: 'Die Synthese vereint These und Antithese zu einer neuen, umfassenderen Erkenntnis. Das ist der Höhepunkt der Argumentation.',
+    difficulty: 'hard',
+    category: 'Rhetorik'
+  },
+  {
+    id: 'q60',
+    question: 'Wie kombinierst du die Wahrnehmungstypen und Kundentypen in der Praxis?',
+    type: 'open',
+    correctAnswer: 'Du erkennst zuerst den Wahrnehmungstyp (visuell, auditiv, kinästhetisch) und dann den Kundentyp (Besserwisser, Zauderer, etc.) und passt deine Strategie an beide an',
+    explanation: 'In der Praxis musst du beide Systeme kombinieren. Ein Kunde kann z.B. ein visueller Besserwisser sein. Dann brauchst du eine Strategie, die beide Aspekte berücksichtigt.',
+    difficulty: 'hard',
+    category: 'Allgemein'
   },
 ];
 
