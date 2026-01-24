@@ -31,13 +31,12 @@ export default function Quiz({
     if (question.type === 'multiple-choice') {
       correct = selectedAnswer === question.correctAnswer;
     } else if (question.type === 'open') {
-      // Simple check: if the answer contains key words from the correct answer
       const userAnswer = openAnswer.toLowerCase().trim();
       const correctAnswerLower = (question.correctAnswer as string).toLowerCase();
       correct =
         userAnswer.includes(correctAnswerLower) ||
         correctAnswerLower.includes(userAnswer) ||
-        userAnswer.length > 10; // Give partial credit for effort
+        userAnswer.length > 10;
     }
 
     setIsCorrect(correct);
@@ -54,43 +53,44 @@ export default function Quiz({
 
   return (
     <div className="w-full max-w-2xl mx-auto">
-      {/* Progress */}
-      <div className="mb-6">
-        <div className="flex justify-between items-center mb-2">
-          <span className="text-sm font-medium">
-            Frage {questionNumber} von {totalQuestions}
+      {/* Progress - ADHS Optimized */}
+      <div className="mb-6 adhs-focus">
+        <div className="flex justify-between items-center mb-3">
+          <span className="text-sm font-bold uppercase tracking-widest">
+            Frage {questionNumber} / {totalQuestions}
           </span>
-          <span className="text-xs text-muted-foreground">
-            Schwierigkeit:{' '}
+          <span className="text-xs font-bold text-cyan-400 uppercase">
             {question.difficulty === 'easy'
-              ? 'Leicht'
+              ? '● LEICHT'
               : question.difficulty === 'medium'
-                ? 'Mittel'
-                : 'Schwer'}
+                ? '● MITTEL'
+                : '● SCHWER'}
           </span>
         </div>
-        <div className="w-full bg-secondary rounded-full h-2">
+        <div className="w-full bg-gray-800 rounded-sm h-3 border border-pink-500">
           <div
-            className="bg-primary h-2 rounded-full transition-all duration-300"
+            className="bg-gradient-to-r from-pink-500 to-cyan-400 h-3 rounded-sm transition-all duration-300"
             style={{ width: `${(questionNumber / totalQuestions) * 100}%` }}
           />
         </div>
       </div>
 
-      {/* Question */}
-      <Card className="p-6 mb-6">
-        <h3 className="text-lg font-semibold mb-4">{question.question}</h3>
+      {/* Question Card - Hotline Miami Style */}
+      <div className="quiz-card mb-6">
+        <h3 className="text-lg font-bold mb-6 text-white uppercase tracking-wide">
+          {question.question}
+        </h3>
 
         {/* Multiple Choice */}
         {question.type === 'multiple-choice' && (
           <RadioGroup value={selectedAnswer} onValueChange={setSelectedAnswer}>
             <div className="space-y-3">
               {question.options?.map((option, idx) => (
-                <div key={idx} className="flex items-center space-x-2">
+                <div key={idx} className="flex items-center space-x-3 p-3 border border-gray-700 rounded-sm hover:border-pink-500 transition-colors cursor-pointer">
                   <RadioGroupItem value={option} id={`option-${idx}`} />
                   <Label
                     htmlFor={`option-${idx}`}
-                    className="cursor-pointer flex-1 font-normal"
+                    className="cursor-pointer flex-1 font-normal text-white"
                   >
                     {option}
                   </Label>
@@ -106,37 +106,31 @@ export default function Quiz({
             placeholder="Deine Antwort hier..."
             value={openAnswer}
             onChange={(e) => setOpenAnswer(e.target.value)}
-            className="min-h-32"
+            className="min-h-32 bg-black/50 border-2 border-gray-700 text-white placeholder-gray-600 focus:border-cyan-400"
           />
         )}
-      </Card>
+      </div>
 
-      {/* Result */}
+      {/* Result - Hotline Miami Style */}
       {showResult && (
-        <Card
-          className={`p-6 mb-6 border-2 ${
-            isCorrect
-              ? 'border-green-500 bg-green-50 dark:bg-green-950'
-              : 'border-red-500 bg-red-50 dark:bg-red-950'
-          }`}
-        >
-          <div className="flex gap-3 mb-3">
+        <div className={`quiz-card ${isCorrect ? 'correct' : 'incorrect'}`}>
+          <div className="flex gap-4 mb-4">
             {isCorrect ? (
-              <CheckCircle className="w-6 h-6 text-green-600 flex-shrink-0" />
+              <CheckCircle className="w-8 h-8 text-cyan-400 flex-shrink-0" />
             ) : (
-              <XCircle className="w-6 h-6 text-red-600 flex-shrink-0" />
+              <XCircle className="w-8 h-8 text-pink-500 flex-shrink-0" />
             )}
-            <div>
-              <h4 className="font-semibold mb-2">
-                {isCorrect ? '✓ Richtig!' : '✗ Leider falsch'}
+            <div className="flex-1">
+              <h4 className={`font-bold mb-3 text-lg ${isCorrect ? 'text-cyan-400' : 'text-pink-500'} uppercase tracking-widest`}>
+                {isCorrect ? '▶ RICHTIG ◀' : '▶ FALSCH ◀'}
               </h4>
-              <p className="text-sm mb-3">{question.explanation}</p>
+              <p className="text-sm mb-4 leading-relaxed text-gray-200">{question.explanation}</p>
               {!isCorrect && (
-                <div className="bg-white dark:bg-slate-900 p-3 rounded border border-red-200 dark:border-red-800">
-                  <p className="text-xs font-medium text-muted-foreground mb-1">
-                    Richtige Antwort:
+                <div className="bg-black/50 p-4 rounded-sm border-l-4 border-cyan-400 mb-3">
+                  <p className="text-xs font-bold text-cyan-400 mb-2 uppercase tracking-widest">
+                    Korrekte Antwort:
                   </p>
-                  <p className="text-sm font-medium">
+                  <p className="text-sm font-semibold text-white">
                     {Array.isArray(question.correctAnswer)
                       ? question.correctAnswer.join(', ')
                       : question.correctAnswer}
@@ -145,10 +139,10 @@ export default function Quiz({
               )}
             </div>
           </div>
-        </Card>
+        </div>
       )}
 
-      {/* Buttons */}
+      {/* Buttons - Hotline Miami Style */}
       <div className="flex gap-3 justify-between">
         {!showResult ? (
           <Button
@@ -157,13 +151,16 @@ export default function Quiz({
               (question.type === 'multiple-choice' && !selectedAnswer) ||
               (question.type === 'open' && !openAnswer.trim())
             }
-            className="w-full"
+            className="w-full bg-pink-600 hover:bg-pink-500 text-black font-bold uppercase tracking-widest border-2 border-pink-500 rounded-sm"
           >
-            Antwort prüfen
+            ▶ ANTWORT PRÜFEN ◀
           </Button>
         ) : (
-          <Button onClick={handleNext} className="w-full">
-            {questionNumber < totalQuestions ? 'Nächste Frage' : 'Zum Ergebnis'}
+          <Button 
+            onClick={handleNext} 
+            className="w-full bg-cyan-500 hover:bg-cyan-400 text-black font-bold uppercase tracking-widest border-2 border-cyan-500 rounded-sm"
+          >
+            {questionNumber < totalQuestions ? '▶ NÄCHSTE ◀' : '▶ ERGEBNIS ◀'}
           </Button>
         )}
       </div>
