@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { quizQuestions } from '@/lib/learningData';
 import { useLearningProgress } from '@/hooks/useLearningProgress';
 import QuizComponent from '@/components/Quiz';
-import { RotateCcw, Trophy } from 'lucide-react';
+import { RotateCcw, Trophy, AlertCircle, CheckCircle, XCircle } from 'lucide-react';
 
 type QuizState = 'start' | 'quiz' | 'results';
 
@@ -59,149 +59,208 @@ export default function QuizPage() {
 
   return (
     <div className="space-y-6">
-      <div className="mb-6">
-        <h2 className="text-2xl font-bold mb-2">📝 Klausur-Quiz</h2>
-        <p className="text-muted-foreground">
+      {/* Header */}
+      <div className="adhs-section">
+        <h2 className="adhs-section-title">▶ KLAUSUR-QUIZ ◀</h2>
+        <p className="text-sm text-gray-300">
           Teste dein Wissen mit {quizQuestions.length} prüfungsrelevanten Fragen.
         </p>
       </div>
 
       {/* Start Screen */}
       {quizState === 'start' && (
-        <Card className="p-8 text-center space-y-6">
-          <div className="w-16 h-16 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mx-auto">
-            <Trophy className="w-8 h-8 text-blue-600 dark:text-blue-400" />
+        <div className="quiz-card p-8 text-center space-y-6">
+          <div className="w-16 h-16 bg-pink-500/20 border-2 border-pink-500 rounded-sm flex items-center justify-center mx-auto">
+            <Trophy className="w-8 h-8 text-pink-500" />
           </div>
           <div>
-            <h3 className="text-2xl font-bold mb-2">Bereit für das Quiz?</h3>
-            <p className="text-muted-foreground mb-6">
-              Du wirst {quizQuestions.length} Fragen beantworten. Jede Frage hat
-              eine Erklärung, damit du lernst.
+            <h3 className="text-2xl font-bold mb-2 text-pink-500 uppercase tracking-widest">
+              ▶ BEREIT FÜR DAS QUIZ? ◀
+            </h3>
+            <p className="text-gray-300 mb-6">
+              Du wirst {quizQuestions.length} Fragen beantworten. 
+              Alle Ergebnisse werden am Ende angezeigt.
             </p>
             <div className="grid grid-cols-3 gap-4 mb-6 text-center">
-              <div className="bg-slate-100 dark:bg-slate-800 p-4 rounded-lg">
-                <p className="text-2xl font-bold text-blue-600">
+              <div className="bg-gray-800 border-2 border-cyan-400 p-4 rounded-sm">
+                <p className="text-2xl font-bold text-cyan-400">
                   {quizQuestions.length}
                 </p>
-                <p className="text-xs text-muted-foreground">Fragen</p>
+                <p className="text-xs text-gray-400 uppercase tracking-widest">Fragen</p>
               </div>
-              <div className="bg-slate-100 dark:bg-slate-800 p-4 rounded-lg">
-                <p className="text-2xl font-bold text-green-600">~10 min</p>
-                <p className="text-xs text-muted-foreground">Dauer</p>
+              <div className="bg-gray-800 border-2 border-yellow-400 p-4 rounded-sm">
+                <p className="text-2xl font-bold text-yellow-400">~15 min</p>
+                <p className="text-xs text-gray-400 uppercase tracking-widest">Dauer</p>
               </div>
-              <div className="bg-slate-100 dark:bg-slate-800 p-4 rounded-lg">
-                <p className="text-2xl font-bold text-purple-600">70%</p>
-                <p className="text-xs text-muted-foreground">Bestanden</p>
+              <div className="bg-gray-800 border-2 border-purple-400 p-4 rounded-sm">
+                <p className="text-2xl font-bold text-purple-400">70%</p>
+                <p className="text-xs text-gray-400 uppercase tracking-widest">Bestanden</p>
               </div>
             </div>
           </div>
-          <Button onClick={handleStartQuiz} size="lg" className="w-full">
-            Quiz starten
+          <Button 
+            onClick={handleStartQuiz} 
+            className="w-full bg-pink-600 hover:bg-pink-500 text-black font-bold uppercase tracking-widest rounded-sm text-lg py-6"
+          >
+            ▶ QUIZ STARTEN ◀
           </Button>
-        </Card>
+
+          {/* Narrator Tip */}
+          <div className="narrator don-juan mt-6">
+            <div className="narrator-name text-yellow-400">▶ DON JUAN ◀</div>
+            <p className="text-sm leading-relaxed">
+              "Vertrau deinem Instinkt. Du wirst alle Ergebnisse am Ende sehen – konzentriere dich jetzt auf jede Frage."
+            </p>
+          </div>
+        </div>
       )}
 
       {/* Quiz Screen */}
-      {quizState === 'quiz' && (
-        <QuizComponent
-          question={currentQuestion}
-          onAnswer={handleAnswer}
-          questionNumber={currentQuestionIndex + 1}
-          totalQuestions={quizQuestions.length}
-        />
+      {quizState === 'quiz' && currentQuestion && (
+        <div>
+          <QuizComponent
+            question={currentQuestion}
+            onAnswer={handleAnswer}
+            questionNumber={currentQuestionIndex + 1}
+            totalQuestions={quizQuestions.length}
+            showFeedback={false}
+          />
+        </div>
       )}
 
       {/* Results Screen */}
       {quizState === 'results' && (
         <div className="space-y-6">
           {/* Score Card */}
-          <Card
-            className={`p-8 text-center border-2 ${
-              isPassed
-                ? 'border-green-500 bg-green-50 dark:bg-green-950'
-                : 'border-orange-500 bg-orange-50 dark:bg-orange-950'
-            }`}
-          >
-            <div className="mb-4">
-              <p className="text-6xl font-bold mb-2">
-                {percentage}
-                <span className="text-3xl">%</span>
-              </p>
-              <p className="text-xl font-semibold mb-2">
-                {correctAnswers} von {quizQuestions.length} richtig
-              </p>
-              <p
-                className={`text-lg font-medium ${
-                  isPassed
-                    ? 'text-green-700 dark:text-green-200'
-                    : 'text-orange-700 dark:text-orange-200'
-                }`}
-              >
-                {isPassed ? '🎉 Bestanden!' : '💪 Noch nicht ganz...'}
-              </p>
+          <div className={`quiz-card p-8 text-center border-2 ${
+            isPassed ? 'border-cyan-400 bg-cyan-400/10' : 'border-pink-500 bg-pink-500/10'
+          }`}>
+            <div className="flex justify-center mb-4">
+              {isPassed ? (
+                <CheckCircle className="w-16 h-16 text-cyan-400" />
+              ) : (
+                <AlertCircle className="w-16 h-16 text-pink-500" />
+              )}
             </div>
-          </Card>
+            <h2 className={`text-3xl font-bold mb-2 uppercase tracking-widest ${
+              isPassed ? 'text-cyan-400' : 'text-pink-500'
+            }`}>
+              {isPassed ? '✓ BESTANDEN!' : '✗ NICHT BESTANDEN'}
+            </h2>
+            <p className="text-gray-300 mb-6">
+              {isPassed 
+                ? 'Großartig! Du bist bereit für die Klausur!' 
+                : 'Noch nicht ganz – wiederhole die schwachen Punkte!'}
+            </p>
 
-          {/* Feedback */}
-          <Card className="p-6 space-y-4">
-            <h3 className="font-semibold text-lg">Dein Ergebnis:</h3>
+            {/* Score Display */}
+            <div className="grid grid-cols-3 gap-4 mb-8">
+              <div className="bg-gray-800 border-2 border-cyan-400 p-6 rounded-sm">
+                <p className="text-4xl font-bold text-cyan-400">{percentage}%</p>
+                <p className="text-xs text-gray-400 uppercase tracking-widest mt-2">Gesamt</p>
+              </div>
+              <div className="bg-gray-800 border-2 border-green-400 p-6 rounded-sm">
+                <p className="text-4xl font-bold text-green-400">{correctAnswers}</p>
+                <p className="text-xs text-gray-400 uppercase tracking-widest mt-2">Richtig</p>
+              </div>
+              <div className="bg-gray-800 border-2 border-red-400 p-6 rounded-sm">
+                <p className="text-4xl font-bold text-red-400">{quizQuestions.length - correctAnswers}</p>
+                <p className="text-xs text-gray-400 uppercase tracking-widest mt-2">Falsch</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Detailed Results */}
+          <div className="adhs-section">
+            <h3 className="adhs-section-title">▶ DETAILLIERTE ERGEBNISSE ◀</h3>
+            <div className="space-y-2">
+              {quizAnswers.map((answer, idx) => {
+                const question = quizQuestions.find(q => q.id === answer.questionId);
+                return (
+                  <div 
+                    key={idx}
+                    className={`p-4 rounded-sm border-l-4 ${
+                      answer.correct
+                        ? 'border-cyan-400 bg-cyan-400/10'
+                        : 'border-pink-500 bg-pink-500/10'
+                    }`}
+                  >
+                    <div className="flex items-start gap-3">
+                      {answer.correct ? (
+                        <CheckCircle className="w-5 h-5 text-cyan-400 flex-shrink-0 mt-1" />
+                      ) : (
+                        <XCircle className="w-5 h-5 text-pink-500 flex-shrink-0 mt-1" />
+                      )}
+                      <div className="flex-1">
+                        <p className="text-sm font-bold text-white mb-1">
+                          Frage {idx + 1}: {question?.question}
+                        </p>
+                        <p className="text-xs text-gray-300 mb-2">
+                          {question?.explanation}
+                        </p>
+                        {!answer.correct && (
+                          <p className="text-xs text-yellow-400 font-bold">
+                            Richtige Antwort: {question?.correctAnswer}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Narrator Messages */}
+          <div className="grid md:grid-cols-2 gap-4">
             {isPassed ? (
-              <div className="space-y-3">
-                <p className="text-green-700 dark:text-green-200">
-                  ✓ Großartig! Du hast die Klausur bestanden!
-                </p>
-                <p className="text-sm text-muted-foreground">
-                  Du bist gut vorbereitet. Wiederhole die Themen, bei denen du
-                  unsicher warst, und du wirst eine sehr gute Note bekommen.
-                </p>
-              </div>
+              <>
+                <div className="narrator richard">
+                  <div className="narrator-name text-pink-500">▶ RICHARD ◀</div>
+                  <p className="text-sm leading-relaxed">
+                    "Hervorragend! Du beherrschst das Thema. Geh jetzt in die Klausur und zeig, was du kannst!"
+                  </p>
+                </div>
+                <div className="narrator rasmus">
+                  <div className="narrator-name text-cyan-400">▶ RASMUS ◀</div>
+                  <p className="text-sm leading-relaxed">
+                    "Deine Logik und Struktur sind perfekt. Du bist vorbereitet."
+                  </p>
+                </div>
+              </>
             ) : (
-              <div className="space-y-3">
-                <p className="text-orange-700 dark:text-orange-200">
-                  Noch nicht ganz – aber du machst Fortschritte!
-                </p>
-                <p className="text-sm text-muted-foreground">
-                  Gehe zurück zu den Themen, die dir Schwierigkeiten bereitet
-                  haben, und wiederhole die Flashcards. Du schaffst das!
-                </p>
-              </div>
+              <>
+                <div className="narrator richard">
+                  <div className="narrator-name text-pink-500">▶ RICHARD ◀</div>
+                  <p className="text-sm leading-relaxed">
+                    "Nicht aufgeben! Wiederhole die Themen, bei denen du Fehler gemacht hast."
+                  </p>
+                </div>
+                <div className="narrator don-juan">
+                  <div className="narrator-name text-yellow-400">▶ DON JUAN ◀</div>
+                  <p className="text-sm leading-relaxed">
+                    "Du bist näher dran, als du denkst. Vertrau deinem Bauchgefühl und lerne weiter."
+                  </p>
+                </div>
+              </>
             )}
-          </Card>
+          </div>
 
-          {/* Stats */}
-          <Card className="p-6">
-            <h3 className="font-semibold mb-4">Statistik:</h3>
-            <div className="space-y-3">
-              <div className="flex justify-between items-center">
-                <span className="text-sm">Richtige Antworten</span>
-                <span className="font-bold text-green-600">
-                  {correctAnswers}
-                </span>
-              </div>
-              <div className="flex justify-between items-center">
-                <span className="text-sm">Falsche Antworten</span>
-                <span className="font-bold text-red-600">
-                  {quizQuestions.length - correctAnswers}
-                </span>
-              </div>
-              <div className="flex justify-between items-center">
-                <span className="text-sm">Erfolgsquote</span>
-                <span className="font-bold text-blue-600">{percentage}%</span>
-              </div>
-            </div>
-          </Card>
-
-          {/* Actions */}
+          {/* Action Buttons */}
           <div className="flex gap-3">
             <Button
-              variant="outline"
               onClick={handleRestartQuiz}
-              className="flex-1 gap-2"
+              className="flex-1 bg-pink-600 hover:bg-pink-500 text-black font-bold uppercase tracking-widest rounded-sm"
             >
-              <RotateCcw className="w-4 h-4" />
-              Nochmal versuchen
+              <RotateCcw className="w-4 h-4 mr-2" />
+              ▶ QUIZ WIEDERHOLEN ◀
             </Button>
-            <Button className="flex-1">Zur Übersicht</Button>
+            <Button
+              onClick={() => setQuizState('start')}
+              className="flex-1 bg-cyan-500 hover:bg-cyan-400 text-black font-bold uppercase tracking-widest rounded-sm"
+            >
+              ▶ ZURÜCK ZUM START ◀
+            </Button>
           </div>
         </div>
       )}

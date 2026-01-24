@@ -182,7 +182,7 @@ Verpacke den Preis zwischen zwei starken Argumenten:
 **Kundentypen (Wichtig für die Klausur!):**
 
 1. Der Besserwisser: Will alles besser wissen. Strategie: Um Hilfe bitten, Bestätigung geben.
-2. Der Zauderer: Unsicher, braucht lange für Entscheidungen. Strategie: Geduld, Sicherheit, Schritt für Schritt.
+2. Der Entscheidungsschwache: Unsicher, braucht lange für Entscheidungen. Strategie: Geduld, Sicherheit, Schritt für Schritt.
 3. Der Ungeduldig-Impulsive: Schnell, ungeduldig. Strategie: Kurz und prägnant, schnelle Ergebnisse.
 4. Der Emotionale: Gefühlsorientiert. Strategie: Emotionale Geschichten, Vertrauen aufbauen.
 5. Der Sachliche/Analytiker: Logisch, datenorientiert. Strategie: Fakten, Statistiken, Beweise.
@@ -465,11 +465,11 @@ export const quizQuestions: QuizQuestion[] = [
   // NEW QUESTIONS - Customer Types (18-35)
   {
     id: 'q18',
-    question: 'Der Zauderer braucht in der Kommunikation vor allem:',
+    question: 'Der Entscheidungsschwache braucht in der Kommunikation vor allem:',
     type: 'multiple-choice',
     options: ['Schnelle Entscheidungen', 'Geduld und Sicherheit', 'Emotionale Geschichten', 'Statistiken und Daten'],
     correctAnswer: 'Geduld und Sicherheit',
-    explanation: 'Der Zauderer ist unsicher und braucht Zeit. Geduld und Sicherheit sind daher die wichtigsten Faktoren.',
+    explanation: 'Der Entscheidungsschwache ist unsicher und braucht Zeit. Geduld und Sicherheit sind daher die wichtigsten Faktoren.',
     difficulty: 'easy',
     category: 'Kundentypen'
   },
@@ -519,7 +519,7 @@ export const quizQuestions: QuizQuestion[] = [
     type: 'multiple-choice',
     options: ['Geduld zeigen', 'Schritt für Schritt erklären', 'Schnelle Entscheidungen erzwingen', 'Sicherheit geben'],
     correctAnswer: 'Schnelle Entscheidungen erzwingen',
-    explanation: 'Der Zauderer braucht Zeit. Schnelle Entscheidungen zu erzwingen, führt zu Frustration und Ablehnung.',
+    explanation: 'Der Entscheidungsschwache braucht Zeit. Schnelle Entscheidungen zu erzwingen, führt zu Frustration und Ablehnung.',
     difficulty: 'medium',
     category: 'Kundentypen'
   },
@@ -545,7 +545,7 @@ export const quizQuestions: QuizQuestion[] = [
     id: 'q26',
     question: 'Welcher Kundentyp ist am leichtesten zu überzeugen?',
     type: 'multiple-choice',
-    options: ['Der Besserwisser', 'Der Zauderer', 'Der Freundliche/Kooperative', 'Der Analytiker'],
+    options: ['Der Besserwisser', 'Der Entscheidungsschwache', 'Der Freundliche/Kooperative', 'Der Analytiker'],
     correctAnswer: 'Der Freundliche/Kooperative',
     explanation: 'Der Freundliche Typ ist hilfsbereit und leicht zu überzeugen. Er möchte Konflikte vermeiden und stimmt schnell zu.',
     difficulty: 'easy',
@@ -563,11 +563,11 @@ export const quizQuestions: QuizQuestion[] = [
   },
   {
     id: 'q28',
-    question: 'Der Zauderer stellt typischerweise:',
+    question: 'Der Entscheidungsschwache stellt typischerweise:',
     type: 'multiple-choice',
     options: ['Wenige Fragen', 'Viele Fragen', 'Keine Fragen', 'Nur kritische Fragen'],
     correctAnswer: 'Viele Fragen',
-    explanation: 'Der Zauderer ist unsicher und möchte alles genau wissen. Er stellt daher viele Fragen, bevor er eine Entscheidung trifft.',
+    explanation: 'Der Entscheidungsschwache ist unsicher und möchte alles genau wissen. Er stellt daher viele Fragen, bevor er eine Entscheidung trifft.',
     difficulty: 'easy',
     category: 'Kundentypen'
   },
@@ -575,9 +575,9 @@ export const quizQuestions: QuizQuestion[] = [
     id: 'q29',
     question: 'Welcher Kundentyp braucht die meiste Zeit für eine Entscheidung?',
     type: 'multiple-choice',
-    options: ['Der Emotionale', 'Der Ungeduldig-Impulsive', 'Der Zauderer', 'Der Analytiker'],
-    correctAnswer: 'Der Zauderer',
-    explanation: 'Der Zauderer ist unsicher und vorsichtig. Er braucht die meiste Zeit, um eine Entscheidung zu treffen.',
+    options: ['Der Emotionale', 'Der Ungeduldig-Impulsive', 'Der Entscheidungsschwache', 'Der Analytiker'],
+    correctAnswer: 'Der Entscheidungsschwache',
+    explanation: 'Der Entscheidungsschwache ist unsicher und vorsichtig. Er braucht die meiste Zeit, um eine Entscheidung zu treffen.',
     difficulty: 'easy',
     category: 'Kundentypen'
   },
@@ -604,7 +604,7 @@ export const quizQuestions: QuizQuestion[] = [
     id: 'q32',
     question: 'Welcher Kundentyp ist am ehesten bereit, deine Meinung zu akzeptieren?',
     type: 'multiple-choice',
-    options: ['Der Besserwisser', 'Der Zauderer', 'Der Freundliche/Kooperative', 'Der Analytiker'],
+    options: ['Der Besserwisser', 'Der Entscheidungsschwache', 'Der Freundliche/Kooperative', 'Der Analytiker'],
     correctAnswer: 'Der Freundliche/Kooperative',
     explanation: 'Der Freundliche Typ möchte Konflikte vermeiden und ist daher am ehesten bereit, deine Meinung zu akzeptieren.',
     difficulty: 'medium',
@@ -792,7 +792,7 @@ export const quizQuestions: QuizQuestion[] = [
     type: 'multiple-choice',
     options: ['Du erklärst zu viel', 'Du erzwingst schnelle Entscheidungen', 'Du gibst ihm nicht genug Zeit', 'Alle oben genannten'],
     correctAnswer: 'Alle oben genannten',
-    explanation: 'Der Zauderer braucht Zeit und Geduld. Alle diese Fehler führen zu Frustration und Ablehnung.',
+    explanation: 'Der Entscheidungsschwache braucht Zeit und Geduld. Alle diese Fehler führen zu Frustration und Ablehnung.',
     difficulty: 'hard',
     category: 'Kundentypen'
   },
@@ -856,7 +856,7 @@ export const quizQuestions: QuizQuestion[] = [
     id: 'q58',
     question: 'Welcher Kundentyp ist am schwierigsten zu handhaben?',
     type: 'multiple-choice',
-    options: ['Der Emotionale', 'Der Besserwisser', 'Der Zauderer', 'Der Analytiker'],
+    options: ['Der Emotionale', 'Der Besserwisser', 'Der Entscheidungsschwache', 'Der Analytiker'],
     correctAnswer: 'Der Besserwisser',
     explanation: 'Der Besserwisser ist am schwierigsten, weil er alles besser weiß und ständig widerspricht. Man muss sehr vorsichtig mit ihm umgehen.',
     difficulty: 'hard',

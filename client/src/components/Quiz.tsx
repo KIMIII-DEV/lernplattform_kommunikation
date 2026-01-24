@@ -12,6 +12,7 @@ interface QuizProps {
   onAnswer: (correct: boolean) => void;
   questionNumber: number;
   totalQuestions: number;
+  showFeedback?: boolean;
 }
 
 export default function Quiz({
@@ -19,6 +20,7 @@ export default function Quiz({
   onAnswer,
   questionNumber,
   totalQuestions,
+  showFeedback = false,
 }: QuizProps) {
   const [selectedAnswer, setSelectedAnswer] = useState<string>('');
   const [openAnswer, setOpenAnswer] = useState<string>('');
@@ -37,6 +39,8 @@ export default function Quiz({
         userAnswer.includes(correctAnswerLower) ||
         correctAnswerLower.includes(userAnswer) ||
         userAnswer.length > 10;
+    } else if (question.type === 'matching') {
+      correct = selectedAnswer === question.correctAnswer;
     }
 
     setIsCorrect(correct);
@@ -56,10 +60,10 @@ export default function Quiz({
       {/* Progress - ADHS Optimized */}
       <div className="mb-6 adhs-focus">
         <div className="flex justify-between items-center mb-3">
-          <span className="text-sm font-bold uppercase tracking-widest">
+          <span className="text-sm font-bold uppercase tracking-widest text-cyan-400">
             Frage {questionNumber} / {totalQuestions}
           </span>
-          <span className="text-xs font-bold text-cyan-400 uppercase">
+          <span className="text-xs font-bold text-yellow-400 uppercase">
             {question.difficulty === 'easy'
               ? '● LEICHT'
               : question.difficulty === 'medium'
@@ -86,12 +90,9 @@ export default function Quiz({
           <RadioGroup value={selectedAnswer} onValueChange={setSelectedAnswer}>
             <div className="space-y-3">
               {question.options?.map((option, idx) => (
-                <div key={idx} className="flex items-center space-x-3 p-3 border border-gray-700 rounded-sm hover:border-pink-500 transition-colors cursor-pointer">
+                <div key={idx} className="flex items-center space-x-3 p-3 border border-gray-700 rounded-sm hover:bg-gray-800/50 cursor-pointer">
                   <RadioGroupItem value={option} id={`option-${idx}`} />
-                  <Label
-                    htmlFor={`option-${idx}`}
-                    className="cursor-pointer flex-1 font-normal text-white"
-                  >
+                  <Label htmlFor={`option-${idx}`} className="cursor-pointer flex-1 text-gray-200">
                     {option}
                   </Label>
                 </div>
@@ -100,70 +101,89 @@ export default function Quiz({
           </RadioGroup>
         )}
 
-        {/* Open Question */}
+        {/* Open Answer */}
         {question.type === 'open' && (
           <Textarea
-            placeholder="Deine Antwort hier..."
             value={openAnswer}
             onChange={(e) => setOpenAnswer(e.target.value)}
-            className="min-h-32 bg-black/50 border-2 border-gray-700 text-white placeholder-gray-600 focus:border-cyan-400"
+            placeholder="Schreibe deine Antwort hier..."
+            className="bg-gray-800 border-gray-700 text-white placeholder-gray-500 rounded-sm min-h-32"
           />
+        )}
+
+        {/* Matching */}
+        {question.type === 'matching' && (
+          <RadioGroup value={selectedAnswer} onValueChange={setSelectedAnswer}>
+            <div className="space-y-3">
+              {question.options?.map((option, idx) => (
+                <div key={idx} className="flex items-center space-x-3 p-3 border border-gray-700 rounded-sm hover:bg-gray-800/50 cursor-pointer">
+                  <RadioGroupItem value={option} id={`match-${idx}`} />
+                  <Label htmlFor={`match-${idx}`} className="cursor-pointer flex-1 text-gray-200">
+                    {option}
+                  </Label>
+                </div>
+              ))}
+            </div>
+          </RadioGroup>
         )}
       </div>
 
-      {/* Result - Hotline Miami Style */}
-      {showResult && (
-        <div className={`quiz-card ${isCorrect ? 'correct' : 'incorrect'}`}>
-          <div className="flex gap-4 mb-4">
+      {/* Feedback - ONLY if showFeedback is true (at end of quiz) */}
+      {showResult && showFeedback && (
+        <div className={`mb-6 p-4 rounded-sm border-2 ${
+          isCorrect
+            ? 'border-cyan-400 bg-cyan-400/10'
+            : 'border-pink-500 bg-pink-500/10'
+        }`}>
+          <div className="flex items-start gap-3">
             {isCorrect ? (
-              <CheckCircle className="w-8 h-8 text-cyan-400 flex-shrink-0" />
+              <CheckCircle className="w-6 h-6 text-cyan-400 flex-shrink-0 mt-1" />
             ) : (
-              <XCircle className="w-8 h-8 text-pink-500 flex-shrink-0" />
+              <XCircle className="w-6 h-6 text-pink-500 flex-shrink-0 mt-1" />
             )}
-            <div className="flex-1">
-              <h4 className={`font-bold mb-3 text-lg ${isCorrect ? 'text-cyan-400' : 'text-pink-500'} uppercase tracking-widest`}>
-                {isCorrect ? '▶ RICHTIG ◀' : '▶ FALSCH ◀'}
+            <div>
+              <h4 className={`font-bold uppercase tracking-widest mb-2 ${
+                isCorrect ? 'text-cyan-400' : 'text-pink-500'
+              }`}>
+                {isCorrect ? '✓ RICHTIG' : '✗ FALSCH'}
               </h4>
-              <p className="text-sm mb-4 leading-relaxed text-gray-200">{question.explanation}</p>
+              <p className="text-sm text-gray-300 mb-3">
+                {question.explanation}
+              </p>
               {!isCorrect && (
-                <div className="bg-black/50 p-4 rounded-sm border-l-4 border-cyan-400 mb-3">
-                  <p className="text-xs font-bold text-cyan-400 mb-2 uppercase tracking-widest">
-                    Korrekte Antwort:
-                  </p>
-                  <p className="text-sm font-semibold text-white">
-                    {Array.isArray(question.correctAnswer)
-                      ? question.correctAnswer.join(', ')
-                      : question.correctAnswer}
-                  </p>
-                </div>
+                <p className="text-sm text-yellow-400 font-bold">
+                  Richtige Antwort: {question.correctAnswer}
+                </p>
               )}
             </div>
           </div>
         </div>
       )}
 
-      {/* Buttons - Hotline Miami Style */}
-      <div className="flex gap-3 justify-between">
-        {!showResult ? (
-          <Button
-            onClick={handleSubmit}
-            disabled={
-              (question.type === 'multiple-choice' && !selectedAnswer) ||
-              (question.type === 'open' && !openAnswer.trim())
-            }
-            className="w-full bg-pink-600 hover:bg-pink-500 text-black font-bold uppercase tracking-widest border-2 border-pink-500 rounded-sm"
-          >
-            ▶ ANTWORT PRÜFEN ◀
-          </Button>
-        ) : (
-          <Button 
-            onClick={handleNext} 
-            className="w-full bg-cyan-500 hover:bg-cyan-400 text-black font-bold uppercase tracking-widest border-2 border-cyan-500 rounded-sm"
-          >
-            {questionNumber < totalQuestions ? '▶ NÄCHSTE ◀' : '▶ ERGEBNIS ◀'}
-          </Button>
-        )}
-      </div>
+      {/* Submit Button */}
+      {!showResult && (
+        <Button
+          onClick={handleSubmit}
+          disabled={
+            (question.type === 'multiple-choice' && !selectedAnswer) ||
+            (question.type === 'open' && !openAnswer) ||
+            (question.type === 'matching' && !selectedAnswer)
+          }
+          className="w-full bg-pink-600 hover:bg-pink-500 text-black font-bold uppercase tracking-widest rounded-sm disabled:opacity-50"
+        >
+          ▶ ANTWORT PRÜFEN ◀
+        </Button>
+      )}
+
+      {/* Next Button */}
+      {showResult && (
+        <Button
+          onClick={handleNext}
+          className="w-full bg-cyan-500 hover:bg-cyan-400 text-black font-bold uppercase tracking-widest rounded-sm"
+        >
+          ▶ NÄCHSTE FRAGE ◀
+        </Button>
+      )}
     </div>
   );
 }
