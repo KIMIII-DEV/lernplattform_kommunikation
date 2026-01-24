@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
-import { CheckCircle, XCircle, AlertCircle } from 'lucide-react';
+import { CheckCircle, XCircle } from 'lucide-react';
 import { QuizQuestion } from '@/lib/learningData';
 
 interface QuizProps {
@@ -26,6 +26,7 @@ export default function Quiz({
   const [openAnswer, setOpenAnswer] = useState<string>('');
   const [showResult, setShowResult] = useState(false);
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
+  const [autoAdvanceTimer, setAutoAdvanceTimer] = useState<NodeJS.Timeout | null>(null);
 
   const handleSubmit = () => {
     let correct = false;
@@ -46,14 +47,34 @@ export default function Quiz({
     setIsCorrect(correct);
     setShowResult(true);
     onAnswer(correct);
+
+    // Auto-advance after 2 seconds if not at end
+    if (questionNumber < totalQuestions) {
+      const timer = setTimeout(() => {
+        handleNext();
+      }, 2000);
+      setAutoAdvanceTimer(timer);
+    }
   };
 
   const handleNext = () => {
+    if (autoAdvanceTimer) {
+      clearTimeout(autoAdvanceTimer);
+      setAutoAdvanceTimer(null);
+    }
     setSelectedAnswer('');
     setOpenAnswer('');
     setShowResult(false);
     setIsCorrect(null);
   };
+
+  useEffect(() => {
+    return () => {
+      if (autoAdvanceTimer) {
+        clearTimeout(autoAdvanceTimer);
+      }
+    };
+  }, [autoAdvanceTimer]);
 
   return (
     <div className="w-full max-w-2xl mx-auto">
@@ -160,6 +181,22 @@ export default function Quiz({
         </div>
       )}
 
+      {/* Quick Feedback during quiz (no showFeedback) */}
+      {showResult && !showFeedback && (
+        <div className={`mb-6 p-3 rounded-sm border-2 text-center ${
+          isCorrect
+            ? 'border-cyan-400 bg-cyan-400/10'
+            : 'border-pink-500 bg-pink-500/10'
+        }`}>
+          <p className={`font-bold uppercase tracking-widest ${
+            isCorrect ? 'text-cyan-400' : 'text-pink-500'
+          }`}>
+            {isCorrect ? '✓ RICHTIG' : '✗ FALSCH'}
+          </p>
+          <p className="text-xs text-gray-400 mt-1">Nächste Frage in Kürze...</p>
+        </div>
+      )}
+
       {/* Submit Button */}
       {!showResult && (
         <Button
@@ -175,13 +212,13 @@ export default function Quiz({
         </Button>
       )}
 
-      {/* Next Button */}
-      {showResult && (
+      {/* Next Button - Only shown at end of quiz */}
+      {showResult && questionNumber === totalQuestions && (
         <Button
           onClick={handleNext}
           className="w-full bg-cyan-500 hover:bg-cyan-400 text-black font-bold uppercase tracking-widest rounded-sm"
         >
-          ▶ NÄCHSTE FRAGE ◀
+          ▶ ZUM ERGEBNIS ◀
         </Button>
       )}
     </div>
