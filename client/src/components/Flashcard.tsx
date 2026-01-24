@@ -22,56 +22,35 @@ export default function Flashcard({
 
   return (
     <div className="w-full max-w-2xl mx-auto">
-      {/* Progress indicator */}
-      <div className="mb-4 text-sm text-muted-foreground text-center">
-        Karte {cardNumber} von {totalCards}
-      </div>
-
-      {/* Flashcard */}
+      {/* Flashcard Container */}
       <div
-        className="h-64 cursor-pointer perspective"
         onClick={() => setIsFlipped(!isFlipped)}
+        className="flashcard cursor-pointer min-h-64 flex flex-col items-center justify-center p-8 text-center"
       >
-        <Card
-          className={`h-full w-full flex items-center justify-center p-8 transition-all duration-300 transform ${
-            isFlipped ? 'bg-accent' : 'bg-card'
-          } hover:shadow-lg`}
-        >
-          <div className="text-center">
-            <div className="text-xs font-semibold text-muted-foreground mb-4 uppercase tracking-wide">
-              {isFlipped ? '✓ Antwort' : '? Frage'}
-            </div>
-            <p className="text-lg font-medium leading-relaxed">
-              {isFlipped ? answer : question}
-            </p>
-            <div className="mt-6 text-xs text-muted-foreground">
-              Klick zum Umdrehen
-            </div>
-          </div>
-        </Card>
+        <div className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-4">
+          {isFlipped ? '▶ ANTWORT ◀' : '▶ FRAGE ◀'}
+        </div>
+        
+        <div className="text-lg font-bold text-white mb-6">
+          {isFlipped ? answer : question}
+        </div>
+
+        <div className="text-xs text-gray-400 uppercase tracking-widest mt-auto">
+          Klicke zum Umdrehen
+        </div>
       </div>
 
-      {/* Controls */}
-      <div className="flex gap-3 mt-6 justify-center">
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => setIsFlipped(false)}
-          className="gap-2"
-        >
-          <RotateCcw className="w-4 h-4" />
-          Zurücksetzen
-        </Button>
-        <Button
-          variant="default"
-          size="sm"
-          onClick={onComplete}
-          className="gap-2"
-        >
-          Verstanden
-          <ChevronRight className="w-4 h-4" />
-        </Button>
-      </div>
+      {/* Completion Button */}
+      {onComplete && (
+        <div className="mt-6 flex justify-center">
+          <Button
+            onClick={onComplete}
+            className="bg-cyan-500 hover:bg-cyan-400 text-black font-bold uppercase tracking-widest rounded-sm"
+          >
+            ▶ ERLEDIGT ◀
+          </Button>
+        </div>
+      )}
     </div>
   );
 }

@@ -58,135 +58,143 @@ export default function FlashcardsPage() {
   if (!currentCard) {
     return (
       <div className="text-center py-12">
-        <p className="text-muted-foreground">Keine Karten verfügbar.</p>
+        <p className="text-gray-400 uppercase tracking-widest font-bold">
+          ▶ KEINE KARTEN VERFÜGBAR ◀
+        </p>
       </div>
     );
   }
 
   return (
     <div className="space-y-6">
-      <div className="mb-6">
-        <h2 className="text-2xl font-bold mb-2">🃏 Flashcards</h2>
-        <p className="text-muted-foreground">
-          Lerne mit interaktiven Kartensets. Klick auf eine Karte, um die Antwort
-          zu sehen.
+      {/* Header */}
+      <div className="adhs-section">
+        <h2 className="adhs-section-title">▶ FLASHCARDS ◀</h2>
+        <p className="text-sm text-gray-300">
+          Trainiere mit interaktiven Lernkarten. Klicke zum Umdrehen.
         </p>
       </div>
 
-      {/* Category Filter */}
-      <Card className="p-4">
-        <p className="text-sm font-medium mb-3">Kategorie wählen:</p>
-        <div className="flex flex-wrap gap-2">
-          <Button
-            variant={selectedCategory === null ? 'default' : 'outline'}
-            size="sm"
-            onClick={() => {
-              setSelectedCategory(null);
-              setCurrentCardIndex(0);
-            }}
-          >
-            Alle ({flashcards.length})
-          </Button>
-          {categories.map((category) => {
-            const count = flashcards.filter((c) => c.category === category).length;
-            return (
-              <Button
-                key={category}
-                variant={selectedCategory === category ? 'default' : 'outline'}
-                size="sm"
-                onClick={() => {
-                  setSelectedCategory(category);
-                  setCurrentCardIndex(0);
-                }}
-              >
-                {category} ({count})
-              </Button>
-            );
-          })}
-        </div>
-      </Card>
-
       {/* Progress */}
-      <div className="bg-blue-50 dark:bg-blue-950 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
-        <div className="flex justify-between items-center mb-2">
-          <span className="text-sm font-medium">Fortschritt</span>
-          <span className="text-sm font-bold">
+      <div className="quiz-card">
+        <div className="flex items-center justify-between mb-3">
+          <span className="text-sm font-bold uppercase tracking-widest text-cyan-400">
+            Fortschritt
+          </span>
+          <span className="text-lg font-bold text-pink-500">
             {completedCount} / {displayCards.length}
           </span>
         </div>
-        <div className="w-full bg-blue-200 dark:bg-blue-900 rounded-full h-2">
+        <div className="w-full bg-gray-800 rounded-sm h-3 border border-yellow-400">
           <div
-            className="bg-blue-600 h-2 rounded-full transition-all duration-300"
-            style={{
-              width: `${
-                displayCards.length > 0
-                  ? (completedCount / displayCards.length) * 100
-                  : 0
-              }%`,
-            }}
+            className="bg-gradient-to-r from-yellow-400 to-pink-500 h-3 rounded-sm transition-all duration-300"
+            style={{ width: `${displayCards.length > 0 ? (completedCount / displayCards.length) * 100 : 0}%` }}
           />
         </div>
       </div>
 
-      {/* Flashcard */}
-      <Flashcard
-        question={currentCard.question}
-        answer={currentCard.answer}
-        onComplete={handleComplete}
-        cardNumber={currentCardIndex + 1}
-        totalCards={displayCards.length}
-      />
-
-      {/* Navigation */}
-      <div className="flex gap-3 justify-between">
-        <Button
-          variant="outline"
-          onClick={handlePrevious}
-          disabled={currentCardIndex === 0}
-        >
-          ← Zurück
-        </Button>
-
-        <div className="flex gap-2">
+      {/* Category Filter */}
+      <div className="quiz-card">
+        <h3 className="text-xs font-bold uppercase tracking-widest text-cyan-400 mb-3">
+          ▶ KATEGORIEN ◀
+        </h3>
+        <div className="flex flex-wrap gap-2">
           <Button
-            variant="outline"
-            size="sm"
             onClick={() => {
-              setIsShuffled(!isShuffled);
+              setSelectedCategory(null);
               setCurrentCardIndex(0);
             }}
-            className="gap-2"
+            className={`text-xs uppercase tracking-widest rounded-sm ${
+              selectedCategory === null
+                ? 'bg-cyan-500 hover:bg-cyan-400 text-black font-bold'
+                : 'bg-gray-800 hover:bg-gray-700 text-cyan-400 border border-gray-600'
+            }`}
           >
-            <Shuffle className="w-4 h-4" />
-            {isShuffled ? 'Sortiert' : 'Gemischt'}
+            Alle
           </Button>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={handleReset}
-            className="gap-2"
-          >
-            <RotateCcw className="w-4 h-4" />
-            Zurücksetzen
-          </Button>
+          {categories.map((category) => (
+            <Button
+              key={category}
+              onClick={() => {
+                setSelectedCategory(category);
+                setCurrentCardIndex(0);
+              }}
+              className={`text-xs uppercase tracking-widest rounded-sm ${
+                selectedCategory === category
+                  ? 'bg-pink-600 hover:bg-pink-500 text-black font-bold'
+                  : 'bg-gray-800 hover:bg-gray-700 text-pink-400 border border-gray-600'
+              }`}
+            >
+              {category}
+            </Button>
+          ))}
+        </div>
+      </div>
+
+      {/* Current Card */}
+      <div className="flex flex-col items-center gap-6">
+        <div className="w-full max-w-2xl">
+          <Flashcard
+            question={currentCard.question}
+            answer={currentCard.answer}
+            onComplete={handleComplete}
+            cardNumber={currentCardIndex + 1}
+            totalCards={displayCards.length}
+          />
         </div>
 
+        {/* Card Counter */}
+        <div className="text-center">
+          <p className="text-sm font-bold text-cyan-400 uppercase tracking-widest">
+            Karte {currentCardIndex + 1} von {displayCards.length}
+          </p>
+        </div>
+      </div>
+
+      {/* Navigation Buttons */}
+      <div className="flex gap-3 justify-center flex-wrap">
+        <Button
+          onClick={handlePrevious}
+          disabled={currentCardIndex === 0}
+          className="bg-gray-800 hover:bg-gray-700 text-cyan-400 font-bold uppercase tracking-widest rounded-sm disabled:opacity-50"
+        >
+          ▶ ZURÜCK ◀
+        </Button>
         <Button
           onClick={handleNext}
           disabled={currentCardIndex === displayCards.length - 1}
+          className="bg-gray-800 hover:bg-gray-700 text-pink-500 font-bold uppercase tracking-widest rounded-sm disabled:opacity-50"
         >
-          Weiter →
+          ▶ WEITER ◀
+        </Button>
+        <Button
+          onClick={() => setIsShuffled(!isShuffled)}
+          className={`font-bold uppercase tracking-widest rounded-sm ${
+            isShuffled
+              ? 'bg-yellow-400 hover:bg-yellow-300 text-black'
+              : 'bg-gray-800 hover:bg-gray-700 text-yellow-400'
+          }`}
+        >
+          <Shuffle className="w-4 h-4 mr-2" />
+          SHUFFLE
+        </Button>
+        <Button
+          onClick={handleReset}
+          className="bg-gray-800 hover:bg-gray-700 text-purple-400 font-bold uppercase tracking-widest rounded-sm"
+        >
+          <RotateCcw className="w-4 h-4 mr-2" />
+          RESET
         </Button>
       </div>
 
-      {/* Motivation */}
-      {isCardCompleted && (
-        <Card className="bg-green-50 dark:bg-green-950 border-green-200 dark:border-green-800 p-4 text-center">
-          <p className="text-sm font-medium text-green-700 dark:text-green-200">
-            ✓ Du hast diese Karte schon gelernt!
-          </p>
-        </Card>
-      )}
+      {/* Narrator Tip */}
+      <div className="narrator rasmus mt-8">
+        <div className="narrator-name text-cyan-400">▶ RASMUS' TIPP ◀</div>
+        <p className="text-sm leading-relaxed">
+          "Wiederhole die Karten regelmäßig. Nutze den Shuffle-Modus, um dein Wissen zu testen. 
+          Markiere Karten als erledigt, wenn du sie sicher beherrschst."
+        </p>
+      </div>
     </div>
   );
 }

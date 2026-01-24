@@ -11,98 +11,115 @@ export default function TopicsPage() {
   const { progress, markTopicComplete } = useLearningProgress();
 
   return (
-    <div className="space-y-4">
-      <div className="mb-6">
-        <h2 className="text-2xl font-bold mb-2">📚 Lernthemen</h2>
-        <p className="text-muted-foreground">
-          Lerne die Grundlagen Schritt für Schritt. Jedes Thema ist kurz und
-          verständlich aufbereitet.
+    <div className="space-y-6">
+      {/* Header */}
+      <div className="adhs-section">
+        <h2 className="adhs-section-title">▶ LERNTHEMEN ◀</h2>
+        <p className="text-sm text-gray-300 leading-relaxed">
+          Lerne die Grundlagen Schritt für Schritt. Jedes Thema ist kurz und verständlich aufbereitet.
         </p>
       </div>
 
-      {topics.map((topic) => {
-        const isCompleted = progress.completedTopics.includes(topic.id);
-        const isExpanded = expandedTopic === topic.id;
+      {/* Topics List */}
+      <div className="space-y-3">
+        {topics.map((topic) => {
+          const isCompleted = progress.completedTopics.includes(topic.id);
+          const isExpanded = expandedTopic === topic.id;
 
-        return (
-          <Card
-            key={topic.id}
-            className={`overflow-hidden transition-all ${
-              isExpanded ? 'ring-2 ring-blue-500' : ''
-            }`}
-          >
-            <button
-              onClick={() =>
-                setExpandedTopic(isExpanded ? null : topic.id)
-              }
-              className="w-full p-4 flex items-center justify-between hover:bg-secondary/50 transition-colors"
+          return (
+            <div
+              key={topic.id}
+              className={`quiz-card overflow-hidden transition-all ${
+                isExpanded ? 'border-cyan-400 bg-cyan-500/10' : ''
+              }`}
             >
-              <div className="flex items-center gap-3 text-left flex-1">
-                {isCompleted ? (
-                  <CheckCircle className="w-6 h-6 text-green-500 flex-shrink-0" />
+              <button
+                onClick={() =>
+                  setExpandedTopic(isExpanded ? null : topic.id)
+                }
+                className="w-full p-4 flex items-center justify-between hover:bg-gray-800/50 transition-colors"
+              >
+                <div className="flex items-center gap-4 text-left flex-1">
+                  {isCompleted ? (
+                    <CheckCircle className="w-6 h-6 text-cyan-400 flex-shrink-0" />
+                  ) : (
+                    <Circle className="w-6 h-6 text-pink-500 flex-shrink-0" />
+                  )}
+                  <div>
+                    <h3 className="font-bold text-lg uppercase tracking-widest text-white">
+                      {topic.title}
+                    </h3>
+                    <p className="text-xs text-gray-400 mt-1">
+                      {topic.description}
+                    </p>
+                  </div>
+                </div>
+                {isExpanded ? (
+                  <ChevronUp className="w-5 h-5 text-cyan-400 flex-shrink-0" />
                 ) : (
-                  <Circle className="w-6 h-6 text-slate-300 flex-shrink-0" />
+                  <ChevronDown className="w-5 h-5 text-pink-500 flex-shrink-0" />
                 )}
-                <div>
-                  <h3 className="font-semibold text-lg">{topic.title}</h3>
-                  <p className="text-sm text-muted-foreground">
-                    {topic.description}
-                  </p>
-                </div>
-              </div>
-              {isExpanded ? (
-                <ChevronUp className="w-5 h-5 text-muted-foreground flex-shrink-0" />
-              ) : (
-                <ChevronDown className="w-5 h-5 text-muted-foreground flex-shrink-0" />
-              )}
-            </button>
+              </button>
 
-            {isExpanded && (
-              <div className="border-t border-slate-200 dark:border-slate-800 p-6 bg-slate-50 dark:bg-slate-900/50">
-                <div className="prose dark:prose-invert max-w-none mb-6">
-                  <Streamdown>{topic.content}</Streamdown>
-                </div>
+              {/* Expanded Content */}
+              {isExpanded && (
+                <div className="border-t-2 border-gray-700 p-6 bg-black/50">
+                  <div className="prose prose-invert max-w-none mb-6">
+                    <Streamdown>{topic.content}</Streamdown>
+                  </div>
 
-                {/* Key Points */}
-                <div className="bg-blue-50 dark:bg-blue-950 border border-blue-200 dark:border-blue-800 rounded-lg p-4 mb-6">
-                  <h4 className="font-semibold text-sm mb-3 text-blue-900 dark:text-blue-100">
-                    🎯 Wichtigste Punkte:
-                  </h4>
-                  <ul className="space-y-2">
-                    {topic.keyPoints.map((point, idx) => (
-                      <li
-                        key={idx}
-                        className="text-sm text-blue-800 dark:text-blue-200 flex gap-2"
+                  {/* Key Points */}
+                  {topic.keyPoints && topic.keyPoints.length > 0 && (
+                    <div className="mb-6 p-4 border-l-4 border-yellow-400 bg-yellow-400/5 rounded-sm">
+                      <h4 className="font-bold text-yellow-400 uppercase tracking-widest mb-3">
+                        ▶ WICHTIGE PUNKTE ◀
+                      </h4>
+                      <ul className="space-y-2">
+                        {topic.keyPoints.map((point, idx) => (
+                          <li key={idx} className="text-sm text-gray-200 flex gap-2">
+                            <span className="text-yellow-400 font-bold">▸</span>
+                            <span>{point}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
+
+
+                  {/* Completion Button */}
+                  <div className="flex gap-3">
+                    {!isCompleted ? (
+                      <Button
+                        onClick={() => markTopicComplete(topic.id)}
+                        className="flex-1 bg-cyan-500 hover:bg-cyan-400 text-black font-bold uppercase tracking-widest rounded-sm"
                       >
-                        <span className="text-blue-600 dark:text-blue-400 font-bold">
-                          •
-                        </span>
-                        {point}
-                      </li>
-                    ))}
-                  </ul>
+                        ▶ ALS ERLEDIGT MARKIEREN ◀
+                      </Button>
+                    ) : (
+                      <Button
+                        disabled
+                        className="flex-1 bg-gray-700 text-gray-400 font-bold uppercase tracking-widest rounded-sm"
+                      >
+                        ✓ ERLEDIGT
+                      </Button>
+                    )}
+                  </div>
                 </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
 
-                {/* Complete Button */}
-                <Button
-                  onClick={() => markTopicComplete(topic.id)}
-                  variant={isCompleted ? 'outline' : 'default'}
-                  className="w-full"
-                >
-                  {isCompleted ? '✓ Verstanden' : 'Als verstanden markieren'}
-                </Button>
-              </div>
-            )}
-          </Card>
-        );
-      })}
-
-      {/* Motivation */}
-      <Card className="bg-gradient-to-r from-purple-50 to-blue-50 dark:from-purple-950 dark:to-blue-950 border-purple-200 dark:border-purple-800 p-6 text-center">
-        <p className="text-sm font-medium text-slate-700 dark:text-slate-300">
-          💪 Gut gemacht! Du machst Fortschritte. Weiter so!
+      {/* Narrator Tip */}
+      <div className="narrator richard mt-8">
+        <div className="narrator-name text-pink-500">▶ RICHARD'S TIPP ◀</div>
+        <p className="text-sm leading-relaxed">
+          "Lerne ein Thema nach dem anderen. Markiere es als erledigt, wenn du es verstanden hast. 
+          So behältst du den Überblick und bleibst motiviert."
         </p>
-      </Card>
+      </div>
     </div>
   );
 }
