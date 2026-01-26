@@ -10,16 +10,20 @@ async function startServer() {
   const app = express();
   const server = createServer(app);
 
-  // Serve static files from dist/public in production
-  const staticPath =
-    process.env.NODE_ENV === "production"
-      ? path.resolve(__dirname, "public")
-      : path.resolve(__dirname, "..", "dist", "public");
+  // In production (Vercel), assets are in dist/public relative to the root
+  // or just 'public' relative to the compiled index.js in 'dist'
+  const staticPath = path.resolve(__dirname, "public");
+
+  console.log(`Serving static files from: ${staticPath}`);
 
   app.use(express.static(staticPath));
 
   // Handle client-side routing - serve index.html for all routes
-  app.get("*", (_req, res) => {
+  app.get("*", (req, res) => {
+    // Skip for files that should have been caught by express.static
+    if (req.path.includes(".")) {
+      return res.status(404).send("Not found");
+    }
     res.sendFile(path.join(staticPath, "index.html"));
   });
 
