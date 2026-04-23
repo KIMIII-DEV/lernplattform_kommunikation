@@ -112,12 +112,11 @@ export default function TopicsPage() {
         })}
       </div>
 
-      {/* Narrator Tip */}
-      <div className="narrator richard mt-8">
-        <div className="narrator-name text-pink-500">▶ RICHARD'S TIPP ◀</div>
-        <p className="text-sm leading-relaxed">
-          "Lerne ein Thema nach dem anderen. Markiere es als erledigt, wenn du es verstanden hast. 
-          So behältst du den Überblick und bleibst motiviert."
+      {/* Study Tip */}
+      <div className="adhs-section mt-8 border-l-4 border-yellow-400">
+        <div className="text-yellow-400 font-bold uppercase tracking-widest mb-2">▶ LERNHINWEIS ◀</div>
+        <p className="text-sm leading-relaxed text-gray-300">
+          Bearbeiten Sie die Themen sequentiell. Markieren Sie ein Thema erst dann als erledigt, wenn Sie die Kernpunkte sicher wiedergeben können. Dies ist die Basis für die anschließenden Quizfragen.
         </p>
       </div>
     </div>

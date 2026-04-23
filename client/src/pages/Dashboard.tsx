@@ -28,26 +28,26 @@ export default function DashboardPage({
 
   return (
     <div className="space-y-6">
-      {/* Welcome Section - Hotline Miami Style */}
-      <div className="quiz-card border-2 border-pink-500 bg-gradient-to-r from-black via-gray-900 to-black p-8">
-        <h2 className="text-3xl font-bold mb-2 text-pink-500 uppercase tracking-widest">
-          ▶ WILLKOMMEN ZURÜCK ◀
+      {/* Welcome Section */}
+      <div className="quiz-card border-2 border-cyan-400 bg-gradient-to-r from-black via-gray-900 to-black p-8">
+        <h2 className="text-3xl font-bold mb-2 text-cyan-400 uppercase tracking-widest">
+          ▶ LERN-DASHBOARD ◀
         </h2>
-        <p className="text-cyan-400 mb-6 uppercase tracking-widest font-bold">
-          Du machst großartige Fortschritte. Weiter so!
+        <p className="text-gray-400 mb-6 uppercase tracking-widest font-bold">
+          Ihr aktueller Stand der Prüfungsvorbereitung
         </p>
         <div className="grid grid-cols-3 gap-4">
-          <div className="bg-gray-800 border-2 border-pink-500 rounded-sm p-4">
-            <p className="text-pink-500 text-xs mb-2 font-bold uppercase tracking-widest">Punkte</p>
-            <p className="text-3xl font-bold text-cyan-400">{totalScore}</p>
-          </div>
           <div className="bg-gray-800 border-2 border-cyan-400 rounded-sm p-4">
-            <p className="text-cyan-400 text-xs mb-2 font-bold uppercase tracking-widest">Fortschritt</p>
-            <p className="text-3xl font-bold text-yellow-400">{overallProgress}%</p>
+            <p className="text-cyan-400 text-xs mb-2 font-bold uppercase tracking-widest">Punkte</p>
+            <p className="text-3xl font-bold text-white">{totalScore}</p>
           </div>
           <div className="bg-gray-800 border-2 border-yellow-400 rounded-sm p-4">
-            <p className="text-yellow-400 text-xs mb-2 font-bold uppercase tracking-widest">Motivation</p>
-            <p className="text-3xl font-bold text-pink-500">🔥</p>
+            <p className="text-yellow-400 text-xs mb-2 font-bold uppercase tracking-widest">Fortschritt</p>
+            <p className="text-3xl font-bold text-white">{overallProgress}%</p>
+          </div>
+          <div className="bg-gray-800 border-2 border-pink-500 rounded-sm p-4">
+            <p className="text-pink-500 text-xs mb-2 font-bold uppercase tracking-widest">Status</p>
+            <p className="text-3xl font-bold text-white">AKTIV</p>
           </div>
         </div>
       </div>
@@ -153,23 +153,12 @@ export default function DashboardPage({
         </p>
       </div>
 
-      {/* Narrator Messages */}
-      <div className="grid md:grid-cols-2 gap-4">
-        {/* Richard */}
-        <div className="narrator richard">
-          <div className="narrator-name text-pink-500">▶ RICHARD ◀</div>
-          <p className="text-sm leading-relaxed">
-            "Dein Fortschritt ist beeindruckend. Konzentriere dich auf die Themen, die dir noch schwerfallen."
-          </p>
-        </div>
-
-        {/* Don Juan */}
-        <div className="narrator don-juan">
-          <div className="narrator-name text-yellow-400">▶ DON JUAN ◀</div>
-          <p className="text-sm leading-relaxed">
-            "Vertrau deinem Instinkt. Du bist näher an der Bestnote, als du denkst."
-          </p>
-        </div>
+      {/* Info Section */}
+      <div className="adhs-section border-l-4 border-cyan-400">
+        <h3 className="adhs-section-title">▶ SYSTEM-HINWEIS ◀</h3>
+        <p className="text-sm leading-relaxed text-gray-300">
+          Die Inhalte von Lernfeld 4 wurden vollständig integriert. Konzentrieren Sie sich auf die technischen Grundlagen der Kommunikationssysteme und die gesetzlichen Bestimmungen zum Datenschutz, da diese eine hohe Prüfungsrelevanz aufweisen.
+        </p>
       </div>
 
       {/* Tips Section */}

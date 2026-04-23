@@ -187,12 +187,11 @@ export default function FlashcardsPage() {
         </Button>
       </div>
 
-      {/* Narrator Tip */}
-      <div className="narrator rasmus mt-8">
-        <div className="narrator-name text-cyan-400">▶ RASMUS' TIPP ◀</div>
-        <p className="text-sm leading-relaxed">
-          "Wiederhole die Karten regelmäßig. Nutze den Shuffle-Modus, um dein Wissen zu testen. 
-          Markiere Karten als erledigt, wenn du sie sicher beherrschst."
+      {/* Study Tip */}
+      <div className="adhs-section mt-8 border-l-4 border-cyan-400">
+        <div className="text-cyan-400 font-bold uppercase tracking-widest mb-2">▶ LERNSTRATEGIE ◀</div>
+        <p className="text-sm leading-relaxed text-gray-300">
+          Nutzen Sie den Shuffle-Modus, um die Reihenfolge der Fragen zu variieren. Dies verhindert ein rein auswendiges Lernen der Abfolge und festigt das tatsächliche Fachwissen. Wiederholen Sie Karten mit Fehlern gezielt.
         </p>
       </div>
     </div>

@@ -43,17 +43,17 @@
 }
 
 :root {
-  /* Hotline Miami Neon Palette */
-  --primary: #ff006e; /* Hot Pink - Intensity */
-  --primary-foreground: #0a0a0a; /* Near-black */
-  --sidebar-primary: #ff006e;
+  /* Professional Exam Palette */
+  --primary: #00d9ff; /* Cyan - Focus & Clarity */
+  --primary-foreground: #0a0a0a;
+  --sidebar-primary: #00d9ff;
   --sidebar-primary-foreground: #0a0a0a;
   
-  /* Neon Accents */
+  /* Accents */
   --chart-1: #00d9ff; /* Cyan */
   --chart-2: #ffbe0b; /* Yellow */
   --chart-3: #8338ec; /* Purple */
-  --chart-4: #ff006e; /* Pink */
+  --chart-4: #00d9ff; /* Cyan */
   --chart-5: #fb5607; /* Orange */
   
   --radius: 0.25rem; /* Sharp corners - retro style */
@@ -212,24 +212,7 @@
 
 /* ===== HOTLINE MIAMI DESIGN EFFECTS ===== */
 
-/* Subtle scanline effect for retro aesthetic */
-body::before {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  background: repeating-linear-gradient(
-    0deg,
-    rgba(255, 255, 255, 0.02),
-    rgba(255, 255, 255, 0.02) 1px,
-    transparent 1px,
-    transparent 2px
-  );
-  z-index: 9999;
-}
+/* Scanline effect removed for better readability */
 
 /* Neon glow effects for interactive elements */
 button, [role="button"], input[type="button"], input[type="submit"] {
@@ -429,30 +412,14 @@ select:focus {
   outline: none;
 }
 
-/* Narrative elements (Richard, Rasmus, Don Juan) */
+/* Narrative elements replaced by info boxes */
 .narrator {
   padding: 1.5rem;
   margin: 1.5rem 0;
-  border-left: 4px solid #ff006e;
-  background: rgba(255, 0, 110, 0.08);
+  border-left: 4px solid #00d9ff;
+  background: rgba(0, 217, 255, 0.05);
   border-radius: 0.25rem;
-  font-style: italic;
   color: #ffffff;
-}
-
-.narrator.richard {
-  border-left-color: #ff006e;
-  background: rgba(255, 0, 110, 0.08);
-}
-
-.narrator.rasmus {
-  border-left-color: #00d9ff;
-  background: rgba(0, 217, 255, 0.08);
-}
-
-.narrator.don-juan {
-  border-left-color: #ffbe0b;
-  background: rgba(255, 190, 11, 0.08);
 }
 
 .narrator-name {

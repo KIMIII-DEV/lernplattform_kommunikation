@@ -41,7 +41,7 @@ export default function Home() {
                 <h1 className="text-2xl font-bold text-pink-500 uppercase tracking-widest">
                   KOMMUNIKATION
                 </h1>
-                <p className="text-xs text-cyan-400 uppercase tracking-widest">▶ Klausur-Vorbereitung ◀</p>
+                <p className="text-xs text-cyan-400 uppercase tracking-widest">▶ IHK-Prüfungsvorbereitung 1.0 ◀</p>
               </div>
             </div>
             <div className="text-right border-l-2 border-cyan-400 pl-4">
@@ -97,11 +97,11 @@ export default function Home() {
 
           {/* Dashboard Tab */}
           <TabsContent value="dashboard" className="space-y-6">
-            {/* Welcome Section - Hotline Miami Narrator */}
-            <div className="narrator richard mb-8 border-l-4 border-pink-500">
-              <div className="narrator-name text-pink-500">▶ RICHARD ◀</div>
-              <p className="text-sm leading-relaxed">
-                "Willkommen zurück. Du machst großartige Fortschritte. Weiter so!"
+            {/* Welcome Section */}
+            <div className="adhs-section mb-8 border-l-4 border-cyan-400">
+              <h2 className="adhs-section-title">▶ WILLKOMMEN ◀</h2>
+              <p className="text-sm leading-relaxed text-gray-300">
+                Diese Plattform bietet eine strukturierte Vorbereitung auf die IHK-Abschlussprüfung im Dialogmarketing, basierend auf dem aktuellen Fachbuch.
               </p>
             </div>
 
@@ -165,41 +165,26 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Narrator Sections */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
-              {/* Rasmus Section */}
-              <div className="narrator rasmus">
-                <div className="narrator-name text-cyan-400">▶ RASMUS ◀</div>
-                <p className="text-xs leading-relaxed mb-3">
-                  "Logik und Struktur sind der Schlüssel. Konzentriere dich auf die Grundlagen."
+            {/* Info Sections */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8">
+              <div className="quiz-card">
+                <div className="text-cyan-400 font-bold uppercase tracking-widest mb-3">
+                  ▶ PRÜFUNGSFOKUS ◀
+                </div>
+                <p className="text-xs leading-relaxed text-gray-300">
+                  Alle Inhalte sind strikt nach dem IHK-Rahmenlehrplan und dem Fachbuch aufbereitet. Konzentriere dich besonders auf die markierten Kernbereiche.
                 </p>
-                <Button className="w-full bg-cyan-500 hover:bg-cyan-400 text-black font-bold uppercase tracking-widest rounded-sm text-xs">
-                  ▶ ZUR ANALYSE ◀
-                </Button>
               </div>
 
-              {/* Don Juan Section */}
-              <div className="narrator don-juan">
-                <div className="narrator-name text-yellow-400">▶ DON JUAN ◀</div>
-                <p className="text-xs leading-relaxed mb-3">
-                  "Nutze deine Intuition. Manchmal führt das Bauchgefühl zum Ziel."
-                </p>
-                <Button className="w-full bg-yellow-400 hover:bg-yellow-300 text-black font-bold uppercase tracking-widest rounded-sm text-xs">
-                  ▶ INTUITION TESTEN ◀
-                </Button>
-              </div>
-
-              {/* Motivation Section */}
               <div className="quiz-card">
                 <div className="text-pink-500 font-bold uppercase tracking-widest mb-3">
-                  ▶ MOTIVATION ◀
+                  ▶ STATUS ◀
                 </div>
-                <p className="text-xs leading-relaxed mb-3">
-                  Du bist {Math.round((topicsProgress + flashcardsProgress + quizProgress) / 3)}% des Weges. 
-                  Halte durch – die Bestnote ist in Reichweite!
+                <p className="text-xs leading-relaxed text-gray-300">
+                  Du hast bereits {Math.round((topicsProgress + flashcardsProgress + quizProgress) / 3)}% der verfügbaren Lernmaterialien bearbeitet.
                 </p>
-                <div className="text-right text-pink-500 font-bold text-xs">
-                  🔥 KEEP GOING 🔥
+                <div className="text-right text-pink-500 font-bold text-xs mt-2">
+                  ZIEL: 100%
                 </div>
               </div>
             </div>
@@ -251,10 +236,10 @@ export default function Home() {
       <footer className="border-t-2 border-pink-500 bg-black py-6 mt-12">
         <div className="container text-center">
           <p className="text-xs text-gray-500 uppercase tracking-widest">
-            ▶ Hotline Miami Learning Platform ◀ | Klausur-Vorbereitung Kommunikation
+            ▶ IHK Lernplattform Dialogmarketing ◀ | Fachliche Prüfungsvorbereitung
           </p>
-          <p className="text-xs text-pink-500 mt-2 uppercase tracking-widest">
-            Powered by Richard, Rasmus & Don Juan
+          <p className="text-xs text-cyan-400 mt-2 uppercase tracking-widest">
+            Strikt faktenbasiert nach Fachbuch
           </p>
         </div>
       </footer>

@@ -105,11 +105,11 @@ export default function QuizPage() {
             ▶ QUIZ STARTEN ◀
           </Button>
 
-          {/* Narrator Tip */}
-          <div className="narrator don-juan mt-6">
-            <div className="narrator-name text-yellow-400">▶ DON JUAN ◀</div>
-            <p className="text-sm leading-relaxed">
-              "Vertrau deinem Instinkt. Du wirst alle Ergebnisse am Ende sehen – konzentriere dich jetzt auf jede Frage."
+          {/* Study Tip */}
+          <div className="adhs-section mt-6 border-l-4 border-yellow-400">
+            <div className="text-yellow-400 font-bold uppercase tracking-widest mb-2">▶ HINWEIS ◀</div>
+            <p className="text-sm leading-relaxed text-gray-300">
+              Konzentrieren Sie sich auf jede Frage einzeln. Die detaillierte Auswertung mit Erklärungen erfolgt nach Abschluss des gesamten Quiz.
             </p>
           </div>
         </div>
@@ -211,39 +211,14 @@ export default function QuizPage() {
             </div>
           </div>
 
-          {/* Narrator Messages */}
-          <div className="grid md:grid-cols-2 gap-4">
-            {isPassed ? (
-              <>
-                <div className="narrator richard">
-                  <div className="narrator-name text-pink-500">▶ RICHARD ◀</div>
-                  <p className="text-sm leading-relaxed">
-                    "Hervorragend! Du beherrschst das Thema. Geh jetzt in die Klausur und zeig, was du kannst!"
-                  </p>
-                </div>
-                <div className="narrator rasmus">
-                  <div className="narrator-name text-cyan-400">▶ RASMUS ◀</div>
-                  <p className="text-sm leading-relaxed">
-                    "Deine Logik und Struktur sind perfekt. Du bist vorbereitet."
-                  </p>
-                </div>
-              </>
-            ) : (
-              <>
-                <div className="narrator richard">
-                  <div className="narrator-name text-pink-500">▶ RICHARD ◀</div>
-                  <p className="text-sm leading-relaxed">
-                    "Nicht aufgeben! Wiederhole die Themen, bei denen du Fehler gemacht hast."
-                  </p>
-                </div>
-                <div className="narrator don-juan">
-                  <div className="narrator-name text-yellow-400">▶ DON JUAN ◀</div>
-                  <p className="text-sm leading-relaxed">
-                    "Du bist näher dran, als du denkst. Vertrau deinem Bauchgefühl und lerne weiter."
-                  </p>
-                </div>
-              </>
-            )}
+          {/* Feedback Section */}
+          <div className="adhs-section border-l-4 border-cyan-400">
+            <h3 className="adhs-section-title">▶ FACHLICHES FEEDBACK ◀</h3>
+            <p className="text-sm leading-relaxed text-gray-300">
+              {isPassed 
+                ? "Sie haben die erforderliche Punktzahl erreicht. Nutzen Sie die detaillierten Ergebnisse unten, um auch die restlichen Wissenslücken zu schließen."
+                : "Sie haben die erforderliche Punktzahl noch nicht erreicht. Bitte wiederholen Sie die entsprechenden Kapitel im Fachbuch und nutzen Sie die Erklärungen in der untenstehenden Liste."}
+            </p>
           </div>
 
           {/* Action Buttons */}
