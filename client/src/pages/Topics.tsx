@@ -46,9 +46,16 @@ export default function TopicsPage() {
                     <Circle className="w-6 h-6 text-pink-500 flex-shrink-0" />
                   )}
                   <div>
-                    <h3 className="font-bold text-lg uppercase tracking-widest text-white">
-                      {topic.title}
-                    </h3>
+                    <div className="flex items-center gap-2">
+                      <h3 className="font-bold text-lg uppercase tracking-widest text-white">
+                        {topic.title}
+                      </h3>
+                      {topic.examRelevance === 'high' && (
+                        <span className="bg-pink-600 text-[10px] px-2 py-0.5 rounded-full font-black text-white animate-pulse">
+                          PRÜFUNGSRELEVANT
+                        </span>
+                      )}
+                    </div>
                     <p className="text-xs text-gray-400 mt-1">
                       {topic.description}
                     </p>
@@ -71,9 +78,12 @@ export default function TopicsPage() {
                   {/* Key Points */}
                   {topic.keyPoints && topic.keyPoints.length > 0 && (
                     <div className="mb-6 p-4 border-l-4 border-yellow-400 bg-yellow-400/5 rounded-sm">
-                      <h4 className="font-bold text-yellow-400 uppercase tracking-widest mb-3">
-                        ▶ WICHTIGE PUNKTE ◀
-                      </h4>
+                      <div className="flex items-center justify-between mb-3">
+                        <h4 className="font-bold text-yellow-400 uppercase tracking-widest">
+                          ▶ WICHTIGE PUNKTE ◀
+                        </h4>
+                        <span className="text-[10px] font-bold text-yellow-400/60">IHK 1.0 FOKUS</span>
+                      </div>
                       <ul className="space-y-2">
                         {topic.keyPoints.map((point, idx) => (
                           <li key={idx} className="text-sm text-gray-200 flex gap-2">

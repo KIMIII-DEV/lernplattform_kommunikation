@@ -46,8 +46,8 @@ export default function DashboardPage({
             <p className="text-3xl font-bold text-white">{overallProgress}%</p>
           </div>
           <div className="bg-gray-800 border-2 border-pink-500 rounded-sm p-4">
-            <p className="text-pink-500 text-xs mb-2 font-bold uppercase tracking-widest">Status</p>
-            <p className="text-3xl font-bold text-white">AKTIV</p>
+            <p className="text-pink-500 text-xs mb-2 font-bold uppercase tracking-widest">Ziel-Niveau</p>
+            <p className="text-3xl font-bold text-white">IHK 1.0</p>
           </div>
         </div>
       </div>
@@ -157,7 +157,7 @@ export default function DashboardPage({
       <div className="adhs-section border-l-4 border-cyan-400">
         <h3 className="adhs-section-title">▶ SYSTEM-HINWEIS ◀</h3>
         <p className="text-sm leading-relaxed text-gray-300">
-          Die Inhalte von Lernfeld 4 wurden vollständig integriert. Konzentrieren Sie sich auf die technischen Grundlagen der Kommunikationssysteme und die gesetzlichen Bestimmungen zum Datenschutz, da diese eine hohe Prüfungsrelevanz aufweisen.
+          Lernfeld 4 wurde auf Basis der Kompetenz-Checkliste perfektioniert. Mit 100 Flashcards und 50 gezielten Quizfragen sind Sie optimal auf die IHK-Prüfung vorbereitet. Konzentrieren Sie sich auf die markierten "PRÜFUNGSRELEVANTEN" Themen.
         </p>
       </div>
 
