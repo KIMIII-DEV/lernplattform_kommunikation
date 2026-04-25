@@ -27,6 +27,8 @@ export interface Topic {
   content: string;
   keyPoints: string[];
   examRelevance: 'high' | 'medium' | 'low';
+  errorTrap?: string; // ⚠️ Fehlerfalle
+  memo?: string; // 💡 Merksatz
 }
 
 // Topics for Lernfeld 4
@@ -51,7 +53,9 @@ export const topics: Topic[] = [
       'Unterscheidung Dial-in vs. Dial-out',
       'Nutzung der TK-Anlage oder externer Anbieter',
       'Wichtigkeit der Netiquette für Effizienz'
-    ]
+    ],
+    errorTrap: 'Verwechslung von Dial-in und Dial-out: Dial-in ist, wenn der Teilnehmer anruft, Dial-out, wenn er angerufen wird.',
+    memo: 'Telefonkonferenzen sparen Reisezeit und -kosten, erfordern aber Disziplin und klare Regeln.'
   },
   {
     id: 'lf4-1-2',
@@ -72,7 +76,9 @@ export const topics: Topic[] = [
       'Hardware-AB vs. serverbasierte Voicemail',
       'Zeitsteuerung für professionelle Außenwirkung',
       'Fernabfrage für mobile Mitarbeiter'
-    ]
+    ],
+    errorTrap: 'Anrufbeantworter sind veraltet; Voicemail ist die moderne, integrierte Lösung.',
+    memo: 'Ein professioneller Ansagetext ist die Visitenkarte des Unternehmens bei Nichterreichbarkeit.'
   },
   {
     id: 'lf4-1-3',
@@ -94,7 +100,9 @@ export const topics: Topic[] = [
       'Zentraler Posteingang für alle Nachrichtentypen',
       'Effizienz durch Medienkonvertierung (TTS, Fax-to-Mail)',
       'Unterscheidung UMS (Nachrichten) vs. UC (Echtzeit)'
-    ]
+    ],
+    errorTrap: 'UMS und UC sind nicht dasselbe: UMS bündelt Nachrichten, UC integriert Echtzeit-Kommunikation.',
+    memo: 'UMS vereinfacht die Kommunikation, indem es alle Kanäle in einer Oberfläche zusammenführt.'
   },
   {
     id: 'lf4-1-4',

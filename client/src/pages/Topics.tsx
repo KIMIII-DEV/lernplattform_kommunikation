@@ -95,6 +95,32 @@ export default function TopicsPage() {
                     </div>
                   )}
 
+                  {/* Error Trap */}
+                  {topic.errorTrap && (
+                    <div className="mb-6 p-4 border-l-4 border-red-500 bg-red-500/5 rounded-sm">
+                      <div className="flex items-center justify-between mb-3">
+                        <h4 className="font-bold text-red-500 uppercase tracking-widest">
+                          🔴 FEHLERFALLE
+                        </h4>
+                        <span className="text-[10px] font-bold text-red-500/60">IHK 1.0 FOKUS</span>
+                      </div>
+                      <p className="text-sm text-gray-200">{topic.errorTrap}</p>
+                    </div>
+                  )}
+
+                  {/* Memo */}
+                  {topic.memo && (
+                    <div className="mb-6 p-4 border-l-4 border-green-500 bg-green-500/5 rounded-sm">
+                      <div className="flex items-center justify-between mb-3">
+                        <h4 className="font-bold text-green-500 uppercase tracking-widest">
+                          💡 MERKSATZ
+                        </h4>
+                        <span className="text-[10px] font-bold text-green-500/60">IHK 1.0 FOKUS</span>
+                      </div>
+                      <p className="text-sm text-gray-200">{topic.memo}</p>
+                    </div>
+                  )}
+
 
 
                   {/* Completion Button */}
