@@ -1,6 +1,7 @@
 // Learning Data for Communication Exam Preparation
 // IHK 1.0 Level - Strictly based on the textbook and Competence Checklist
 // Lernfeld 4: Informations- und Kommunikationstechnische Systeme nutzen
+// Lernfeld 5: Kundinnen und Kunden im Dialogmarketing betreuen und binden
 
 export interface Flashcard {
   id: string;
@@ -352,6 +353,559 @@ export const topics: Topic[] = [
       'Personenbezogene Daten als Kern'
     ]
   }
+,
+  // ============================================================
+  // LERNFELD 5 - Kundinnen und Kunden im Dialogmarketing betreuen und binden
+  // Quelle: Fachbuch Kaufleute für Dialogmarketing, p.404-508
+  // ============================================================
+  {
+    id: 'lf5-1-1',
+    title: '5.1.1 Meldeformel & Gesprächseröffnung',
+    description: 'Standardisierter Einstieg im Inbound-Beratungsgespräch.',
+    examRelevance: 'high',
+    content: `Die Meldeformel ist das standardisierte Gesprächseinstiegsformat im Inbound-Bereich. Sie besteht aus genau 4 Elementen in fester Reihenfolge:
+
+**Reihenfolge (B-F-N-F):**
+1. **Begrüßung** ("Guten Tag" / "Guten Morgen")
+2. **Firmenname** ("KommunikativAktiv GmbH")
+3. **Name des Mitarbeiters** ("Mein Name ist Müller")
+4. **Offene Frage** ("Was kann ich für Sie tun?")
+
+**Beispiel:** "Guten Tag, KommunikativAktiv, mein Name ist Müller, was kann ich für Sie tun?"
+
+**Prüfungsfalle:** Reihenfolge ist FIX. Die Frage am Ende muss OFFEN sein – keine Ja/Nein-Frage.`,
+    keyPoints: [
+      '4 Bestandteile in fester Reihenfolge: B-F-N-F',
+      'Letzte Frage muss IMMER offen sein (W-Frage)',
+      'Eselsbrücke: Begrüßung-Firma-Name-Frage'
+    ]
+  },
+  {
+    id: 'lf5-1-2',
+    title: '5.1.2 Legitimationsprüfung',
+    description: 'Identitätsprüfung des Anrufers vor Datenweitergabe.',
+    examRelevance: 'high',
+    content: `Vor der Datenweitergabe oder Kontobearbeitung muss die Identität des Anrufers geprüft werden.
+
+**Typische Prüfelemente:**
+- Name + Adresse
+- Kundennummer
+- Geburtsdatum
+
+**Zweck:**
+- Datenschutz (DSGVO)
+- Vermeidung von Social Engineering
+- Haftungsschutz für das Unternehmen
+
+**Prüfungsfalle:** Legitimation muss VOR Datenweitergabe erfolgen – niemals danach. Auch bei bekannten Stammkunden.`,
+    keyPoints: [
+      'IMMER vor Datenweitergabe (DSGVO-Pflicht)',
+      'Schutz vor Social Engineering',
+      'Auch bei bekannten Kunden zwingend'
+    ]
+  },
+  {
+    id: 'lf5-1-3',
+    title: '5.1.3 Fragetrichter & Bedarfsermittlung',
+    description: 'Strukturierte Gesprächstechnik von offen zu geschlossen.',
+    examRelevance: 'high',
+    content: `Der Fragetrichter strukturiert das Kundengespräch von offen → geschlossen.
+
+**Phasen:**
+1. **Offene Fragen (W-Fragen):** Breite Informationssammlung – "Was beschäftigt Sie?"
+2. **Vertiefende Fragen:** Konkretisierung – "Seit wann besteht das Problem?"
+3. **Geschlossene Fragen:** Absicherung – "Habe ich das richtig verstanden, dass…?"
+
+**Regel:** Erst öffnen, dann schließen. NIEMALS mit geschlossener Frage starten.
+
+**Bild:** Trichter = oben weit (offen), unten eng (geschlossen).`,
+    keyPoints: [
+      'Reihenfolge: offen → vertiefend → geschlossen',
+      'W-Fragen liefern die meiste Information',
+      'Geschlossene Fragen nur zur Absicherung am Ende'
+    ]
+  },
+  {
+    id: 'lf5-1-4',
+    title: '5.1.4 Phasen des Beratungsgesprächs',
+    description: '6 Phasen eines professionellen Inbound-Gesprächs.',
+    examRelevance: 'high',
+    content: `Ein vollständiges Beratungsgespräch durchläuft 6 Phasen:
+
+1. **Kontaktphase:** Meldeformel, Legitimation, Beziehungsaufbau
+2. **Bedarfsermittlung:** Fragetrichter, aktives Zuhören
+3. **Beratungsphase:** Lösungsvorschläge, Nutzenargumentation
+4. **Einwandbehandlung:** Einwände aufnehmen, entkräften, bestätigen
+5. **Abschlussphase:** Zusammenfassung, Verabschiedung
+6. **Nachbearbeitung (ACW):** Dokumentation im CRM, Follow-up
+
+**Wichtig:** Immer den Kunden zuerst auflegen lassen.`,
+    keyPoints: [
+      '6 Phasen in fester Reihenfolge',
+      'ACW (After-Call-Work) ist Pflichtphase',
+      'Kunde legt zuerst auf'
+    ]
+  },
+  {
+    id: 'lf5-2-1',
+    title: '5.2.1 5 Grundsätze der Datenerfassung',
+    description: 'R-V-R-Z-K: Die fünf Pflicht-Grundsätze.',
+    examRelevance: 'high',
+    content: `Bei der Erfassung von Kundendaten gelten 5 Grundsätze:
+
+1. **Richtigkeit:** Daten sachlich korrekt
+2. **Vollständigkeit:** Alle erforderlichen Felder befüllt
+3. **Redundanzvermeidung:** Keine doppelten Datensätze (Dubletten)
+4. **Zeitstabilität:** Daten so erfassen, dass sie lange gültig bleiben (Geburtsdatum statt Alter, Postfach statt temporärer Adresse)
+5. **Konsistenz:** Einheitliche Schreibweisen, Formate, Systematik
+
+**Prüfungsfalle:** "Aktualität" ist KEIN eigener Grundsatz – der vierte heißt ZEITSTABILITÄT.`,
+    keyPoints: [
+      'Merkformel: R-V-R-Z-K',
+      'Zeitstabilität: Geburtsdatum statt Alter',
+      '"Aktualität" ist kein offizieller Grundsatz'
+    ]
+  },
+  {
+    id: 'lf5-2-2',
+    title: '5.2.2 Dubletten & Datenpflege',
+    description: 'Doppelte Datensätze erkennen, vermeiden, bereinigen.',
+    examRelevance: 'medium',
+    content: `**Dublette:** Ein Kunde ist mehrfach in der Datenbank erfasst (z. B. nach Umzug, mit verschiedenen Schreibweisen).
+
+**Folgen:**
+- Höhere Portokosten (Mehrfachversand)
+- Imageverlust beim Kunden ("Ihr kennt mich nicht")
+- Verfälschung von Statistiken
+- Erhöhter Pflegeaufwand
+
+**Maßnahmen:**
+- Automatische Dublettenprüfung beim Erfassen
+- Regelmäßige Bereinigung (Adressabgleich)
+- DSGVO: Daten nur so lange wie nötig speichern (Speicherbegrenzung)`,
+    keyPoints: [
+      'Dubletten = doppelte Datensätze',
+      'Folge: Kosten + Imageverlust',
+      'DSGVO: Speicherbegrenzung beachten'
+    ]
+  },
+  {
+    id: 'lf5-3-1',
+    title: '5.3.1 CRM-Definition & Strategiebegriff',
+    description: 'CRM ist eine STRATEGIE – keine Software!',
+    examRelevance: 'high',
+    content: `**CRM (Customer Relationship Management)** ist eine **Unternehmensstrategie** zur Ausrichtung **ALLER Unternehmensbereiche** auf den Aufbau und die Pflege langfristiger, profitabler Kundenbeziehungen.
+
+**Wichtig:** CRM ist KEINE Software – Software ist nur das Werkzeug zur Umsetzung.
+
+**Ziel-Kette:**
+Kundenzufriedenheit → Kundenloyalität → Unternehmenserfolg
+
+**Prüfungsfalle:** Der häufigste IHK-Fehler ist die Verwechslung von CRM-Strategie mit CRM-Software.`,
+    keyPoints: [
+      'CRM = Strategie, NICHT Software',
+      'Alle Unternehmensbereiche werden ausgerichtet',
+      'Kette: Zufriedenheit → Loyalität → Erfolg'
+    ]
+  },
+  {
+    id: 'lf5-3-2',
+    title: '5.3.2 3 CRM-Aufgaben',
+    description: 'Pflegen, Gewinnen, Zurückgewinnen.',
+    examRelevance: 'high',
+    content: `Die drei Kernaufgaben des CRM:
+
+1. **Kundenpflege (Retention):** Bestehende Kunden halten, Zufriedenheit sichern, Up-/Cross-Selling
+2. **Kundengewinnung (Acquisition):** Neukunden ansprechen, Leads konvertieren
+3. **Kundenrückgewinnung (Winback):** Verlorene Kunden reaktivieren – oft günstiger als Neugewinnung
+
+**Strategische Priorität:** Pflege > Rückgewinnung > Neugewinnung (nach Kosten-Effizienz).`,
+    keyPoints: [
+      '3 Aufgaben: Pflegen, Gewinnen, Zurückgewinnen',
+      'Winback günstiger als Neugewinnung (5-7x)',
+      'Pflege ist die effizienteste Aufgabe'
+    ]
+  },
+  {
+    id: 'lf5-3-3',
+    title: '5.3.3 3 CRM-Säulen (T-O-P)',
+    description: 'Technik, Organisation, Personal – gleichgewichtig.',
+    examRelevance: 'high',
+    content: `Die drei Säulen des CRM müssen **gleichgewichtig** wirken:
+
+1. **Technik:** CRM-Software, Datenbanken, Data-Warehouse, Kommunikationsanlagen (ACD, CTI)
+2. **Organisation:** Prozesse, Abläufe, Zuständigkeiten, Schnittstellen, Kampagnenmanagement
+3. **Personal:** Qualifikation, Kommunikationsfähigkeit, Kundenorientierung als Haltung
+
+**Prüfungsfalle:** Nur Technik ist KEIN echtes CRM. Alle 3 Säulen müssen ausgewogen sein.
+
+**Merkformel:** T-O-P → Technik, Organisation, Personal.`,
+    keyPoints: [
+      '3 Säulen: T-O-P',
+      'Alle gleichgewichtig – sonst kein echtes CRM',
+      'Personal-Säule = Haltung, nicht nur Skill'
+    ]
+  },
+  {
+    id: 'lf5-3-4',
+    title: '5.3.4 Data-Warehouse & Data-Mining',
+    description: 'Datenbasis und Analyseverfahren.',
+    examRelevance: 'high',
+    content: `**Data-Warehouse:**
+- Zentrale Datenbank, bündelt Daten aus ALLEN Unternehmensbereichen
+- Basis für Analysen und Berichte
+- Enthält historische Daten – KEIN Echtzeit-System
+
+**Data-Mining:**
+- Analyseverfahren zur **Mustererkennung** in großen Datenmengen
+- Identifiziert Trends, Kaufmuster, Risikogruppen
+- Basis für gezielte Kampagnen
+
+**Informationsfluss:**
+Data-Warehouse → Data-Mining → Kampagnenmanagement
+
+**Bild:** Warehouse = Lager der Daten. Mining = Schürfen nach Wissen.`,
+    keyPoints: [
+      'Warehouse: zentrale, historische Datenbasis',
+      'Mining: Mustererkennung in den Daten',
+      'Fluss: Warehouse → Mining → Kampagne'
+    ]
+  },
+  {
+    id: 'lf5-4-1',
+    title: '5.4.1 Kundenwert – 5 Faktoren',
+    description: 'Kundenwert ist NICHT gleich Umsatz.',
+    examRelevance: 'high',
+    content: `Der Kundenwert beschreibt den wirtschaftlichen Beitrag eines Kunden über 5 Faktoren:
+
+1. **Umsatz:** Aktueller Umsatz
+2. **Ertrag:** Gewinn nach Abzug aller Kosten (Betreuung, Rabatte)
+3. **Potenzial:** Möglicher zukünftiger Umsatz
+4. **Referenzwert:** Weiterempfehlungen, Netzwerkeffekte
+5. **Informationswert:** Qualität des Feedbacks für Produktentwicklung
+
+**Prüfungsfalle:** Kundenwert ≠ Umsatz! Ein umsatzstarker Kunde mit hohen Betreuungskosten kann wertlos sein.`,
+    keyPoints: [
+      '5 Faktoren: Umsatz, Ertrag, Potenzial, Referenz, Information',
+      'Kundenwert ≠ Umsatz',
+      'Ertrag = Umsatz minus alle Kosten'
+    ]
+  },
+  {
+    id: 'lf5-4-2',
+    title: '5.4.2 Kundenlebenszyklus – 6 Phasen',
+    description: 'Akquisition → Optimierung in fester Reihenfolge.',
+    examRelevance: 'high',
+    content: `Der Kundenlebenszyklus beschreibt 6 Phasen einer Kundenbeziehung:
+
+1. **Akquisition:** Neukunde ansprechen, gewinnen
+2. **Angebot:** Erstkontakt, Beratung, Angebotserstellung
+3. **Kauf:** Erstauftrag, Vertrag, Transaktion
+4. **After-Sales:** Kurzfristige Nachbetreuung (Lieferung, Einführung)
+5. **Betreuung:** Langfristige Kundenbeziehung, Loyalitätsaufbau
+6. **Optimierung:** Analyse, Upselling, Verbesserung
+
+**Prüfungsfalle:** After-Sales = kurzfristig. Betreuung = langfristig. Häufige Verwechslung!
+
+**Eselsbrücke:** A-A-K-A-B-O`,
+    keyPoints: [
+      '6 Phasen, Reihenfolge prüfungsrelevant',
+      'After-Sales (kurz) ≠ Betreuung (lang)',
+      'Eselsbrücke: A-A-K-A-B-O'
+    ]
+  },
+  {
+    id: 'lf5-4-3',
+    title: '5.4.3 Zufriedenheit vs. Loyalität',
+    description: 'Vergangenheits- vs. zukunftsorientiert.',
+    examRelevance: 'high',
+    content: `**Kundenzufriedenheit:**
+- **Vergangenheitsorientiert** – bewertet bisherige Erfahrungen
+- Messung: Umfragen, NPS, Reklamationsquote
+- **Notwendige, aber NICHT hinreichende** Bedingung für Loyalität
+
+**Kundenloyalität:**
+- **Zukunftsorientiert** – Wiederkaufabsicht, emotionale Bindung
+- Messung: Wiederkaufrate, Weiterempfehlungsrate
+- Loyalität > Zufriedenheit
+
+**Prüfungsfalle:** Ein zufriedener Kunde ist NICHT automatisch loyal. Loyale Kunden bleiben auch bei Problemen.`,
+    keyPoints: [
+      'Zufriedenheit: vergangenheitsorientiert',
+      'Loyalität: zukunftsorientiert',
+      'Zufrieden ≠ Loyal'
+    ]
+  },
+  {
+    id: 'lf5-4-4',
+    title: '5.4.4 Kundenbindungsinstrumente',
+    description: '4 Kategorien: emotional, ökonomisch, strukturell, faktisch.',
+    examRelevance: 'medium',
+    content: `Vier Arten von Kundenbindung:
+
+**Emotional:** Persönliche Ansprache, Geburtstagsglückwünsche, Community-Building
+**Ökonomisch:** Bonusprogramme, Rabattsysteme, Kundenkarten, Treuepunkte
+**Strukturell:** Langzeitverträge, Abonnements, technische Integration
+**Faktisch:** Standortvorteil, Gewohnheit, fehlende Alternativen
+
+**Wichtig:** Faktische Bindung ist UNGEPLANT – sie entsteht ohne aktive Maßnahme.`,
+    keyPoints: [
+      '4 Kategorien: emotional, ökonomisch, strukturell, faktisch',
+      'Abonnement = strukturell, NICHT ökonomisch',
+      'Faktische Bindung = ungeplant'
+    ]
+  },
+  {
+    id: 'lf5-5-1',
+    title: '5.5.1 Beschwerde vs. Reklamation',
+    description: 'Rechtspflichten unterscheiden!',
+    examRelevance: 'high',
+    content: `**Beschwerde:**
+- Ausdruck von Unzufriedenheit
+- KEIN rechtlicher Anspruch
+- Beispiel: "Ihr Mitarbeiter war unfreundlich"
+
+**Reklamation:**
+- Konkreter Mangel an Produkt/Leistung
+- Hat **Rechtspflichten** (Gewährleistung)
+- 4 Gewährleistungsansprüche: Nachbesserung, Ersatzlieferung, Minderung, Rücktritt
+- Beispiel: "Das gelieferte Produkt ist defekt"
+
+**Prüfungsfalle:** Beschwerde ≠ Reklamation. Reklamation hat Rechtspflichten zur Folge!`,
+    keyPoints: [
+      'Beschwerde: Emotion ohne Rechtsanspruch',
+      'Reklamation: Mangel mit Rechtspflicht',
+      '4 Gewährleistungsansprüche bei Reklamation'
+    ]
+  },
+  {
+    id: 'lf5-5-2',
+    title: '5.5.2 ESEL – 5 Schritte im Beschwerdegespräch',
+    description: 'Einsteigen, Sachlich, Emotional, Lösung, Abschluss.',
+    examRelevance: 'high',
+    content: `Die 5 Schritte des Beschwerdegesprächs (ESEL-Modell):
+
+1. **Einsteigen / Annehmen:** Vollständig anhören, nicht unterbrechen, Empathie zeigen
+2. **Sachlich klären:** Sachverhalt aufnehmen, Was/Wann/Wo/Wie, dokumentieren
+3. **Emotional begleiten:** Verständnis, Entschuldigung (auch ohne Schuldeingeständnis)
+4. **Lösung anbieten:** Konkreter Vorschlag, ggf. Kulanz, Termin
+5. **Abschluss:** Zusammenfassung, Dank für Feedback, Dokumentation im CRM
+
+**Prüfungsfalle:** Reihenfolge ist PFLICHT. Lösung NIE vor emotionaler Begleitung!`,
+    keyPoints: [
+      '5 Schritte: ESEL',
+      'Reihenfolge ist verbindlich',
+      'Emotionale Begleitung VOR Lösung'
+    ]
+  },
+  {
+    id: 'lf5-5-3',
+    title: '5.5.3 10 Fehler im Beschwerdegespräch',
+    description: 'IHK-Pflichtwissen.',
+    examRelevance: 'high',
+    content: `Die 10 häufigen Fehler im Beschwerdegespräch:
+
+1. Kunden unterbrechen
+2. Rechtfertigungen ("Nicht meine Schuld")
+3. Schuld auf Kollegen schieben
+4. Kunden nicht ernst nehmen
+5. Zu schnell Lösung anbieten (ohne emotional gehört zu haben)
+6. Vage Versprechen (ohne Termin)
+7. Nicht dokumentieren
+8. Negatives Formulieren ("Das können wir nicht")
+9. Kulanz ohne Genehmigung zusagen
+10. Kein Follow-up nach Lösung
+
+**Prüfungsrelevanz:** Diese Liste kommt direkt in der IHK-Prüfung.`,
+    keyPoints: [
+      '10 Fehler – auswendig lernen',
+      'Häufigster Fehler: zu schnell Lösung',
+      'Kulanz braucht Genehmigung'
+    ]
+  },
+  {
+    id: 'lf5-5-4',
+    title: '5.5.4 Kulanz',
+    description: 'Freiwilliges Entgegenkommen ohne Rechtspflicht.',
+    examRelevance: 'medium',
+    content: `**Kulanz** = freiwilliges Entgegenkommen des Unternehmens **OHNE** rechtliche Verpflichtung.
+
+**Zweck:**
+- Kundenbeziehung erhalten
+- Imagepflege
+- Kundenbindung
+
+**Beispiele:** Ersatz außerhalb der Gewährleistung, Gutschein bei langer Wartezeit.
+
+**Wichtig:** Kulanz braucht Genehmigung (Kompetenzrahmen!). Nicht mit Gewährleistung verwechseln.`,
+    keyPoints: [
+      'Kulanz: freiwillig, OHNE Rechtspflicht',
+      'Braucht interne Genehmigung',
+      'Nicht mit Gewährleistung verwechseln'
+    ]
+  },
+  {
+    id: 'lf5-6-1',
+    title: '5.6.1 Haltegespräch (Kündigungsprävention)',
+    description: 'Kunden halten BEVOR er kündigt.',
+    examRelevance: 'medium',
+    content: `**Haltegespräch:** Gespräch mit dem Ziel, einen kündigungswilligen Kunden zu halten – BEVOR er gekündigt hat.
+
+**Phasen:**
+1. Kündigungsgrund herausarbeiten (offene Fragen!)
+2. Verständnis zeigen
+3. Konkrete Gegenargumente / Alternativen
+4. Spezialangebot (Sonderkonditionen, Upgrade)
+5. Entscheidung dem Kunden überlassen
+
+**Erfolgsregel:** Kein Druck. Entscheidungsraum lassen.`,
+    keyPoints: [
+      'Prävention vor Kündigung',
+      'Kündigungsgrund verstehen',
+      'Kein Druck ausüben'
+    ]
+  },
+  {
+    id: 'lf5-6-2',
+    title: '5.6.2 Winback – Kundenrückgewinnung',
+    description: 'Bereits abgewanderte Kunden reaktivieren.',
+    examRelevance: 'high',
+    content: `**Winback** = Rückgewinnung bereits **verlorener** Kunden (NACH Abwanderung).
+
+**Warum Winback?**
+- Neukundengewinnung kostet 5-7x mehr
+- Verlorene Kunden kennen das Unternehmen bereits
+- Abwanderungsanalyse liefert wertvolles Feedback
+
+**Prozess:**
+1. Abwanderungsanalyse (Warum?)
+2. Segmentierung (Wer lohnt sich?)
+3. Persönliche Ansprache
+4. Rückkehranreiz schaffen
+5. Re-Integration
+
+**Wichtig:** Nicht jeden Kunden zurückgewinnen – Kundenwert prüfen.`,
+    keyPoints: [
+      'Winback = nach Abwanderung',
+      '5-7x günstiger als Neugewinnung',
+      'Nur bei positivem Kundenwert'
+    ]
+  },
+  {
+    id: 'lf5-7-1',
+    title: '5.7.1 AHT – Average Handling Time',
+    description: 'Kernkennzahl Inbound.',
+    examRelevance: 'high',
+    content: `**AHT (Average Handling Time)** = Durchschnittliche Bearbeitungszeit eines Anrufs.
+
+**Formel:**
+AHT = Talk Time + Hold Time + ACW (After-Call-Work)
+
+**Bestandteile:**
+- **Talk Time:** Reine Gesprächsdauer
+- **Hold Time:** Wartezeit während Recherche
+- **ACW:** Dokumentation nach dem Gespräch
+
+**Prüfungsfalle:** AHT enthält IMMER auch die Nachbearbeitung (ACW), nicht nur die Gesprächszeit. Zu niedrige AHT = unvollständige Bearbeitung.`,
+    keyPoints: [
+      'AHT = Talk + Hold + ACW',
+      'ACW ist immer Teil der AHT',
+      'Zu niedrig = Qualitätsproblem'
+    ]
+  },
+  {
+    id: 'lf5-7-2',
+    title: '5.7.2 Servicelevel & FCR',
+    description: '80/20-Regel und Erstlösungsquote.',
+    examRelevance: 'high',
+    content: `**Servicelevel:** Erreichbarkeitsziel im Format X% / Y Sekunden.
+- **Branchenstandard:** 80/20 → 80% der Anrufe in 20 Sekunden angenommen
+- Formel: (in X Sek. beantwortet / Gesamtanrufe) × 100
+
+**FCR (First Call Resolution):**
+- Anteil der Probleme, die beim **ersten** Kontakt gelöst werden
+- Zielwert: > 70-80%
+- Formel: (Erstkontakt-Lösungen / Gesamtfälle) × 100
+
+**Prüfungsfalle:** Beim zweiten Anruf zum selben Thema zählt FCR NICHT mehr.`,
+    keyPoints: [
+      'Servicelevel-Standard: 80/20',
+      'FCR-Ziel: > 70-80%',
+      'Zweiter Anruf zerstört FCR'
+    ]
+  },
+  {
+    id: 'lf5-7-3',
+    title: '5.7.3 Outbound-Kennzahlen',
+    description: 'Ausschöpfungs-, Erfolgs- und Stornoquote.',
+    examRelevance: 'high',
+    content: `**Ausschöpfungsquote:** (Kontaktiert / Gesamtadressen) × 100
+
+**Erfolgsquote (Conversion):** (Abschlüsse / Kontakte) × 100
+
+**Stornoquote:** (Stornierungen / Abschlüsse) × 100
+- Hohe Stornoquote = Qualitätsproblem (Beratungsfehler, Druckverkauf)
+
+**Lost Calls (Inbound):** Anrufe, bei denen der Anrufer auflegt, bevor abgenommen wird. Hohe Quote = Erreichbarkeitsproblem.`,
+    keyPoints: [
+      'Ausschöpfung: Kontakte/Adressen',
+      'Erfolg: Abschlüsse/Kontakte',
+      'Storno: Qualitätsindikator'
+    ]
+  },
+  {
+    id: 'lf5-8-1',
+    title: '5.8.1 SEPA – IBAN, BIC, Mandat',
+    description: 'IBAN-Aufbau und Widerspruchsfristen.',
+    examRelevance: 'high',
+    content: `**SEPA:** Single Euro Payments Area – einheitlicher Euro-Zahlungsverkehrsraum.
+
+**IBAN (Deutschland):**
+- Länderkennung (DE) = 2
+- Prüfziffer = 2
+- BLZ = 8
+- Kontonummer = 10
+- **Gesamt: IMMER 22 Stellen**
+
+**BIC:** Bank Identifier Code (8 oder 11 Stellen).
+
+**Lastschrift-Widerspruchsfristen:**
+- **Basislastschrift (Verbraucher):** 8 Wochen
+- **Bei fehlendem Mandat:** 13 Monate
+- **Firmenlastschrift (B2B):** KEIN Widerspruchsrecht
+
+**Überweisungsdauer:** max. 1 Bankarbeitstag.`,
+    keyPoints: [
+      'IBAN DE = 22 Stellen',
+      'Basislastschrift: 8 Wochen Widerspruch',
+      'Firmenlastschrift: kein Widerspruch'
+    ]
+  },
+  {
+    id: 'lf5-8-2',
+    title: '5.8.2 Bonität & Schufa',
+    description: 'Kreditwürdigkeit und Datenschutzpflicht.',
+    examRelevance: 'medium',
+    content: `**Bonität:** Kreditwürdigkeit / Zahlungsfähigkeit eines Kunden.
+
+**Schufa (Schutzgemeinschaft für allgemeine Kreditsicherung):**
+- Private Auskunftei
+- Sammelt: Kredithistorie, Zahlungsausfälle, Verträge
+- Score: 0-100 (höher = besser)
+
+**Einsatz im Call Center:**
+- Vor Vertragsabschluss auf Kredit
+- Vor SEPA-Lastschrift-Genehmigung
+- Bei Ratenkäufen
+
+**DSGVO-Pflicht:** Bonitätsprüfung erfordert Einwilligung des Kunden oder berechtigtes Interesse.`,
+    keyPoints: [
+      'Bonität = Kreditwürdigkeit',
+      'Schufa-Score: 0-100',
+      'Einwilligung nach DSGVO erforderlich'
+    ]
+  }
+
 ];
 
 // 100 Flashcards for Lernfeld 4
@@ -456,6 +1010,116 @@ export const flashcards: Flashcard[] = [
   { id: 'lf4-f98', category: 'Sicherheit/Schutz', question: 'Was ist eine Auftragsverarbeitung?', answer: 'Wenn ein Dienstleister personenbezogene Daten im Auftrag und nach Weisung eines Verantwortlichen verarbeitet.' },
   { id: 'lf4-f99', category: 'Sicherheit/Schutz', question: 'Was ist die Integrität von Daten?', answer: 'Die Unversehrtheit und Korrektheit der Daten (Schutz vor unbefugter Änderung).' },
   { id: 'lf4-f100', category: 'Sicherheit/Schutz', question: 'Was ist die Verfügbarkeit von Daten?', answer: 'Sicherstellung, dass Daten bei Bedarf für berechtigte Nutzer zugänglich sind.' }
+,
+  // ============================================================
+  // LERNFELD 5 - Flashcards (105 Karten)
+  // ============================================================
+  { id: 'lf5-f1', category: 'Gesprächsführung', question: 'Welche 4 Bestandteile hat die Meldeformel?', answer: 'Begrüßung, Firmenname, Name des Mitarbeiters, offene Frage (B-F-N-F).' },
+  { id: 'lf5-f2', category: 'Gesprächsführung', question: 'Warum endet die Meldeformel mit einer offenen Frage?', answer: 'Offene Fragen ermöglichen dem Kunden, sein Anliegen frei zu schildern – mehr Information, bessere Bedarfsermittlung.' },
+  { id: 'lf5-f3', category: 'Gesprächsführung', question: 'Was ist die Legitimationsprüfung und wann erfolgt sie?', answer: 'Identitätsprüfung des Anrufers (Name, Adresse, Kundennummer). Sie erfolgt VOR jeder Datenweitergabe (DSGVO).' },
+  { id: 'lf5-f4', category: 'Gesprächsführung', question: 'Erkläre den Fragetrichter.', answer: 'Gesprächsstruktur von offen → vertiefend → geschlossen. Erst breite Information sammeln, dann konkretisieren, am Ende absichern.' },
+  { id: 'lf5-f5', category: 'Gesprächsführung', question: 'Was ist eine offene Frage? Beispiel?', answer: 'W-Frage, die ausführliche Antworten erlaubt. Beispiel: "Was kann ich für Sie tun?"' },
+  { id: 'lf5-f6', category: 'Gesprächsführung', question: 'Was ist eine geschlossene Frage und wann setzt man sie ein?', answer: 'Frage mit Ja/Nein-Antwort. Einsatz am Ende zur Absicherung: "Habe ich das richtig verstanden?"' },
+  { id: 'lf5-f7', category: 'Gesprächsführung', question: 'Nenne die 6 Phasen des Beratungsgesprächs.', answer: '1. Kontaktphase 2. Bedarfsermittlung 3. Beratung 4. Einwandbehandlung 5. Abschluss 6. Nachbearbeitung.' },
+  { id: 'lf5-f8', category: 'Gesprächsführung', question: 'Was ist ACW (After-Call-Work)?', answer: 'Nachbearbeitungszeit: Dokumentation, Weiterleitung, CRM-Eintrag. Teil der AHT.' },
+  { id: 'lf5-f9', category: 'Gesprächsführung', question: 'Wer legt zuerst auf – Mitarbeiter oder Kunde?', answer: 'Immer der Kunde. Der Mitarbeiter wartet, bis der Kunde aufgelegt hat.' },
+  { id: 'lf5-f10', category: 'Gesprächsführung', question: 'Was bedeutet aktives Zuhören?', answer: 'Bewusstes, konzentriertes Zuhören mit Bestätigen, Zusammenfassen, Nachfragen – ohne Unterbrechungen.' },
+  { id: 'lf5-f11', category: 'Datenmanagement', question: 'Nenne die 5 Grundsätze der Datenerfassung.', answer: 'Richtigkeit, Vollständigkeit, Redundanzvermeidung, Zeitstabilität, Konsistenz (R-V-R-Z-K).' },
+  { id: 'lf5-f12', category: 'Datenmanagement', question: 'Was bedeutet Zeitstabilität – mit Beispiel?', answer: 'Daten so erfassen, dass sie lange gültig bleiben. Beispiel: Geburtsdatum statt Alter, da Alter sich jährlich ändert.' },
+  { id: 'lf5-f13', category: 'Datenmanagement', question: 'Was ist eine Dublette und welche Folgen hat sie?', answer: 'Doppelt vorhandener Datensatz. Folgen: Mehrfachversand, Imageverlust, verfälschte Statistiken.' },
+  { id: 'lf5-f14', category: 'Datenmanagement', question: 'Was bedeutet Redundanzvermeidung?', answer: 'Daten nicht mehrfach erfassen – keine Dubletten, einmalige Datenhaltung zur Sicherung der Integrität.' },
+  { id: 'lf5-f15', category: 'Datenmanagement', question: 'Was enthält eine Kundenhistorie?', answer: 'Alle Kundenkontakte: Datum, Art, Inhalte, Beschwerden, offene Vorgänge, Kaufhistorie.' },
+  { id: 'lf5-f16', category: 'Datenmanagement', question: 'Ist echtes Multitasking neurobiologisch möglich?', answer: 'Nein. Das Gehirn macht Task-Switching – schnelles Wechseln zwischen Aufgaben. Fehlerrate steigt, Tiefe sinkt.' },
+  { id: 'lf5-f17', category: 'Datenmanagement', question: 'Was bedeutet Konsistenz bei der Datenerfassung?', answer: 'Einheitliche Schreibweisen, Formate, Systematik. Z. B. immer "Straße" statt "Str.".' },
+  { id: 'lf5-f18', category: 'CRM', question: 'Definiere CRM korrekt nach IHK.', answer: 'CRM ist eine Unternehmensstrategie zur Ausrichtung ALLER Bereiche auf langfristige, profitable Kundenbeziehungen. KEINE Software.' },
+  { id: 'lf5-f19', category: 'CRM', question: 'Nenne die 3 CRM-Aufgaben.', answer: '1. Kundenpflege (Retention) 2. Kundengewinnung (Acquisition) 3. Kundenrückgewinnung (Winback).' },
+  { id: 'lf5-f20', category: 'CRM', question: 'Nenne die 3 CRM-Säulen.', answer: 'Technik, Organisation, Personal (T-O-P) – müssen gleichgewichtig sein.' },
+  { id: 'lf5-f21', category: 'CRM', question: 'Was ist ein Data-Warehouse?', answer: 'Zentrale Datenbank, die Daten aus ALLEN Unternehmensbereichen bündelt. Basis für Analysen. Historische Daten – kein Echtzeit-System.' },
+  { id: 'lf5-f22', category: 'CRM', question: 'Was ist Data-Mining?', answer: 'Analyseverfahren zur Mustererkennung in großen Datenmengen. Erkennt Trends, Kaufmuster, Risikogruppen.' },
+  { id: 'lf5-f23', category: 'CRM', question: 'Wie hängen Data-Warehouse und Data-Mining zusammen?', answer: 'Warehouse liefert Daten → Mining analysiert Muster → Kampagnenmanagement nutzt die Ergebnisse.' },
+  { id: 'lf5-f24', category: 'CRM', question: 'Unterschied: CRM-Strategie vs. CRM-Software?', answer: 'Strategie = Unternehmensausrichtung auf Kundenbeziehungen. Software = nur das Werkzeug.' },
+  { id: 'lf5-f25', category: 'CRM', question: 'Was ist Social CRM?', answer: 'Erweiterung des CRM auf Social-Media-Kanäle: Monitoring, Direktinteraktion, Community-Management.' },
+  { id: 'lf5-f26', category: 'Kundenbindung', question: 'Nenne die 5 Faktoren des Kundenwerts.', answer: '1. Umsatz 2. Ertrag 3. Potenzial 4. Referenzwert 5. Informationswert.' },
+  { id: 'lf5-f27', category: 'Kundenbindung', question: 'Warum ist Kundenwert ≠ Umsatz?', answer: 'Hoher Umsatz mit hohen Betreuungskosten kann negativen Ertrag erzeugen → trotz hohem Umsatz geringer Wert.' },
+  { id: 'lf5-f28', category: 'Kundenbindung', question: 'Nenne die 6 Phasen des Kundenlebenszyklus.', answer: '1. Akquisition 2. Angebot 3. Kauf 4. After-Sales 5. Betreuung 6. Optimierung.' },
+  { id: 'lf5-f29', category: 'Kundenbindung', question: 'Unterschied: After-Sales vs. Betreuung?', answer: 'After-Sales = kurzfristig direkt nach dem Kauf (Lieferung, Einführung). Betreuung = langfristige Beziehungspflege.' },
+  { id: 'lf5-f30', category: 'Kundenbindung', question: 'Unterschied: Kundenzufriedenheit vs. Kundenloyalität?', answer: 'Zufriedenheit = vergangenheitsorientiert. Loyalität = zukunftsorientiert (Wiederkaufabsicht, emotionale Bindung).' },
+  { id: 'lf5-f31', category: 'Kundenbindung', question: 'Kann ein zufriedener Kunde zur Konkurrenz wechseln?', answer: 'Ja. Zufriedenheit reicht nicht für Loyalität. Loyalität entsteht erst durch emotionale Bindung und Mehrwert.' },
+  { id: 'lf5-f32', category: 'Kundenbindung', question: 'Nenne 3 strukturelle Kundenbindungsinstrumente.', answer: '1. Langzeitverträge 2. Abonnements 3. Technische Integration (z. B. Software-Anbindung).' },
+  { id: 'lf5-f33', category: 'Kundenbindung', question: 'Was ist Winback und warum lohnt es?', answer: 'Rückgewinnung verlorener Kunden. Lohnt sich: Neukundengewinnung kostet 5-7x mehr.' },
+  { id: 'lf5-f34', category: 'Kundenbindung', question: 'Nenne 3 emotionale Kundenbindungsinstrumente.', answer: '1. Persönliche Ansprache 2. Geburtstagsglückwünsche 3. Community-Events.' },
+  { id: 'lf5-f35', category: 'Kundenbindung', question: 'Nenne 3 ökonomische Kundenbindungsinstrumente.', answer: '1. Bonusprogramme 2. Kundenkarten/Treuepunkte 3. Sonderkonditionen für Stammkunden.' },
+  { id: 'lf5-f36', category: 'Beschwerden', question: 'Unterschied Beschwerde vs. Reklamation?', answer: 'Beschwerde = Unzufriedenheit ohne Rechtsanspruch. Reklamation = konkreter Mangel mit Rechtspflichten (Nachbesserung, Ersatz, Minderung, Rücktritt).' },
+  { id: 'lf5-f37', category: 'Beschwerden', question: 'Nenne die 5 Schritte im Beschwerdegespräch.', answer: '1. Einsteigen 2. Sachlich klären 3. Emotional begleiten 4. Lösung anbieten 5. Abschluss (ESEL).' },
+  { id: 'lf5-f38', category: 'Beschwerden', question: 'Warum ist die Reihenfolge der 5 Schritte wichtig?', answer: 'Emotionale Begleitung muss VOR der Lösung kommen – sonst wirkt die Lösung kalt und wird abgelehnt.' },
+  { id: 'lf5-f39', category: 'Beschwerden', question: 'Was ist Kulanz?', answer: 'Freiwilliges Entgegenkommen OHNE rechtliche Verpflichtung. Dient Kundenbindung und Imagepflege.' },
+  { id: 'lf5-f40', category: 'Beschwerden', question: 'Nenne 5 von 10 Fehlern im Beschwerdegespräch.', answer: '1. Unterbrechen 2. Rechtfertigen 3. Schuld auf Kollegen 4. Zu schnell Lösung 5. Keine Dokumentation.' },
+  { id: 'lf5-f41', category: 'Beschwerden', question: 'Eselsbrücke für die 5 Schritte des Beschwerdegesprächs?', answer: 'ESEL: Einsteigen, Sachlich, Emotional, Lösung, Abschluss.' },
+  { id: 'lf5-f42', category: 'Beschwerden', question: 'Was ist eine Entschuldigung ohne Schuldeingeständnis?', answer: 'Verständnis und Bedauern ausdrücken ("Tut mir leid, dass Sie das erlebt haben"), ohne rechtliche Schuld anzuerkennen.' },
+  { id: 'lf5-f43', category: 'Beschwerden', question: 'Warum ist Beschwerdefeedback wertvoll?', answer: 'Nur ca. 4% der Unzufriedenen beschweren sich aktiv. Jede Beschwerde repräsentiert viele stille Unzufriedene.' },
+  { id: 'lf5-f44', category: 'Beschwerden', question: 'Welche 4 Gewährleistungsansprüche gibt es?', answer: '1. Nachbesserung 2. Ersatzlieferung 3. Minderung 4. Rücktritt vom Vertrag.' },
+  { id: 'lf5-f45', category: 'Beschwerden', question: 'Was ist nach dem Beschwerdegespräch im CRM zu dokumentieren?', answer: 'Datum, Inhalt, Lösung, Kulanzleistung, Follow-up-Termin, Kundenstimmung.' },
+  { id: 'lf5-f46', category: 'Kennzahlen', question: 'Was ist AHT und wie berechnet man sie?', answer: 'Average Handling Time = Talk Time + Hold Time + ACW (Nachbearbeitung).' },
+  { id: 'lf5-f47', category: 'Kennzahlen', question: 'Was bedeutet Servicelevel 80/20?', answer: '80% aller Anrufe werden innerhalb von 20 Sekunden angenommen. Branchenstandard.' },
+  { id: 'lf5-f48', category: 'Kennzahlen', question: 'Was sind Lost Calls?', answer: 'Anrufe, bei denen der Anrufer auflegt, bevor ein Mitarbeiter abnimmt. Hohe Quote = Erreichbarkeitsproblem.' },
+  { id: 'lf5-f49', category: 'Kennzahlen', question: 'Was ist FCR und welcher Zielwert gilt?', answer: 'First Call Resolution = Problem beim ersten Kontakt gelöst. Zielwert: > 70-80%.' },
+  { id: 'lf5-f50', category: 'Kennzahlen', question: 'Was ist die Ausschöpfungsquote im Outbound?', answer: '(Kontaktierte Adressen / Gesamtadressen) × 100. Zeigt Bearbeitungsgrad der Adressbasis.' },
+  { id: 'lf5-f51', category: 'Kennzahlen', question: 'Was ist die Stornoquote und was zeigt sie?', answer: 'Anteil stornierter Abschlüsse. Hoch = Qualitätsproblem (Druckverkauf, Fehlinformation).' },
+  { id: 'lf5-f52', category: 'Kennzahlen', question: 'Was ist die Erfolgsquote im Outbound?', answer: '(Abschlüsse / Kontakte) × 100 = Conversion Rate.' },
+  { id: 'lf5-f53', category: 'Kennzahlen', question: 'Warum ist eine zu niedrige AHT problematisch?', answer: 'Zu kurze Gespräche = unvollständige Bearbeitung → Folge-Anrufe, niedrige FCR.' },
+  { id: 'lf5-f54', category: 'Kennzahlen', question: 'Wie hängen FCR und Kundenzufriedenheit zusammen?', answer: 'Hohe FCR = Problem beim ersten Kontakt gelöst = hohe Kundenzufriedenheit. Starke positive Korrelation.' },
+  { id: 'lf5-f55', category: 'Kennzahlen', question: 'Was ist Hold-Time?', answer: 'Zeit, in der der Kunde während des Gesprächs gehalten wird (Warteschleife für Recherche). Teil der AHT.' },
+  { id: 'lf5-f56', category: 'Zahlungsverkehr', question: 'Wie ist eine deutsche IBAN aufgebaut?', answer: 'DE (2) + Prüfziffer (2) + BLZ (8) + Kontonummer (10) = 22 Stellen.' },
+  { id: 'lf5-f57', category: 'Zahlungsverkehr', question: 'Widerspruchsfrist bei SEPA-Basislastschrift?', answer: '8 Wochen ab Kontobelastungsdatum.' },
+  { id: 'lf5-f58', category: 'Zahlungsverkehr', question: 'Wofür steht SEPA?', answer: 'Single Euro Payments Area – einheitlicher Euro-Zahlungsverkehrsraum in Europa.' },
+  { id: 'lf5-f59', category: 'Zahlungsverkehr', question: 'Unterschied: SEPA-Lastschrift vs. SEPA-Überweisung?', answer: 'Lastschrift: Unternehmen zieht ein (Mandat nötig). Überweisung: Kunde überweist aktiv.' },
+  { id: 'lf5-f60', category: 'Zahlungsverkehr', question: 'Was ist BIC?', answer: 'Bank Identifier Code – internationale Bankkennung mit 8 oder 11 Stellen.' },
+  { id: 'lf5-f61', category: 'Zahlungsverkehr', question: 'Widerspruchsfrist bei fehlendem Mandat?', answer: '13 Monate (statt 8 Wochen mit gültigem Mandat).' },
+  { id: 'lf5-f62', category: 'Zahlungsverkehr', question: 'Was ist Bonität?', answer: 'Kreditwürdigkeit / Zahlungsfähigkeit. Wird über Schufa-Score (0-100) gemessen.' },
+  { id: 'lf5-f63', category: 'Zahlungsverkehr', question: 'Was ist ein SEPA-Lastschriftmandat?', answer: 'Einwilligung des Kunden, dass das Unternehmen Beträge von seinem Konto einziehen darf.' },
+  { id: 'lf5-f64', category: 'Zahlungsverkehr', question: 'Wie lange dauert eine SEPA-Überweisung?', answer: 'Maximal 1 Bankarbeitstag.' },
+  { id: 'lf5-f65', category: 'Zahlungsverkehr', question: 'Was sammelt die Schufa?', answer: 'Kredithistorie, Zahlungsausfälle, bestehende Verträge, Konten. Liefert Bonitätsscore.' },
+  { id: 'lf5-f66', category: 'CRM', question: 'Warum müssen alle 3 CRM-Säulen gleichgewichtig sein?', answer: 'Technik ohne Schulung (Personal) und Prozesse (Organisation) scheitert. Alle drei müssen greifen.' },
+  { id: 'lf5-f67', category: 'Kundenbindung', question: 'Was ist der Kundenlebenszyklus und wozu dient er?', answer: 'Modell der Phasen einer Kundenbeziehung. Dient zur gezielten Maßnahmenplanung pro Phase.' },
+  { id: 'lf5-f68', category: 'Gesprächsführung', question: 'Was ist Einwandbehandlung?', answer: 'Phase, in der Kundenwiderstände aufgenommen, verstanden und entkräftet werden – ohne Widerspruch.' },
+  { id: 'lf5-f69', category: 'Beschwerden', question: 'Unterschied Beschwerde vs. Widerspruch?', answer: 'Beschwerde = emotionale Unzufriedenheit. Widerspruch = formaler Einspruch gegen eine Entscheidung.' },
+  { id: 'lf5-f70', category: 'Kennzahlen', question: 'Was bedeutet eine hohe Stornoquote für das Qualitätsmanagement?', answer: 'Hinweis auf Beratungsfehler, Druckverkauf oder Fehlinformation – muss analysiert werden.' },
+  { id: 'lf5-f71', category: 'CRM', question: 'Welche CRM-Aufgabe hat höchste Effizienz?', answer: 'Kundenpflege – günstigste Aufgabe, da Bestand erhalten wird. Gewinnung am teuersten.' },
+  { id: 'lf5-f72', category: 'Gesprächsführung', question: 'Was ist Bedarfsermittlung?', answer: 'Systematische Erfassung der Kundenbedürfnisse als Basis für passende Lösungsvorschläge.' },
+  { id: 'lf5-f73', category: 'Gesprächsführung', question: 'Unterschied Frontoffice vs. Backoffice?', answer: 'Frontoffice = direkter Kundenkontakt (Telefonie). Backoffice = Weiterbearbeitung ohne direkten Kontakt.' },
+  { id: 'lf5-f74', category: 'Kundenbindung', question: 'Warum ist Winback günstiger als Neukundengewinnung?', answer: 'Verlorene Kunden kennen Unternehmen, Produkte und Prozesse bereits – weniger Aufklärungsaufwand.' },
+  { id: 'lf5-f75', category: 'Zahlungsverkehr', question: 'Unterschied Basislastschrift vs. Firmenlastschrift?', answer: 'Basislastschrift: Verbraucher, 8 Wochen Widerspruch. Firmenlastschrift: B2B, KEIN Widerspruchsrecht.' },
+  { id: 'lf5-f76', category: 'Beschwerden', question: 'Was bedeutet positives Formulieren?', answer: 'Negative Aussagen umwandeln: "Das geht nicht" → "Was ich für Sie tun kann ist…"' },
+  { id: 'lf5-f77', category: 'Gesprächsführung', question: 'Was ist die Nachbereitungsphase?', answer: 'Dokumentation im CRM, Weiterleitung von Aufgaben, Follow-up-Termine setzen – Qualitätssicherung.' },
+  { id: 'lf5-f78', category: 'CRM', question: 'Was ist ein Kundensegment?', answer: 'Gruppe von Kunden mit ähnlichen Merkmalen oder Verhaltensweisen – Basis für zielgruppengerechte Maßnahmen.' },
+  { id: 'lf5-f79', category: 'Kundenbindung', question: 'Was ist der Referenzwert eines Kunden?', answer: 'Wert durch Weiterempfehlungen und Netzwerkeffekte – ein Kunde, der neue Kunden bringt.' },
+  { id: 'lf5-f80', category: 'Kundenbindung', question: 'Was ist der Informationswert eines Kunden?', answer: 'Qualität seines Feedbacks für Produktentwicklung und Marktforschung.' },
+  { id: 'lf5-f81', category: 'Kennzahlen', question: 'Was ist Talk-Time?', answer: 'Reine Gesprächsdauer ohne Nachbearbeitung. Teilkomponente der AHT.' },
+  { id: 'lf5-f82', category: 'Kennzahlen', question: 'Wie berechnet man die Lost-Call-Rate?', answer: '(Nicht angenommene Anrufe / Gesamtanrufe) × 100.' },
+  { id: 'lf5-f83', category: 'Beschwerden', question: 'Welche 4 Gewährleistungsansprüche kennt das Recht?', answer: 'Nachbesserung, Ersatzlieferung, Minderung, Rücktritt vom Vertrag.' },
+  { id: 'lf5-f84', category: 'Gesprächsführung', question: 'Was ist Nutzenargumentation?', answer: 'Argumentation aus Kundenperspektive: nicht Eigenschaften, sondern Vorteile für den Kunden betonen.' },
+  { id: 'lf5-f85', category: 'Datenmanagement', question: 'DSGVO-Relevanz bei der Datenspeicherung?', answer: 'Speicherbegrenzung: Daten nur so lange wie nötig. Bei fehlendem Zweck löschen. Einwilligung erforderlich.' },
+  { id: 'lf5-f86', category: 'CRM', question: 'Unterschied Kundenpflege vs. Kundenrückgewinnung?', answer: 'Pflege = aktiven Bestand halten und entwickeln. Rückgewinnung = abgewanderte Kunden reaktivieren.' },
+  { id: 'lf5-f87', category: 'Kundenbindung', question: 'Welche Phase folgt direkt nach dem Kauf?', answer: 'After-Sales – kurzfristige Nachbetreuung (Lieferung, Einführung).' },
+  { id: 'lf5-f88', category: 'Beschwerden', question: 'Unterschied Beschwerdemanagement vs. Qualitätsmanagement?', answer: 'Beschwerdemanagement = reaktiv. Qualitätsmanagement = proaktiv (Fehler vermeiden).' },
+  { id: 'lf5-f89', category: 'Gesprächsführung', question: 'Was sind Gesprächsstörer?', answer: 'Verhaltensweisen, die Gespräche behindern: Unterbrechen, Bewerten, Ablenken.' },
+  { id: 'lf5-f90', category: 'Gesprächsführung', question: 'Was sind Gesprächsförderer?', answer: 'Verhaltensweisen, die Gespräche unterstützen: Aktives Zuhören, offene Fragen, Bestätigen, Empathie.' },
+  { id: 'lf5-f91', category: 'Kennzahlen', question: 'Was bedeutet eine Erfolgsquote von 15% im Outbound?', answer: 'Von 100 Kontakten führen 15 zu einem Abschluss. Werte variieren stark je Kampagne.' },
+  { id: 'lf5-f92', category: 'Zahlungsverkehr', question: 'Warum braucht die Schufa-Abfrage Einwilligung?', answer: 'DSGVO: Bonitätsprüfung ist Datenverarbeitung – erfordert Rechtsgrundlage.' },
+  { id: 'lf5-f93', category: 'CRM', question: 'Was ist Kundenwert-Scoring?', answer: 'Bewertungssystem zur Einordnung von Kunden nach Gesamtwert – zur Priorisierung der Betreuung.' },
+  { id: 'lf5-f94', category: 'Kundenbindung', question: 'Was sind faktische Kundenbindungsgründe?', answer: 'Bindung ohne bewusste Entscheidung: Standortvorteil, fehlende Alternativen, Gewohnheit.' },
+  { id: 'lf5-f95', category: 'Beschwerden', question: 'Warum nach der Beschwerde danken?', answer: 'Feedback ist wertvoll. Dank signalisiert Wertschätzung. Nur ~4% der Unzufriedenen beschweren sich aktiv.' },
+  { id: 'lf5-f96', category: 'Gesprächsführung', question: 'Was ist die Bumerang-Technik?', answer: 'Einwand des Kunden als Argument umkehren: "Gerade WEIL Sie auf den Preis achten, ist dieses Angebot ideal."' },
+  { id: 'lf5-f97', category: 'Kennzahlen', question: 'Was ist die Auslastungsquote?', answer: 'Anteil produktiver Gesprächszeit an der Gesamtarbeitszeit.' },
+  { id: 'lf5-f98', category: 'CRM', question: 'Was ist ein CRM-System (Software)?', answer: 'Softwarelösung zur Verwaltung von Kundendaten, Kontakthistorien, Kampagnen – Werkzeug der CRM-Strategie.' },
+  { id: 'lf5-f99', category: 'Kundenbindung', question: 'Unterschied Neukunde vs. Stammkunde im Kundenwert?', answer: 'Stammkunden: höherer Wert – geringere Betreuungskosten, höhere Wiederkaufrate, mehr Empfehlungen.' },
+  { id: 'lf5-f100', category: 'Beschwerden', question: 'Wann ist Kulanz sinnvoll?', answer: 'Wenn Beziehungspflege und Imageschutz den Aufwand übersteigen. Immer Kompetenzrahmen prüfen.' },
+  { id: 'lf5-f101', category: 'CRM', question: 'Was ist ein Kampagnenmanagement-System?', answer: 'Software zur Planung, Durchführung und Auswertung von Marketing-/Vertriebskampagnen. Teil der Technik-Säule.' },
+  { id: 'lf5-f102', category: 'Kundenbindung', question: 'Was sind die 3 Grundregeln im Shitstorm-Management?', answer: 'Nie löschen, nie ignorieren, nie aggressiv reagieren.' },
+  { id: 'lf5-f103', category: 'Kundenbindung', question: 'Welche 5 Schritte hat die Shitstorm-Strategie?', answer: '1. Monitoring 2. Analyse 3. Reaktion 4. Lösung 5. Nachverfolgung.' },
+  { id: 'lf5-f104', category: 'Gesprächsführung', question: 'Was passiert ohne Legitimationsprüfung?', answer: 'DSGVO-Verstoß, Social-Engineering-Risiko, Datenschutzverletzung, Haftungsrisiko.' },
+  { id: 'lf5-f105', category: 'Beschwerden', question: 'Warum darf man Lösung nicht vor emotionaler Begleitung anbieten?', answer: 'Wirkt kalt, wird oft abgelehnt. Kunde fühlt sich nicht ernst genommen. ESEL-Reihenfolge ist verbindlich.' }
+
 ];
 
 // 100 Quiz Questions for Lernfeld 4
@@ -1443,4 +2107,1059 @@ export const quizQuestions: QuizQuestion[] = [
     difficulty: 'easy',
     category: 'Prüfungsfokus'
   }
+,
+  // ============================================================
+  // LERNFELD 5 - Quiz Questions (105 Fragen)
+  // ============================================================
+  {
+    id: 'lf5-q1',
+    question: 'Welche 4 Elemente hat die Meldeformel in der richtigen Reihenfolge?',
+    type: 'multiple-choice',
+    options: ['Firma, Name, Begrüßung, Frage', 'Begrüßung, Firma, Name, offene Frage', 'Name, Begrüßung, Frage, Firma', 'Begrüßung, Name, Firma, Frage'],
+    correctAnswer: 'Begrüßung, Firma, Name, offene Frage',
+    explanation: 'Korrekte Reihenfolge: Begrüßung → Firmenname → Mitarbeitername → offene Frage. Reihenfolge ist fix.',
+    difficulty: 'easy',
+    category: 'Gesprächsführung'
+  },
+  {
+    id: 'lf5-q2',
+    question: 'CRM ist...',
+    type: 'multiple-choice',
+    options: ['Eine Software für Kundendaten', 'Ein Datenbankformat', 'Eine Unternehmensstrategie zur Ausrichtung auf Kundenbeziehungen', 'Eine gesetzliche Pflicht'],
+    correctAnswer: 'Eine Unternehmensstrategie zur Ausrichtung auf Kundenbeziehungen',
+    explanation: 'CRM = Strategie. Software ist nur das Werkzeug. Häufigster IHK-Fehler.',
+    difficulty: 'easy',
+    category: 'CRM'
+  },
+  {
+    id: 'lf5-q3',
+    question: 'Wie viele Stellen hat eine deutsche IBAN?',
+    type: 'multiple-choice',
+    options: ['18 Stellen', '20 Stellen', '22 Stellen', '24 Stellen'],
+    correctAnswer: '22 Stellen',
+    explanation: 'DE (2) + Prüfziffer (2) + BLZ (8) + Kontonummer (10) = 22 Stellen.',
+    difficulty: 'easy',
+    category: 'Zahlungsverkehr'
+  },
+  {
+    id: 'lf5-q4',
+    question: 'Was ist der Unterschied zwischen Beschwerde und Reklamation?',
+    type: 'multiple-choice',
+    options: ['Beschwerde hat Rechtspflichten, Reklamation nicht', 'Beide haben Rechtspflichten', 'Reklamation hat Rechtspflichten, Beschwerde nicht', 'Es gibt keinen Unterschied'],
+    correctAnswer: 'Reklamation hat Rechtspflichten, Beschwerde nicht',
+    explanation: 'Reklamation = konkreter Mangel → Rechtspflichten (Nachbesserung etc.). Beschwerde = Unzufriedenheit ohne Rechtspflicht.',
+    difficulty: 'easy',
+    category: 'Beschwerden'
+  },
+  {
+    id: 'lf5-q5',
+    question: 'Wie lautet der Servicelevel-Branchenstandard?',
+    type: 'multiple-choice',
+    options: ['70/30', '80/20', '90/10', '60/40'],
+    correctAnswer: '80/20',
+    explanation: '80/20 = 80% der Anrufe werden innerhalb von 20 Sekunden angenommen. Branchenstandard.',
+    difficulty: 'easy',
+    category: 'Kennzahlen'
+  },
+  {
+    id: 'lf5-q6',
+    question: 'Welche Widerspruchsfrist gilt bei der SEPA-Basislastschrift?',
+    type: 'multiple-choice',
+    options: ['4 Wochen', '6 Wochen', '8 Wochen', '13 Monate'],
+    correctAnswer: '8 Wochen',
+    explanation: '8 Wochen ab Kontobelastung. Bei fehlendem Mandat: 13 Monate.',
+    difficulty: 'easy',
+    category: 'Zahlungsverkehr'
+  },
+  {
+    id: 'lf5-q7',
+    question: 'Welche der folgenden ist KEINE offizielle CRM-Aufgabe?',
+    type: 'multiple-choice',
+    options: ['Kundenpflege', 'Kundengewinnung', 'Kundenrückgewinnung', 'Kundenbesteuerung'],
+    correctAnswer: 'Kundenbesteuerung',
+    explanation: 'Die 3 CRM-Aufgaben: Kundenpflege, Kundengewinnung, Kundenrückgewinnung.',
+    difficulty: 'easy',
+    category: 'CRM'
+  },
+  {
+    id: 'lf5-q8',
+    question: 'Was ist FCR?',
+    type: 'multiple-choice',
+    options: ['Full Customer Revenue', 'First Call Resolution', 'Final Contact Rate', 'Fast Customer Response'],
+    correctAnswer: 'First Call Resolution',
+    explanation: 'FCR = First Call Resolution = Problem beim ersten Kontakt gelöst. Ziel: > 70-80%.',
+    difficulty: 'easy',
+    category: 'Kennzahlen'
+  },
+  {
+    id: 'lf5-q9',
+    question: 'Welcher Grundsatz ist KEIN offizieller der 5 Grundsätze der Datenerfassung?',
+    type: 'multiple-choice',
+    options: ['Richtigkeit', 'Zeitstabilität', 'Aktualität', 'Konsistenz'],
+    correctAnswer: 'Aktualität',
+    explanation: 'Die 5 Grundsätze: Richtigkeit, Vollständigkeit, Redundanzvermeidung, Zeitstabilität, Konsistenz. Aktualität ist kein eigener Grundsatz.',
+    difficulty: 'medium',
+    category: 'Datenmanagement'
+  },
+  {
+    id: 'lf5-q10',
+    question: 'Was ist eine Dublette?',
+    type: 'multiple-choice',
+    options: ['Ein fehlerhafter Datensatz', 'Ein doppelt vorhandener Datensatz', 'Ein veralteter Datensatz', 'Ein Kundenkontakt ohne Notiz'],
+    correctAnswer: 'Ein doppelt vorhandener Datensatz',
+    explanation: 'Dublette = Datensatz, der mehrfach in der Datenbank vorhanden ist. Folgen: Mehrfachversand, Imageverlust.',
+    difficulty: 'easy',
+    category: 'Datenmanagement'
+  },
+  {
+    id: 'lf5-q11',
+    question: 'In welcher Reihenfolge verlaufen die Phasen des Kundenlebenszyklus?',
+    type: 'multiple-choice',
+    options: ['Angebot, Akquisition, Kauf, After-Sales, Betreuung, Optimierung', 'Akquisition, Angebot, Kauf, After-Sales, Betreuung, Optimierung', 'Kauf, Angebot, Akquisition, After-Sales, Optimierung, Betreuung', 'Akquisition, Kauf, Angebot, Betreuung, After-Sales, Optimierung'],
+    correctAnswer: 'Akquisition, Angebot, Kauf, After-Sales, Betreuung, Optimierung',
+    explanation: 'Korrekt: Akquisition → Angebot → Kauf → After-Sales → Betreuung → Optimierung.',
+    difficulty: 'medium',
+    category: 'Kundenbindung'
+  },
+  {
+    id: 'lf5-q12',
+    question: 'Was ist AHT?',
+    type: 'multiple-choice',
+    options: ['Average Human Time', 'Average Handling Time', 'After-Hours Transfer', 'Automatic Hold Timer'],
+    correctAnswer: 'Average Handling Time',
+    explanation: 'AHT = Average Handling Time = Talk + Hold + ACW.',
+    difficulty: 'easy',
+    category: 'Kennzahlen'
+  },
+  {
+    id: 'lf5-q13',
+    question: 'Der Fragetrichter funktioniert...',
+    type: 'multiple-choice',
+    options: ['Von geschlossen zu offen', 'Immer mit alternativen Fragen', 'Von offen zu geschlossen', 'Nur mit Gegenfragen'],
+    correctAnswer: 'Von offen zu geschlossen',
+    explanation: 'Erst offene Fragen (breite Information), dann vertiefend, dann geschlossen (Absicherung).',
+    difficulty: 'easy',
+    category: 'Gesprächsführung'
+  },
+  {
+    id: 'lf5-q14',
+    question: 'Welche CRM-Säule beinhaltet Data-Warehouse und CRM-Software?',
+    type: 'multiple-choice',
+    options: ['Organisation', 'Personal', 'Technik', 'Strategie'],
+    correctAnswer: 'Technik',
+    explanation: 'Technik-Säule: Software, Datenbanken, Data-Warehouse, Kommunikationsanlagen.',
+    difficulty: 'easy',
+    category: 'CRM'
+  },
+  {
+    id: 'lf5-q15',
+    question: 'Was unterscheidet After-Sales von Betreuung im Kundenlebenszyklus?',
+    type: 'multiple-choice',
+    options: ['After-Sales ist langfristig, Betreuung kurzfristig', 'After-Sales ist kurzfristig direkt nach dem Kauf, Betreuung ist langfristig', 'Kein Unterschied', 'After-Sales nur bei B2B'],
+    correctAnswer: 'After-Sales ist kurzfristig direkt nach dem Kauf, Betreuung ist langfristig',
+    explanation: 'After-Sales = kurzfristig (Lieferung, Einführung). Betreuung = langfristige Loyalitätspflege.',
+    difficulty: 'medium',
+    category: 'Kundenbindung'
+  },
+  {
+    id: 'lf5-q16',
+    question: 'In welchem Schritt des Beschwerdegesprächs wird emotional begleitet?',
+    type: 'multiple-choice',
+    options: ['Schritt 1: Einsteigen', 'Schritt 2: Sachlich klären', 'Schritt 3: Emotional begleiten', 'Schritt 4: Lösung anbieten'],
+    correctAnswer: 'Schritt 3: Emotional begleiten',
+    explanation: 'ESEL: Einsteigen → Sachlich → Emotional → Lösung → Abschluss.',
+    difficulty: 'easy',
+    category: 'Beschwerden'
+  },
+  {
+    id: 'lf5-q17',
+    question: 'Woran ist Kundenzufriedenheit orientiert?',
+    type: 'multiple-choice',
+    options: ['Zukunft (Wiederkaufabsicht)', 'Vergangenheit (bisherige Erfahrungen)', 'Aktueller Umsatz', 'Marktanteilen'],
+    correctAnswer: 'Vergangenheit (bisherige Erfahrungen)',
+    explanation: 'Zufriedenheit = vergangenheitsorientiert. Loyalität = zukunftsorientiert.',
+    difficulty: 'medium',
+    category: 'Kundenbindung'
+  },
+  {
+    id: 'lf5-q18',
+    question: 'Was ist ein Data-Warehouse?',
+    type: 'multiple-choice',
+    options: ['Echtzeit-Datenbank für aktuelle Transaktionen', 'Externe Sicherungskopie', 'Zentrale Datenbank für Analysen mit historischen Daten aus allen Bereichen', 'CRM-Software-Modul'],
+    correctAnswer: 'Zentrale Datenbank für Analysen mit historischen Daten aus allen Bereichen',
+    explanation: 'Data-Warehouse: zentrale Analysedatenbank, bündelt alle Unternehmensdaten, historische Daten.',
+    difficulty: 'medium',
+    category: 'CRM'
+  },
+  {
+    id: 'lf5-q19',
+    question: 'Welcher Kundenwert-Faktor beschreibt Weiterempfehlungen?',
+    type: 'multiple-choice',
+    options: ['Umsatz', 'Ertrag', 'Potenzial', 'Referenzwert'],
+    correctAnswer: 'Referenzwert',
+    explanation: 'Referenzwert = Wert durch Weiterempfehlungen und Netzwerkeffekte.',
+    difficulty: 'medium',
+    category: 'Kundenbindung'
+  },
+  {
+    id: 'lf5-q20',
+    question: 'Was ist ein Fehler bei der Zeitstabilität?',
+    type: 'multiple-choice',
+    options: ['Geburtsdatum statt Alter erfassen', 'Alter statt Geburtsdatum erfassen', 'Postfach statt temporäre Adresse erfassen', 'Alle Felder pflichtfüllen'],
+    correctAnswer: 'Alter statt Geburtsdatum erfassen',
+    explanation: 'Alter ändert sich jährlich → nicht zeitstabil. Geburtsdatum ist zeitstabil.',
+    difficulty: 'medium',
+    category: 'Datenmanagement'
+  },
+  {
+    id: 'lf5-q21',
+    question: 'Was ist Winback?',
+    type: 'multiple-choice',
+    options: ['Kundenkontakt nach Beschwerde', 'Rückgewinnung verlorener Kunden', 'Halten von kündigungswilligen Kunden', 'Bonus für treue Kunden'],
+    correctAnswer: 'Rückgewinnung verlorener Kunden',
+    explanation: 'Winback = Rückgewinnung bereits abgewanderter Kunden. Haltegespräch = Prävention.',
+    difficulty: 'easy',
+    category: 'Kundenbindung'
+  },
+  {
+    id: 'lf5-q22',
+    question: 'Warum ist Neukundengewinnung teurer als Winback?',
+    type: 'multiple-choice',
+    options: ['Neukunden brauchen mehr Rabatte', 'Verlorene Kunden kennen Unternehmen, Produkte, Prozesse bereits', 'Neukunden zahlen schlechter', 'Es gibt keine Preisdifferenz'],
+    correctAnswer: 'Verlorene Kunden kennen Unternehmen, Produkte, Prozesse bereits',
+    explanation: 'Rückkehrer kennen das Unternehmen → weniger Aufklärungsaufwand, schnellere Entscheidung.',
+    difficulty: 'medium',
+    category: 'Kundenbindung'
+  },
+  {
+    id: 'lf5-q23',
+    question: 'Was ist Kulanz?',
+    type: 'multiple-choice',
+    options: ['Rechtlicher Anspruch des Kunden bei Mängeln', 'Freiwilliges Entgegenkommen ohne Rechtspflicht', 'Pflichtleistung bei Reklamation', 'Entschädigung nach Gerichtsurteil'],
+    correctAnswer: 'Freiwilliges Entgegenkommen ohne Rechtspflicht',
+    explanation: 'Kulanz = freiwillig, ohne Rechtspflicht. Dient Kundenbindung und Imagepflege.',
+    difficulty: 'easy',
+    category: 'Beschwerden'
+  },
+  {
+    id: 'lf5-q24',
+    question: 'Welche Aussage über FCR ist FALSCH?',
+    type: 'multiple-choice',
+    options: ['FCR steht für First Call Resolution', 'Zielwert liegt bei über 70-80%', 'FCR und Kundenzufriedenheit korrelieren positiv', 'Ein zweiter Anruf zum selben Thema zählt noch als FCR'],
+    correctAnswer: 'Ein zweiter Anruf zum selben Thema zählt noch als FCR',
+    explanation: 'FALSCH: Zweiter Anruf bedeutet, dass FCR NICHT erfüllt wurde. FCR = Lösung beim ERSTEN Kontakt.',
+    difficulty: 'hard',
+    category: 'Kennzahlen'
+  },
+  {
+    id: 'lf5-q25',
+    question: 'Die SEPA-Firmenlastschrift gilt für...',
+    type: 'multiple-choice',
+    options: ['Verbraucher mit 8 Wochen Widerspruchsrecht', 'Nur B2B ohne Widerspruchsrecht', 'Nur öffentliche Auftraggeber', 'Verbraucher ohne Widerspruchsrecht'],
+    correctAnswer: 'Nur B2B ohne Widerspruchsrecht',
+    explanation: 'Firmenlastschrift: Nur Business-to-Business. Kein Widerspruchsrecht.',
+    difficulty: 'hard',
+    category: 'Zahlungsverkehr'
+  },
+  {
+    id: 'lf5-q26',
+    question: 'Wer legt bei einem Kundengespräch zuerst auf?',
+    type: 'multiple-choice',
+    options: ['Der Mitarbeiter', 'Der Teamleiter entscheidet', 'Der Kunde', 'Gleichzeitig'],
+    correctAnswer: 'Der Kunde',
+    explanation: 'Immer der Kunde legt zuerst auf. Grundregel der professionellen Gesprächsführung.',
+    difficulty: 'easy',
+    category: 'Gesprächsführung'
+  },
+  {
+    id: 'lf5-q27',
+    question: 'Welcher Schritt kommt im Beschwerdegespräch ZULETZT?',
+    type: 'multiple-choice',
+    options: ['Emotional begleiten', 'Sachlich klären', 'Lösung anbieten', 'Abschluss'],
+    correctAnswer: 'Abschluss',
+    explanation: 'ESEL: Einsteigen → Sachlich → Emotional → Lösung → Abschluss. Abschluss ist Schritt 5.',
+    difficulty: 'easy',
+    category: 'Beschwerden'
+  },
+  {
+    id: 'lf5-q28',
+    question: 'Was beschreibt der Ertrag im Kundenwert?',
+    type: 'multiple-choice',
+    options: ['Der Brutto-Umsatz des Kunden', 'Umsatz minus alle anfallenden Kosten (Betreuung, Rabatte)', 'Zukünftiges Umsatzpotenzial', 'Weiterempfehlungen'],
+    correctAnswer: 'Umsatz minus alle anfallenden Kosten (Betreuung, Rabatte)',
+    explanation: 'Ertrag = Umsatz minus alle Kosten. Hoher Umsatz mit hohen Kosten = wenig Ertrag.',
+    difficulty: 'medium',
+    category: 'Kundenbindung'
+  },
+  {
+    id: 'lf5-q29',
+    question: 'Was ist KEIN Teil der AHT?',
+    type: 'multiple-choice',
+    options: ['Talk Time (Gesprächszeit)', 'Hold Time (Wartezeit während Gespräch)', 'Pausenzeit des Mitarbeiters', 'ACW (Nachbearbeitung)'],
+    correctAnswer: 'Pausenzeit des Mitarbeiters',
+    explanation: 'AHT = Talk + Hold + ACW. Pausenzeiten außerhalb des Gesprächs sind NICHT Teil der AHT.',
+    difficulty: 'medium',
+    category: 'Kennzahlen'
+  },
+  {
+    id: 'lf5-q30',
+    question: 'Welche Aussage über Data-Mining ist KORREKT?',
+    type: 'multiple-choice',
+    options: ['Ersetzt das Data-Warehouse', 'Ist ein Echtzeit-Dateneingabesystem', 'Erkennt Muster in großen Datenmengen', 'Ist nur für externe Dienstleister'],
+    correctAnswer: 'Erkennt Muster in großen Datenmengen',
+    explanation: 'Data-Mining = Mustererkennung. Nutzt das Data-Warehouse als Datenquelle.',
+    difficulty: 'medium',
+    category: 'CRM'
+  },
+  {
+    id: 'lf5-q31',
+    question: 'Was ist Legitimationsprüfung im Call Center?',
+    type: 'multiple-choice',
+    options: ['Prüfung der fachlichen Kompetenz des Mitarbeiters', 'Prüfung der Identität des Anrufers vor Datenweitergabe', 'Prüfung der DSGVO-Konformität', 'Qualitätskontrolle des Gesprächs'],
+    correctAnswer: 'Prüfung der Identität des Anrufers vor Datenweitergabe',
+    explanation: 'Legitimation = Identitätsprüfung. Muss VOR jeder Datenweitergabe erfolgen (DSGVO).',
+    difficulty: 'easy',
+    category: 'Gesprächsführung'
+  },
+  {
+    id: 'lf5-q32',
+    question: 'Welche Aussage zu Zufriedenheit vs. Loyalität ist KORREKT?',
+    type: 'multiple-choice',
+    options: ['Zufriedene Kunden sind immer loyal', 'Loyalität ist vergangenheitsorientiert', 'Zufriedenheit ist notwendig aber nicht hinreichend für Loyalität', 'Loyalität ist billiger als Zufriedenheit zu erzeugen'],
+    correctAnswer: 'Zufriedenheit ist notwendig aber nicht hinreichend für Loyalität',
+    explanation: 'Zufriedenheit ist Voraussetzung, aber nicht ausreichend. Loyalität braucht emotionale Bindung.',
+    difficulty: 'hard',
+    category: 'Kundenbindung'
+  },
+  {
+    id: 'lf5-q33',
+    question: 'Was sind Lost Calls?',
+    type: 'multiple-choice',
+    options: ['Anrufe mit falscher Weiterleitung', 'Anrufe die abgebrochen werden bevor ein Mitarbeiter abnimmt', 'Anrufe außerhalb der Betriebszeiten', 'Nicht protokollierte Gespräche'],
+    correctAnswer: 'Anrufe die abgebrochen werden bevor ein Mitarbeiter abnimmt',
+    explanation: 'Lost Calls = Anrufer legt auf, bevor abgenommen wird. Hohe Quote = Erreichbarkeitsproblem.',
+    difficulty: 'easy',
+    category: 'Kennzahlen'
+  },
+  {
+    id: 'lf5-q34',
+    question: 'Was ist der Informationswert eines Kunden?',
+    type: 'multiple-choice',
+    options: ['Umsatz durch Online-Informationen', 'Wert seines Feedbacks für Produktentwicklung', 'Datenschutzrechtlicher Wert seiner Daten', 'Wert seiner Suchhistorie'],
+    correctAnswer: 'Wert seines Feedbacks für Produktentwicklung',
+    explanation: 'Informationswert = Qualität des Kundenfeedbacks für Verbesserungen und Marktforschung.',
+    difficulty: 'medium',
+    category: 'Kundenbindung'
+  },
+  {
+    id: 'lf5-q35',
+    question: 'Welche Aussage zur SEPA-Überweisung ist FALSCH?',
+    type: 'multiple-choice',
+    options: ['Wird aktiv vom Kunden ausgeführt', 'Ausführung max. 1 Bankarbeitstag', 'Benötigt ein Mandat wie die Lastschrift', 'Erfordert IBAN des Empfängers'],
+    correctAnswer: 'Benötigt ein Mandat wie die Lastschrift',
+    explanation: 'FALSCH: Überweisung braucht KEIN Mandat. Nur die Lastschrift benötigt ein Lastschriftmandat.',
+    difficulty: 'hard',
+    category: 'Zahlungsverkehr'
+  },
+  {
+    id: 'lf5-q36',
+    question: 'Was sind die 3 Säulen des CRM?',
+    type: 'multiple-choice',
+    options: ['Kunden, Prozesse, Daten', 'Technik, Organisation, Personal', 'Inbound, Outbound, Digital', 'Marketing, Vertrieb, Service'],
+    correctAnswer: 'Technik, Organisation, Personal',
+    explanation: 'Die 3 CRM-Säulen: T-O-P → Technik, Organisation, Personal.',
+    difficulty: 'easy',
+    category: 'CRM'
+  },
+  {
+    id: 'lf5-q37',
+    question: 'Welcher Fehler im Beschwerdegespräch ist besonders schwerwiegend?',
+    type: 'multiple-choice',
+    options: ['Zu langes Zuhören', 'Zu viele Fragen stellen', 'Lösung anbieten BEVOR emotional begleitet wurde', 'Zu freundlich sein'],
+    correctAnswer: 'Lösung anbieten BEVOR emotional begleitet wurde',
+    explanation: 'Lösung vor emotionaler Begleitung wirkt kalt und wird oft abgelehnt.',
+    difficulty: 'medium',
+    category: 'Beschwerden'
+  },
+  {
+    id: 'lf5-q38',
+    question: 'Was beschreibt Kundenloyalität?',
+    type: 'multiple-choice',
+    options: ['Vergangenheitsorientierte Bewertung bisheriger Erfahrungen', 'Zukunftsorientierte Wiederkaufabsicht und emotionale Bindung', 'Aktuelle Transaktionshäufigkeit', 'Zahlungsbereitschaft'],
+    correctAnswer: 'Zukunftsorientierte Wiederkaufabsicht und emotionale Bindung',
+    explanation: 'Loyalität = zukunftsorientiert. Beschreibt Absicht, wiederzukommen und weiterzuempfehlen.',
+    difficulty: 'medium',
+    category: 'Kundenbindung'
+  },
+  {
+    id: 'lf5-q39',
+    question: 'Warum dürfen Social-Media-Kommentare bei einem Shitstorm NICHT gelöscht werden?',
+    type: 'multiple-choice',
+    options: ['Wegen DSGVO', 'Löschen verschlimmert die Reaktion (Vertuschungsvorwurf)', 'Es ist technisch unmöglich', 'Weil Kommentare Eigentum der Nutzer sind'],
+    correctAnswer: 'Löschen verschlimmert die Reaktion (Vertuschungsvorwurf)',
+    explanation: 'Löschen → Vertuschungsvorwurf → Eskalation. Grundregel: Nie löschen, nie ignorieren, nie aggressiv.',
+    difficulty: 'medium',
+    category: 'Kundenbindung'
+  },
+  {
+    id: 'lf5-q40',
+    question: 'Was berechnet die Stornoquote?',
+    type: 'multiple-choice',
+    options: ['Anteil der Rabatte am Umsatz', 'Anteil der stornierten Abschlüsse an Gesamtabschlüssen', 'Anteil verlorener Kunden', 'Fehlerrate bei Dateneingabe'],
+    correctAnswer: 'Anteil der stornierten Abschlüsse an Gesamtabschlüssen',
+    explanation: 'Stornoquote = (Stornierungen / Abschlüsse) × 100. Hoch = Beratungsfehler oder Druckverkauf.',
+    difficulty: 'easy',
+    category: 'Kennzahlen'
+  },
+  {
+    id: 'lf5-q41',
+    question: 'Wie viele Phasen hat der Kundenlebenszyklus?',
+    type: 'multiple-choice',
+    options: ['4 Phasen', '5 Phasen', '6 Phasen', '8 Phasen'],
+    correctAnswer: '6 Phasen',
+    explanation: '6 Phasen: Akquisition, Angebot, Kauf, After-Sales, Betreuung, Optimierung.',
+    difficulty: 'easy',
+    category: 'Kundenbindung'
+  },
+  {
+    id: 'lf5-q42',
+    question: 'Was ist Multitasking neurobiologisch betrachtet?',
+    type: 'multiple-choice',
+    options: ['Echte parallele Verarbeitung mehrerer Aufgaben', 'Schnelles Wechseln zwischen Aufgaben (Task-Switching)', 'Unbewusste Automatisierung von Routinen', 'Ausschließlich möglich mit Training'],
+    correctAnswer: 'Schnelles Wechseln zwischen Aufgaben (Task-Switching)',
+    explanation: 'Echtes Multitasking ist neurobiologisch unmöglich. Gehirn macht Task-Switching → Fehler steigen.',
+    difficulty: 'medium',
+    category: 'Datenmanagement'
+  },
+  {
+    id: 'lf5-q43',
+    question: 'Was ist der korrekte Aufbau der deutschen IBAN?',
+    type: 'multiple-choice',
+    options: ['DE + 3 Prüfziffern + BLZ + Kontonummer = 22 Stellen', 'DE + 2 Prüfziffern + BLZ (8) + Kontonummer (10) = 22 Stellen', 'DE + 2 Prüfziffern + BIC + Kontonummer = 20 Stellen', 'DE + BLZ (8) + Kontonummer (12) = 22 Stellen'],
+    correctAnswer: 'DE + 2 Prüfziffern + BLZ (8) + Kontonummer (10) = 22 Stellen',
+    explanation: 'DE(2) + Prüfziffer(2) + BLZ(8) + Kontonummer(10) = 22 Stellen.',
+    difficulty: 'hard',
+    category: 'Zahlungsverkehr'
+  },
+  {
+    id: 'lf5-q44',
+    question: 'Welche Aussage zu den 5 Grundsätzen ist FALSCH?',
+    type: 'multiple-choice',
+    options: ['Richtigkeit: Daten müssen sachlich korrekt sein', 'Vollständigkeit: Alle Felder müssen befüllt sein', 'Redundanzvermeidung: Keine Dubletten', 'Aktualität: Daten täglich prüfen'],
+    correctAnswer: 'Aktualität: Daten täglich prüfen',
+    explanation: 'FALSCH: Aktualität ist kein Grundsatz. Der vierte Grundsatz heißt ZEITSTABILITÄT.',
+    difficulty: 'hard',
+    category: 'Datenmanagement'
+  },
+  {
+    id: 'lf5-q45',
+    question: 'Was ist der Referenzwert eines Kunden?',
+    type: 'multiple-choice',
+    options: ['Sein aktueller Umsatz', 'Seine Kreditwürdigkeit', 'Sein Wert durch Weiterempfehlungen/Netzwerkeffekte', 'Sein Kundenwert in Referenzprojekten'],
+    correctAnswer: 'Sein Wert durch Weiterempfehlungen/Netzwerkeffekte',
+    explanation: 'Referenzwert = Wert durch Weiterempfehlungen.',
+    difficulty: 'medium',
+    category: 'Kundenbindung'
+  },
+  {
+    id: 'lf5-q46',
+    question: 'Welche Schritte beinhaltet ACW (After-Call-Work)?',
+    type: 'multiple-choice',
+    options: ['Pausenzeit und Schulung', 'Dokumentation, Weiterleitung, CRM-Eintrag, Follow-up', 'Nur Gesprächsprotokoll', 'Qualitätskontrolle durch Teamleiter'],
+    correctAnswer: 'Dokumentation, Weiterleitung, CRM-Eintrag, Follow-up',
+    explanation: 'ACW = alle Tätigkeiten nach dem Gespräch: Dokumentation, Weiterleitung, CRM-Pflege, Termine.',
+    difficulty: 'medium',
+    category: 'Kennzahlen'
+  },
+  {
+    id: 'lf5-q47',
+    question: 'Was ist der Unterschied Haltegespräch vs. Winback?',
+    type: 'multiple-choice',
+    options: ['Kein Unterschied', 'Haltegespräch = Kunden halten BEVOR er kündigt; Winback = Kunden zurückgewinnen NACHDEM er gegangen ist', 'Winback = intern, Haltegespräch = extern', 'Haltegespräch nur für B2B'],
+    correctAnswer: 'Haltegespräch = Kunden halten BEVOR er kündigt; Winback = Kunden zurückgewinnen NACHDEM er gegangen ist',
+    explanation: 'Haltegespräch = Prävention. Winback = Reaktion (bereits abgewanderten Kunden zurückgewinnen).',
+    difficulty: 'easy',
+    category: 'Kundenbindung'
+  },
+  {
+    id: 'lf5-q48',
+    question: 'Welche Aussage zu Kulanz ist KORREKT?',
+    type: 'multiple-choice',
+    options: ['Kulanz ist eine gesetzliche Pflicht bei Mängeln', 'Kulanz erfordert Kundenzustimmung', 'Kulanz ist freiwillig und braucht interne Genehmigung', 'Kulanz ist immer unbegrenzt gewährbar'],
+    correctAnswer: 'Kulanz ist freiwillig und braucht interne Genehmigung',
+    explanation: 'Kulanz = freiwillig, ohne Rechtspflicht, braucht Genehmigung (Kompetenzrahmen).',
+    difficulty: 'medium',
+    category: 'Beschwerden'
+  },
+  {
+    id: 'lf5-q49',
+    question: 'Was ist der Informationsfluss im Data-Warehouse/Data-Mining-Prozess?',
+    type: 'multiple-choice',
+    options: ['Data-Mining → Data-Warehouse → Kampagne', 'Kampagne → Data-Mining → Data-Warehouse', 'Data-Warehouse → Data-Mining → Kampagnenmanagement', 'Data-Warehouse = Data-Mining'],
+    correctAnswer: 'Data-Warehouse → Data-Mining → Kampagnenmanagement',
+    explanation: 'Warehouse liefert Daten → Mining analysiert → Kampagnenmanagement nutzt Ergebnisse.',
+    difficulty: 'medium',
+    category: 'CRM'
+  },
+  {
+    id: 'lf5-q50',
+    question: 'Was ist die Ausschöpfungsquote im Outbound?',
+    type: 'multiple-choice',
+    options: ['Anteil erfolgreicher Abschlüsse', 'Anteil kontaktierter an Gesamtadressen', 'Anteil verlorener Adressen', 'Anteil stornierter Aufträge'],
+    correctAnswer: 'Anteil kontaktierter an Gesamtadressen',
+    explanation: 'Ausschöpfungsquote = (Kontaktiert / Gesamt) × 100.',
+    difficulty: 'medium',
+    category: 'Kennzahlen'
+  },
+  {
+    id: 'lf5-q51',
+    question: 'Welche Aussage zur Legitimationsprüfung ist KORREKT?',
+    type: 'multiple-choice',
+    options: ['Sie kann nach der Datenweitergabe erfolgen', 'Sie ist optional bei bekannten Kunden', 'Sie muss VOR jeder Datenweitergabe erfolgen', 'Sie gilt nur für Neukunden'],
+    correctAnswer: 'Sie muss VOR jeder Datenweitergabe erfolgen',
+    explanation: 'Legitimation = Pflicht vor Datenweitergabe. Auch bei bekannten Kunden (DSGVO).',
+    difficulty: 'easy',
+    category: 'Gesprächsführung'
+  },
+  {
+    id: 'lf5-q52',
+    question: 'Was ist beim Shitstorm-Management der erste Schritt?',
+    type: 'multiple-choice',
+    options: ['Sofort Lösungsangebot posten', 'Monitoring (frühzeitige Erkennung)', 'Rechtliche Prüfung', 'Mitarbeiter informieren'],
+    correctAnswer: 'Monitoring (frühzeitige Erkennung)',
+    explanation: 'Schritt 1 = Monitoring. Dann Analyse, Reaktion, Lösung, Nachverfolgung.',
+    difficulty: 'medium',
+    category: 'Kundenbindung'
+  },
+  {
+    id: 'lf5-q53',
+    question: 'Was ist KEIN Kundenwert-Faktor?',
+    type: 'multiple-choice',
+    options: ['Umsatz', 'Ertrag', 'Potenzial', 'Zahlungshistorie'],
+    correctAnswer: 'Zahlungshistorie',
+    explanation: 'Die 5 Faktoren: Umsatz, Ertrag, Potenzial, Referenzwert, Informationswert.',
+    difficulty: 'hard',
+    category: 'Kundenbindung'
+  },
+  {
+    id: 'lf5-q54',
+    question: 'Was ist die Erfolgsquote im Outbound?',
+    type: 'multiple-choice',
+    options: ['(Abschlüsse / Kontakte) × 100', '(Kontakte / Adressen) × 100', '(Stornos / Abschlüsse) × 100', '(Anrufe / Stunden) × 100'],
+    correctAnswer: '(Abschlüsse / Kontakte) × 100',
+    explanation: 'Erfolgsquote = Conversion Rate im Outbound.',
+    difficulty: 'medium',
+    category: 'Kennzahlen'
+  },
+  {
+    id: 'lf5-q55',
+    question: 'Was beschreibt die Personal-Säule im CRM?',
+    type: 'multiple-choice',
+    options: ['Softwareausstattung des Teams', 'Qualifikation, Kommunikationsfähigkeiten und Kundenorientierung der Mitarbeiter', 'Personalplanung und Schichtpläne', 'Gehaltsstruktur'],
+    correctAnswer: 'Qualifikation, Kommunikationsfähigkeiten und Kundenorientierung der Mitarbeiter',
+    explanation: 'Personal-Säule: Qualifikation, Kommunikationskompetenz, Kundenorientierung als Haltung.',
+    difficulty: 'medium',
+    category: 'CRM'
+  },
+  {
+    id: 'lf5-q56',
+    question: 'Widerspruchsfrist bei fehlendem SEPA-Mandat?',
+    type: 'multiple-choice',
+    options: ['4 Wochen', '8 Wochen', '6 Monate', '13 Monate'],
+    correctAnswer: '13 Monate',
+    explanation: 'Ohne Mandat: 13 Monate (statt 8 Wochen mit Mandat).',
+    difficulty: 'hard',
+    category: 'Zahlungsverkehr'
+  },
+  {
+    id: 'lf5-q57',
+    question: 'Was ist der Fragetrichter und wo beginnt er?',
+    type: 'multiple-choice',
+    options: ['Beginnt mit geschlossenen Fragen', 'Beginnt mit offenen Fragen und endet bei geschlossenen', 'Besteht nur aus Alternativfragen', 'Wird nach dem Gespräch eingesetzt'],
+    correctAnswer: 'Beginnt mit offenen Fragen und endet bei geschlossenen',
+    explanation: 'Trichter: oben weit (offen), unten eng (geschlossen zur Absicherung).',
+    difficulty: 'easy',
+    category: 'Gesprächsführung'
+  },
+  {
+    id: 'lf5-q58',
+    question: 'Welche Aussage zu CRM und Software ist FALSCH?',
+    type: 'multiple-choice',
+    options: ['CRM ist eine Strategie', 'Software ist nur das Werkzeug der CRM-Strategie', 'CRM funktioniert nur mit CRM-Software', 'CRM umfasst Technik, Organisation und Personal'],
+    correctAnswer: 'CRM funktioniert nur mit CRM-Software',
+    explanation: 'FALSCH: CRM funktioniert als Strategie auch ohne Software. Software ist Werkzeug.',
+    difficulty: 'hard',
+    category: 'CRM'
+  },
+  {
+    id: 'lf5-q59',
+    question: 'Was ist die Bonitätsprüfung?',
+    type: 'multiple-choice',
+    options: ['Überprüfung der Kundenzufriedenheit', 'Beurteilung der Kreditwürdigkeit und Zahlungsfähigkeit', 'Prüfung der Legitimation', 'Datenschutzprüfung'],
+    correctAnswer: 'Beurteilung der Kreditwürdigkeit und Zahlungsfähigkeit',
+    explanation: 'Bonität = Kreditwürdigkeit. Über Schufa abgefragt. Erfordert Einwilligung.',
+    difficulty: 'easy',
+    category: 'Zahlungsverkehr'
+  },
+  {
+    id: 'lf5-q60',
+    question: 'Welche Phase folgt direkt nach dem Kauf?',
+    type: 'multiple-choice',
+    options: ['Optimierung', 'Betreuung', 'After-Sales', 'Angebot'],
+    correctAnswer: 'After-Sales',
+    explanation: 'Nach Kauf: After-Sales (kurzfristig) → dann Betreuung (langfristig).',
+    difficulty: 'medium',
+    category: 'Kundenbindung'
+  },
+  {
+    id: 'lf5-q61',
+    question: 'Was bedeutet Redundanzvermeidung?',
+    type: 'multiple-choice',
+    options: ['Datensicherung auf mehreren Servern', 'Vermeidung doppelter Datensätze (Dubletten)', 'Tägliche Datenprüfung', 'Backup-Strategie'],
+    correctAnswer: 'Vermeidung doppelter Datensätze (Dubletten)',
+    explanation: 'Redundanz = Doppelt vorhanden. Redundanzvermeidung = keine Dubletten.',
+    difficulty: 'easy',
+    category: 'Datenmanagement'
+  },
+  {
+    id: 'lf5-q62',
+    question: 'Wann gilt der Servicelevel als erfüllt (80/20)?',
+    type: 'multiple-choice',
+    options: ['Wenn 80% der Kunden zufrieden sind', 'Wenn 80% der Anrufe in 20 Sek. angenommen werden', 'Wenn 20% der Anrufe in 80 Sek. bearbeitet werden', 'Wenn der AHT unter 20 Min liegt'],
+    correctAnswer: 'Wenn 80% der Anrufe in 20 Sek. angenommen werden',
+    explanation: 'Servicelevel 80/20 = 80% aller Anrufe innerhalb von 20 Sekunden angenommen.',
+    difficulty: 'easy',
+    category: 'Kennzahlen'
+  },
+  {
+    id: 'lf5-q63',
+    question: 'Was ist die Organisation-Säule im CRM?',
+    type: 'multiple-choice',
+    options: ['IT-Infrastruktur', 'Mitarbeiterschulungen', 'Prozesse, Abläufe, Zuständigkeiten und Schnittstellen', 'Kundendatenbanken'],
+    correctAnswer: 'Prozesse, Abläufe, Zuständigkeiten und Schnittstellen',
+    explanation: 'Organisation-Säule: Prozessgestaltung, Ablauforganisation, Zuständigkeiten.',
+    difficulty: 'medium',
+    category: 'CRM'
+  },
+  {
+    id: 'lf5-q64',
+    question: 'Was ist ein Vorteil von Winback gegenüber Neukundengewinnung?',
+    type: 'multiple-choice',
+    options: ['Höhere Margen', 'Geringerer Beratungsaufwand (Kunde kennt Unternehmen bereits)', 'Keine Datenschutzanforderungen', 'Kostenfreie Maßnahme'],
+    correctAnswer: 'Geringerer Beratungsaufwand (Kunde kennt Unternehmen bereits)',
+    explanation: 'Rückkehrer kennen Unternehmen → weniger Aufklärungsaufwand, schnellere Entscheidung.',
+    difficulty: 'medium',
+    category: 'Kundenbindung'
+  },
+  {
+    id: 'lf5-q65',
+    question: 'Was ist KEIN Bestandteil der Meldeformel?',
+    type: 'multiple-choice',
+    options: ['Begrüßung', 'Abteilungsname', 'Firmenname', 'Offene Frage'],
+    correctAnswer: 'Abteilungsname',
+    explanation: 'Meldeformel: Begrüßung, Firmenname, Mitarbeitername, offene Frage. Kein Abteilungsname.',
+    difficulty: 'medium',
+    category: 'Gesprächsführung'
+  },
+  {
+    id: 'lf5-q66',
+    question: 'Wie viele Schritte hat das Beschwerdegespräch?',
+    type: 'multiple-choice',
+    options: ['3 Schritte', '4 Schritte', '5 Schritte', '7 Schritte'],
+    correctAnswer: '5 Schritte',
+    explanation: '5 Schritte: ESEL → Einsteigen, Sachlich, Emotional, Lösung, Abschluss.',
+    difficulty: 'easy',
+    category: 'Beschwerden'
+  },
+  {
+    id: 'lf5-q67',
+    question: 'Was ist der Unterschied zwischen Frontoffice und Backoffice?',
+    type: 'multiple-choice',
+    options: ['Frontoffice ohne Kundenkontakt, Backoffice mit', 'Frontoffice mit direktem Kundenkontakt (Telefonie), Backoffice ohne (Sachbearbeitung)', 'Frontoffice nur Outbound, Backoffice nur Inbound', 'Kein relevanter Unterschied'],
+    correctAnswer: 'Frontoffice mit direktem Kundenkontakt (Telefonie), Backoffice ohne (Sachbearbeitung)',
+    explanation: 'Frontoffice = direkter Kundenkontakt. Backoffice = Weiterverarbeitung.',
+    difficulty: 'easy',
+    category: 'Gesprächsführung'
+  },
+  {
+    id: 'lf5-q68',
+    question: 'Welche Aussage zur Kundenzufriedenheit ist FALSCH?',
+    type: 'multiple-choice',
+    options: ['Zufriedenheit ist vergangenheitsorientiert', 'Zufriedene Kunden sind garantiert loyal', 'Zufriedenheit wird durch NPS gemessen', 'Zufriedenheit ist notwendig aber nicht hinreichend für Loyalität'],
+    correctAnswer: 'Zufriedene Kunden sind garantiert loyal',
+    explanation: 'FALSCH: Zufriedenheit garantiert keine Loyalität. Loyalität braucht emotionale Bindung.',
+    difficulty: 'medium',
+    category: 'Kundenbindung'
+  },
+  {
+    id: 'lf5-q69',
+    question: 'Was bedeutet positives Formulieren?',
+    type: 'multiple-choice',
+    options: ['Immer zustimmen', 'Negative Aussagen in positive umwandeln (Was ich tun kann...)', 'Schnell zur Lösung kommen', 'Alle Versprechen einhalten'],
+    correctAnswer: 'Negative Aussagen in positive umwandeln (Was ich tun kann...)',
+    explanation: 'Statt Das geht nicht: Was ich für Sie tun kann ist... Fokus auf Möglichkeiten.',
+    difficulty: 'easy',
+    category: 'Beschwerden'
+  },
+  {
+    id: 'lf5-q70',
+    question: 'Was ist KEIN Teil der SEPA-Komponenten?',
+    type: 'multiple-choice',
+    options: ['IBAN', 'BIC', 'SWIFT', 'Lastschriftmandat'],
+    correctAnswer: 'SWIFT',
+    explanation: 'SWIFT = internationales Clearing-Netzwerk, kein direkter SEPA-Bestandteil.',
+    difficulty: 'hard',
+    category: 'Zahlungsverkehr'
+  },
+  {
+    id: 'lf5-q71',
+    question: 'Was ist ein Haltegespräch?',
+    type: 'multiple-choice',
+    options: ['Gespräch zur Neukundengewinnung', 'Gespräch mit kündigungswilligem Kunden zur Kündigungsprävention', 'Beschwerdegespräch', 'Winback-Ansprache'],
+    correctAnswer: 'Gespräch mit kündigungswilligem Kunden zur Kündigungsprävention',
+    explanation: 'Haltegespräch = Prävention: Kunden halten, BEVOR er kündigt.',
+    difficulty: 'easy',
+    category: 'Kundenbindung'
+  },
+  {
+    id: 'lf5-q72',
+    question: 'Was beinhaltet die Technik-Säule von CRM?',
+    type: 'multiple-choice',
+    options: ['Mitarbeiterschulungen', 'Aufbauorganisation', 'Software, Datenbanken, Data-Warehouse, Kommunikationsanlagen', 'Kundensegmentierung'],
+    correctAnswer: 'Software, Datenbanken, Data-Warehouse, Kommunikationsanlagen',
+    explanation: 'Technik-Säule: CRM-Software, Datenbanken, Data-Warehouse, Kommunikationsanlagen.',
+    difficulty: 'easy',
+    category: 'CRM'
+  },
+  {
+    id: 'lf5-q73',
+    question: 'Warum ist ein Beschwerdeführer wertvoll für das Unternehmen?',
+    type: 'multiple-choice',
+    options: ['Weil er mehr kauft', 'Weil nur ca. 4% der Unzufriedenen sich beschweren - jede Beschwerde repräsentiert viele', 'Weil er kostenlose Werbung macht', 'Weil er Mitarbeiterfehler meldet'],
+    correctAnswer: 'Weil nur ca. 4% der Unzufriedenen sich beschweren - jede Beschwerde repräsentiert viele',
+    explanation: 'Nur ~4% beschweren sich aktiv. Jede Beschwerde = Signal für viele ungeäußerte Probleme.',
+    difficulty: 'medium',
+    category: 'Beschwerden'
+  },
+  {
+    id: 'lf5-q74',
+    question: 'Was ist der Unterschied zwischen Talk-Time und AHT?',
+    type: 'multiple-choice',
+    options: ['AHT ist kürzer als Talk-Time', 'Talk-Time ist die reine Gesprächszeit; AHT = Talk + Hold + ACW', 'Beide sind identisch', 'AHT ist nur die Nachbearbeitung'],
+    correctAnswer: 'Talk-Time ist die reine Gesprächszeit; AHT = Talk + Hold + ACW',
+    explanation: 'Talk-Time = nur Gesprächsdauer. AHT = Talk + Hold + ACW.',
+    difficulty: 'medium',
+    category: 'Kennzahlen'
+  },
+  {
+    id: 'lf5-q75',
+    question: 'Welche 4 Gewährleistungsansprüche hat ein Kunde bei Reklamation?',
+    type: 'multiple-choice',
+    options: ['Rücktritt, Minderung, Schadensersatz, Neuvertrag', 'Nachbesserung, Ersatzlieferung, Minderung, Rücktritt', 'Kulanz, Entschädigung, Ersatz, Rücktritt', 'Erstattung, Minderung, Neulieferung, Klage'],
+    correctAnswer: 'Nachbesserung, Ersatzlieferung, Minderung, Rücktritt',
+    explanation: 'Gewährleistungsansprüche: Nachbesserung, Ersatzlieferung, Minderung, Rücktritt.',
+    difficulty: 'hard',
+    category: 'Beschwerden'
+  },
+  {
+    id: 'lf5-q76',
+    question: 'Wie heißt das 5. Element der Datenerfassungs-Grundsätze?',
+    type: 'multiple-choice',
+    options: ['Aktualität', 'Vollständigkeit', 'Konsistenz', 'Sicherheit'],
+    correctAnswer: 'Konsistenz',
+    explanation: '5 Grundsätze: Richtigkeit, Vollständigkeit, Redundanzvermeidung, Zeitstabilität, KONSISTENZ.',
+    difficulty: 'medium',
+    category: 'Datenmanagement'
+  },
+  {
+    id: 'lf5-q77',
+    question: 'Was ist ein Abonnement als Kundenbindungsinstrument?',
+    type: 'multiple-choice',
+    options: ['Emotionales Instrument', 'Ökonomisches Instrument', 'Strukturelles Instrument', 'Faktisches Instrument'],
+    correctAnswer: 'Strukturelles Instrument',
+    explanation: 'Abonnement = strukturelle Bindung durch Vertragspflicht.',
+    difficulty: 'hard',
+    category: 'Kundenbindung'
+  },
+  {
+    id: 'lf5-q78',
+    question: 'Wann ist es sinnvoll, NICHT alle verlorenen Kunden zurückzugewinnen?',
+    type: 'multiple-choice',
+    options: ['Niemals - alle Kunden sind gleich wertvoll', 'Wenn der Kundenwert (Ertrag) negativ ist', 'Wenn der Kunde umgezogen ist', 'Nur bei Firmenkunden'],
+    correctAnswer: 'Wenn der Kundenwert (Ertrag) negativ ist',
+    explanation: 'Winback nur bei lohnenswerten Kunden. Negativer Wert → kein Winback.',
+    difficulty: 'hard',
+    category: 'Kundenbindung'
+  },
+  {
+    id: 'lf5-q79',
+    question: 'Was ist KEIN Ziel von CRM?',
+    type: 'multiple-choice',
+    options: ['Kundenzufriedenheit steigern', 'Kundenloyalität erhöhen', 'Unternehmenserfolg sichern', 'Konkurrenten vom Markt verdrängen'],
+    correctAnswer: 'Konkurrenten vom Markt verdrängen',
+    explanation: 'CRM-Ziele: Zufriedenheit → Loyalität → Unternehmenserfolg. Konkurrenz-Verdrängen ist kein CRM-Ziel.',
+    difficulty: 'easy',
+    category: 'CRM'
+  },
+  {
+    id: 'lf5-q80',
+    question: 'Welcher Schritt des ESEL-Modells beinhaltet die Zusammenfassung?',
+    type: 'multiple-choice',
+    options: ['E - Einsteigen', 'S - Sachlich klären', 'E - Emotional begleiten', 'A - Abschluss'],
+    correctAnswer: 'A - Abschluss',
+    explanation: 'Abschluss = Zusammenfassung, Dank, Dokumentation. Letzter Schritt.',
+    difficulty: 'easy',
+    category: 'Beschwerden'
+  },
+  {
+    id: 'lf5-q81',
+    question: 'Was beschreibt Kundenpotenzial als Kundenwert-Faktor?',
+    type: 'multiple-choice',
+    options: ['Aktueller Jahresumsatz', 'Möglicher zukünftiger Umsatz', 'Empfehlungsreichweite', 'Feedbackqualität'],
+    correctAnswer: 'Möglicher zukünftiger Umsatz',
+    explanation: 'Potenzial = möglicher zukünftiger Umsatz.',
+    difficulty: 'medium',
+    category: 'Kundenbindung'
+  },
+  {
+    id: 'lf5-q82',
+    question: 'Was ist der Unterschied zwischen BIC und IBAN?',
+    type: 'multiple-choice',
+    options: ['BIC identifiziert das Konto, IBAN die Bank', 'IBAN identifiziert Konto und Bank; BIC identifiziert nur die Bank', 'Beide identifizieren denselben Inhalt', 'BIC gilt nur für Überweisungen, IBAN für Lastschriften'],
+    correctAnswer: 'IBAN identifiziert Konto und Bank; BIC identifiziert nur die Bank',
+    explanation: 'IBAN = Kontonummer international. BIC = nur Bankkennung.',
+    difficulty: 'medium',
+    category: 'Zahlungsverkehr'
+  },
+  {
+    id: 'lf5-q83',
+    question: 'Was ist der primäre Nutzen der Kundenhistorie im CRM?',
+    type: 'multiple-choice',
+    options: ['Marketingplanung für Neukunden', 'Nahtlose Gesprächsfortführung und Personalisierung', 'Kostensenkung durch Automatisierung', 'DSGVO-Dokumentation'],
+    correctAnswer: 'Nahtlose Gesprächsfortführung und Personalisierung',
+    explanation: 'Kundenhistorie ermöglicht nahtloses Anknüpfen und Personalisierung.',
+    difficulty: 'easy',
+    category: 'CRM'
+  },
+  {
+    id: 'lf5-q84',
+    question: 'Was passiert ohne Legitimationsprüfung?',
+    type: 'multiple-choice',
+    options: ['Kein Problem bei bekannten Stammkunden', 'DSGVO-Verstoß, Social-Engineering-Risiko, Datenschutzverletzung', 'Nur interne Protokollpflicht verletzt', 'Nichts, es ist freiwillig'],
+    correctAnswer: 'DSGVO-Verstoß, Social-Engineering-Risiko, Datenschutzverletzung',
+    explanation: 'Ohne Legitimation: DSGVO-Verletzung, Social Engineering, Haftungsrisiko.',
+    difficulty: 'hard',
+    category: 'Gesprächsführung'
+  },
+  {
+    id: 'lf5-q85',
+    question: 'Was ist ein ökonomisches Kundenbindungsinstrument?',
+    type: 'multiple-choice',
+    options: ['Persönliche Ansprache', 'Community-Events', 'Bonusprogramm / Treuepunkte', 'Abonnementvertrag'],
+    correctAnswer: 'Bonusprogramm / Treuepunkte',
+    explanation: 'Ökonomisch = finanzielle Anreize: Bonusprogramme, Treuepunkte. Abonnement ist strukturell.',
+    difficulty: 'medium',
+    category: 'Kundenbindung'
+  },
+  {
+    id: 'lf5-q86',
+    question: 'Was ist KEIN Bestandteil des ACW?',
+    type: 'multiple-choice',
+    options: ['Dokumentation im CRM', 'Weiterleitung von Vorgängen', 'Qualitätskontrolle durch Teamleiter', 'Follow-up-Termine setzen'],
+    correctAnswer: 'Qualitätskontrolle durch Teamleiter',
+    explanation: 'ACW = Mitarbeiter-Aufgaben nach dem Gespräch. Qualitätskontrolle durch Teamleiter ist NICHT Teil des ACW.',
+    difficulty: 'hard',
+    category: 'Kennzahlen'
+  },
+  {
+    id: 'lf5-q87',
+    question: 'Was beschreibt Konsistenz als Datenerfassungsgrundsatz?',
+    type: 'multiple-choice',
+    options: ['Tägliche Überprüfung der Daten', 'Einheitliche Schreibweisen und Formate in der Datenbank', 'Alle Daten müssen aktuell sein', 'Keine veralteten Einträge'],
+    correctAnswer: 'Einheitliche Schreibweisen und Formate in der Datenbank',
+    explanation: 'Konsistenz = einheitliche Schreibweisen, Formate.',
+    difficulty: 'medium',
+    category: 'Datenmanagement'
+  },
+  {
+    id: 'lf5-q88',
+    question: 'Welche Phase ist mit Analyse und Upselling verbunden?',
+    type: 'multiple-choice',
+    options: ['Akquisition', 'After-Sales', 'Betreuung', 'Optimierung'],
+    correctAnswer: 'Optimierung',
+    explanation: 'Optimierung = letzte Phase: Analyse, Upselling, Verbesserungen.',
+    difficulty: 'hard',
+    category: 'Kundenbindung'
+  },
+  {
+    id: 'lf5-q89',
+    question: 'Was ist ein BIC?',
+    type: 'multiple-choice',
+    options: ['Bankinterner Code für Kontonummern', 'International Bank Identifier Code (8 oder 11 Stellen)', 'Prüfziffer der IBAN', 'Bankkodierungssystem für SEPA-Überweisungen'],
+    correctAnswer: 'International Bank Identifier Code (8 oder 11 Stellen)',
+    explanation: 'BIC = Bank Identifier Code. 8 oder 11 Stellen.',
+    difficulty: 'easy',
+    category: 'Zahlungsverkehr'
+  },
+  {
+    id: 'lf5-q90',
+    question: 'Was ist die Kernaussage von CRM bezüglich der Unternehmensbereiche?',
+    type: 'multiple-choice',
+    options: ['Nur Vertrieb und Marketing sind betroffen', 'ALLE Unternehmensbereiche werden auf Kundenbeziehungen ausgerichtet', 'Nur der Kundendienst ist involviert', 'CRM betrifft nur den Einkauf'],
+    correctAnswer: 'ALLE Unternehmensbereiche werden auf Kundenbeziehungen ausgerichtet',
+    explanation: 'CRM = ALLE Bereiche (Produktion, Logistik, Marketing, Service, HR) werden ausgerichtet.',
+    difficulty: 'medium',
+    category: 'CRM'
+  },
+  {
+    id: 'lf5-q91',
+    question: 'Was ist der erste Schritt im Beschwerdegespräch?',
+    type: 'multiple-choice',
+    options: ['Sachlich klären', 'Lösung anbieten', 'Einsteigen / Anhören', 'Emotional begleiten'],
+    correctAnswer: 'Einsteigen / Anhören',
+    explanation: 'ESEL: Erster Schritt = Einsteigen / vollständig anhören.',
+    difficulty: 'easy',
+    category: 'Beschwerden'
+  },
+  {
+    id: 'lf5-q92',
+    question: 'Welches Szenario beschreibt einen Fehler bei der Zeitstabilität?',
+    type: 'multiple-choice',
+    options: ['Geburtsdatum: 15.03.1990 erfassen', 'Alter: 34 erfassen (statt Geburtsdatum)', 'Straße: Hauptstraße 5 erfassen', 'PLZ: 10115 erfassen'],
+    correctAnswer: 'Alter: 34 erfassen (statt Geburtsdatum)',
+    explanation: 'Alter erfassen ist nicht zeitstabil (jährliche Änderung). Geburtsdatum ist zeitstabil.',
+    difficulty: 'medium',
+    category: 'Datenmanagement'
+  },
+  {
+    id: 'lf5-q93',
+    question: 'Wofür steht SEPA?',
+    type: 'multiple-choice',
+    options: ['Standard Euro Payment Architecture', 'Single European Payment Agreement', 'Single Euro Payments Area', 'Secure Electronic Payment Authorization'],
+    correctAnswer: 'Single Euro Payments Area',
+    explanation: 'SEPA = Single Euro Payments Area = einheitlicher Euro-Zahlungsverkehrsraum.',
+    difficulty: 'easy',
+    category: 'Zahlungsverkehr'
+  },
+  {
+    id: 'lf5-q94',
+    question: 'Was ist ein Qualitätsmerkmal hoher FCR?',
+    type: 'multiple-choice',
+    options: ['Niedrige Kundenzufriedenheit', 'Viele Folge-Anrufe zu gleichem Thema', 'Problem beim ersten Kontakt gelöst = hohe Kundenzufriedenheit', 'Kurze AHT'],
+    correctAnswer: 'Problem beim ersten Kontakt gelöst = hohe Kundenzufriedenheit',
+    explanation: 'Hohe FCR = Erstlösungsquote hoch = Kundenzufriedenheit hoch.',
+    difficulty: 'easy',
+    category: 'Kennzahlen'
+  },
+  {
+    id: 'lf5-q95',
+    question: 'Was sind die Folgen einer hohen Stornoquote?',
+    type: 'multiple-choice',
+    options: ['Hohe Kundenzufriedenheit, aber niedrige Umsätze', 'Hinweis auf Beratungsfehler oder Druckverkauf - Qualitätsproblem', 'Normales Marktphänomen ohne Handlungsbedarf', 'Zeichen für gute Beratungsqualität'],
+    correctAnswer: 'Hinweis auf Beratungsfehler oder Druckverkauf - Qualitätsproblem',
+    explanation: 'Hohe Stornoquote = Warnsignal: Fehlinformation, Druck, falsche Beratung.',
+    difficulty: 'medium',
+    category: 'Kennzahlen'
+  },
+  {
+    id: 'lf5-q96',
+    question: 'Was müssen alle 3 CRM-Säulen gemeinsam haben?',
+    type: 'multiple-choice',
+    options: ['Sie müssen isoliert voneinander arbeiten', 'Gleichgewichtige Ausrichtung auf Kundenbeziehungen', 'Alle unter Führung der IT-Abteilung', 'Nur Technik muss CRM-orientiert sein'],
+    correctAnswer: 'Gleichgewichtige Ausrichtung auf Kundenbeziehungen',
+    explanation: 'Alle 3 Säulen müssen gleichgewichtig und aufeinander abgestimmt sein.',
+    difficulty: 'medium',
+    category: 'CRM'
+  },
+  {
+    id: 'lf5-q97',
+    question: 'Welche Mindestanzahl an Stellen hat ein BIC?',
+    type: 'multiple-choice',
+    options: ['6 Stellen', '8 Stellen', '10 Stellen', '11 Stellen'],
+    correctAnswer: '8 Stellen',
+    explanation: 'BIC: 8 oder 11 Stellen. Mindestlänge: 8 Stellen.',
+    difficulty: 'hard',
+    category: 'Zahlungsverkehr'
+  },
+  {
+    id: 'lf5-q98',
+    question: 'Was ist KEIN Schritt der Shitstorm-Strategie?',
+    type: 'multiple-choice',
+    options: ['Monitoring', 'Analyse', 'Kommentare löschen', 'Nachverfolgung'],
+    correctAnswer: 'Kommentare löschen',
+    explanation: 'Kommentare löschen ist VERBOTEN. Die 5 Schritte: Monitoring, Analyse, Reaktion, Lösung, Nachverfolgung.',
+    difficulty: 'medium',
+    category: 'Kundenbindung'
+  },
+  {
+    id: 'lf5-q99',
+    question: 'Was beschreibt die Kundenhistorie NICHT?',
+    type: 'multiple-choice',
+    options: ['Vergangene Kundenkontakte', 'Kaufhistorie', 'Beschwerden und offene Vorgänge', 'Kreditwürdigkeit des Kunden'],
+    correctAnswer: 'Kreditwürdigkeit des Kunden',
+    explanation: 'Kundenhistorie = Kontakthistorie. Kreditwürdigkeit (Bonität) ist Schufa-Information.',
+    difficulty: 'hard',
+    category: 'CRM'
+  },
+  {
+    id: 'lf5-q100',
+    question: 'Was ist ein faktisches Kundenbindungsinstrument?',
+    type: 'multiple-choice',
+    options: ['Bonusprogramm', 'Persönliche Ansprache', 'Keine alternativen Anbieter (Monopol/Gewohnheit)', 'Abonnementvertrag'],
+    correctAnswer: 'Keine alternativen Anbieter (Monopol/Gewohnheit)',
+    explanation: 'Faktisch = unbeabsichtigte Bindung: fehlende Alternativen, Standortvorteil, Gewohnheit.',
+    difficulty: 'hard',
+    category: 'Kundenbindung'
+  },
+  {
+    id: 'lf5-q101',
+    question: 'Welche Aussage zur SEPA-Firmenlastschrift ist KORREKT?',
+    type: 'multiple-choice',
+    options: ['Hat 8 Wochen Widerspruchsrecht wie die Basislastschrift', 'Gilt nur für Verbraucher', 'Ist ausschließlich für B2B und hat KEIN Widerspruchsrecht', 'Erfordert kein Mandat'],
+    correctAnswer: 'Ist ausschließlich für B2B und hat KEIN Widerspruchsrecht',
+    explanation: 'Firmenlastschrift: B2B only, kein Widerspruchsrecht. Basislastschrift: 8 Wochen Widerspruch.',
+    difficulty: 'hard',
+    category: 'Zahlungsverkehr'
+  },
+  {
+    id: 'lf5-q102',
+    question: 'Warum sollte im Haltegespräch kein Druck ausgeübt werden?',
+    type: 'multiple-choice',
+    options: ['Wegen rechtlicher Einschränkungen', 'Druck erzeugt Gegendruck und beschleunigt Abwanderung', 'Es ist unwirksam bei Neukunden', 'Nur bei B2C verboten'],
+    correctAnswer: 'Druck erzeugt Gegendruck und beschleunigt Abwanderung',
+    explanation: 'Druck im Haltegespräch ist kontraproduktiv. Entscheidungsraum lassen.',
+    difficulty: 'medium',
+    category: 'Kundenbindung'
+  },
+  {
+    id: 'lf5-q103',
+    question: 'Welche Aussage zur Schufa-Abfrage ist KORREKT?',
+    type: 'multiple-choice',
+    options: ['Kann ohne Einwilligung abgerufen werden', 'Erfordert Einwilligung des Kunden (DSGVO)', 'Ist kostenlos für alle Unternehmen', 'Gilt nur für Privatkunden'],
+    correctAnswer: 'Erfordert Einwilligung des Kunden (DSGVO)',
+    explanation: 'DSGVO: Bonitätsprüfung erfordert Einwilligung oder berechtigtes Interesse als Rechtsgrundlage.',
+    difficulty: 'medium',
+    category: 'Zahlungsverkehr'
+  },
+  {
+    id: 'lf5-q104',
+    question: 'Was ist das übergeordnete Ziel von CRM?',
+    type: 'multiple-choice',
+    options: ['Kurzfristige Umsatzsteigerung', 'Aufbau und Pflege langfristiger, profitabler Kundenbeziehungen', 'Kostensenkung in der Produktion', 'Erhöhung der Mitarbeiterzufriedenheit'],
+    correctAnswer: 'Aufbau und Pflege langfristiger, profitabler Kundenbeziehungen',
+    explanation: 'CRM-Ziel: Langfristige, profitable Kundenbeziehungen → Zufriedenheit → Loyalität → Erfolg.',
+    difficulty: 'easy',
+    category: 'CRM'
+  },
+  {
+    id: 'lf5-q105',
+    question: 'Welche Eselsbrücke hilft für die 5 Grundsätze der Datenerfassung?',
+    type: 'multiple-choice',
+    options: ['T-O-P', 'R-V-R-Z-K', 'ESEL', 'A-A-K-A-B-O'],
+    correctAnswer: 'R-V-R-Z-K',
+    explanation: 'R-V-R-Z-K: Richtigkeit, Vollständigkeit, Redundanzvermeidung, Zeitstabilität, Konsistenz.',
+    difficulty: 'medium',
+    category: 'Datenmanagement'
+  }
+
 ];
