@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { BookOpen, Lightbulb, Zap, BarChart3, Home as HomeIcon } from 'lucide-react';
 import { useLearningProgress } from '@/hooks/useLearningProgress';
@@ -10,236 +9,164 @@ import FlashcardsPage from './Flashcards';
 import QuizPage from './Quiz';
 import DashboardPage from './Dashboard';
 
+type ActiveLF = 'lf4' | 'lf5';
+
+const LF_META: Record<ActiveLF, { label: string; subtitle: string }> = {
+  lf4: { label: 'LF 4', subtitle: 'IKT-SYSTEME' },
+  lf5: { label: 'LF 5', subtitle: 'DIALOGMARKETING' },
+};
+
 export default function Home() {
   const [currentTab, setCurrentTab] = useState('dashboard');
+  const [activeLF, setActiveLF] = useState<ActiveLF>('lf5');
   const { progress, getProgressPercentage } = useLearningProgress();
 
+  const activeTopics = topics.filter((t) => t.id.startsWith(activeLF));
+  const activeFlashcards = flashcards.filter((f) => f.id.startsWith(activeLF));
+  const activeQuizQuestions = quizQuestions.filter((q) => q.id.startsWith(activeLF));
+
   const topicsProgress = getProgressPercentage(
-    topics.length,
-    progress.completedTopics.length
+    activeTopics.length,
+    progress.completedTopics.filter((id) => id.startsWith(activeLF)).length
   );
   const flashcardsProgress = getProgressPercentage(
-    flashcards.length,
-    progress.completedFlashcards.length
+    activeFlashcards.length,
+    progress.completedFlashcards.filter((id) => id.startsWith(activeLF)).length
   );
   const quizProgress = getProgressPercentage(
-    quizQuestions.length,
-    progress.quizResults.length
+    activeQuizQuestions.length,
+    progress.quizResults.filter((r) => r.questionId?.startsWith(activeLF)).length
   );
 
   return (
-    <div className="min-h-screen bg-black text-white">
-      {/* Header - Hotline Miami Style */}
-      <header className="sticky top-0 z-50 bg-black border-b-2 border-pink-500 shadow-lg">
+    <div className="min-h-screen bg-[#0e0e0e] text-[#e8e8e8]">
+      {/* Header */}
+      <header className="sticky top-0 z-50 bg-[#0e0e0e] border-b-2 border-[#390007] shadow-lg">
         <div className="container py-4">
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between gap-4">
+            {/* Brand */}
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-gradient-to-br from-pink-500 to-cyan-400 rounded-sm flex items-center justify-center border-2 border-pink-500">
-                <BookOpen className="w-6 h-6 text-black font-bold" />
+              <div className="w-10 h-10 bg-[#390007] flex items-center justify-center border-2 border-[#cc0000]">
+                <BookOpen className="w-5 h-5 text-[#e8e8e8]" />
               </div>
               <div>
-                <h1 className="text-2xl font-bold text-pink-500 uppercase tracking-widest">
-                  KOMMUNIKATION
+                <h1 className="text-xl font-bold text-[#cc0000] uppercase tracking-widest">
+                  IZURE
                 </h1>
-                <p className="text-xs text-cyan-400 uppercase tracking-widest">▶ IHK-Prüfungsvorbereitung 1.0 ◀</p>
+                <p className="text-[10px] text-[#c8a96a] uppercase tracking-widest">
+                  ▶ TACTICAL TRAINING SYSTEM ◀
+                </p>
               </div>
             </div>
-            <div className="text-right border-l-2 border-cyan-400 pl-4">
-              <p className="text-lg font-bold text-cyan-400 uppercase tracking-widest">
+
+            {/* LF Switcher */}
+            <div className="flex items-center gap-1 border-2 border-[#390007]">
+              {(['lf4', 'lf5'] as ActiveLF[]).map((lf) => (
+                <button
+                  key={lf}
+                  onClick={() => setActiveLF(lf)}
+                  className={`px-3 py-2 text-[10px] font-bold uppercase tracking-widest transition-all ${
+                    activeLF === lf
+                      ? 'bg-[#390007] text-[#cc0000]'
+                      : 'bg-transparent text-[#888888] hover:text-[#e8e8e8]'
+                  }`}
+                >
+                  <div>{LF_META[lf].label}</div>
+                  <div className="text-[8px] opacity-70">{LF_META[lf].subtitle}</div>
+                </button>
+              ))}
+            </div>
+
+            {/* Score */}
+            <div className="text-right border-l-2 border-[#390007] pl-4">
+              <p className="text-lg font-bold text-[#cc0000] uppercase tracking-widest">
                 {progress.totalScore} PTS
               </p>
-              <p className="text-xs text-pink-500 uppercase tracking-widest">
-                {progress.completedTopics.length} / {topics.length} THEMEN
+              <p className="text-[10px] text-[#c8a96a] uppercase tracking-widest">
+                {progress.completedTopics.filter((id) => id.startsWith(activeLF)).length} / {activeTopics.length} MODULES
               </p>
             </div>
           </div>
         </div>
       </header>
 
-      {/* Main Content - Hotline Miami Dark Background */}
+      {/* Main Content */}
       <main className="container py-8">
-        <Tabs
-          value={currentTab}
-          onValueChange={setCurrentTab}
-          className="w-full"
-        >
-          {/* Tab Navigation - Hotline Miami Style */}
-          <TabsList className="grid w-full grid-cols-4 mb-8 bg-gray-900 border-2 border-pink-500 rounded-sm">
-            <TabsTrigger 
-              value="dashboard" 
-              className="gap-2 data-[state=active]:bg-pink-600 data-[state=active]:text-black text-cyan-400 uppercase font-bold tracking-widest rounded-sm"
+        <Tabs value={currentTab} onValueChange={setCurrentTab} className="w-full">
+          {/* Tab Navigation */}
+          <TabsList className="grid w-full grid-cols-4 mb-8 bg-[#1a0a0a] border-2 border-[#390007]">
+            <TabsTrigger
+              value="dashboard"
+              className="gap-2 data-[state=active]:bg-[#390007] data-[state=active]:text-[#cc0000] text-[#888888] uppercase font-bold tracking-widest"
             >
               <HomeIcon className="w-4 h-4" />
-              <span className="hidden sm:inline">Übersicht</span>
+              <span className="hidden sm:inline">HQ</span>
             </TabsTrigger>
-            <TabsTrigger 
-              value="topics" 
-              className="gap-2 data-[state=active]:bg-cyan-500 data-[state=active]:text-black text-pink-500 uppercase font-bold tracking-widest rounded-sm"
+            <TabsTrigger
+              value="topics"
+              className="gap-2 data-[state=active]:bg-[#390007] data-[state=active]:text-[#c8a96a] text-[#888888] uppercase font-bold tracking-widest"
             >
               <Lightbulb className="w-4 h-4" />
-              <span className="hidden sm:inline">Themen</span>
+              <span className="hidden sm:inline">MODULES</span>
             </TabsTrigger>
-            <TabsTrigger 
-              value="flashcards" 
-              className="gap-2 data-[state=active]:bg-yellow-400 data-[state=active]:text-black text-cyan-400 uppercase font-bold tracking-widest rounded-sm"
+            <TabsTrigger
+              value="flashcards"
+              className="gap-2 data-[state=active]:bg-[#390007] data-[state=active]:text-[#c8a96a] text-[#888888] uppercase font-bold tracking-widest"
             >
               <Zap className="w-4 h-4" />
-              <span className="hidden sm:inline">Karten</span>
+              <span className="hidden sm:inline">CARDS</span>
             </TabsTrigger>
-            <TabsTrigger 
-              value="quiz" 
-              className="gap-2 data-[state=active]:bg-purple-600 data-[state=active]:text-white text-pink-500 uppercase font-bold tracking-widest rounded-sm"
+            <TabsTrigger
+              value="quiz"
+              className="gap-2 data-[state=active]:bg-[#390007] data-[state=active]:text-[#cc0000] text-[#888888] uppercase font-bold tracking-widest"
             >
               <BarChart3 className="w-4 h-4" />
-              <span className="hidden sm:inline">Quiz</span>
+              <span className="hidden sm:inline">SIMULATION</span>
             </TabsTrigger>
           </TabsList>
 
           {/* Dashboard Tab */}
           <TabsContent value="dashboard" className="space-y-6">
-            {/* Welcome Section */}
-            <div className="adhs-section mb-8 border-l-4 border-cyan-400">
-              <h2 className="adhs-section-title">▶ WILLKOMMEN ◀</h2>
-              <p className="text-sm leading-relaxed text-gray-300">
-                Diese Plattform bietet eine strukturierte Vorbereitung auf die IHK-Abschlussprüfung im Dialogmarketing, basierend auf dem aktuellen Fachbuch.
-              </p>
-            </div>
-
-            {/* Progress Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {/* Topics Progress */}
-              <div className="quiz-card">
-                <div className="flex items-center justify-between mb-3">
-                  <h3 className="text-sm font-bold uppercase tracking-widest text-cyan-400">
-                    Themen
-                  </h3>
-                  <span className="text-xl font-bold text-pink-500">{topicsProgress}%</span>
-                </div>
-                <div className="w-full bg-gray-800 rounded-sm h-3 border border-cyan-400">
-                  <div
-                    className="bg-gradient-to-r from-cyan-400 to-pink-500 h-3 rounded-sm transition-all duration-300"
-                    style={{ width: `${topicsProgress}%` }}
-                  />
-                </div>
-                <p className="text-xs text-gray-400 mt-2">
-                  {progress.completedTopics.length} von {topics.length} abgeschlossen
-                </p>
-              </div>
-
-              {/* Flashcards Progress */}
-              <div className="quiz-card">
-                <div className="flex items-center justify-between mb-3">
-                  <h3 className="text-sm font-bold uppercase tracking-widest text-yellow-400">
-                    Flashcards
-                  </h3>
-                  <span className="text-xl font-bold text-cyan-400">{flashcardsProgress}%</span>
-                </div>
-                <div className="w-full bg-gray-800 rounded-sm h-3 border border-yellow-400">
-                  <div
-                    className="bg-gradient-to-r from-yellow-400 to-pink-500 h-3 rounded-sm transition-all duration-300"
-                    style={{ width: `${flashcardsProgress}%` }}
-                  />
-                </div>
-                <p className="text-xs text-gray-400 mt-2">
-                  {progress.completedFlashcards.length} von {flashcards.length} gelernt
-                </p>
-              </div>
-
-              {/* Quiz Progress */}
-              <div className="quiz-card">
-                <div className="flex items-center justify-between mb-3">
-                  <h3 className="text-sm font-bold uppercase tracking-widest text-purple-400">
-                    Quiz
-                  </h3>
-                  <span className="text-xl font-bold text-cyan-400">{quizProgress}%</span>
-                </div>
-                <div className="w-full bg-gray-800 rounded-sm h-3 border border-purple-400">
-                  <div
-                    className="bg-gradient-to-r from-purple-500 to-pink-500 h-3 rounded-sm transition-all duration-300"
-                    style={{ width: `${quizProgress}%` }}
-                  />
-                </div>
-                <p className="text-xs text-gray-400 mt-2">
-                  {progress.quizResults.length} von {quizQuestions.length} beantwortet
-                </p>
-              </div>
-            </div>
-
-            {/* Info Sections */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8">
-              <div className="quiz-card">
-                <div className="text-cyan-400 font-bold uppercase tracking-widest mb-3">
-                  ▶ PRÜFUNGSFOKUS ◀
-                </div>
-                <p className="text-xs leading-relaxed text-gray-300">
-                  Alle Inhalte sind strikt nach dem IHK-Rahmenlehrplan und dem Fachbuch aufbereitet. Konzentriere dich besonders auf die markierten Kernbereiche.
-                </p>
-              </div>
-
-              <div className="quiz-card">
-                <div className="text-pink-500 font-bold uppercase tracking-widest mb-3">
-                  ▶ STATUS ◀
-                </div>
-                <p className="text-xs leading-relaxed text-gray-300">
-                  Du hast bereits {Math.round((topicsProgress + flashcardsProgress + quizProgress) / 3)}% der verfügbaren Lernmaterialien bearbeitet.
-                </p>
-                <div className="text-right text-pink-500 font-bold text-xs mt-2">
-                  ZIEL: 100%
-                </div>
-              </div>
-            </div>
-
-            {/* Call to Action */}
-            <div className="adhs-section mt-8">
-              <h2 className="adhs-section-title">▶ NÄCHSTE SCHRITTE ◀</h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                <Button 
-                  onClick={() => setCurrentTab('topics')}
-                  className="bg-cyan-500 hover:bg-cyan-400 text-black font-bold uppercase tracking-widest rounded-sm"
-                >
-                  ▶ THEMEN LERNEN ◀
-                </Button>
-                <Button 
-                  onClick={() => setCurrentTab('flashcards')}
-                  className="bg-yellow-400 hover:bg-yellow-300 text-black font-bold uppercase tracking-widest rounded-sm"
-                >
-                  ▶ KARTEN ÜBEN ◀
-                </Button>
-                <Button 
-                  onClick={() => setCurrentTab('quiz')}
-                  className="bg-pink-600 hover:bg-pink-500 text-black font-bold uppercase tracking-widest rounded-sm"
-                >
-                  ▶ QUIZ STARTEN ◀
-                </Button>
-              </div>
-            </div>
+            <DashboardPage
+              topicsProgress={topicsProgress}
+              flashcardsProgress={flashcardsProgress}
+              quizProgress={quizProgress}
+              totalScore={progress.totalScore}
+              activeLF={activeLF}
+              activeTopicsCount={activeTopics.length}
+              activeFlashcardsCount={activeFlashcards.length}
+              activeQuizCount={activeQuizQuestions.length}
+              completedTopicsCount={progress.completedTopics.filter((id) => id.startsWith(activeLF)).length}
+              completedFlashcardsCount={progress.completedFlashcards.filter((id) => id.startsWith(activeLF)).length}
+              onNavigate={setCurrentTab}
+            />
           </TabsContent>
 
-          {/* Topics Tab */}
+          {/* Modules Tab */}
           <TabsContent value="topics">
-            <TopicsPage />
+            <TopicsPage topics={activeTopics} />
           </TabsContent>
 
-          {/* Flashcards Tab */}
+          {/* Cards Tab */}
           <TabsContent value="flashcards">
-            <FlashcardsPage />
+            <FlashcardsPage flashcards={activeFlashcards} />
           </TabsContent>
 
-          {/* Quiz Tab */}
+          {/* Simulation Tab */}
           <TabsContent value="quiz">
-            <QuizPage />
+            <QuizPage quizQuestions={activeQuizQuestions} />
           </TabsContent>
         </Tabs>
       </main>
 
       {/* Footer */}
-      <footer className="border-t-2 border-pink-500 bg-black py-6 mt-12">
+      <footer className="border-t-2 border-[#390007] bg-[#0e0e0e] py-6 mt-12">
         <div className="container text-center">
-          <p className="text-xs text-gray-500 uppercase tracking-widest">
-            ▶ IHK Lernplattform Dialogmarketing ◀ | Fachliche Prüfungsvorbereitung
+          <p className="text-[10px] text-[#888888] uppercase tracking-widest">
+            ▶ IZURE TACTICAL TRAINING SYSTEM ◀ | DIALOGMARKETING
           </p>
-          <p className="text-xs text-cyan-400 mt-2 uppercase tracking-widest">
-            Strikt faktenbasiert nach Fachbuch
+          <p className="text-[10px] text-[#c8a96a] mt-2 uppercase tracking-widest">
+            Strikt faktenbasiert · {LF_META[activeLF].label} aktiv
           </p>
         </div>
       </footer>

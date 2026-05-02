@@ -1,22 +1,35 @@
 import { useState } from 'react';
-import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { topics } from '@/lib/learningData';
+import { Topic } from '@/lib/learningData';
 import { useLearningProgress } from '@/hooks/useLearningProgress';
 import { CheckCircle, Circle, ChevronDown, ChevronUp } from 'lucide-react';
 import { Streamdown } from 'streamdown';
 
-export default function TopicsPage() {
+interface TopicsPageProps {
+  topics: Topic[];
+}
+
+export default function TopicsPage({ topics }: TopicsPageProps) {
   const [expandedTopic, setExpandedTopic] = useState<string | null>(topics[0]?.id);
   const { progress, markTopicComplete } = useLearningProgress();
+
+  if (topics.length === 0) {
+    return (
+      <div className="text-center py-12">
+        <p className="text-[#888888] uppercase tracking-widest font-bold">
+          ▶ KEINE MODULE VERFÜGBAR ◀
+        </p>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-6">
       {/* Header */}
       <div className="adhs-section">
-        <h2 className="adhs-section-title">▶ LERNTHEMEN ◀</h2>
-        <p className="text-sm text-gray-300 leading-relaxed">
-          Lerne die Grundlagen Schritt für Schritt. Jedes Thema ist kurz und verständlich aufbereitet.
+        <h2 className="adhs-section-title">▶ MODULE ◀</h2>
+        <p className="text-sm text-[#888888] leading-relaxed">
+          Kerninhalte sequentiell bearbeiten. Jeden Node erst abschließen wenn Wissen sicher abrufbar.
         </p>
       </div>
 
@@ -30,64 +43,64 @@ export default function TopicsPage() {
             <div
               key={topic.id}
               className={`quiz-card overflow-hidden transition-all ${
-                isExpanded ? 'border-cyan-400 bg-cyan-500/10' : ''
+                isExpanded ? 'border-[#cc0000]' : ''
               }`}
             >
               <button
-                onClick={() =>
-                  setExpandedTopic(isExpanded ? null : topic.id)
-                }
-                className="w-full p-4 flex items-center justify-between hover:bg-gray-800/50 transition-colors"
+                onClick={() => setExpandedTopic(isExpanded ? null : topic.id)}
+                className="w-full p-4 flex items-center justify-between hover:bg-[#2a1010]/50 transition-colors"
               >
                 <div className="flex items-center gap-4 text-left flex-1">
                   {isCompleted ? (
-                    <CheckCircle className="w-6 h-6 text-cyan-400 flex-shrink-0" />
+                    <CheckCircle className="w-6 h-6 text-[#c8a96a] flex-shrink-0" />
                   ) : (
-                    <Circle className="w-6 h-6 text-pink-500 flex-shrink-0" />
+                    <Circle className="w-6 h-6 text-[#cc0000] flex-shrink-0" />
                   )}
                   <div>
-                    <div className="flex items-center gap-2">
-                      <h3 className="font-bold text-lg uppercase tracking-widest text-white">
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <h3 className="font-bold text-lg uppercase tracking-widest text-[#e8e8e8]">
                         {topic.title}
                       </h3>
                       {topic.examRelevance === 'high' && (
-                        <span className="bg-pink-600 text-[10px] px-2 py-0.5 rounded-full font-black text-white animate-pulse">
-                          PRÜFUNGSRELEVANT
+                        <span className="bg-[#390007] border border-[#cc0000] text-[10px] px-2 py-0.5 font-black text-[#cc0000] uppercase tracking-widest">
+                          KRITISCHER KERNINHALT
                         </span>
                       )}
                     </div>
-                    <p className="text-xs text-gray-400 mt-1">
+                    <p className="text-xs text-[#888888] mt-1">
                       {topic.description}
                     </p>
                   </div>
                 </div>
                 {isExpanded ? (
-                  <ChevronUp className="w-5 h-5 text-cyan-400 flex-shrink-0" />
+                  <ChevronUp className="w-5 h-5 text-[#cc0000] flex-shrink-0" />
                 ) : (
-                  <ChevronDown className="w-5 h-5 text-pink-500 flex-shrink-0" />
+                  <ChevronDown className="w-5 h-5 text-[#888888] flex-shrink-0" />
                 )}
               </button>
 
               {/* Expanded Content */}
               {isExpanded && (
-                <div className="border-t-2 border-gray-700 p-6 bg-black/50">
+                <div className="border-t-2 border-[#390007] p-6 bg-[#0e0e0e]">
                   <div className="prose prose-invert max-w-none mb-6">
                     <Streamdown>{topic.content}</Streamdown>
                   </div>
 
                   {/* Key Points */}
                   {topic.keyPoints && topic.keyPoints.length > 0 && (
-                    <div className="mb-6 p-4 border-l-4 border-yellow-400 bg-yellow-400/5 rounded-sm">
+                    <div className="mb-6 p-4 border-l-4 border-[#c8a96a] bg-[#c8a96a]/5">
                       <div className="flex items-center justify-between mb-3">
-                        <h4 className="font-bold text-yellow-400 uppercase tracking-widest">
-                          ▶ WICHTIGE PUNKTE ◀
+                        <h4 className="font-bold text-[#c8a96a] uppercase tracking-widest">
+                          ▶ CORE CONTENT ◀
                         </h4>
-                        <span className="text-[10px] font-bold text-yellow-400/60">IHK 1.0 FOKUS</span>
+                        <span className="text-[10px] font-bold text-[#c8a96a]/60 uppercase tracking-widest">
+                          KEY NODES
+                        </span>
                       </div>
                       <ul className="space-y-2">
                         {topic.keyPoints.map((point, idx) => (
-                          <li key={idx} className="text-sm text-gray-200 flex gap-2">
-                            <span className="text-yellow-400 font-bold">▸</span>
+                          <li key={idx} className="text-sm text-[#e8e8e8] flex gap-2">
+                            <span className="text-[#c8a96a] font-bold">▸</span>
                             <span>{point}</span>
                           </li>
                         ))}
@@ -96,48 +109,50 @@ export default function TopicsPage() {
                   )}
 
                   {/* Error Trap */}
-                  {topic.errorTrap && (
-                    <div className="mb-6 p-4 border-l-4 border-red-500 bg-red-500/5 rounded-sm">
+                  {(topic as any).errorTrap && (
+                    <div className="mb-6 p-4 border-l-4 border-[#cc0000] bg-[#cc0000]/5">
                       <div className="flex items-center justify-between mb-3">
-                        <h4 className="font-bold text-red-500 uppercase tracking-widest">
-                          🔴 FEHLERFALLE
+                        <h4 className="font-bold text-[#cc0000] uppercase tracking-widest">
+                          ⚠ CRITICAL TRAP
                         </h4>
-                        <span className="text-[10px] font-bold text-red-500/60">IHK 1.0 FOKUS</span>
+                        <span className="text-[10px] font-bold text-[#cc0000]/60 uppercase tracking-widest">
+                          AVOID FAILURE
+                        </span>
                       </div>
-                      <p className="text-sm text-gray-200">{topic.errorTrap}</p>
+                      <p className="text-sm text-[#e8e8e8]">{(topic as any).errorTrap}</p>
                     </div>
                   )}
 
                   {/* Memo */}
-                  {topic.memo && (
-                    <div className="mb-6 p-4 border-l-4 border-green-500 bg-green-500/5 rounded-sm">
+                  {(topic as any).memo && (
+                    <div className="mb-6 p-4 border-l-4 border-[#c8a96a] bg-[#c8a96a]/5">
                       <div className="flex items-center justify-between mb-3">
-                        <h4 className="font-bold text-green-500 uppercase tracking-widest">
-                          💡 MERKSATZ
+                        <h4 className="font-bold text-[#c8a96a] uppercase tracking-widest">
+                          ▶ INTEL NOTE
                         </h4>
-                        <span className="text-[10px] font-bold text-green-500/60">IHK 1.0 FOKUS</span>
+                        <span className="text-[10px] font-bold text-[#c8a96a]/60 uppercase tracking-widest">
+                          RETAIN
+                        </span>
                       </div>
-                      <p className="text-sm text-gray-200">{topic.memo}</p>
+                      <p className="text-sm text-[#e8e8e8]">{(topic as any).memo}</p>
                     </div>
                   )}
-
-
 
                   {/* Completion Button */}
                   <div className="flex gap-3">
                     {!isCompleted ? (
                       <Button
                         onClick={() => markTopicComplete(topic.id)}
-                        className="flex-1 bg-cyan-500 hover:bg-cyan-400 text-black font-bold uppercase tracking-widest rounded-sm"
+                        className="flex-1 bg-[#390007] hover:bg-[#cc0000] text-[#e8e8e8] font-bold uppercase tracking-widest border border-[#cc0000]"
                       >
-                        ▶ ALS ERLEDIGT MARKIEREN ◀
+                        ▶ MODULE ABSCHLIESSEN ◀
                       </Button>
                     ) : (
                       <Button
                         disabled
-                        className="flex-1 bg-gray-700 text-gray-400 font-bold uppercase tracking-widest rounded-sm"
+                        className="flex-1 bg-[#1a0a0a] text-[#c8a96a] font-bold uppercase tracking-widest border border-[#c8a96a] opacity-80"
                       >
-                        ✓ ERLEDIGT
+                        ✓ CLEARED
                       </Button>
                     )}
                   </div>
@@ -148,11 +163,12 @@ export default function TopicsPage() {
         })}
       </div>
 
-      {/* Study Tip */}
-      <div className="adhs-section mt-8 border-l-4 border-yellow-400">
-        <div className="text-yellow-400 font-bold uppercase tracking-widest mb-2">▶ LERNHINWEIS ◀</div>
-        <p className="text-sm leading-relaxed text-gray-300">
-          Bearbeiten Sie die Themen sequentiell. Markieren Sie ein Thema erst dann als erledigt, wenn Sie die Kernpunkte sicher wiedergeben können. Dies ist die Basis für die anschließenden Quizfragen.
+      {/* Intel Note */}
+      <div className="adhs-section mt-8 border-l-4 border-[#c8a96a]">
+        <div className="text-[#c8a96a] font-bold uppercase tracking-widest mb-2">▶ PROTOCOL ◀</div>
+        <p className="text-sm leading-relaxed text-[#888888]">
+          Module sequentiell bearbeiten. Einen Node erst abschließen wenn die Kernpunkte sicher wiedergegeben werden können.
+          Dies ist die Basis für die anschließende Simulation.
         </p>
       </div>
     </div>

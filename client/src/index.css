@@ -43,83 +43,83 @@
 }
 
 :root {
-  /* Professional Exam Palette */
-  --primary: #00d9ff; /* Cyan - Focus & Clarity */
-  --primary-foreground: #0a0a0a;
-  --sidebar-primary: #00d9ff;
-  --sidebar-primary-foreground: #0a0a0a;
-  
+  /* IZURE Tactical Palette */
+  --primary: #cc0000; /* Tactical red */
+  --primary-foreground: #e8e8e8;
+  --sidebar-primary: #cc0000;
+  --sidebar-primary-foreground: #e8e8e8;
+
   /* Accents */
-  --chart-1: #00d9ff; /* Cyan */
-  --chart-2: #ffbe0b; /* Yellow */
-  --chart-3: #8338ec; /* Purple */
-  --chart-4: #00d9ff; /* Cyan */
-  --chart-5: #fb5607; /* Orange */
-  
-  --radius: 0.25rem; /* Sharp corners - retro style */
-  
-  /* Dark background with high contrast */
-  --background: #0a0a0a; /* Deep black */
-  --foreground: #ffffff; /* Pure white for contrast */
-  --card: #1a1a1a; /* Slightly lighter black */
-  --card-foreground: #ffffff;
-  --popover: #1a1a1a;
-  --popover-foreground: #ffffff;
-  
-  /* Neon secondary colors */
-  --secondary: #00d9ff; /* Cyan */
-  --secondary-foreground: #0a0a0a;
-  --muted: #333333; /* Dark gray */
-  --muted-foreground: #888888; /* Medium gray */
-  --accent: #ff006e; /* Pink accent */
-  --accent-foreground: #ffffff;
-  --destructive: #ff006e; /* Pink for warnings */
-  --destructive-foreground: #0a0a0a;
-  --border: #333333; /* Dark borders */
-  --input: #1a1a1a; /* Dark input fields */
-  --ring: #00d9ff; /* Cyan focus ring */
-  --sidebar: #0a0a0a;
-  --sidebar-foreground: #ffffff;
-  --sidebar-accent: #ff006e;
-  --sidebar-accent-foreground: #0a0a0a;
-  --sidebar-border: #333333;
-  --sidebar-ring: #00d9ff;
+  --chart-1: #cc0000; /* Red */
+  --chart-2: #c8a96a; /* Amber gold */
+  --chart-3: #8b0000; /* Dark red */
+  --chart-4: #390007; /* Deep red */
+  --chart-5: #ff4444; /* Alert red */
+
+  --radius: 0; /* Zero radius — hard tactical edges */
+
+  /* IZURE dark background */
+  --background: #0e0e0e;
+  --foreground: #e8e8e8;
+  --card: #1a0a0a;
+  --card-foreground: #e8e8e8;
+  --popover: #1a0a0a;
+  --popover-foreground: #e8e8e8;
+
+  /* Secondary / muted */
+  --secondary: #c8a96a; /* Amber highlight */
+  --secondary-foreground: #0e0e0e;
+  --muted: #2a1010;
+  --muted-foreground: #888888;
+  --accent: #390007;
+  --accent-foreground: #e8e8e8;
+  --destructive: #ff4444;
+  --destructive-foreground: #0e0e0e;
+  --border: #390007;
+  --input: #1a0a0a;
+  --ring: #cc0000;
+  --sidebar: #0e0e0e;
+  --sidebar-foreground: #e8e8e8;
+  --sidebar-accent: #390007;
+  --sidebar-accent-foreground: #e8e8e8;
+  --sidebar-border: #390007;
+  --sidebar-ring: #cc0000;
 }
 
 .dark {
-  /* Hotline Miami dark mode (same as root - always dark) */
-  --primary: #ff006e;
-  --primary-foreground: #0a0a0a;
-  --sidebar-primary: #ff006e;
-  --sidebar-primary-foreground: #0a0a0a;
-  --background: #0a0a0a;
-  --foreground: #ffffff;
-  --card: #1a1a1a;
-  --card-foreground: #ffffff;
-  --popover: #1a1a1a;
-  --popover-foreground: #ffffff;
-  --secondary: #00d9ff;
-  --secondary-foreground: #0a0a0a;
-  --muted: #333333;
+  /* IZURE dark mode (same as root — always dark) */
+  --primary: #cc0000;
+  --primary-foreground: #e8e8e8;
+  --sidebar-primary: #cc0000;
+  --sidebar-primary-foreground: #e8e8e8;
+  --background: #0e0e0e;
+  --foreground: #e8e8e8;
+  --card: #1a0a0a;
+  --card-foreground: #e8e8e8;
+  --popover: #1a0a0a;
+  --popover-foreground: #e8e8e8;
+  --secondary: #c8a96a;
+  --secondary-foreground: #0e0e0e;
+  --muted: #2a1010;
   --muted-foreground: #888888;
-  --accent: #ff006e;
-  --accent-foreground: #ffffff;
-  --destructive: #ff006e;
-  --destructive-foreground: #0a0a0a;
-  --border: #333333;
-  --input: #1a1a1a;
-  --ring: #00d9ff;
-  --chart-1: #00d9ff;
-  --chart-2: #ffbe0b;
-  --chart-3: #8338ec;
-  --chart-4: #ff006e;
-  --chart-5: #fb5607;
-  --sidebar: #0a0a0a;
-  --sidebar-foreground: #ffffff;
-  --sidebar-accent: #ff006e;
-  --sidebar-accent-foreground: #0a0a0a;
-  --sidebar-border: #333333;
-  --sidebar-ring: #00d9ff;
+  --accent: #390007;
+  --accent-foreground: #e8e8e8;
+  --destructive: #ff4444;
+  --destructive-foreground: #0e0e0e;
+  --border: #390007;
+  --input: #1a0a0a;
+  --ring: #cc0000;
+  --chart-1: #cc0000;
+  --chart-2: #c8a96a;
+  --chart-3: #8b0000;
+  --chart-4: #390007;
+  --chart-5: #ff4444;
+  --sidebar: #0e0e0e;
+  --sidebar-foreground: #e8e8e8;
+  --sidebar-accent: #390007;
+  --sidebar-accent-foreground: #e8e8e8;
+  --sidebar-border: #390007;
+  --sidebar-ring: #cc0000;
 }
 
 @layer base {
@@ -210,76 +210,72 @@
   }
 }
 
-/* ===== HOTLINE MIAMI DESIGN EFFECTS ===== */
+/* ===== IZURE TACTICAL DESIGN SYSTEM ===== */
 
-/* Scanline effect removed for better readability */
-
-/* Neon glow effects for interactive elements */
+/* Button glow — tactical red */
 button, [role="button"], input[type="button"], input[type="submit"] {
   transition: all 0.2s ease;
-  box-shadow: 0 0 10px rgba(255, 0, 110, 0.3);
+  box-shadow: 0 0 8px rgba(57, 0, 7, 0.5);
 }
 
 button:hover, [role="button"]:hover, input[type="button"]:hover, input[type="submit"]:hover {
-  box-shadow: 0 0 20px rgba(255, 0, 110, 0.6), 0 0 30px rgba(0, 217, 255, 0.3);
+  box-shadow: 0 0 16px rgba(204, 0, 0, 0.6);
   transform: scale(1.02);
 }
 
 button:focus, [role="button"]:focus, input[type="button"]:focus, input[type="submit"]:focus {
-  box-shadow: 0 0 30px rgba(0, 217, 255, 0.8), 0 0 50px rgba(255, 0, 110, 0.4);
-  outline: 2px solid #00d9ff;
+  box-shadow: 0 0 20px rgba(204, 0, 0, 0.8);
+  outline: 2px solid #cc0000;
   outline-offset: 2px;
 }
 
-/* Card glow effect */
+/* Card — tactical border */
 .card, [role="card"] {
-  border: 1px solid rgba(255, 0, 110, 0.2);
-  box-shadow: 0 0 15px rgba(255, 0, 110, 0.1), inset 0 0 20px rgba(255, 0, 110, 0.05);
+  border: 1px solid rgba(57, 0, 7, 0.4);
+  box-shadow: 0 0 10px rgba(57, 0, 7, 0.15);
   transition: all 0.3s ease;
 }
 
 .card:hover, [role="card"]:hover {
-  border-color: rgba(255, 0, 110, 0.4);
-  box-shadow: 0 0 25px rgba(255, 0, 110, 0.2), inset 0 0 20px rgba(255, 0, 110, 0.08);
+  border-color: rgba(204, 0, 0, 0.5);
+  box-shadow: 0 0 20px rgba(204, 0, 0, 0.2);
 }
 
-/* Accent text with neon effect */
+/* Text effects */
 .text-accent, .text-primary {
-  text-shadow: 0 0 10px rgba(255, 0, 110, 0.3);
+  text-shadow: 0 0 8px rgba(204, 0, 0, 0.4);
 }
 
 .text-secondary {
-  text-shadow: 0 0 10px rgba(0, 217, 255, 0.3);
+  text-shadow: 0 0 8px rgba(200, 169, 106, 0.3);
 }
 
-/* ===== ADHS-OPTIMIZED COMPONENTS ===== */
+/* ===== IZURE STRUCTURED COMPONENTS ===== */
 
-/* Clear visual hierarchy for ADHS users */
 .adhs-focus {
-  border: 2px solid #ff006e;
+  border: 2px solid #cc0000;
   padding: 1.5rem;
-  background: rgba(255, 0, 110, 0.05);
-  border-radius: 0.25rem;
+  background: rgba(57, 0, 7, 0.08);
   margin: 1rem 0;
 }
 
 .adhs-section {
   padding: 2rem;
   margin: 1.5rem 0;
-  border-left: 4px solid #00d9ff;
-  background: rgba(0, 217, 255, 0.02);
+  border-left: 4px solid #c8a96a;
+  background: rgba(200, 169, 106, 0.03);
 }
 
 .adhs-section-title {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #00d9ff;
+  color: #c8a96a;
   margin-bottom: 1rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
 }
 
-/* Progress indicator - motivating */
+/* Progress indicator */
 .progress-indicator {
   display: flex;
   gap: 0.5rem;
@@ -289,84 +285,80 @@ button:focus, [role="button"]:focus, input[type="button"]:focus, input[type="sub
 .progress-dot {
   width: 12px;
   height: 12px;
-  border-radius: 50%;
-  background: #333333;
-  border: 2px solid #666666;
+  background: #2a1010;
+  border: 2px solid #390007;
   transition: all 0.3s ease;
 }
 
 .progress-dot.active {
-  background: #ff006e;
-  border-color: #ff006e;
-  box-shadow: 0 0 10px rgba(255, 0, 110, 0.6);
+  background: #cc0000;
+  border-color: #cc0000;
+  box-shadow: 0 0 8px rgba(204, 0, 0, 0.6);
 }
 
 .progress-dot.completed {
-  background: #00d9ff;
-  border-color: #00d9ff;
-  box-shadow: 0 0 10px rgba(0, 217, 255, 0.6);
+  background: #c8a96a;
+  border-color: #c8a96a;
+  box-shadow: 0 0 8px rgba(200, 169, 106, 0.6);
 }
 
-/* Quiz card styling */
+/* Tactical card */
 .quiz-card {
-  background: #1a1a1a;
-  border: 2px solid #333333;
+  background: #1a0a0a;
+  border: 2px solid #390007;
   padding: 1.5rem;
   margin: 1rem 0;
-  border-radius: 0.25rem;
   transition: all 0.3s ease;
 }
 
 .quiz-card:hover {
-  border-color: #ff006e;
-  box-shadow: 0 0 20px rgba(255, 0, 110, 0.2);
+  border-color: #cc0000;
+  box-shadow: 0 0 16px rgba(204, 0, 0, 0.2);
 }
 
 .quiz-card.correct {
-  border-color: #00d9ff;
-  background: rgba(0, 217, 255, 0.05);
-  box-shadow: 0 0 20px rgba(0, 217, 255, 0.3);
+  border-color: #c8a96a;
+  background: rgba(200, 169, 106, 0.06);
+  box-shadow: 0 0 16px rgba(200, 169, 106, 0.3);
 }
 
 .quiz-card.incorrect {
-  border-color: #ff006e;
-  background: rgba(255, 0, 110, 0.05);
-  box-shadow: 0 0 20px rgba(255, 0, 110, 0.3);
+  border-color: #cc0000;
+  background: rgba(204, 0, 0, 0.06);
+  box-shadow: 0 0 16px rgba(204, 0, 0, 0.3);
 }
 
-/* Flashcard styling */
+/* Flashcard */
 .flashcard {
   perspective: 1000px;
   min-height: 200px;
-  background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
-  border: 2px solid #ff006e;
-  border-radius: 0.25rem;
+  background: linear-gradient(135deg, #1a0a0a 0%, #2a1010 100%);
+  border: 2px solid #390007;
   padding: 2rem;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 0 15px rgba(255, 0, 110, 0.2);
+  box-shadow: 0 0 12px rgba(57, 0, 7, 0.3);
 }
 
 .flashcard:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 0 25px rgba(255, 0, 110, 0.4), 0 10px 30px rgba(0, 0, 0, 0.5);
-  border-color: #00d9ff;
+  transform: translateY(-4px);
+  box-shadow: 0 0 24px rgba(204, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.6);
+  border-color: #cc0000;
 }
 
 .flashcard.flipped {
-  background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
-  border-color: #00d9ff;
-  box-shadow: 0 0 25px rgba(0, 217, 255, 0.3);
+  background: linear-gradient(135deg, #2a1010 0%, #1a0a0a 100%);
+  border-color: #c8a96a;
+  box-shadow: 0 0 20px rgba(200, 169, 106, 0.3);
 }
 
-/* Tab styling */
+/* Tab */
 .tab-button {
-  background: #1a1a1a;
-  border: 2px solid #333333;
+  background: #1a0a0a;
+  border: 2px solid #390007;
   color: #888888;
   padding: 0.75rem 1.5rem;
   margin-right: 0.5rem;
-  border-radius: 0.25rem;
   cursor: pointer;
   transition: all 0.3s ease;
   font-weight: 600;
@@ -375,29 +367,28 @@ button:focus, [role="button"]:focus, input[type="button"]:focus, input[type="sub
 }
 
 .tab-button:hover {
-  border-color: #ff006e;
-  color: #ffffff;
+  border-color: #cc0000;
+  color: #e8e8e8;
 }
 
 .tab-button.active {
-  background: #ff006e;
-  border-color: #ff006e;
-  color: #0a0a0a;
-  box-shadow: 0 0 20px rgba(255, 0, 110, 0.4);
+  background: #390007;
+  border-color: #cc0000;
+  color: #e8e8e8;
+  box-shadow: 0 0 16px rgba(204, 0, 0, 0.4);
 }
 
-/* Input styling */
+/* Input */
 input[type="text"],
 input[type="email"],
 input[type="password"],
 input[type="number"],
 textarea,
 select {
-  background: #1a1a1a;
-  border: 2px solid #333333;
-  color: #ffffff;
+  background: #1a0a0a;
+  border: 2px solid #390007;
+  color: #e8e8e8;
   padding: 0.75rem;
-  border-radius: 0.25rem;
   transition: all 0.3s ease;
 }
 
@@ -407,19 +398,18 @@ input[type="password"]:focus,
 input[type="number"]:focus,
 textarea:focus,
 select:focus {
-  border-color: #00d9ff;
-  box-shadow: 0 0 15px rgba(0, 217, 255, 0.3), inset 0 0 10px rgba(0, 217, 255, 0.05);
+  border-color: #cc0000;
+  box-shadow: 0 0 12px rgba(204, 0, 0, 0.3);
   outline: none;
 }
 
-/* Narrative elements replaced by info boxes */
+/* Info blocks */
 .narrator {
   padding: 1.5rem;
   margin: 1.5rem 0;
-  border-left: 4px solid #00d9ff;
-  background: rgba(0, 217, 255, 0.05);
-  border-radius: 0.25rem;
-  color: #ffffff;
+  border-left: 4px solid #c8a96a;
+  background: rgba(200, 169, 106, 0.04);
+  color: #e8e8e8;
 }
 
 .narrator-name {
