@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
@@ -48,7 +47,6 @@ export default function Quiz({
     setShowResult(true);
     onAnswer(correct);
 
-    // Auto-advance after 2 seconds if not at end
     if (questionNumber < totalQuestions) {
       const timer = setTimeout(() => {
         handleNext();
@@ -70,39 +68,44 @@ export default function Quiz({
 
   useEffect(() => {
     return () => {
-      if (autoAdvanceTimer) {
-        clearTimeout(autoAdvanceTimer);
-      }
+      if (autoAdvanceTimer) clearTimeout(autoAdvanceTimer);
     };
   }, [autoAdvanceTimer]);
 
+  const nodeLabel = (n: number) => String(n).padStart(2, '0');
+
+  const difficultyLabel =
+    question.difficulty === 'easy'
+      ? '● BASIC'
+      : question.difficulty === 'medium'
+        ? '● STANDARD'
+        : '● CRITICAL';
+
   return (
     <div className="w-full max-w-2xl mx-auto">
-      {/* Progress - ADHS Optimized */}
+      {/* Progress Bar */}
       <div className="mb-6 adhs-focus">
         <div className="flex justify-between items-center mb-3">
-          <span className="text-sm font-bold uppercase tracking-widest text-cyan-400">
-            Frage {questionNumber} / {totalQuestions}
+          <span className="text-sm font-bold uppercase tracking-widest text-[#cc0000]">
+            NODE {nodeLabel(questionNumber)} / {nodeLabel(totalQuestions)}
           </span>
-          <span className="text-xs font-bold text-yellow-400 uppercase">
-            {question.difficulty === 'easy'
-              ? '● LEICHT'
-              : question.difficulty === 'medium'
-                ? '● MITTEL'
-                : '● SCHWER'}
+          <span className={`text-xs font-bold uppercase tracking-widest ${
+            question.difficulty === 'hard' ? 'text-[#cc0000]' : 'text-[#c8a96a]'
+          }`}>
+            {difficultyLabel}
           </span>
         </div>
-        <div className="w-full bg-gray-800 rounded-sm h-3 border border-pink-500">
+        <div className="w-full bg-[#0e0e0e] h-3 border border-[#390007]">
           <div
-            className="bg-gradient-to-r from-pink-500 to-cyan-400 h-3 rounded-sm transition-all duration-300"
+            className="bg-gradient-to-r from-[#390007] to-[#cc0000] h-3 transition-all duration-300"
             style={{ width: `${(questionNumber / totalQuestions) * 100}%` }}
           />
         </div>
       </div>
 
-      {/* Question Card - Hotline Miami Style */}
+      {/* Question Card */}
       <div className="quiz-card mb-6">
-        <h3 className="text-lg font-bold mb-6 text-white uppercase tracking-wide">
+        <h3 className="text-lg font-bold mb-6 text-[#e8e8e8] uppercase tracking-wide">
           {question.question}
         </h3>
 
@@ -111,9 +114,12 @@ export default function Quiz({
           <RadioGroup value={selectedAnswer} onValueChange={setSelectedAnswer}>
             <div className="space-y-3">
               {question.options?.map((option, idx) => (
-                <div key={idx} className="flex items-center space-x-3 p-3 border border-gray-700 rounded-sm hover:bg-gray-800/50 cursor-pointer">
+                <div
+                  key={idx}
+                  className="flex items-center space-x-3 p-3 border border-[#390007] hover:bg-[#2a1010]/50 cursor-pointer"
+                >
                   <RadioGroupItem value={option} id={`option-${idx}`} />
-                  <Label htmlFor={`option-${idx}`} className="cursor-pointer flex-1 text-gray-200">
+                  <Label htmlFor={`option-${idx}`} className="cursor-pointer flex-1 text-[#e8e8e8]">
                     {option}
                   </Label>
                 </div>
@@ -127,8 +133,8 @@ export default function Quiz({
           <Textarea
             value={openAnswer}
             onChange={(e) => setOpenAnswer(e.target.value)}
-            placeholder="Schreibe deine Antwort hier..."
-            className="bg-gray-800 border-gray-700 text-white placeholder-gray-500 rounded-sm min-h-32"
+            placeholder=">_ Antwort eingeben..."
+            className="bg-[#0e0e0e] border-[#390007] text-[#e8e8e8] placeholder-[#888888] min-h-32"
           />
         )}
 
@@ -137,9 +143,12 @@ export default function Quiz({
           <RadioGroup value={selectedAnswer} onValueChange={setSelectedAnswer}>
             <div className="space-y-3">
               {question.options?.map((option, idx) => (
-                <div key={idx} className="flex items-center space-x-3 p-3 border border-gray-700 rounded-sm hover:bg-gray-800/50 cursor-pointer">
+                <div
+                  key={idx}
+                  className="flex items-center space-x-3 p-3 border border-[#390007] hover:bg-[#2a1010]/50 cursor-pointer"
+                >
                   <RadioGroupItem value={option} id={`match-${idx}`} />
-                  <Label htmlFor={`match-${idx}`} className="cursor-pointer flex-1 text-gray-200">
+                  <Label htmlFor={`match-${idx}`} className="cursor-pointer flex-1 text-[#e8e8e8]">
                     {option}
                   </Label>
                 </div>
@@ -149,31 +158,29 @@ export default function Quiz({
         )}
       </div>
 
-      {/* Feedback - ONLY if showFeedback is true (at end of quiz) */}
+      {/* Feedback — showFeedback mode (end of quiz) */}
       {showResult && showFeedback && (
-        <div className={`mb-6 p-4 rounded-sm border-2 ${
+        <div className={`mb-6 p-4 border-2 ${
           isCorrect
-            ? 'border-cyan-400 bg-cyan-400/10'
-            : 'border-pink-500 bg-pink-500/10'
+            ? 'border-[#c8a96a] bg-[#c8a96a]/8'
+            : 'border-[#cc0000] bg-[#cc0000]/8'
         }`}>
           <div className="flex items-start gap-3">
             {isCorrect ? (
-              <CheckCircle className="w-6 h-6 text-cyan-400 flex-shrink-0 mt-1" />
+              <CheckCircle className="w-6 h-6 text-[#c8a96a] flex-shrink-0 mt-1" />
             ) : (
-              <XCircle className="w-6 h-6 text-pink-500 flex-shrink-0 mt-1" />
+              <XCircle className="w-6 h-6 text-[#cc0000] flex-shrink-0 mt-1" />
             )}
             <div>
               <h4 className={`font-bold uppercase tracking-widest mb-2 ${
-                isCorrect ? 'text-cyan-400' : 'text-pink-500'
+                isCorrect ? 'text-[#c8a96a]' : 'text-[#cc0000]'
               }`}>
-                {isCorrect ? '✓ RICHTIG' : '✗ FALSCH'}
+                {isCorrect ? '✓ CONFIRMED' : '✗ INCORRECT'}
               </h4>
-              <p className="text-sm text-gray-300 mb-3">
-                {question.explanation}
-              </p>
+              <p className="text-sm text-[#888888] mb-3">{question.explanation}</p>
               {!isCorrect && (
-                <p className="text-sm text-yellow-400 font-bold">
-                  Richtige Antwort: {question.correctAnswer}
+                <p className="text-sm text-[#c8a96a] font-bold">
+                  ▶ Correct: {question.correctAnswer}
                 </p>
               )}
             </div>
@@ -181,19 +188,19 @@ export default function Quiz({
         </div>
       )}
 
-      {/* Quick Feedback during quiz (no showFeedback) */}
+      {/* Quick Feedback during simulation */}
       {showResult && !showFeedback && (
-        <div className={`mb-6 p-3 rounded-sm border-2 text-center ${
+        <div className={`mb-6 p-3 border-2 text-center ${
           isCorrect
-            ? 'border-cyan-400 bg-cyan-400/10'
-            : 'border-pink-500 bg-pink-500/10'
+            ? 'border-[#c8a96a] bg-[#c8a96a]/8'
+            : 'border-[#cc0000] bg-[#cc0000]/8'
         }`}>
           <p className={`font-bold uppercase tracking-widest ${
-            isCorrect ? 'text-cyan-400' : 'text-pink-500'
+            isCorrect ? 'text-[#c8a96a]' : 'text-[#cc0000]'
           }`}>
-            {isCorrect ? '✓ RICHTIG' : '✗ FALSCH'}
+            {isCorrect ? '✓ CONFIRMED' : '✗ INCORRECT'}
           </p>
-          <p className="text-xs text-gray-400 mt-1">Nächste Frage in Kürze...</p>
+          <p className="text-xs text-[#888888] mt-1">Next node loading...</p>
         </div>
       )}
 
@@ -206,19 +213,19 @@ export default function Quiz({
             (question.type === 'open' && !openAnswer) ||
             (question.type === 'matching' && !selectedAnswer)
           }
-          className="w-full bg-pink-600 hover:bg-pink-500 text-black font-bold uppercase tracking-widest rounded-sm disabled:opacity-50"
+          className="w-full bg-[#390007] hover:bg-[#cc0000] text-[#e8e8e8] font-bold uppercase tracking-widest border border-[#cc0000] disabled:opacity-30"
         >
-          ▶ ANTWORT PRÜFEN ◀
+          &gt;_ SUBMIT RESPONSE
         </Button>
       )}
 
-      {/* Next Button - Only shown at end of quiz */}
+      {/* Final node — advance to debriefing */}
       {showResult && questionNumber === totalQuestions && (
         <Button
           onClick={handleNext}
-          className="w-full bg-cyan-500 hover:bg-cyan-400 text-black font-bold uppercase tracking-widest rounded-sm"
+          className="w-full bg-[#1a0a0a] hover:bg-[#390007] text-[#c8a96a] font-bold uppercase tracking-widest border border-[#c8a96a]"
         >
-          ▶ ZUM ERGEBNIS ◀
+          ▶ OPEN DEBRIEFING ◀
         </Button>
       )}
     </div>

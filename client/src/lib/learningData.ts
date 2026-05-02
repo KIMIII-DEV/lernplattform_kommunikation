@@ -1,5 +1,4 @@
-// Learning Data for Communication Exam Preparation
-// IHK 1.0 Level - Strictly based on the textbook and Competence Checklist
+// IZURE Learning Platform — Tactical Training Data
 // Lernfeld 4: Informations- und Kommunikationstechnische Systeme nutzen
 // Lernfeld 5: Kundinnen und Kunden im Dialogmarketing betreuen und binden
 
@@ -2099,13 +2098,13 @@ export const quizQuestions: QuizQuestion[] = [
   },
   {
     id: 'lf4-q100',
-    question: 'Was ist das Ziel der "IHK 1.0" Vorbereitung?',
+    question: 'Was ist das Ziel der IZURE Full Mastery Vorbereitung?',
     type: 'multiple-choice',
-    options: ['Bestehen mit 50%', 'Exzellente Beherrschung aller prüfungsrelevanten Inhalte für die Bestnote', 'Nur die Flashcards lernen', 'Schnell fertig werden'],
-    correctAnswer: 'Exzellente Beherrschung aller prüfungsrelevanten Inhalte für die Bestnote',
-    explanation: 'Dieses System ist darauf ausgelegt, Sie zur Bestnote zu führen.',
+    options: ['Bestehen mit 50%', 'Exzellente Beherrschung aller kritischen Kerninhalte für Full Mastery', 'Nur die Flashcards lernen', 'Schnell fertig werden'],
+    correctAnswer: 'Exzellente Beherrschung aller kritischen Kerninhalte für Full Mastery',
+    explanation: 'Dieses System ist darauf ausgelegt, Sie zur vollen Systembeherrschung zu führen.',
     difficulty: 'easy',
-    category: 'Prüfungsfokus'
+    category: 'Systemfokus'
   }
 ,
   // ============================================================
