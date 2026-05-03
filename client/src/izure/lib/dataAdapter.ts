@@ -10,7 +10,7 @@ import {
   type Topic as RawTopicImport,
   type Flashcard as RawFlashcardImport,
   type QuizQuestion as RawQuestionImport,
-} from '../../../lib/learningData';
+} from '../../lib/learningData';
 
 export type RawTopic     = RawTopicImport;
 export type RawFlashcard = RawFlashcardImport;
