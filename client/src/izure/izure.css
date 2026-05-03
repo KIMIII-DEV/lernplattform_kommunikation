@@ -79,34 +79,34 @@
 [data-izure="true"] ::-webkit-scrollbar-thumb:hover { background: var(--izure-line-bright); }
 
 /* ── TOPBAR ─────────────────────────────────────────────────────────────────── */
-[data-izure="true"] .iz-topbar {
+[data-izure="true"] .topbar {
   background: var(--izure-bg);
   border-bottom: 1px solid var(--izure-line-bright);
   display: flex; align-items: center;
   padding: 0 16px; gap: 24px; height: 56px;
 }
-[data-izure="true"] .iz-brand {
+[data-izure="true"] .brand {
   font-family: var(--izure-font-display);
   font-weight: 700; font-size: 18px;
   letter-spacing: 0.5em; color: var(--izure-text);
   text-decoration: none;
 }
-[data-izure="true"] .iz-brand .red { color: var(--izure-warn); }
+[data-izure="true"] .brand .red { color: var(--izure-warn); }
 
-[data-izure="true"] .iz-topbar-meta {
+[data-izure="true"] .topbar-meta {
   margin-left: auto; display: flex; gap: 24px; align-items: center;
   font-size: 10px; letter-spacing: 0.18em;
   text-transform: uppercase; color: var(--izure-text-dim);
 }
-[data-izure="true"] .iz-topbar-meta .v { color: var(--izure-text); }
+[data-izure="true"] .topbar-meta .v { color: var(--izure-text); }
 
 /* ── SIDEBAR NAV ────────────────────────────────────────────────────────────── */
-[data-izure="true"] .iz-sidebar { padding: 16px 0; background: var(--izure-bg); }
-[data-izure="true"] .iz-nav-section {
+[data-izure="true"] .sidebar { padding: 16px 0; background: var(--izure-bg); }
+[data-izure="true"] .nav-section {
   padding: 8px 16px; font-size: 10px; letter-spacing: 0.32em;
   text-transform: uppercase; color: var(--izure-text-faint); margin-top: 16px;
 }
-[data-izure="true"] .iz-nav-item {
+[data-izure="true"] .nav-item {
   display: flex; align-items: center; gap: 10px;
   padding: 10px 16px; cursor: pointer;
   border-left: 2px solid transparent;
@@ -114,11 +114,11 @@
   color: var(--izure-text-dim); text-decoration: none;
   transition: background 0.08s, color 0.08s, border-color 0.08s;
 }
-[data-izure="true"] .iz-nav-item:hover { color: var(--izure-text); background: var(--izure-bg-2); }
-[data-izure="true"] .iz-nav-item.active { color: var(--izure-text); background: var(--izure-bg-2); border-left-color: var(--izure-warn); }
-[data-izure="true"] .iz-nav-item.locked { opacity: 0.4; cursor: not-allowed; }
-[data-izure="true"] .iz-nav-num { font-size: 9px; color: var(--izure-text-faint); letter-spacing: 0.18em; width: 24px; }
-[data-izure="true"] .iz-nav-item.active .iz-nav-num { color: var(--izure-warn); }
+[data-izure="true"] .nav-item:hover { color: var(--izure-text); background: var(--izure-bg-2); }
+[data-izure="true"] .nav-item.active { color: var(--izure-text); background: var(--izure-bg-2); border-left-color: var(--izure-warn); }
+[data-izure="true"] .nav-item.locked { opacity: 0.4; cursor: not-allowed; }
+[data-izure="true"] .nav-num { font-size: 9px; color: var(--izure-text-faint); letter-spacing: 0.18em; width: 24px; }
+[data-izure="true"] .nav-item.active .num { color: var(--izure-warn); }
 
 /* ── TACTICAL CARD ──────────────────────────────────────────────────────────── */
 [data-izure="true"] .tcard { background: var(--izure-bg-2); border: 1px solid var(--izure-line); position: relative; }

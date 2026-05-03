@@ -14,14 +14,14 @@ function useClock() {
 
 export function Topbar({ progress }: { progress: AppProgress }) {
   const t = useClock();
-  const loc = useLocation();
+  const [location] = useLocation();
 
   const completedRuns = Object.values(progress.modules ?? {})
     .reduce((s, m) => s + (m.simRuns?.length ?? 0), 0);
 
   let label = '';
-  if (loc.pathname.startsWith('/lf/')) label = '[ MODULE ]';
-  else if (loc.pathname.startsWith('/dashboard') || loc.pathname === '/') label = '[ COMMAND ]';
+  if (location.startsWith('/lf/')) label = '[ MODULE ]';
+  else if (location.startsWith('/dashboard') || location === '/') label = '[ COMMAND ]';
 
   return (
     <div className="topbar">

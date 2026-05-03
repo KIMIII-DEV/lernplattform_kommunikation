@@ -3,15 +3,15 @@ import { LERNFELDER } from '../../lib/dataAdapter';
 import type { AppProgress } from '../../types/learning';
 
 export function Sidebar({ progress }: { progress: AppProgress }) {
-  const loc = useLocation();
-  const isActive = (p: string) => loc.pathname === p || loc.pathname.startsWith(p + '/');
+  const [location] = useLocation();
+  const isActive = (p: string) => location === p || location.startsWith(p + '/');
 
   return (
     <div className="sidebar">
       <div className="nav-section">// COMMAND</div>
 
       <Link to="/" style={{ textDecoration: 'none' }}>
-        <div className={`nav-item ${isActive('/') && loc.pathname === '/' ? 'active' : ''}`}>
+        <div className={`nav-item ${isActive('/') && location === '/' ? 'active' : ''}`}>
           <span className="num">00</span>
           <span>DASHBOARD</span>
         </div>
