@@ -189,6 +189,7 @@ export function DrillPage({
           </div>
           <div className="tcard-body">
             <FlashcardDrill
+              key={card.id}
               card={card}
               onAnswer={handleAnswer}
               active

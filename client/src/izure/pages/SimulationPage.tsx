@@ -198,6 +198,7 @@ export function SimulationPage({
             )}
 
             <DrillRouter
+              key={q.id}
               question={q as any}
               onAnswer={handleAnswer}
               active={!answered}
