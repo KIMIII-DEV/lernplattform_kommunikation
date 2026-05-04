@@ -77,9 +77,15 @@ export function IzureApp() {
         maxHeight: 'calc(100vh - 56px - 32px)',
       }}>
         <Switch>
-          <Route path="/"          component={() => <Dashboard progress={progress} />} />
-          <Route path="/dashboard" component={() => <Dashboard progress={progress} />} />
-          <Route path="/lf/:id"    component={() => <LfRoute patchLF={patchLF} progress={progress} />} />
+          <Route path="/">
+            <Dashboard progress={progress} />
+          </Route>
+          <Route path="/dashboard">
+            <Dashboard progress={progress} />
+          </Route>
+          <Route path="/lf/:id">
+            <LfRoute patchLF={patchLF} progress={progress} />
+          </Route>
         </Switch>
       </main>
       <div style={{ gridArea: 'ticker' }}>
