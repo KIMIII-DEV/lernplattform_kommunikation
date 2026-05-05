@@ -560,13 +560,15 @@ export const flashcards: Flashcard[] = [
   { id: 'lf5-f1', category: 'Kennzahlen', question: 'Wie lautet die Formel für die AHT (Average Handling Time)?', answer: '(Gesprächszeit + Haltezeit + Nachbearbeitungszeit) / Anzahl der Calls.' },
   { id: 'lf5-f2', category: 'Kennzahlen', question: 'Was bedeutet ein Servicelevel von 90/10?', answer: '90% der Anrufe wurden innerhalb von 10 Sekunden angenommen.' },
   { id: 'lf5-f3', category: 'Kennzahlen', question: 'Was ist der Unterschied zwischen Brutto- und Nettokontakten im Outbound?', answer: 'Brutto: Alle Anwahlversuche (inkl. Besetzt/AB). Netto: Zielperson persönlich erreicht (Entscheiderkontakt).' },
-  { id: 'lf5-f4', category: 'Kennzahlen', question: 'Definiere 'First Call Resolution' (FCR).', answer: 'Der Anteil der Kundenanliegen, die beim ersten Kontakt abschließend gelöst werden konnten.' },
+  { id: 'lf5-f4', category: 'Kennzahlen', question: 'Definiere \'First Call Resolution\' (FCR).', answer: 'Der Anteil der Kundenanliegen, die beim ersten Kontakt abschließend gelöst werden konnten.' },
   { id: 'lf5-f5', category: 'Beschwerden', question: 'Was besagt die L-E-S-T Regel im Beschwerdemanagement?', answer: 'Listen (Zuhören), Empathize (Empathie), Solve (Lösen), Thank (Danken).' },
   { id: 'lf5-f6', category: 'Beschwerden', question: 'Was ist der rechtliche Unterschied zwischen Reklamation und Beschwerde?', answer: 'Reklamation: Rechtsanspruch wegen Mangel. Beschwerde: Subjektive Unzufriedenheit ohne Rechtsanspruch.' },
-  { id: 'lf5-f7', category: 'Gesprächsführung', question: 'Was ist das Ziel des 'Fragetrichters'?', answer: 'Informationen durch offene Fragen sammeln und das Gespräch durch geschlossene Fragen zum Abschluss/Ergebnis führen.' },
-  { id: 'lf5-f8', category: 'Kundenbindung', question: 'Was versteht man unter 'Cross-Selling'?', answer: 'Verkauf von ergänzenden Produkten oder Dienstleistungen zum Hauptprodukt.' },
+  { id: 'lf5-f7', category: 'Gesprächsführung', question: 'Was ist das Ziel des \'Fragetrichters\'?', answer: 'Informationen durch offene Fragen sammeln und das Gespräch durch geschlossene Fragen zum Abschluss/Ergebnis führen.' },
+  { id: 'lf5-f8', category: 'Kundenbindung', question: 'Was versteht man unter \'Cross-Selling\'?', answer: 'Verkauf von ergänzenden Produkten oder Dienstleistungen zum Hauptprodukt.' },
   { id: 'lf5-f9', category: 'CRM', question: 'Was ist eine ABC-Analyse im Kundenmanagement?', answer: 'Klassifizierung der Kunden nach ihrer Bedeutung für das Unternehmen (meist nach Umsatz oder Deckungsbeitrag).' },
-  { id: 'lf5-f10', category: 'Zahlungsverkehr', question: 'Wie lange ist die Widerspruchsfrist bei einer SEPA-Lastschrift OHNE Mandat?', answer: '13 Monate.' },
+  { id: 'lf5-f10', category: 'Zahlungsverkehr', question: 'Wie lange ist die Widerspruchsfrist bei einer SEPA-Lastschrift OHNE Mandat?', answer: '13 Monate.' }
+];
+
 // 100 Quiz Questions for Lernfeld 4
 export const quizQuestions: QuizQuestion[] = [
   {
@@ -1618,11 +1620,11 @@ export const quizQuestions: QuizQuestion[] = [
   },
   {
     id: 'lf5-q7',
-    question: 'Ordne die Phasen des Beratungsgesprächs in die richtige Reihenfolge:',
+    question: "Ordne die Phasen des Beratungsgesprächs in die richtige Reihenfolge:",
     type: 'matching',
     options: ["Bedarfsermittlung", "Gesprächsabschluss", "Begrüßung", "Lösungspräsentation"],
     correctAnswer: ["Begrüßung", "Bedarfsermittlung", "Lösungspräsentation", "Gesprächsabschluss"],
-    explanation: 'Zuerst der Kontakt, dann die Analyse des Bedarfs, dann das Angebot und zum Schluss die Fixierung.',
+    explanation: "Zuerst der Kontakt, dann die Analyse des Bedarfs, dann das Angebot und zum Schluss die Fixierung.",
     difficulty: 'easy',
     category: 'Gesprächsführung'
   },
