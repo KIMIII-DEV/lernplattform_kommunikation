@@ -400,7 +400,7 @@ export const topics: Topic[] = [
 
 **Inbound-Kennzahlen:**
 - **Servicelevel:** Anteil der Anrufe, die innerhalb einer Zeitvorgabe (z.B. 20 Sek.) angenommen wurden.
-- **AHT (Average Handling Time):** Die wichtigste Zeitkennzahl. Berechnet als: `(Gesprächszeit + Haltezeit + Nachbearbeitungszeit) / Anzahl Calls`.
+- **AHT (Average Handling Time):** Die wichtigste Zeitkennzahl. Berechnet als: \`(Gesprächszeit + Haltezeit + Nachbearbeitungszeit) / Anzahl Calls\`.
 - **FCR (First Call Resolution):** Anteil der beim ersten Kontakt gelösten Anliegen.
 
 **Outbound-Kennzahlen:**
