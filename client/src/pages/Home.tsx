@@ -6,8 +6,8 @@ import PrivateDashboard from './PrivateDashboard';
 import StudyPage from './Study';
 import BarkeeperPage from './Barkeeper';
 import WirePage from './Wire';
-import { MoodboardsPage } from './StubPages';
 import AboutPage from './About';
+import MoodboardsPage from './Moodboards';
 
 export default function Home() {
   const [route, setRoute] = useState<string>(() => location.hash.slice(1) || '/');

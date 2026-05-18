@@ -92,14 +92,14 @@ export default function AboutPage() {
 
               <dl style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '24px 24px' }}>
                 {[
-                  ['Carries', 'A quiet kind of charisma. Most of it stays unused.'],
-                  ['Holds', "Discipline that doesn't ask for permission."],
-                  ['Keeps', "A long fuse and a longer memory."],
-                  ['Studies', 'Psychology by night. Philosophy between shifts.'],
-                  ['Trains', 'Sport. The body keeps the mind honest.'],
-                  ['Wired', "Differently — ADHS, diagnosed in 2025. Part of the kit, not the story."],
-                  ['Stands with', "Linke Jugend [solid] · die Linke. Said out loud when it counts."],
-                  ['Watches', 'Internet, media, the small print under everything.'],
+                  ['Drinks', 'Espresso. Strong, no sugar. Sometimes twice a morning.'],
+                  ['Listens', 'Records all the way through. Both sides.'],
+                  ['Reads', 'Slowly. Books worth putting down to think.'],
+                  ['Trains', 'Sport, weights. Keeps the head clear.'],
+                  ['Studies', 'Psychology and philosophy. Curious about how people work.'],
+                  ['Wired', 'Differently — ADHS, diagnosed in 2025. Part of the kit, not the story.'],
+                  ['Stands with', 'Linke Jugend [solid] · die Linke. Said out loud when it counts.'],
+                  ['Watches', 'Old films, slow ones. Anything with weather in it.'],
                 ].map(([k, v]) => (
                   <div key={k} style={{ display: 'contents' }}>
                     <dt className="t-label" style={{ color: 'var(--accent)', paddingTop: 4 }}>
