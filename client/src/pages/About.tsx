@@ -1,5 +1,60 @@
+import { ReactNode } from 'react';
 import { CineImg, GhostText, GoldLine } from '@/components/izure/primitives';
 import { IMG } from '@/lib/atmosphere';
+
+function Block({ label, children }: { label: string; children: ReactNode }) {
+  return (
+    <section
+      style={{
+        padding: '20px 0 22px',
+        borderTop: '1px solid var(--line-subtle)',
+      }}
+    >
+      <div className="t-label" style={{ color: 'var(--accent)', marginBottom: 10 }}>
+        {label}
+      </div>
+      <div
+        className="t-body"
+        style={{
+          fontFamily: 'Cormorant Garamond, serif',
+          fontSize: 17,
+          lineHeight: 1.45,
+          color: 'var(--text-primary)',
+        }}
+      >
+        {children}
+      </div>
+    </section>
+  );
+}
+
+function BookLine({ author, titles }: { author: string; titles: string }) {
+  return (
+    <li
+      style={{
+        display: 'grid',
+        gridTemplateColumns: '1fr',
+        rowGap: 2,
+        paddingLeft: 16,
+        borderLeft: '1px solid var(--accent-dim)',
+      }}
+    >
+      <span className="t-label" style={{ fontSize: 9, color: 'var(--accent)' }}>
+        {author}
+      </span>
+      <span
+        style={{
+          fontFamily: 'Cormorant Garamond, serif',
+          fontStyle: 'italic',
+          fontSize: 15,
+          color: 'var(--text-secondary)',
+        }}
+      >
+        {titles}
+      </span>
+    </li>
+  );
+}
 
 export default function AboutPage() {
   return (
@@ -86,31 +141,78 @@ export default function AboutPage() {
             </div>
 
             <div style={{ paddingTop: 24 }}>
-              <div className="gold-line left" style={{ marginBottom: 40 }}>
+              <div className="gold-line left" style={{ marginBottom: 32 }}>
                 <span>habits · rituals</span>
               </div>
 
-              <dl style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '24px 24px' }}>
-                {[
-                  ['Drinks', 'Espresso. Strong, no sugar. Sometimes twice a morning.'],
-                  ['Listens', 'Records all the way through. Both sides.'],
-                  ['Reads', 'Slowly. Books worth putting down to think.'],
-                  ['Trains', 'Sport, weights. Keeps the head clear.'],
-                  ['Studies', 'Psychology and philosophy. Curious about how people work.'],
-                  ['Wired', 'Differently — ADHS, diagnosed in 2025. Part of the kit, not the story.'],
-                  ['Stands with', 'Linke Jugend [solid] · die Linke. Said out loud when it counts.'],
-                  ['Watches', 'Old films, slow ones. Anything with weather in it.'],
-                ].map(([k, v]) => (
-                  <div key={k} style={{ display: 'contents' }}>
-                    <dt className="t-label" style={{ color: 'var(--accent)', paddingTop: 4 }}>
-                      {k}
-                    </dt>
-                    <dd className="t-body" style={{ fontSize: 14 }}>
-                      {v}
-                    </dd>
-                  </div>
-                ))}
-              </dl>
+              <Block label="Espresso">
+                Three in the morning, sometimes more.
+                <br />
+                No sugar. No frills.
+              </Block>
+
+              <Block label="Music">
+                Vinyl. Both sides, always.
+                <br />
+                <span style={{ color: 'var(--text-secondary)' }}>
+                  Fleetwood Mac · Arctic Monkeys · ZZ Top · Jimi Hendrix · Pino D'Angiò.
+                </span>
+                <br />
+                <em style={{ color: 'var(--text-muted)' }}>No algorithm gets to choose.</em>
+              </Block>
+
+              <Block label="Books">
+                Read slowly. Sometimes put down so you can think.
+                <ul style={{ listStyle: 'none', marginTop: 14, display: 'flex', flexDirection: 'column', gap: 10 }}>
+                  <BookLine
+                    author="Albert Camus"
+                    titles="The Stranger · The Myth of Sisyphus · The Plague"
+                  />
+                  <BookLine author="Niccolò Machiavelli" titles="The Prince" />
+                  <BookLine
+                    author="Karl Marx & Friedrich Engels"
+                    titles="The Communist Manifesto · Das Kapital (I · II · III)"
+                  />
+                  <BookLine
+                    author="Vladimir Ilyich Lenin"
+                    titles="The State and Revolution · What Is to Be Done?"
+                  />
+                </ul>
+              </Block>
+
+              <Block label="Sport">
+                Calisthenics. Running.
+                <br />
+                Muay Thai and Taekwondo.
+                <br />
+                <em style={{ color: 'var(--text-muted)' }}>The head needs it.</em>
+              </Block>
+
+              <Block label="Interests">
+                Psychology, philosophy, politics, art, history.
+                <br />
+                <em style={{ color: 'var(--text-muted)' }}>All at once. Always.</em>
+              </Block>
+
+              <Block label="Political">
+                Member of <span style={{ color: 'var(--text-primary)' }}>die Linke</span> and{' '}
+                <span style={{ color: 'var(--text-primary)' }}>Linke Jugend [solid]</span>.
+                <br />
+                <span style={{ color: 'var(--accent-light)' }}>161.</span>
+              </Block>
+
+              <Block label="Film">
+                Old and slow.
+                <br />
+                <span style={{ color: 'var(--text-primary)' }}>The Good, the Bad and the Ugly</span> as
+                the benchmark for everything else.
+              </Block>
+
+              <Block label="ADHS">
+                Diagnosed in 2025.
+                <br />
+                <em style={{ color: 'var(--text-muted)' }}>A lot makes more sense now.</em>
+              </Block>
             </div>
           </div>
         </div>
