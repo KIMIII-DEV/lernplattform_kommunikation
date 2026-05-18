@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { CineImg, GhostText, GoldLine } from '@/components/izure/primitives';
 import { IMG } from '@/lib/atmosphere';
 
-type Category = 'faces' | 'places' | 'films' | 'sounds' | 'marks' | 'paintings';
+type Category = 'faces' | 'places' | 'films' | 'paintings' | 'movement';
 
 interface Ref {
   id: string;
@@ -22,17 +22,15 @@ const REFS: Ref[] = [
     cat: 'faces',
     img: IMG.ref_bourdain,
     span: 2,
-    note:
-      "Worldliness without arrogance. Asks the right question, then shuts up long enough to hear the answer. The right way to walk into a room you don't belong in.",
+    note: 'Worldliness without arrogance. Asks the right question, then shuts up long enough to hear the answer. The right way to walk into a room you don\'t belong in.',
   },
   {
     id: 'camus',
     title: 'Albert Camus',
-    italic: "L'Étranger · 1942",
+    italic: 'L\'Étranger · 1942',
     cat: 'faces',
     img: IMG.ref_camus,
-    note:
-      'Existential calm. Saying less, meaning more. A reminder that being a stranger to a thing is not the same as not understanding it.',
+    note: 'The brain running in circles. A cigarette and a glass and still more left to figure out than there is time. Existential calm is not the same as giving up.',
   },
   {
     id: 'matthew',
@@ -40,92 +38,66 @@ const REFS: Ref[] = [
     italic: 'just keep livin',
     cat: 'faces',
     img: IMG.ref_matthew,
-    note:
-      "Relaxed charisma. Not in a hurry. The school of being where the room slows down to your tempo instead of the other way round.",
+    note: 'Longbranch, notebook, a window view. Not in a hurry. The man who slowed a room down to his tempo.',
   },
   {
-    id: 'fleet',
-    title: 'Fleetwood Mac',
-    italic: 'Rumours · 1977',
-    cat: 'sounds',
-    img: IMG.ref_fleet,
-    span: 2,
-    note:
-      'Heartbreak that still moves. Warm analog feelings, played loud at the right hour. The whole record, in order, with the dust still on it.',
+    id: 'che',
+    title: 'Ernesto "Che" Guevara',
+    italic: 'La Habana · 1960s',
+    cat: 'faces',
+    img: IMG.ref_che,
+    note: 'Read before you decide what you think. The photograph knows more than the poster.',
   },
   {
-    id: 'pino',
-    title: "Pino D'Angiò",
-    italic: 'Ma Quale Idea',
-    cat: 'sounds',
-    img: IMG.ref_pino,
-    note:
-      'Italian nightlife at its most ironic. The cool of not taking yourself too seriously, set to a bass line you forget on purpose.',
-  },
-  {
-    id: 'sideb',
-    title: 'Side B',
-    italic: 'the better half',
-    cat: 'sounds',
-    img: IMG.mat_vinyl,
-    note:
-      "The track no one plays first. Usually the one worth keeping the record for. Flip the side. Slow down. Listen properly.",
+    id: 'castro',
+    title: 'Fidel Castro',
+    italic: 'Pico Turquino · summit',
+    cat: 'faces',
+    img: IMG.ref_castro,
+    note: 'At the side of Martí\'s bust — a reminder that ideas outlast the people who carry them. The summit is just a place to catch your breath.',
   },
   {
     id: 'gbu',
     title: 'The Good, the Bad and the Ugly',
     italic: 'Leone · 1966',
     cat: 'films',
-    img: IMG.ref_zztop,
+    img: IMG.ref_gbu,
     span: 2,
-    note:
-      'Long silences. Wind doing the talking. A wide frame where nothing happens for a full minute — and then everything does. The way to hold a scene.',
+    note: 'Long silences. Wind doing the talking. A wide frame where nothing happens for a full minute — then everything does. The way to hold a scene.',
   },
   {
-    id: 'jazz',
-    title: 'The club downstairs',
-    italic: 'side B, low',
-    cat: 'films',
-    img: IMG.hero_jazz,
-    note:
-      "The kind of small room a story should end in. Smoke optional. Tempo low. Conversation honest.",
-  },
-  {
-    id: 'sicily',
-    title: 'Sicily · Italian streets',
-    italic: 'noon and after',
-    cat: 'places',
-    img: IMG.mood_alley,
-    span: 2,
-    note:
-      'Narrow lanes, washed walls, motorinos at noon. Loud lunches, quiet afternoons. The afternoon nap as a piece of national architecture.',
-  },
-  {
-    id: 'dublin',
+    id: 'gallery',
     title: 'National Gallery of Ireland',
     italic: 'Dublin · early hour',
-    cat: 'paintings',
-    img: IMG.hero_window,
-    note:
-      'A morning in the old wing. Caravaggio on the wall, nobody speaking above a whisper, the light arriving slowly through the high windows.',
+    cat: 'places',
+    img: IMG.mood_gallery,
+    span: 2,
+    note: 'A morning in the old wing. Light through the skylight, nobody above a whisper. The kind of silence that costs nothing and takes a lifetime to find.',
   },
   {
-    id: 'oldmasters',
-    title: 'Pre-1700 · gilded edges',
-    italic: 'chiaroscuro',
+    id: 'painter',
+    title: 'The painter at the sea',
+    italic: 'after Van Gogh',
     cat: 'paintings',
-    img: IMG.mood_books,
-    note:
-      "Saints with dirty fingernails. Light coming from somewhere just out of frame. The kind of painting that earns the silence around it.",
+    img: IMG.mood_painter,
+    note: 'Copying Van Gogh at the sea. Not to own it — to understand it from the inside. The irises never look the same after.',
   },
   {
-    id: 'celtic',
-    title: 'Celtic knotwork',
-    italic: 'marks worth keeping',
-    cat: 'marks',
-    img: IMG.mat_silver,
-    note:
-      "Lines that turn back on themselves. No beginning, no end. Marks that mean something only to the person who wears them — which is the whole point.",
+    id: 'caravaggio',
+    title: 'Caravaggio · Taking of Christ',
+    italic: 'c. 1602 · Dublin',
+    cat: 'paintings',
+    img: IMG.ref_caravaggio,
+    span: 2,
+    note: 'Lantern in the dark. The one face that knows exactly what is happening — and still doesn\'t move. Saints with dirty fingernails. Light from nowhere obvious.',
+  },
+  {
+    id: 'movement',
+    title: 'The practice',
+    italic: 'before anyone wakes',
+    cat: 'movement',
+    img: IMG.ref_movement,
+    note: 'The practice nobody sees. Not performance. Just the body obeying — until it doesn\'t, and then until it does again.',
   },
 ];
 
@@ -147,11 +119,10 @@ const QUOTES = [
 const TABS: { id: 'all' | Category; label: string }[] = [
   { id: 'all', label: 'All' },
   { id: 'faces', label: 'Faces' },
-  { id: 'sounds', label: 'Sounds' },
   { id: 'films', label: 'Films' },
   { id: 'places', label: 'Places' },
   { id: 'paintings', label: 'Paintings' },
-  { id: 'marks', label: 'Marks' },
+  { id: 'movement', label: 'Movement' },
 ];
 
 export default function MoodboardsPage() {
@@ -188,8 +159,8 @@ export default function MoodboardsPage() {
               </span>
             </h1>
             <p className="t-body" style={{ paddingBottom: 16, maxWidth: 460, fontSize: 16 }}>
-              Faces, places, sounds, films, marks, paintings. Things kept on the
-              wall above the desk because they hold something worth borrowing.
+              Faces, places, films, paintings, movement. Things kept on the wall
+              above the desk because they hold something worth borrowing.
               None of it is mine — all of it is in the kit.
             </p>
           </div>
@@ -246,7 +217,7 @@ export default function MoodboardsPage() {
               <article
                 key={r.id}
                 style={{
-                  gridColumn: r.span === 2 ? 'span 2' : 'span 2',
+                  gridColumn: r.span === 2 ? 'span 2' : 'span 1',
                   background: 'var(--bg-card)',
                   border: '1px solid var(--line-subtle)',
                   padding: 0,
