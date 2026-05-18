@@ -31,10 +31,10 @@ export default function AboutPage() {
             </h1>
             <div />
             <p className="t-body" style={{ maxWidth: 460, fontSize: 16, paddingBottom: 20 }}>
-              Not a portfolio. Not a CV. A few rooms, a few records, and the
-              things that have stayed in my pocket long enough to matter —
-              kept by Maurice, born 2007, somewhere between Bad Segeberg
-              and the late shift in Hamburg.
+              Maurice, eighteen, born in 2007. Currently in the middle of
+              figuring out which questions are worth carrying and which ones
+              only sound clever. The pages here are a notebook in public —
+              kept loosely, written between shifts. Read them like that.
             </p>
           </div>
 
@@ -92,14 +92,14 @@ export default function AboutPage() {
 
               <dl style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '24px 24px' }}>
                 {[
-                  ['Carries', 'Charisma — used quietly, never poured out.'],
+                  ['Carries', 'A quiet kind of charisma. Most of it stays unused.'],
                   ['Holds', "Discipline that doesn't ask for permission."],
-                  ['Refuses', 'To break under pressure. Or under boredom.'],
+                  ['Keeps', "A long fuse and a longer memory."],
                   ['Studies', 'Psychology by night. Philosophy between shifts.'],
-                  ['Trains', 'Sport, mostly. The body keeps the mind honest.'],
+                  ['Trains', 'Sport. The body keeps the mind honest.'],
+                  ['Wired', "Differently — ADHS, diagnosed in 2025. Part of the kit, not the story."],
+                  ['Stands with', "Linke Jugend [solid] · die Linke. Said out loud when it counts."],
                   ['Watches', 'Internet, media, the small print under everything.'],
-                  ['Mothered by', 'Maja — Stralsund, 1972. Segeberger Kliniken.'],
-                  ['Fathered by', 'Marco — Quedlinburg, 1974. Telekom, Hamburg.'],
                 ].map(([k, v]) => (
                   <div key={k} style={{ display: 'contents' }}>
                     <dt className="t-label" style={{ color: 'var(--accent)', paddingTop: 4 }}>
@@ -116,14 +116,14 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ───────── Bourdain quote ───────── */}
+      {/* ───────── House quote ───────── */}
       <section style={{ position: 'relative', padding: '40px 0 120px' }}>
         <GhostText left="-3vw" top="-2vh" size="32vw" style={{ opacity: 0.04, fontStyle: 'italic' }}>
           talk
         </GhostText>
 
         <div className="shell" style={{ position: 'relative', zIndex: 2 }}>
-          <GoldLine label="House quote · for the record" />
+          <GoldLine label="House quote" />
           <div
             style={{
               display: 'grid',
@@ -180,17 +180,6 @@ export default function AboutPage() {
               "
             </div>
           </div>
-          <div
-            className="t-label"
-            style={{
-              color: 'var(--text-muted)',
-              textAlign: 'center',
-              marginTop: 32,
-              fontSize: 10,
-            }}
-          >
-            — in the spirit of Anthony Bourdain · pinned above the espresso machine
-          </div>
         </div>
       </section>
 
@@ -218,9 +207,9 @@ export default function AboutPage() {
               >
                 Two schools,
                 <br />
-                three certificates,
+                a short detour,
                 <br />
-                one detour.
+                a few certificates.
               </h2>
               <p className="t-body" style={{ fontSize: 14, maxWidth: 380 }}>
                 The classroom never quite fit. The hallway did. Maurice read the
@@ -244,9 +233,15 @@ export default function AboutPage() {
                 },
                 {
                   year: '2024',
-                  title: 'BWL · VWL · Wirtschaftswissenschaften',
+                  title: 'Städtisches Gymnasium',
+                  place: 'Bad Segeberg',
+                  note: 'A short visit. The room was beautiful, the fit was off.',
+                },
+                {
+                  year: '2024',
+                  title: 'Berufsgymnasium · Wirtschaft',
                   place: 'Theodor-Litt-Schule · Neumünster',
-                  note: 'No certificate — but the books were read, the questions were the right ones.',
+                  note: 'BWL, VWL, Wirtschaftswissenschaften. No certificate — the books were read, the questions were the right ones.',
                 },
               ].map((s, i) => (
                 <li
@@ -298,8 +293,14 @@ export default function AboutPage() {
                 period: '09 / 2025 — present',
                 role: 'Auszubildender',
                 place: 'Deutsche Telekom AG · Hamburg',
-                note: 'The current shift. Late voices on the line, early notes in the book. Inherited the trade from a father who has been with the company since before the millennium.',
+                note: 'The current shift. Late voices on the line, early notes in the book.',
                 accent: true,
+              },
+              {
+                period: 'Anfang 2025',
+                role: 'FSJ · Erzieher',
+                place: 'Kindergarten',
+                note: 'A year on small chairs again — this time on the right side of the room. Patience, repetition, and an honest day.',
               },
               {
                 period: '11 / 2023',
@@ -361,76 +362,43 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ───────── Tongues & contact ───────── */}
+      {/* ───────── Tongues ───────── */}
       <section style={{ padding: '40px 0 140px', borderTop: '1px solid var(--line-subtle)' }}>
         <div className="shell">
-          <div style={{ display: 'grid', gridTemplateColumns: '6fr 6fr', gap: 60, marginTop: 60 }}>
-            <div>
-              <div className="t-label" style={{ color: 'var(--accent)', marginBottom: 18 }}>
-                · Tongues kept
-              </div>
-              <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 16 }}>
-                {[
-                  ['Deutsch', 'Muttersprache · die Heimspur'],
-                  ['English', 'Verhandlungssicher · for the late shift'],
-                  ['Français', 'Gute Kenntnisse · for the menu and the manners'],
-                  ['Italiano', 'Grundkenntnisse · enough to order a doppio without translating'],
-                ].map(([k, v]) => (
-                  <li
-                    key={k}
-                    style={{
-                      display: 'grid',
-                      gridTemplateColumns: '140px 1fr',
-                      gap: 24,
-                      paddingBottom: 14,
-                      borderBottom: '1px solid var(--line-subtle)',
-                      alignItems: 'baseline',
-                    }}
+          <div style={{ marginTop: 60, maxWidth: 720 }}>
+            <div className="t-label" style={{ color: 'var(--accent)', marginBottom: 24 }}>
+              · Tongues kept
+            </div>
+            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 16 }}>
+              {[
+                ['Deutsch', 'Muttersprache · die Heimspur'],
+                ['English', 'Verhandlungssicher · for the late shift'],
+                ['Français', 'Gute Kenntnisse · for the menu and the manners'],
+                ['Italiano', 'Grundkenntnisse · enough to order a doppio without translating'],
+              ].map(([k, v]) => (
+                <li
+                  key={k}
+                  style={{
+                    display: 'grid',
+                    gridTemplateColumns: '160px 1fr',
+                    gap: 24,
+                    paddingBottom: 14,
+                    borderBottom: '1px solid var(--line-subtle)',
+                    alignItems: 'baseline',
+                  }}
+                >
+                  <span
+                    className="t-display italic"
+                    style={{ fontStyle: 'italic', fontSize: 22, color: 'var(--accent-light)' }}
                   >
-                    <span className="t-display italic" style={{ fontStyle: 'italic', fontSize: 22, color: 'var(--accent-light)' }}>
-                      {k}
-                    </span>
-                    <span className="t-body" style={{ fontSize: 14 }}>
-                      {v}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div>
-              <div className="t-label" style={{ color: 'var(--accent)', marginBottom: 18 }}>
-                · Reachable, if quietly
-              </div>
-              <p
-                className="t-display italic"
-                style={{ fontStyle: 'italic', fontSize: 28, lineHeight: 1.2, marginBottom: 32, color: 'var(--text-primary)' }}
-              >
-                Bahnhofstraße 4b
-                <br />
-                29553 Bienenbüttel.
-              </p>
-              <dl style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '14px 16px' }}>
-                <dt className="t-label" style={{ fontSize: 9, color: 'var(--accent)', paddingTop: 3 }}>
-                  By line
-                </dt>
-                <dd className="t-body" style={{ fontSize: 14 }}>
-                  +49 151 723 131 13
-                </dd>
-                <dt className="t-label" style={{ fontSize: 9, color: 'var(--accent)', paddingTop: 3 }}>
-                  By letter
-                </dt>
-                <dd className="t-body" style={{ fontSize: 14 }}>
-                  maurice.risch@icloud.com
-                </dd>
-                <dt className="t-label" style={{ fontSize: 9, color: 'var(--accent)', paddingTop: 3 }}>
-                  Best hour
-                </dt>
-                <dd className="t-body" style={{ fontSize: 14, fontStyle: 'italic' }}>
-                  after the third espresso · before the second drink
-                </dd>
-              </dl>
-            </div>
+                    {k}
+                  </span>
+                  <span className="t-body" style={{ fontSize: 14 }}>
+                    {v}
+                  </span>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </section>
