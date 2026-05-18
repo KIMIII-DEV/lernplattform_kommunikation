@@ -6,7 +6,8 @@ import PrivateDashboard from './PrivateDashboard';
 import StudyPage from './Study';
 import BarkeeperPage from './Barkeeper';
 import WirePage from './Wire';
-import { AboutPage, CellarPage, MoodboardsPage } from './StubPages';
+import { MoodboardsPage } from './StubPages';
+import AboutPage from './About';
 
 export default function Home() {
   const [route, setRoute] = useState<string>(() => location.hash.slice(1) || '/');
@@ -58,7 +59,6 @@ export default function Home() {
     if (route === '/' || route === '') return <LandingPage navigate={navigate} />;
     if (route === '/about') return <AboutPage />;
     if (route === '/moodboards') return <MoodboardsPage />;
-    if (route === '/cellar') return <CellarPage />;
     if (route === '/login') return <LoginPage navigate={navigate} onUnlock={unlock} />;
     if (route === '/private') return <PrivateDashboard navigate={navigate} />;
     if (route === '/private/learn') return <StudyPage />;

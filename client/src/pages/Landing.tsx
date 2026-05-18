@@ -148,7 +148,6 @@ export default function LandingPage({ navigate }: { navigate: (to: string) => vo
         <SideIcon label="Home" active onClick={() => {}} icon={<IconGlobe />} />
         <SideIcon label="About" onClick={() => navigate('/about')} icon={<IconHome />} />
         <SideIcon label="Moods" onClick={() => navigate('/moodboards')} icon={<IconGrid />} />
-        <SideIcon label="The Cellar" onClick={() => navigate('/cellar')} icon={<IconBook />} />
         <SideIcon label="Backroom" onClick={() => navigate('/login')} icon={<IconLock />} bordeaux />
       </aside>
 
@@ -302,7 +301,7 @@ export default function LandingPage({ navigate }: { navigate: (to: string) => vo
             Step inside
           </button>
           <button
-            onClick={() => navigate('/cellar')}
+            onClick={() => navigate('/about')}
             style={{
               background: 'none',
               border: 'none',
@@ -328,7 +327,7 @@ export default function LandingPage({ navigate }: { navigate: (to: string) => vo
               t.style.gap = '14px';
             }}
           >
-            <span>Visit the cellar</span>
+            <span>Who's pouring</span>
             <span style={{ color: 'var(--accent)' }}>→</span>
           </button>
         </div>
@@ -537,13 +536,6 @@ const IconGrid = () => (
     <rect x={14} y={3} width={7} height={7} />
     <rect x={3} y={14} width={7} height={7} />
     <rect x={14} y={14} width={7} height={7} />
-  </svg>
-);
-const IconBook = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1} strokeLinecap="round">
-    <path d="M4 4h7v16H4z" />
-    <path d="M13 4h7v16h-7z" />
-    <path d="M4 8h7M13 8h7M4 12h7M13 12h7" />
   </svg>
 );
 const IconLock = () => (

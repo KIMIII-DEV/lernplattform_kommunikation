@@ -77,32 +77,6 @@ function StubPage({
   );
 }
 
-export function AboutPage() {
-  return (
-    <StubPage
-      label="· Chapter One · Who's pouring"
-      word="who"
-      title="Behind the"
-      italic="curtain"
-      body="Not a portfolio. Not a CV. A few rooms, a few records, and the things that have stayed in my pocket long enough to matter. The full chapter is being typed up — slowly, between espressos."
-      img={IMG.about_portrait}
-    />
-  );
-}
-
-export function CellarPage() {
-  return (
-    <StubPage
-      label="· The Cellar · Sources we keep"
-      word="cellar"
-      title="A late hour"
-      italic="kept warm"
-      body="Books, records, films and references the house leans on. The shelves are being arranged — pull up a stool, the proper visit comes with the next drop."
-      img={IMG.hero_window}
-    />
-  );
-}
-
 export function MoodboardsPage() {
   return (
     <StubPage

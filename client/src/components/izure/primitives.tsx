@@ -167,7 +167,6 @@ export function PublicNav({
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
   const links = [
-    { id: '/cellar', label: 'The Cellar' },
     { id: '/about', label: 'About' },
     { id: '/moodboards', label: 'Moodboards' },
   ];
