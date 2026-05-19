@@ -26,7 +26,7 @@ export default function Home() {
   }, [isPrivate]);
 
   const navigate = (to: string) => {
-    if (to.startsWith('/private') && !unlocked) {
+    if (to.startsWith('/private') && sessionStorage.getItem('izure-unlocked') !== '1') {
       location.hash = '/login';
       return;
     }

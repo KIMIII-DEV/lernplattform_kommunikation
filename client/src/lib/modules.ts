@@ -1,4 +1,6 @@
-/* IZURE — Dialogmarketing Module Catalog */
+/* IZURE — Lernfeld Katalog */
+
+import { topics, flashcards, quizQuestions, Topic, Flashcard, QuizQuestion } from './learningData';
 
 export type ModuleColor = 'gold' | 'bordeaux' | 'petrol' | 'olive';
 
@@ -12,71 +14,88 @@ export interface ModuleSummary {
   color: ModuleColor;
   summary: string;
   locked: boolean;
-  lernfeld: 'LF4' | 'LF5';
+  lernfeld: 'LF1' | 'LF2' | 'LF3' | 'LF4' | 'LF5';
 }
 
 export const MODULES: ModuleSummary[] = [
   {
-    id: 'M-01',
-    code: 'DM-101',
-    name: 'Erstkontakt — Inbound Cold',
-    short: 'Erstkontakt',
-    intel: 'BASIS',
-    duration: '22 MIN',
+    id: 'LF1',
+    code: 'LF-01',
+    name: 'Ausbildung — Den Betrieb mitgestalten',
+    short: 'Den Betrieb',
+    intel: 'FUNDAMENT',
+    duration: '80h · 1. Lehrjahr',
     color: 'gold',
-    summary: 'Der unvorbereitete Anrufer. Identifikation, Bedarfserfassung, Übergabe in 90 Sekunden.',
+    summary: 'Unternehmen verstehen, Rechte kennen, Arbeitsplatz gestalten. Das Fundament-Lernfeld.',
     locked: false,
-    lernfeld: 'LF4',
+    lernfeld: 'LF1',
   },
   {
-    id: 'M-02',
-    code: 'DM-104',
-    name: 'Einwandbehandlung — Preisresistenz',
-    short: 'Einwand',
-    intel: 'VERTIEFT',
-    duration: '34 MIN',
+    id: 'LF2',
+    code: 'LF-02',
+    name: 'Dienstleistungen analysieren — Dialogmarketing als Branche',
+    short: 'Dienstleistungen',
+    intel: 'BRANCHE',
+    duration: '80h · 1. Lehrjahr',
     color: 'petrol',
-    summary: "Wenn der Kunde 'zu teuer' sagt — vier Reaktionsklassen, drei Ankertechniken.",
+    summary: 'Dialogmarketing als Querschnittsbranche. Märkte, Akteure, Wertschöpfung.',
     locked: false,
-    lernfeld: 'LF5',
+    lernfeld: 'LF2',
   },
   {
-    id: 'M-03',
-    code: 'DM-107',
-    name: 'Beschwerde — Eskalierter Bestandskunde',
-    short: 'Beschwerde',
-    intel: 'KRITISCH',
-    duration: '48 MIN',
+    id: 'LF3',
+    code: 'LF-03',
+    name: 'Mit Kunden kommunizieren',
+    short: 'Kommunikation',
+    intel: 'KOMPETENZ',
+    duration: '80h · 1. Lehrjahr',
     color: 'bordeaux',
-    summary: 'Live-Simulation. Kunde droht mit Kündigung. Du hast 6 Minuten, eine Lösung und 3 Optionen.',
+    summary: 'Kommunikative Kompetenz. Frageformen, Zuhörarten, Kundentypen, Gesprächsphasen.',
+    locked: false,
+    lernfeld: 'LF3',
+  },
+  {
+    id: 'LF4',
+    code: 'LF-04',
+    name: 'TK & Datenbanken & Datensicherheit',
+    short: 'TK & Daten',
+    intel: 'TECHNIK',
+    duration: '80h · 2. Lehrjahr',
+    color: 'olive',
+    summary: 'TK-Anlagen, Datenbanken, Datensicherheit, DSGVO. Die technische Infrastruktur.',
+    locked: false,
+    lernfeld: 'LF4',
+  },
+  {
+    id: 'LF5',
+    code: 'LF-05',
+    name: 'Kundenbetreuung & Bindung',
+    short: 'Bindung',
+    intel: 'OPERATIV',
+    duration: '80h · 2. Lehrjahr',
+    color: 'gold',
+    summary: 'Beratungsgespräche, CRM, Beschwerde, Winback, Kennzahlen, Zahlungsverkehr, Logistik.',
     locked: false,
     lernfeld: 'LF5',
-  },
-  {
-    id: 'M-04',
-    code: 'DM-112',
-    name: 'Outbound — Reaktivierung',
-    short: 'Outbound',
-    intel: 'TAKTISCH',
-    duration: '29 MIN',
-    color: 'olive',
-    summary: 'Kunde inaktiv 18 Monate. Pretext, Permission, Pitch.',
-    locked: true,
-    lernfeld: 'LF5',
-  },
-  {
-    id: 'M-05',
-    code: 'DM-118',
-    name: 'Compliance — DSGVO im Dialog',
-    short: 'Compliance',
-    intel: 'PFLICHT',
-    duration: '18 MIN',
-    color: 'olive',
-    summary: 'Was du sagen MUSST. Was du nicht sagen DARFST. Aufzeichnungspflicht.',
-    locked: true,
-    lernfeld: 'LF4',
   },
 ];
+
+export function topicsForLernfeld(lf: ModuleSummary['lernfeld']): Topic[] {
+  const prefix = lf.toLowerCase() + '-';
+  return topics.filter((t) => t.id.startsWith(prefix));
+}
+
+export function flashcardsForLernfeld(lf: ModuleSummary['lernfeld']): Flashcard[] {
+  const prefix = lf.toLowerCase() + '-';
+  return flashcards.filter((c) => c.id.startsWith(prefix));
+}
+
+export function quizForLernfeld(lf: ModuleSummary['lernfeld']): QuizQuestion[] {
+  const prefix = lf.toLowerCase() + '-';
+  return quizQuestions.filter((q) => q.id.startsWith(prefix));
+}
+
+/* --- Simulation prototype (kept for LF5 deep dive) --- */
 
 export interface DecisionOption {
   id: string;
@@ -132,12 +151,12 @@ export interface ModuleDeep {
   };
 }
 
-export const MODULE_M03: ModuleDeep = {
-  id: 'M-03',
-  code: 'DM-107',
+export const MODULE_LF5_BESCHWERDE: ModuleDeep = {
+  id: 'LF5',
+  code: 'LF-05 · Sim',
   name: 'Beschwerde — Eskalierter Bestandskunde',
   threat: 'KRITISCH',
-  lernfeld: 'Kundengespräche im Servicecenter',
+  lernfeld: 'LF5',
 
   briefing: {
     classification: 'INTERN // STUFE-3',
@@ -249,5 +268,5 @@ export const MODULE_M03: ModuleDeep = {
 };
 
 export const MODULE_DEEP: Record<string, ModuleDeep> = {
-  'M-03': MODULE_M03,
+  'LF5': MODULE_LF5_BESCHWERDE,
 };

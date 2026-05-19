@@ -2,11 +2,11 @@ import { useState } from 'react';
 import { GhostText } from '@/components/izure/primitives';
 import { MODULES, MODULE_DEEP, ModuleSummary } from '@/lib/modules';
 import { useProgress } from '@/lib/useProgress';
-import Mission from './Mission';
+import LernfeldDetail from './LernfeldDetail';
 import Simulation from './Simulation';
 import Debrief from './Debrief';
 
-type View = 'lobby' | 'mission' | 'sim' | 'debrief';
+type View = 'lobby' | 'detail' | 'sim' | 'debrief';
 
 export interface SimResult {
   perDecision: { id: string; selected: string; score: number; correct: boolean }[];
@@ -28,7 +28,7 @@ export default function StudyPage() {
     if (m.locked) return;
     startModule(m.id);
     setActiveId(m.id);
-    setView('mission');
+    setView('detail');
   };
 
   const launchSim = () => setView('sim');
@@ -39,17 +39,17 @@ export default function StudyPage() {
     setView('debrief');
   };
 
-  const back = () => setView('mission');
+  const back = () => setView('detail');
   const lobby = () => {
     setView('lobby');
     setActiveId(null);
     setResult(null);
   };
 
-  if (view === 'mission' && activeId) {
+  if (view === 'detail' && activeId) {
     const m = MODULES.find((x) => x.id === activeId);
     if (!m) return null;
-    return <Mission module={m} deep={MODULE_DEEP[m.id]} onLaunch={launchSim} onBack={lobby} />;
+    return <LernfeldDetail module={m} onBack={lobby} onLaunchSim={launchSim} />;
   }
 
   if (view === 'sim' && activeId) {
@@ -72,7 +72,7 @@ export default function StudyPage() {
         </GhostText>
         <div className="shell">
           <div className="t-label" style={{ color: 'var(--accent)', marginBottom: 22 }}>
-            · Room 01 · Study · Dialogmarketing · LF4 + LF5
+            · Room 01 · Study · Dialogmarketing · LF1—LF5
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: '6fr 6fr', gap: 60, alignItems: 'end', marginBottom: 60 }}>
             <h1 className="t-display" style={{ fontSize: 'clamp(56px, 8vw, 112px)', lineHeight: 0.95 }}>
@@ -82,13 +82,13 @@ export default function StudyPage() {
             </h1>
             <div style={{ paddingBottom: 16 }}>
               <p className="t-body" style={{ marginBottom: 28, maxWidth: 440 }}>
-                Fünf Module aus dem Dialogmarketing — sortiert nach Schwere, nicht nach Reihenfolge. Wähle was du heute
-                aushältst. Der Stoff wartet.
+                Fünf Lernfelder. Topics, Flashcards, Quiz — pro Feld. Wähle was du heute aushältst.
+                Der Stoff wartet.
               </p>
               <div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 10 }}>
                   <span className="t-label" style={{ fontSize: 9 }}>
-                    Overall · session by session
+                    Overall · Lernfeld by Lernfeld
                   </span>
                   <span className="t-num" style={{ fontSize: 11, color: 'var(--accent)' }}>
                     {pct}% · {totalDone}/{MODULES.length}
@@ -112,7 +112,7 @@ export default function StudyPage() {
         </div>
       </section>
 
-      {/* Module grid */}
+      {/* Lernfeld grid */}
       <section style={{ paddingBottom: 120 }}>
         <div className="shell">
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 24 }}>
@@ -143,14 +143,7 @@ export default function StudyPage() {
                     e.currentTarget.style.transform = 'translateY(0)';
                   }}
                 >
-                  <div
-                    style={{
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      alignItems: 'baseline',
-                      marginBottom: 18,
-                    }}
-                  >
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 18 }}>
                     <div className="t-num" style={{ fontSize: 11, color: accent }}>
                       {String(i + 1).padStart(2, '0')} · {m.code}
                     </div>
