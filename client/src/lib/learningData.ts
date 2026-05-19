@@ -30,7 +30,7 @@ export interface Topic {
 }
 
 // Topics for Lernfeld 4
-export const topics: Topic[] = [
+const lf45Topics: Topic[] = [
   {
     id: 'lf4-1-1',
     title: '4.1.1 Telefonkonferenz',
@@ -908,7 +908,7 @@ AHT = Talk Time + Hold Time + ACW (After-Call-Work)
 ];
 
 // 100 Flashcards for Lernfeld 4
-export const flashcards: Flashcard[] = [
+const lf45Flashcards: Flashcard[] = [
   { id: 'lf4-f1', category: 'Kommunikationsmedien', question: 'Was ist eine Dial-in-Konferenz?', answer: 'Teilnehmer wählen sich aktiv über eine zentrale Einwahlnummer in eine Konferenzplattform ein.' },
   { id: 'lf4-f2', category: 'Kommunikationsmedien', question: 'Was ist eine Dial-out-Konferenz?', answer: 'Ein Moderator oder ein automatisches System ruft alle Teilnehmer nacheinander an und schaltet sie zusammen.' },
   { id: 'lf4-f3', category: 'Kommunikationsmedien', question: 'Was ist der Vorteil einer Dial-out-Konferenz?', answer: 'Höhere Sicherheit (nur geladene Teilnehmer) und Komfort für die Teilnehmer.' },
@@ -1122,7 +1122,7 @@ export const flashcards: Flashcard[] = [
 ];
 
 // 100 Quiz Questions for Lernfeld 4
-export const quizQuestions: QuizQuestion[] = [
+const lf45QuizQuestions: QuizQuestion[] = [
   {
     id: 'lf4-q1',
     question: 'Ein Unternehmen möchte eine Telefonkonferenz mit 20 externen Teilnehmern durchführen. Welches Verfahren ist am effizientesten?',
@@ -3162,3 +3162,13 @@ export const quizQuestions: QuizQuestion[] = [
   }
 
 ];
+
+// ============================================================
+// MERGED EXPORTS — LF1 + LF4 + LF5
+// ============================================================
+
+import { lf1Topics, lf1Flashcards, lf1QuizQuestions } from './lf1_data';
+
+export const topics: Topic[] = [...lf1Topics, ...lf45Topics];
+export const flashcards: Flashcard[] = [...lf1Flashcards, ...lf45Flashcards];
+export const quizQuestions: QuizQuestion[] = [...lf1QuizQuestions, ...lf45QuizQuestions];
