@@ -3164,12 +3164,13 @@ const lf45QuizQuestions: QuizQuestion[] = [
 ];
 
 // ============================================================
-// MERGED EXPORTS — LF1 + LF2 + LF4 + LF5
+// MERGED EXPORTS — LF1 + LF2 + LF3 + LF4 + LF5
 // ============================================================
 
 import { lf1Topics, lf1Flashcards, lf1QuizQuestions } from './lf1_data';
 import { lf2Topics, lf2Flashcards, lf2QuizQuestions } from './lf2_data';
+import { lf3Topics, lf3Flashcards, lf3QuizQuestions } from './lf3_data';
 
-export const topics: Topic[] = [...lf1Topics, ...lf2Topics, ...lf45Topics];
-export const flashcards: Flashcard[] = [...lf1Flashcards, ...lf2Flashcards, ...lf45Flashcards];
-export const quizQuestions: QuizQuestion[] = [...lf1QuizQuestions, ...lf2QuizQuestions, ...lf45QuizQuestions];
+export const topics: Topic[] = [...lf1Topics, ...lf2Topics, ...lf3Topics, ...lf45Topics];
+export const flashcards: Flashcard[] = [...lf1Flashcards, ...lf2Flashcards, ...lf3Flashcards, ...lf45Flashcards];
+export const quizQuestions: QuizQuestion[] = [...lf1QuizQuestions, ...lf2QuizQuestions, ...lf3QuizQuestions, ...lf45QuizQuestions];
