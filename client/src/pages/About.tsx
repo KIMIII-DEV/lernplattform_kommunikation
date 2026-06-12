@@ -323,27 +323,27 @@ export default function AboutPage() {
               {[
                 {
                   year: '2023',
-                  title: 'Hauptschulabschluss',
+                  title: 'Lower secondary diploma',
                   place: 'Poul-Due-Jensen-Schule · Wahlstedt',
                   note: 'The first stamp. The one that opens the door.',
                 },
                 {
                   year: '2024',
-                  title: 'Realschulabschluss',
+                  title: 'Intermediate secondary diploma',
                   place: 'Poul-Due-Jensen-Schule · Wahlstedt',
                   note: 'The second stamp — same hallway, harder paper.',
                 },
                 {
                   year: '2024',
-                  title: 'Städtisches Gymnasium',
+                  title: 'Municipal Gymnasium',
                   place: 'Bad Segeberg',
                   note: 'A short visit. The room was beautiful, the fit was off.',
                 },
                 {
                   year: '2024',
-                  title: 'Berufsgymnasium · Wirtschaft',
+                  title: 'Business Gymnasium',
                   place: 'Theodor-Litt-Schule · Neumünster',
-                  note: 'BWL, VWL, Wirtschaftswissenschaften. No certificate — the books were read, the questions were the right ones.',
+                  note: 'Business administration, economics, economic theory. No certificate — the books were read, the questions were the right ones.',
                 },
               ].map((s, i) => (
                 <li
@@ -393,27 +393,27 @@ export default function AboutPage() {
             {[
               {
                 period: '09 / 2025 — present',
-                role: 'Auszubildender',
+                role: 'Apprentice',
                 place: 'Deutsche Telekom AG · Hamburg',
                 note: 'The current shift. Late voices on the line, early notes in the book.',
                 accent: true,
               },
               {
-                period: 'Anfang 2025',
-                role: 'FSJ · Erzieher',
+                period: 'Early 2025',
+                role: 'Voluntary social year · Childcare',
                 place: 'Kindergarten',
                 note: 'A year on small chairs again — this time on the right side of the room. Patience, repetition, and an honest day.',
               },
               {
                 period: '11 / 2023',
-                role: 'Jugend im Kreistag',
+                role: 'Youth council delegate',
                 place: 'VJIKA & KJR · Bad Segeberg',
                 note: 'A week with the youth council. Watched how decisions actually get made — in side rooms, between coffees.',
               },
               {
                 period: '08 / 2022 — 02 / 2023',
                 role: 'JobXperience',
-                place: 'Berufsbildungszentrum · Bad Segeberg',
+                place: 'Vocational training centre · Bad Segeberg',
                 note: 'Six months of trying on roles. Some fit. Most pointed elsewhere.',
               },
               {
@@ -473,10 +473,10 @@ export default function AboutPage() {
             </div>
             <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 16 }}>
               {[
-                ['Deutsch', 'Muttersprache · die Heimspur'],
-                ['English', 'Verhandlungssicher · for the late shift'],
-                ['Français', 'Gute Kenntnisse · for the menu and the manners'],
-                ['Italiano', 'Grundkenntnisse · enough to order a doppio without translating'],
+                ['Deutsch', 'Native · the home tongue'],
+                ['English', 'Fluent · for the late shift'],
+                ['Français', 'Solid · for the menu and the manners'],
+                ['Italiano', 'Basics · enough to order a doppio without translating'],
               ].map(([k, v]) => (
                 <li
                   key={k}
