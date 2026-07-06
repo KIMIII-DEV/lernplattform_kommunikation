@@ -200,7 +200,7 @@ export default function BarkeeperPage() {
                   alignItems: 'center',
                 }}
               >
-                <span style={{ color: 'var(--accent)', fontFamily: 'Cormorant Garamond, serif', fontStyle: 'italic', fontSize: 22 }}>
+                <span style={{ color: 'var(--accent)', fontFamily: 'Space Grotesk, sans-serif', fontStyle: 'italic', fontSize: 22 }}>
                   —
                 </span>
                 <input
@@ -213,7 +213,7 @@ export default function BarkeeperPage() {
                     background: 'transparent',
                     border: 'none',
                     outline: 'none',
-                    fontFamily: 'Cormorant Garamond, serif',
+                    fontFamily: 'Space Grotesk, sans-serif',
                     fontStyle: 'italic',
                     fontSize: 19,
                     color: 'var(--text-primary)',
@@ -258,7 +258,7 @@ function ChatLine({ m }: { m: Msg }) {
       </div>
       <p
         style={{
-          fontFamily: 'Cormorant Garamond, serif',
+          fontFamily: 'Space Grotesk, sans-serif',
           fontStyle: m.role !== 'you' ? 'italic' : 'normal',
           fontSize: 19,
           lineHeight: 1.45,

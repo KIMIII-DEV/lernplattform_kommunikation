@@ -132,7 +132,7 @@ function DecisionFlow({
                       fontSize: t.who === 'SYS' ? 12 : 16,
                       fontStyle: t.who === 'SYS' ? 'normal' : 'italic',
                       color: t.who === 'SYS' ? 'var(--text-muted)' : 'var(--text-primary)',
-                      fontFamily: t.who === 'SYS' ? 'Cinzel, serif' : 'Cormorant Garamond, serif',
+                      fontFamily: 'Space Grotesk, sans-serif',
                     }}
                   >
                     {t.what}

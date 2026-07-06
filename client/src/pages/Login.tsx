@@ -90,7 +90,7 @@ export default function LoginPage({
             navigate('/');
           }}
           style={{
-            fontFamily: 'Cormorant Garamond, serif',
+            fontFamily: 'Space Grotesk, sans-serif',
             fontStyle: 'italic',
             fontWeight: 400,
             fontSize: 22,
@@ -106,7 +106,7 @@ export default function LoginPage({
           position: 'absolute',
           top: 28,
           right: 64,
-          fontFamily: 'Cinzel, serif',
+          fontFamily: 'Space Grotesk, sans-serif',
           fontSize: 9,
           letterSpacing: '0.3em',
           color: 'var(--text-muted)',
@@ -173,7 +173,7 @@ export default function LoginPage({
                 border: 'none',
                 borderBottom: `1px solid ${reject ? 'var(--accent-bordeaux-light)' : 'var(--accent)'}`,
                 color: reject ? 'var(--accent-bordeaux-light)' : 'var(--text-primary)',
-                fontFamily: 'Cormorant Garamond, serif',
+                fontFamily: 'Space Grotesk, sans-serif',
                 fontStyle: 'italic',
                 fontWeight: 300,
                 fontSize: 48,
@@ -210,7 +210,7 @@ export default function LoginPage({
               border: '1px solid var(--accent)',
               background: 'transparent',
               color: 'var(--text-primary)',
-              fontFamily: 'Cinzel, serif',
+              fontFamily: 'Space Grotesk, sans-serif',
               fontSize: 11,
               letterSpacing: '0.3em',
               textTransform: 'uppercase',

@@ -18,17 +18,16 @@ function Router() {
   );
 }
 
-// NOTE: About Theme
-// - First choose a default theme according to your design style (dark or light bg), than change color palette in index.css
-//   to keep consistent foreground/background color across components
-// - If you want to make theme switchable, pass `switchable` ThemeProvider and use `useTheme` hook
+// IZURE Design Blueprint v2.0 — Dark ist bewusster Marken-Default (Obsidian Protocol),
+// unabhängig von prefers-color-scheme. Toggle ist aktiv (switchable), Persistenz über
+// den bestehenden "theme"-localStorage-Key in ThemeContext.tsx.
 
 function App() {
   return (
     <ErrorBoundary>
       <ThemeProvider
-        defaultTheme="light"
-        // switchable
+        defaultTheme="dark"
+        switchable
       >
         <TooltipProvider>
           <Toaster />

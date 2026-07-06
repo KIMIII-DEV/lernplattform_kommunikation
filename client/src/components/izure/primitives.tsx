@@ -252,7 +252,7 @@ export function PrivateNav({
             e.preventDefault();
             navigate('/private');
           }}
-          style={{ fontFamily: 'Cormorant Garamond, serif', fontStyle: 'italic', fontSize: 24 }}
+          style={{ fontFamily: 'Space Grotesk, sans-serif', fontStyle: 'italic', fontSize: 24 }}
         >
           IZURE
         </a>
@@ -271,7 +271,7 @@ export function PrivateNav({
               navigate(l.id);
             }}
             style={{
-              fontFamily: 'Cinzel, serif',
+              fontFamily: 'Space Grotesk, sans-serif',
               fontSize: 11,
               letterSpacing: '0.2em',
               textTransform: 'uppercase',
@@ -300,7 +300,7 @@ export function PrivateNav({
         <button
           onClick={lock}
           style={{
-            fontFamily: 'Cinzel, serif',
+            fontFamily: 'Space Grotesk, sans-serif',
             fontSize: 9,
             letterSpacing: '0.3em',
             textTransform: 'uppercase',

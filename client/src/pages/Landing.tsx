@@ -78,7 +78,7 @@ export default function LandingPage({ navigate }: { navigate: (to: string) => vo
           left: '36%',
           top: '52%',
           transform: 'translate(-50%, -50%)',
-          fontFamily: 'Cormorant Garamond, serif',
+          fontFamily: 'Space Grotesk, sans-serif',
           fontStyle: 'italic',
           fontSize: '40vw',
           lineHeight: 0.85,
@@ -109,7 +109,7 @@ export default function LandingPage({ navigate }: { navigate: (to: string) => vo
       >
         <div
           style={{
-            fontFamily: 'Cormorant Garamond, serif',
+            fontFamily: 'Space Grotesk, sans-serif',
             fontStyle: 'italic',
             fontWeight: 400,
             fontSize: 28,
@@ -187,7 +187,7 @@ export default function LandingPage({ navigate }: { navigate: (to: string) => vo
           <div style={{ width: 56, height: 1, background: 'var(--accent-dim)' }} />
           <div
             style={{
-              fontFamily: 'Cinzel, serif',
+              fontFamily: 'Space Grotesk, sans-serif',
               fontSize: 10,
               letterSpacing: '0.35em',
               textTransform: 'uppercase',
@@ -205,7 +205,7 @@ export default function LandingPage({ navigate }: { navigate: (to: string) => vo
               position: 'absolute',
               left: -56,
               top: -36,
-              fontFamily: 'Cormorant Garamond, serif',
+              fontFamily: 'Space Grotesk, sans-serif',
               fontStyle: 'italic',
               fontWeight: 300,
               fontSize: 'clamp(170px, 22vw, 280px)',
@@ -223,7 +223,7 @@ export default function LandingPage({ navigate }: { navigate: (to: string) => vo
 
           <h1
             style={{
-              fontFamily: 'Cormorant Garamond, serif',
+              fontFamily: 'Space Grotesk, sans-serif',
               fontWeight: 300,
               fontSize: 'clamp(120px, 16vw, 220px)',
               lineHeight: 0.9,
@@ -241,7 +241,7 @@ export default function LandingPage({ navigate }: { navigate: (to: string) => vo
               position: 'absolute',
               right: -50,
               top: -10,
-              fontFamily: 'Cinzel, serif',
+              fontFamily: 'Space Grotesk, sans-serif',
               fontSize: 9,
               letterSpacing: '0.3em',
               color: 'var(--accent)',
@@ -257,7 +257,7 @@ export default function LandingPage({ navigate }: { navigate: (to: string) => vo
 
         <p
           style={{
-            fontFamily: 'Cormorant Garamond, serif',
+            fontFamily: 'Space Grotesk, sans-serif',
             fontStyle: 'italic',
             fontWeight: 300,
             fontSize: 'clamp(20px, 1.8vw, 28px)',
@@ -278,7 +278,7 @@ export default function LandingPage({ navigate }: { navigate: (to: string) => vo
               border: '1px solid var(--accent)',
               background: 'transparent',
               color: 'var(--text-primary)',
-              fontFamily: 'Cinzel, serif',
+              fontFamily: 'Space Grotesk, sans-serif',
               fontSize: 11,
               letterSpacing: '0.3em',
               textTransform: 'uppercase',
@@ -306,7 +306,7 @@ export default function LandingPage({ navigate }: { navigate: (to: string) => vo
               background: 'none',
               border: 'none',
               color: 'var(--text-secondary)',
-              fontFamily: 'Cinzel, serif',
+              fontFamily: 'Space Grotesk, sans-serif',
               fontSize: 11,
               letterSpacing: '0.3em',
               textTransform: 'uppercase',
@@ -372,7 +372,7 @@ export default function LandingPage({ navigate }: { navigate: (to: string) => vo
         <div>
           <div
             style={{
-              fontFamily: 'Cinzel, serif',
+              fontFamily: 'Space Grotesk, sans-serif',
               fontSize: 9,
               letterSpacing: '0.3em',
               color: 'var(--text-muted)',
@@ -384,7 +384,7 @@ export default function LandingPage({ navigate }: { navigate: (to: string) => vo
           </div>
           <div
             style={{
-              fontFamily: 'Cormorant Garamond, serif',
+              fontFamily: 'Space Grotesk, sans-serif',
               fontStyle: 'italic',
               fontSize: 16,
               color: 'var(--text-primary)',
@@ -412,7 +412,7 @@ export default function LandingPage({ navigate }: { navigate: (to: string) => vo
         <div
           style={{
             writingMode: 'vertical-rl',
-            fontFamily: 'Cinzel, serif',
+            fontFamily: 'Space Grotesk, sans-serif',
             fontSize: 9,
             letterSpacing: '0.35em',
             textTransform: 'uppercase',
@@ -431,7 +431,7 @@ function Meta({ k, v }: { k: string; v: string }) {
     <div style={{ textAlign: 'right' }}>
       <div
         style={{
-          fontFamily: 'Cinzel, serif',
+          fontFamily: 'Space Grotesk, sans-serif',
           fontSize: 8,
           letterSpacing: '0.35em',
           color: 'var(--text-muted)',
@@ -440,7 +440,7 @@ function Meta({ k, v }: { k: string; v: string }) {
       >
         {k}
       </div>
-      <div style={{ fontFamily: 'Cinzel, serif', fontSize: 11, letterSpacing: '0.18em', color: 'var(--text-primary)' }}>
+      <div style={{ fontFamily: 'Space Grotesk, sans-serif', fontSize: 11, letterSpacing: '0.18em', color: 'var(--text-primary)' }}>
         {v}
       </div>
     </div>
@@ -489,7 +489,7 @@ function SideIcon({
       <div style={{ width: 22, height: 22 }}>{icon}</div>
       <div
         style={{
-          fontFamily: 'Cinzel, serif',
+          fontFamily: 'Space Grotesk, sans-serif',
           fontSize: 7,
           letterSpacing: '0.3em',
           textTransform: 'uppercase',
@@ -603,7 +603,7 @@ function Thumbnail({
               position: 'absolute',
               top: 10,
               left: 12,
-              fontFamily: 'Cinzel, serif',
+              fontFamily: 'Space Grotesk, sans-serif',
               fontSize: 9,
               letterSpacing: '0.3em',
               color: 'var(--accent-light)',
@@ -618,7 +618,7 @@ function Thumbnail({
         <div
           style={{
             marginTop: 10,
-            fontFamily: 'Cormorant Garamond, serif',
+            fontFamily: 'Space Grotesk, sans-serif',
             fontStyle: 'italic',
             fontSize: 12,
             color: 'var(--text-muted)',

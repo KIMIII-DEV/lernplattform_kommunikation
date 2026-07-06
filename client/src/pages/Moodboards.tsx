@@ -186,7 +186,7 @@ export default function MoodboardsPage() {
                     border: 'none',
                     borderBottom: `2px solid ${active ? 'var(--accent)' : 'transparent'}`,
                     color: active ? 'var(--text-primary)' : 'var(--text-secondary)',
-                    fontFamily: 'Cinzel, serif',
+                    fontFamily: 'Space Grotesk, sans-serif',
                     fontSize: 10,
                     letterSpacing: '0.28em',
                     textTransform: 'uppercase',
@@ -248,7 +248,7 @@ export default function MoodboardsPage() {
                       position: 'absolute',
                       top: 16,
                       left: 18,
-                      fontFamily: 'Cinzel, serif',
+                      fontFamily: 'Space Grotesk, sans-serif',
                       fontSize: 9,
                       letterSpacing: '0.3em',
                       color: 'var(--accent-light)',
@@ -358,7 +358,7 @@ export default function MoodboardsPage() {
               >
                 <span
                   className="t-num"
-                  style={{ fontSize: 11, color: 'var(--accent)', fontFamily: 'Cinzel, serif' }}
+                  style={{ fontSize: 11, color: 'var(--accent)', fontFamily: 'Space Grotesk, sans-serif' }}
                 >
                   {f.year}
                 </span>

@@ -165,7 +165,7 @@ export default function StudyPage() {
                       paddingTop: 16,
                       borderTop: '1px solid var(--line-subtle)',
                       color: 'var(--text-muted)',
-                      fontFamily: 'Cinzel, serif',
+                      fontFamily: 'Space Grotesk, sans-serif',
                       fontSize: 9,
                       letterSpacing: '0.25em',
                       textTransform: 'uppercase',

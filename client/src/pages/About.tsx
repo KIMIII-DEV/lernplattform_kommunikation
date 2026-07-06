@@ -16,7 +16,7 @@ function Block({ label, children }: { label: string; children: ReactNode }) {
       <div
         className="t-body"
         style={{
-          fontFamily: 'Cormorant Garamond, serif',
+          fontFamily: 'Space Grotesk, sans-serif',
           fontSize: 17,
           lineHeight: 1.45,
           color: 'var(--text-primary)',
@@ -44,7 +44,7 @@ function BookLine({ author, titles }: { author: string; titles: string }) {
       </span>
       <span
         style={{
-          fontFamily: 'Cormorant Garamond, serif',
+          fontFamily: 'Space Grotesk, sans-serif',
           fontStyle: 'italic',
           fontSize: 15,
           color: 'var(--text-secondary)',
@@ -117,7 +117,7 @@ export default function AboutPage() {
                   position: 'absolute',
                   top: 20,
                   left: 24,
-                  fontFamily: 'Cinzel, serif',
+                  fontFamily: 'Space Grotesk, sans-serif',
                   fontSize: 9,
                   letterSpacing: '0.3em',
                   color: 'var(--accent-light)',
@@ -130,7 +130,7 @@ export default function AboutPage() {
                   position: 'absolute',
                   bottom: 20,
                   right: 24,
-                  fontFamily: 'Cinzel, serif',
+                  fontFamily: 'Space Grotesk, sans-serif',
                   fontSize: 9,
                   letterSpacing: '0.3em',
                   color: 'var(--accent-light)',
@@ -237,7 +237,7 @@ export default function AboutPage() {
           >
             <div
               style={{
-                fontFamily: 'Cormorant Garamond, serif',
+                fontFamily: 'Space Grotesk, sans-serif',
                 fontStyle: 'italic',
                 fontSize: 'clamp(60px, 8vw, 120px)',
                 lineHeight: 1,
@@ -251,7 +251,7 @@ export default function AboutPage() {
 
             <blockquote
               style={{
-                fontFamily: 'Cormorant Garamond, serif',
+                fontFamily: 'Space Grotesk, sans-serif',
                 fontStyle: 'italic',
                 fontWeight: 300,
                 fontSize: 'clamp(28px, 3.6vw, 52px)',
@@ -270,7 +270,7 @@ export default function AboutPage() {
 
             <div
               style={{
-                fontFamily: 'Cormorant Garamond, serif',
+                fontFamily: 'Space Grotesk, sans-serif',
                 fontStyle: 'italic',
                 fontSize: 'clamp(60px, 8vw, 120px)',
                 lineHeight: 1,
@@ -359,7 +359,7 @@ export default function AboutPage() {
                 >
                   <span
                     className="t-num"
-                    style={{ fontSize: 13, color: 'var(--accent)', fontFamily: 'Cinzel, serif' }}
+                    style={{ fontSize: 13, color: 'var(--accent)', fontFamily: 'Space Grotesk, sans-serif' }}
                   >
                     {s.year}
                   </span>
