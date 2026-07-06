@@ -1,5 +1,8 @@
 import { useEffect, useState } from 'react';
-import { Footer, GrainFilter, GrainOverlay, PrivateNav, PublicNav } from '@/components/izure/primitives';
+import { Home as HomeIcon, LayoutGrid, Lock, LogOut, UserRound } from 'lucide-react';
+import { Footer, GrainFilter, GrainOverlay } from '@/components/izure/primitives';
+import IconRail, { IconRailItem, RailAction } from '@/components/shell/IconRail';
+import ThemeToggle from '@/components/shell/ThemeToggle';
 import LandingPage from './Landing';
 import LoginPage from './Login';
 import PrivateDashboard from './PrivateDashboard';
@@ -68,19 +71,53 @@ export default function Home() {
   };
 
   const isLanding = route === '/' || route === '';
-  const showPublicNav = !route.startsWith('/private') && route !== '/login' && !isLanding;
-  const showPrivateNav = route.startsWith('/private');
   const showFooter = !route.startsWith('/private') && route !== '/login' && !isLanding;
+
+  // Blueprint 5.1 — globale Shell: eine Rail für beide Layer. Der Backroom-Zweig
+  // trägt die drei privaten Räume als children (expandiert nur, wenn aktiv).
+  const railItems: IconRailItem[] = [
+    { id: '/', icon: HomeIcon, label: 'Home' },
+    { id: '/about', icon: UserRound, label: 'About' },
+    { id: '/moodboards', icon: LayoutGrid, label: 'Moods' },
+    {
+      id: '/private',
+      icon: Lock,
+      label: 'The Backroom',
+      children: [
+        { id: '/private/learn', label: 'Study', href: '/private/learn' },
+        { id: '/private/barkeeper', label: 'The Barkeeper', href: '/private/barkeeper' },
+        { id: '/private/news', label: 'Wire', href: '/private/news' },
+      ],
+    },
+  ];
 
   return (
     <>
       <GrainFilter />
       <GrainOverlay />
 
-      {showPublicNav && <PublicNav current={route} navigate={navigate} />}
-      {showPrivateNav && <PrivateNav current={route} navigate={navigate} lock={lock} />}
+      <IconRail
+        items={railItems}
+        activeId={route === '' ? '/' : route}
+        onNavigate={navigate}
+        bottom={
+          <>
+            <ThemeToggle />
+            {isPrivate && <RailAction label="Step out" icon={LogOut} onClick={lock} />}
+          </>
+        }
+      />
 
-      <main>{renderPage()}</main>
+      {/* Rail 64px + Inset; wenn der aktive Zweig sein Kinder-Panel zeigt (private Routen),
+          rückt der Content zusätzlich um die Panelbreite ein statt überdeckt zu werden. */}
+      <main
+        style={{
+          paddingLeft: isLanding ? 0 : isPrivate ? 276 : 88,
+          transition: 'padding-left var(--motion-micro)',
+        }}
+      >
+        {renderPage()}
+      </main>
 
       {showFooter && <Footer />}
 

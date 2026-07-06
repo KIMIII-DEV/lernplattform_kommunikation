@@ -98,9 +98,9 @@ export default function LandingPage({ navigate }: { navigate: (to: string) => vo
         style={{
           position: 'absolute',
           top: 0,
-          left: 0,
+          left: 88,
           right: 0,
-          padding: '28px 56px',
+          padding: '28px 56px 28px 24px',
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'flex-start',
@@ -125,31 +125,6 @@ export default function LandingPage({ navigate }: { navigate: (to: string) => vo
           <Meta k="DATE" v={dStr} />
         </div>
       </header>
-
-      {/* Left icon sidebar */}
-      <aside
-        style={{
-          position: 'absolute',
-          left: 0,
-          top: 0,
-          bottom: 0,
-          width: 80,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          gap: 40,
-          zIndex: 10,
-          borderRight: '1px solid var(--line-subtle)',
-          background: 'rgba(15,13,11,0.4)',
-          backdropFilter: 'blur(2px)',
-        }}
-      >
-        <SideIcon label="Home" active onClick={() => {}} icon={<IconGlobe />} />
-        <SideIcon label="About" onClick={() => navigate('/about')} icon={<IconHome />} />
-        <SideIcon label="Moods" onClick={() => navigate('/moodboards')} icon={<IconGrid />} />
-        <SideIcon label="Backroom" onClick={() => navigate('/login')} icon={<IconLock />} bordeaux />
-      </aside>
 
       {/* Right polaroid stack */}
       <div
@@ -446,105 +421,6 @@ function Meta({ k, v }: { k: string; v: string }) {
     </div>
   );
 }
-
-function SideIcon({
-  icon,
-  label,
-  onClick,
-  active,
-  bordeaux,
-}: {
-  icon: React.ReactNode;
-  label: string;
-  onClick: () => void;
-  active?: boolean;
-  bordeaux?: boolean;
-}) {
-  const [hover, setHover] = useState(false);
-  return (
-    <button
-      onClick={onClick}
-      onMouseEnter={() => setHover(true)}
-      onMouseLeave={() => setHover(false)}
-      style={{
-        background: 'none',
-        border: 'none',
-        cursor: 'pointer',
-        padding: 8,
-        color: active
-          ? 'var(--accent)'
-          : bordeaux
-            ? 'var(--accent-bordeaux-light)'
-            : hover
-              ? 'var(--accent-light)'
-              : 'var(--text-secondary)',
-        transition: 'all 400ms var(--ease)',
-        position: 'relative',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        gap: 6,
-      }}
-    >
-      <div style={{ width: 22, height: 22 }}>{icon}</div>
-      <div
-        style={{
-          fontFamily: 'Space Grotesk, sans-serif',
-          fontSize: 7,
-          letterSpacing: '0.3em',
-          textTransform: 'uppercase',
-          opacity: hover || active ? 1 : 0.55,
-          transition: 'opacity 400ms var(--ease)',
-        }}
-      >
-        {label}
-      </div>
-      {active && (
-        <span
-          style={{
-            position: 'absolute',
-            left: -1,
-            top: '50%',
-            transform: 'translateY(-50%)',
-            width: 2,
-            height: 28,
-            background: 'var(--accent)',
-          }}
-        />
-      )}
-    </button>
-  );
-}
-
-const IconGlobe = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1} strokeLinecap="round">
-    <circle cx={12} cy={12} r={9} />
-    <path d="M3 12h18" />
-    <path d="M12 3c2.5 3 2.5 15 0 18" />
-    <path d="M12 3c-2.5 3-2.5 15 0 18" />
-  </svg>
-);
-const IconHome = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1} strokeLinecap="round">
-    <path d="M3 11l9-7 9 7v10H3z" />
-    <path d="M9 21v-7h6v7" />
-  </svg>
-);
-const IconGrid = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1}>
-    <rect x={3} y={3} width={7} height={7} />
-    <rect x={14} y={3} width={7} height={7} />
-    <rect x={3} y={14} width={7} height={7} />
-    <rect x={14} y={14} width={7} height={7} />
-  </svg>
-);
-const IconLock = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1} strokeLinecap="round">
-    <rect x={5} y={11} width={14} height={10} />
-    <path d="M8 11V8a4 4 0 0 1 8 0v3" />
-    <circle cx={12} cy={16} r={1.2} fill="currentColor" />
-  </svg>
-);
 
 function Thumbnail({
   variant = 'curtain',
