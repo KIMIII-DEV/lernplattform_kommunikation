@@ -78,6 +78,10 @@
   --glass-subtle-blur:   6px;
   --glass-subtle-border: rgba(26, 26, 28, 0.10);
 
+  /* Ghost-Headline-Text — Blueprint 5.0. Blueprint-Wert rgba(255,255,255,0.05)
+     ist dark-mode-spezifisch; hier korrekt auf beide Themes gemappt. */
+  --ghost-text: rgba(0, 0, 0, 0.05);
+
   /* Radius / Seam / Schatten — Blueprint 2.4 */
   --seam: 10px;
   --shadow-stage: 0 30px 80px rgba(0, 0, 0, 0.7);
@@ -180,6 +184,8 @@
   --glass-subtle-bg:     rgba(19, 19, 22, 0.72);
   --glass-subtle-blur:   6px;
   --glass-subtle-border: rgba(184, 188, 196, 0.14);
+
+  --ghost-text: rgba(255, 255, 255, 0.05);
 }
 
 /* Private layer override — auf neues Token-System gemappt */
@@ -562,6 +568,11 @@ button { background: none; border: none; color: inherit; cursor: pointer; font-f
 }
 .izure-seal--loading { animation: izure-seal-loading var(--motion-seal) infinite alternate; }
 .izure-seal--route   { animation: izure-seal-route var(--motion-seal) both; }
+.izure-seal--standalone {
+  position: static;
+  display: inline-flex;
+  opacity: 0.55;
+}
 @media (prefers-reduced-motion: reduce) {
   /* 0ms-Infinite-Loop wäre degeneriert — explizit abschalten */
   .izure-seal--loading,
@@ -572,4 +583,29 @@ button { background: none; border: none; color: inherit; cursor: pointer; font-f
 .izure-button:focus-visible {
   outline: 1px solid var(--accent-primary);
   outline-offset: 2px;
+}
+
+/* ============================================================
+   IZURE Phase 3 — Public-Landing-Page (Ghost-Headline, Boot-Sequenz)
+   Ref: IZURE_Design_Blueprint.md v2.1, Abschnitt 5.0
+   ============================================================ */
+
+/* Boot-Sequenz: Ladebalken füllt sich ~1,5–1,7s vor dem Hero-Reveal. */
+@keyframes izure-boot-fill {
+  from { width: 0%; }
+  to   { width: 100%; }
+}
+
+/* Ghost-Headline: Wörter blenden gestaffelt ein, je +150–250ms Versatz
+   (Verzögerung wird pro Wort per --word-delay inline gesetzt). */
+@keyframes izure-ghost-word {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+.izure-ghost-word {
+  opacity: 0;
+  animation: izure-ghost-word var(--motion-base) var(--word-delay, 0ms) both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .izure-ghost-word { opacity: 1; animation: none; }
 }

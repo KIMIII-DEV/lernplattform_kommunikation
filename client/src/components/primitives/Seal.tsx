@@ -16,14 +16,19 @@ export interface SealProps {
   state?: 'idle' | 'loading' | 'route-change';
   size?: number;
   onRouteAnimationEnd?: () => void;
+  /** Trenner-Modus (Blueprint 5.0): kein position:fixed, kein Eck-Abstand —
+   *  für Inline-Platzierung als Abschnittstrenner. Corner-Persistent bleibt
+   *  Default (standalone=false). Visuell unterscheidbar über Opazität
+   *  (55% statt 40% idle) statt über Position allein. */
+  standalone?: boolean;
 }
 
-export default function Seal({ state = 'idle', size = 30, onRouteAnimationEnd }: SealProps) {
+export default function Seal({ state = 'idle', size = 30, onRouteAnimationEnd, standalone = false }: SealProps) {
   const stateClass =
     state === 'loading' ? ' izure-seal--loading' : state === 'route-change' ? ' izure-seal--route' : '';
   return (
     <div
-      className={`izure-seal${stateClass}`}
+      className={`izure-seal${standalone ? ' izure-seal--standalone' : ''}${stateClass}`}
       aria-hidden="true"
       onAnimationEnd={() => {
         if (state === 'route-change') onRouteAnimationEnd?.();

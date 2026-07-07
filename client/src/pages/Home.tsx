@@ -3,6 +3,7 @@ import { Home as HomeIcon, LayoutGrid, Lock, LogOut, UserRound } from 'lucide-re
 import { Footer, GrainFilter, GrainOverlay } from '@/components/izure/primitives';
 import IconRail, { IconRailItem, RailAction } from '@/components/shell/IconRail';
 import ThemeToggle from '@/components/shell/ThemeToggle';
+import { Seal } from '@/components/primitives';
 import LandingPage from './Landing';
 import LoginPage from './Login';
 import PrivateDashboard from './PrivateDashboard';
@@ -19,9 +20,16 @@ export default function Home() {
   const [route, setRoute] = useState<string>(() => location.hash.slice(1) || '/');
   const [unlocked, setUnlocked] = useState<boolean>(() => sessionStorage.getItem('izure-unlocked') === '1');
   const [transitionBlack, setTransitionBlack] = useState(false);
+  const [sealState, setSealState] = useState<'idle' | 'loading' | 'route-change'>('idle');
 
   useEffect(() => {
-    const onHash = () => setRoute(location.hash.slice(1) || '/');
+    // Siegel (Blueprint Abschnitt 4): kurzer "Stempel-Impact" bei jedem
+    // View-Wechsel. Nur auf echte hashchange-Events, nicht auf den
+    // initialen Mount-Zustand.
+    const onHash = () => {
+      setRoute(location.hash.slice(1) || '/');
+      setSealState('route-change');
+    };
     window.addEventListener('hashchange', onHash);
     return () => window.removeEventListener('hashchange', onHash);
   }, []);
@@ -81,7 +89,7 @@ export default function Home() {
   };
 
   const isLanding = route === '/' || route === '';
-  const showFooter = !route.startsWith('/private') && route !== '/login' && !isLanding;
+  const showFooter = !route.startsWith('/private') && route !== '/login';
 
   // Blueprint 5.1 — globale Shell: eine Rail für beide Layer. Der Backroom-Zweig
   // trägt die drei privaten Räume als children (expandiert nur, wenn aktiv).
@@ -105,6 +113,10 @@ export default function Home() {
     <>
       <GrainFilter />
       <GrainOverlay />
+
+      {/* Siegel Corner-Persistent (Blueprint Abschnitt 4) — auf Shell-Ebene,
+          nie innerhalb einer Stage (deren filter wäre Containing-Block für fixed). */}
+      <Seal state={sealState} onRouteAnimationEnd={() => setSealState('idle')} />
 
       <IconRail
         items={railItems}
