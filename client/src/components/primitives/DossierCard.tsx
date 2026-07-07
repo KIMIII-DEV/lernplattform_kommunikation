@@ -15,9 +15,14 @@ export interface DossierCardProps {
   progress: number;
   previewChapters: string[];
   onOpen?: () => void;
+  /** LF-Kategorienfarbe (Masterplan 3.4): schmaler Aktenreiter-Rand links +
+   *  Fortschrittsring — nur zur LF-Zuordnung, nie Feedback/Chrome. */
+  accentColor?: string;
+  /** Kleine Meta-Zeile unter dem Titel (z. B. "LF-01 · 80h · 1. Lehrjahr"). */
+  meta?: string;
 }
 
-export default function DossierCard({ title, progress, previewChapters, onOpen }: DossierCardProps) {
+export default function DossierCard({ title, progress, previewChapters, onOpen, accentColor, meta }: DossierCardProps) {
   const [revealed, setRevealed] = useState(false);
 
   return (
@@ -36,7 +41,13 @@ export default function DossierCard({ title, progress, previewChapters, onOpen }
           onOpen();
         }
       }}
-      style={{ display: 'grid', cursor: onOpen ? 'pointer' : 'default' }}
+      style={{
+        display: 'grid',
+        cursor: onOpen ? 'pointer' : 'default',
+        // Aktenreiter: linke Seam-Kante trägt die LF-Kategorienfarbe —
+        // Kennzeichnung in der Fuge, kein zusätzlicher Schatten/Rahmen.
+        borderLeftColor: accentColor,
+      }}
     >
       {/* Ruhezustand */}
       <div
@@ -52,18 +63,28 @@ export default function DossierCard({ title, progress, previewChapters, onOpen }
           pointerEvents: revealed ? 'none' : undefined,
         }}
       >
-        <h3
-          style={{
-            fontFamily: 'Space Grotesk, sans-serif',
-            fontWeight: 600,
-            fontSize: 'var(--fs-h2)',
-            lineHeight: 1.15,
-            color: 'var(--text-primary)',
-          }}
-        >
-          {title}
-        </h3>
-        <DonutRing value={progress} label="Progress" size={64} />
+        <div>
+          <h3
+            style={{
+              fontFamily: 'Space Grotesk, sans-serif',
+              fontWeight: 600,
+              fontSize: 'var(--fs-h2)',
+              lineHeight: 1.15,
+              color: 'var(--text-primary)',
+            }}
+          >
+            {title}
+          </h3>
+          {meta && (
+            <div
+              className="t-label"
+              style={{ fontSize: 9, color: 'var(--text-tertiary)', marginTop: 8 }}
+            >
+              {meta}
+            </div>
+          )}
+        </div>
+        <DonutRing value={progress} label="Progress" size={64} ringColor={accentColor} />
       </div>
 
       {/* Geöffnete Akte */}

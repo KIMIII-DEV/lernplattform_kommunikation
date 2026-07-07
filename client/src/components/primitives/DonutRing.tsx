@@ -7,12 +7,15 @@ export interface DonutRingProps {
   value: number; // 0–100
   label: string;
   size?: number; // Standard 96px
+  /** LF-Kategorienfarbe für den Fortschrittsring (Masterplan 3.4 — Aktenreiter-
+   *  Zuordnung, nur für LF-Kennzeichnung). Default bleibt accent-primary. */
+  ringColor?: string;
 }
 
 const R = 46.5;
 const C = 2 * Math.PI * R;
 
-export default function DonutRing({ value, label, size = 96 }: DonutRingProps) {
+export default function DonutRing({ value, label, size = 96, ringColor }: DonutRingProps) {
   const clamped = Math.min(100, Math.max(0, value));
   return (
     <div
@@ -28,7 +31,7 @@ export default function DonutRing({ value, label, size = 96 }: DonutRingProps) {
             cy={48}
             r={R}
             fill="none"
-            stroke="var(--accent-primary)"
+            stroke={ringColor || 'var(--accent-primary)'}
             strokeWidth={3}
             strokeDasharray={C}
             strokeDashoffset={C * (1 - clamped / 100)}
