@@ -1,6 +1,11 @@
-import { useEffect, useRef, useState } from 'react';
-import { GhostText } from '@/components/izure/primitives';
-import { IMG } from '@/lib/atmosphere';
+import { Suspense, lazy, useEffect, useRef, useState } from 'react';
+import { Button } from '@/components/primitives';
+
+/* IZURE Login — Masterplan v3, Phase 8. Präsentations-Restyle,
+   Unlock-Logik unangetastet (Codewort-Liste bis zur TOTP-Migration).
+   Ambient: Liquid/Chrome-Morph (lazy, nur auf dieser View). */
+
+const LoginAmbient = lazy(() => import('@/components/izure/LoginAmbient'));
 
 const VALID_CODES = ['sprezzatura', 'nottonight', 'patina', 'izure'];
 
@@ -44,45 +49,21 @@ export default function LoginPage({
   return (
     <div
       className="page-root"
+      data-screen-label="04 Login"
       style={{
         position: 'fixed',
         inset: 0,
-        background: 'var(--bg-primary)',
+        background: 'var(--bg-base)',
         opacity: fading ? 0 : 1,
-        transition: 'opacity 800ms var(--ease)',
+        transition: 'opacity var(--motion-base)',
         overflow: 'hidden',
       }}
-      data-screen-label="04 Login"
     >
-      <div
-        style={{
-          position: 'absolute',
-          inset: 0,
-          backgroundImage: `url(${IMG.hero_street})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          filter: 'brightness(0.32) contrast(1.2) saturate(0.6) sepia(0.2)',
-          opacity: 0.55,
-        }}
-      />
-      <div
-        style={{
-          position: 'absolute',
-          inset: 0,
-          background: 'radial-gradient(ellipse at center, transparent 0%, rgba(15,13,11,0.92) 70%)',
-        }}
-      />
+      <Suspense fallback={null}>
+        <LoginAmbient />
+      </Suspense>
 
-      <GhostText
-        left="50%"
-        top="14%"
-        size="22vw"
-        style={{ opacity: 0.05, transform: 'translateX(-50%)', fontStyle: 'italic' }}
-      >
-        knock
-      </GhostText>
-
-      <div style={{ position: 'absolute', top: 28, left: 64, zIndex: 5 }}>
+      <div style={{ position: 'absolute', top: 28, left: 100, zIndex: 5 }}>
         <a
           href="#/"
           onClick={(e) => {
@@ -91,28 +72,25 @@ export default function LoginPage({
           }}
           style={{
             fontFamily: 'Space Grotesk, sans-serif',
-            fontStyle: 'italic',
-            fontWeight: 400,
-            fontSize: 22,
+            fontSize: 10,
+            fontWeight: 600,
+            letterSpacing: '0.2em',
+            textTransform: 'uppercase',
             color: 'var(--text-secondary)',
+            transition: 'color var(--motion-micro)',
           }}
+          onMouseOver={(e) => (e.currentTarget.style.color = 'var(--text-primary)')}
+          onMouseOut={(e) => (e.currentTarget.style.color = 'var(--text-secondary)')}
         >
           ← IZURE
         </a>
       </div>
 
       <div
-        style={{
-          position: 'absolute',
-          top: 28,
-          right: 64,
-          fontFamily: 'Space Grotesk, sans-serif',
-          fontSize: 9,
-          letterSpacing: '0.3em',
-          color: 'var(--text-muted)',
-        }}
+        className="t-label"
+        style={{ position: 'absolute', top: 30, right: 56, fontSize: 9, color: 'var(--text-tertiary)' }}
       >
-        CODE ROTATES · :00 · :30
+        Code rotates · :00 · :30
       </div>
 
       <div
@@ -126,38 +104,27 @@ export default function LoginPage({
           width: 'min(560px, 90vw)',
         }}
       >
-        <div
-          style={{
-            marginBottom: 36,
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            gap: 18,
-            color: 'var(--accent)',
-          }}
-        >
-          <div style={{ width: 60, height: 1, background: 'var(--accent-dim)' }} />
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth={0.8}>
-            <path d="M7 1 L9 5 L13 7 L9 9 L7 13 L5 9 L1 7 L5 5 Z" />
-          </svg>
-          <div style={{ width: 60, height: 1, background: 'var(--accent-dim)' }} />
+        <div className="t-label" style={{ color: 'var(--accent-primary)', marginBottom: 24 }}>
+          · The Backroom ·
         </div>
-
         <h1
-          className="t-display italic"
-          style={{ fontSize: 'clamp(48px, 6vw, 80px)', fontStyle: 'italic', lineHeight: 1.05, marginBottom: 16 }}
+          style={{
+            fontFamily: 'Space Grotesk, sans-serif',
+            fontWeight: 700,
+            fontSize: 'clamp(44px, 5.5vw, 72px)',
+            lineHeight: 1.02,
+            color: 'var(--text-primary)',
+            marginBottom: 16,
+          }}
         >
           Knock twice.
         </h1>
-        <p
-          className="t-body"
-          style={{ fontSize: 14, color: 'var(--text-secondary)', marginBottom: 56, maxWidth: 360, margin: '0 auto 56px' }}
-        >
+        <p className="t-body" style={{ fontSize: 14, maxWidth: 380, margin: '0 auto 48px' }}>
           We don't keep a list at the door. You either know the word for tonight, or you don't.
         </p>
 
         <form onSubmit={handleSubmit}>
-          <div style={{ position: 'relative', animation: reject ? 'shake 0.4s' : 'none' }}>
+          <div style={{ animation: reject ? 'shake 0.4s' : 'none' }}>
             <input
               ref={inputRef}
               type="text"
@@ -167,70 +134,51 @@ export default function LoginPage({
               autoCorrect="off"
               autoCapitalize="off"
               spellCheck="false"
+              aria-label="Codewort"
               style={{
                 width: '100%',
                 background: 'transparent',
                 border: 'none',
-                borderBottom: `1px solid ${reject ? 'var(--accent-bordeaux-light)' : 'var(--accent)'}`,
-                color: reject ? 'var(--accent-bordeaux-light)' : 'var(--text-primary)',
+                borderBottom: `1px solid ${reject ? 'var(--accent-critical)' : 'var(--border-hairline-strong)'}`,
+                color: reject ? 'var(--accent-critical)' : 'var(--text-primary)',
                 fontFamily: 'Space Grotesk, sans-serif',
-                fontStyle: 'italic',
-                fontWeight: 300,
-                fontSize: 48,
+                fontWeight: 500,
+                fontSize: 40,
                 textAlign: 'center',
                 padding: '12px 0 16px',
                 outline: 'none',
-                letterSpacing: '0.04em',
-                transition: 'all 400ms var(--ease)',
-                caretColor: 'var(--accent)',
+                letterSpacing: '0.06em',
+                transition: 'border-color var(--motion-micro), color var(--motion-micro)',
+                caretColor: 'var(--accent-primary)',
               }}
             />
           </div>
 
-          <div style={{ marginTop: 22, height: 18, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+          <div style={{ marginTop: 20, height: 18, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
             {reject ? (
-              <div
-                className="t-label"
-                style={{ color: 'var(--accent-bordeaux-light)', fontSize: 11, animation: 'fadeIn 0.4s' }}
-              >
-                · NOT TONIGHT ·
+              <div className="t-label" style={{ color: 'var(--accent-critical)', fontSize: 11 }}>
+                · Not tonight ·
               </div>
             ) : (
-              <div className="t-label" style={{ color: 'var(--text-muted)' }}>
-                ENTER THE CODE
+              <div className="t-label" style={{ fontSize: 10, color: 'var(--text-tertiary)' }}>
+                Enter the code
               </div>
             )}
           </div>
 
-          <button
-            type="submit"
-            style={{
-              marginTop: 48,
-              padding: '14px 36px',
-              border: '1px solid var(--accent)',
-              background: 'transparent',
-              color: 'var(--text-primary)',
-              fontFamily: 'Space Grotesk, sans-serif',
-              fontSize: 11,
-              letterSpacing: '0.3em',
-              textTransform: 'uppercase',
-              cursor: 'pointer',
-              transition: 'all 400ms var(--ease)',
-            }}
-            onMouseOver={(e) => (e.currentTarget.style.background = 'rgba(176,141,87,0.1)')}
-            onMouseOut={(e) => (e.currentTarget.style.background = 'transparent')}
-          >
-            Step inside
-          </button>
+          <div style={{ marginTop: 40 }}>
+            <Button type="submit">Step inside</Button>
+          </div>
         </form>
 
         {showHint && (
-          <div style={{ marginTop: 80, opacity: 0.6, animation: 'fadeIn 1s' }}>
-            <div className="gold-line" style={{ maxWidth: 260, margin: '0 auto 18px' }}>
-              <span style={{ color: 'var(--text-muted)', fontSize: 9 }}>house tip</span>
+          <div style={{ marginTop: 72, opacity: 0.7 }}>
+            <div className="t-label" style={{ fontSize: 9, color: 'var(--text-tertiary)', marginBottom: 10 }}>
+              House tip
             </div>
-            <p className="t-body" style={{ fontSize: 12, fontStyle: 'italic', color: 'var(--text-muted)' }}>
-              Tonight's word, between us: <span style={{ color: 'var(--accent-light)' }}>sprezzatura</span>
+            <p className="t-body" style={{ fontSize: 12, color: 'var(--text-secondary)' }}>
+              Tonight's word, between us:{' '}
+              <span style={{ color: 'var(--accent-primary-bright)' }}>sprezzatura</span>
             </p>
           </div>
         )}
