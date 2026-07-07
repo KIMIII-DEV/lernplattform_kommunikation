@@ -131,10 +131,12 @@ export default function Home() {
       />
 
       {/* Rail 64px + Inset; wenn der aktive Zweig sein Kinder-Panel zeigt (private Routen),
-          rückt der Content zusätzlich um die Panelbreite ein statt überdeckt zu werden. */}
+          rückt der Content zusätzlich um die Panelbreite ein statt überdeckt zu werden.
+          Kein Landing-Sonderfall mehr — die Flow-Landing (Phase 3) muss die Rail-Breite
+          genauso kompensieren (Masterplan v3, 4.1). */}
       <main
         style={{
-          paddingLeft: isLanding ? 0 : isPrivate ? 276 : 88,
+          paddingLeft: isPrivate ? 276 : 88,
           transition: 'padding-left var(--motion-micro)',
         }}
       >

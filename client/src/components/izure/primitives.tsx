@@ -183,7 +183,7 @@ export function Footer() {
         </div>
         <div className="meta">
           <span>Izure — Estd. MMXXVI</span>
-          <span>All hours warm</span>
+          <span>By key only.</span>
         </div>
       </div>
     </footer>

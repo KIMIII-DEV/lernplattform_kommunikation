@@ -1,5 +1,9 @@
-import { useEffect, useState } from 'react';
+import { Suspense, lazy, useEffect, useState } from 'react';
 import { Seal, Button, StatChain } from '@/components/primitives';
+
+// Netzwerk-Graph-Ambient (Masterplan v3, 4.4) — lazy: eigener Chunk,
+// lädt ausschließlich auf der Landing, nicht global.
+const LandingAmbient = lazy(() => import('@/components/izure/LandingAmbient'));
 
 /* IZURE Landing — Blueprint v2.1, Abschnitt 5.0 "Public-Landing-Hero".
    Ghost-Headline-Technik: der bestehende Tagline-Satz läuft riesig und
@@ -123,6 +127,13 @@ export default function LandingPage({ navigate }: { navigate: (to: string) => vo
           />
         </header>
 
+        {/* Netzwerk-Graph-Ambient — unterste Ebene, erst nach der Boot-Sequenz */}
+        {booted && (
+          <Suspense fallback={null}>
+            <LandingAmbient />
+          </Suspense>
+        )}
+
         {/* Ghost-Headline — liegt hinter dem Fokus-Element */}
         <div
           aria-hidden="true"
@@ -166,7 +177,7 @@ export default function LandingPage({ navigate }: { navigate: (to: string) => vo
             position: 'relative',
             zIndex: 1,
             maxWidth: 640,
-            padding: '48px 64px 48px 0',
+            padding: '48px 64px',
             margin: '-48px 0 -48px -64px',
             background:
               'radial-gradient(ellipse 85% 100% at 30% 50%, var(--bg-base) 55%, transparent 100%)',

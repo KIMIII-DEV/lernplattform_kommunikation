@@ -78,9 +78,9 @@
   --glass-subtle-blur:   6px;
   --glass-subtle-border: rgba(26, 26, 28, 0.10);
 
-  /* Ghost-Headline-Text — Blueprint 5.0. Blueprint-Wert rgba(255,255,255,0.05)
-     ist dark-mode-spezifisch; hier korrekt auf beide Themes gemappt. */
-  --ghost-text: rgba(0, 0, 0, 0.05);
+  /* Ghost-Headline-Text — Masterplan v3, 4.4: auf 2–3 % reduziert, damit die
+     Ghost-Ebene nicht mit dem Netzwerk-Graph-Ambient konkurriert. Je Theme gemappt. */
+  --ghost-text: rgba(0, 0, 0, 0.025);
 
   /* Radius / Seam / Schatten — Blueprint 2.4 */
   --seam: 10px;
@@ -185,7 +185,7 @@
   --glass-subtle-blur:   6px;
   --glass-subtle-border: rgba(184, 188, 196, 0.14);
 
-  --ghost-text: rgba(255, 255, 255, 0.05);
+  --ghost-text: rgba(255, 255, 255, 0.025);
 }
 
 /* Private layer override — auf neues Token-System gemappt */
