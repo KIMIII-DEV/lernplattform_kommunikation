@@ -473,3 +473,111 @@ button { background: none; border: none; color: inherit; cursor: pointer; font-f
   from { opacity: 0; transform: translateY(4px); }
   to   { opacity: 1; transform: translateY(0); }
 }
+
+/* ============================================================
+   IZURE Primitives — Phase 2 (Glass-Fallback, Seal, Accordion)
+   Ref: IZURE_Design_Blueprint.md v2.1, Abschnitte 2.3, 2.4, 4, 6
+   ============================================================ */
+
+/* Akkordeon-Timing: Blueprint (400ms ease-out) gewinnt über Guide
+   (var(--motion-base) = 600ms) per Eskalationsregel. Als Token, damit
+   der prefers-reduced-motion-Block das bestehende Muster behält. */
+:root { --motion-accordion: 400ms ease-out; }
+@media (prefers-reduced-motion: reduce) {
+  :root { --motion-accordion: 0ms; }
+}
+
+/* --- GlassSurface: Fallback-Kaskade (Reihenfolge zwingend) ---
+   1) Basis = opak (Browser ohne backdrop-filter)
+   2) @supports → Glas-Tokens
+   3) prefers-reduced-transparency ZULETZT → schlägt Fähigkeit */
+.glass-full,
+.glass-subtle {
+  background: var(--bg-panel-raised);
+  border: 1px solid var(--border-hairline);
+}
+.glass-full   { border-radius: var(--radius-outer); position: relative; }
+.glass-subtle { border-radius: var(--radius-card); }
+
+@supports (backdrop-filter: blur(1px)) {
+  .glass-full {
+    background: var(--glass-bg);
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    backdrop-filter: blur(var(--glass-blur));
+    border-color: var(--glass-border);
+  }
+  .glass-subtle {
+    background: var(--glass-subtle-bg);
+    -webkit-backdrop-filter: blur(var(--glass-subtle-blur));
+    backdrop-filter: blur(var(--glass-subtle-blur));
+    border-color: var(--glass-subtle-border);
+  }
+  /* Highlight-Streak: nur variant full (Blueprint 6.1: subtle ohne Streak) */
+  .glass-full::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 24px;
+    right: 24px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--glass-highlight), transparent);
+    pointer-events: none;
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .glass-full,
+  .glass-subtle {
+    background: var(--bg-panel-raised);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    border-color: var(--border-hairline);
+  }
+  .glass-full::after { content: none; }
+}
+
+/* --- Accordion (Radix --radix-accordion-content-height) --- */
+@keyframes izure-accordion-down {
+  from { height: 0; }
+  to   { height: var(--radix-accordion-content-height); }
+}
+@keyframes izure-accordion-up {
+  from { height: var(--radix-accordion-content-height); }
+  to   { height: 0; }
+}
+.izure-accordion-content { overflow: hidden; }
+.izure-accordion-content[data-state='open']   { animation: izure-accordion-down var(--motion-accordion); }
+.izure-accordion-content[data-state='closed'] { animation: izure-accordion-up var(--motion-accordion); }
+.izure-accordion-chevron { transition: transform var(--motion-accordion); }
+.izure-accordion-trigger[data-state='open'] .izure-accordion-chevron { transform: rotate(90deg); }
+
+/* --- Seal (Siegel) --- */
+@keyframes izure-seal-loading {
+  from { transform: scale(0.92); }
+  to   { transform: scale(1); }
+}
+@keyframes izure-seal-route {
+  from { transform: scale(1.15); opacity: 0; }
+  to   { transform: scale(1); opacity: 0.4; }
+}
+.izure-seal {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 900;
+  opacity: 0.4;
+  pointer-events: none;
+}
+.izure-seal--loading { animation: izure-seal-loading var(--motion-seal) infinite alternate; }
+.izure-seal--route   { animation: izure-seal-route var(--motion-seal) both; }
+@media (prefers-reduced-motion: reduce) {
+  /* 0ms-Infinite-Loop wäre degeneriert — explizit abschalten */
+  .izure-seal--loading,
+  .izure-seal--route { animation: none; }
+}
+
+/* --- Button a11y --- */
+.izure-button:focus-visible {
+  outline: 1px solid var(--accent-primary);
+  outline-offset: 2px;
+}

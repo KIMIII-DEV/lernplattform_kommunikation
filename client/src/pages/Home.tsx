@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { Suspense, lazy, useEffect, useState } from 'react';
 import { Home as HomeIcon, LayoutGrid, Lock, LogOut, UserRound } from 'lucide-react';
 import { Footer, GrainFilter, GrainOverlay } from '@/components/izure/primitives';
 import IconRail, { IconRailItem, RailAction } from '@/components/shell/IconRail';
@@ -11,6 +11,9 @@ import BarkeeperPage from './Barkeeper';
 import WirePage from './Wire';
 import AboutPage from './About';
 import MoodboardsPage from './Moodboards';
+
+// DEV-Testbett für die Phase-2-Primitives — lazy, damit es nie im Prod-Bundle landet.
+const PreviewPage = lazy(() => import('./Preview'));
 
 export default function Home() {
   const [route, setRoute] = useState<string>(() => location.hash.slice(1) || '/');
@@ -67,6 +70,13 @@ export default function Home() {
     if (route === '/private/learn') return <StudyPage />;
     if (route === '/private/barkeeper') return <BarkeeperPage />;
     if (route === '/private/news') return <WirePage />;
+    if (import.meta.env.DEV && route === '/preview') {
+      return (
+        <Suspense fallback={null}>
+          <PreviewPage />
+        </Suspense>
+      );
+    }
     return <LandingPage navigate={navigate} />;
   };
 
