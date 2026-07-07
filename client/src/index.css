@@ -251,14 +251,6 @@ button { background: none; border: none; color: inherit; cursor: pointer; font-f
 }
 .grain-overlay svg { width: 100%; height: 100%; }
 
-/* ----------------- Vignette ----------------- */
-.vignette::after {
-  content: '';
-  position: absolute; inset: 0;
-  background: radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.55) 100%);
-  pointer-events: none;
-}
-
 /* ----------------- Layout shell ----------------- */
 .shell {
   max-width: 1400px;

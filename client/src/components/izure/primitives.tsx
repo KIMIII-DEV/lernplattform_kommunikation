@@ -159,9 +159,9 @@ export function Footer() {
       <div className="shell">
         <div className="footer-grid">
           <div className="closing">
-            "Old-world charisma
+            "Kept quiet.
             <br />
-            in digital form."
+            Kept exact."
           </div>
           <div className="links">
             <div className="t-label" style={{ color: 'var(--accent)', marginBottom: 8 }}>
@@ -183,7 +183,6 @@ export function Footer() {
         </div>
         <div className="meta">
           <span>Izure — Estd. MMXXVI</span>
-          <span>Italian Noir · Bohemian</span>
           <span>All hours warm</span>
         </div>
       </div>
