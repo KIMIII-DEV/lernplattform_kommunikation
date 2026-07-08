@@ -1,6 +1,11 @@
-import { useEffect, useRef, useState } from 'react';
-import { CineImg, GhostText } from '@/components/izure/primitives';
+import { Suspense, lazy, useEffect, useRef, useState } from 'react';
+import { CineImg } from '@/components/izure/primitives';
+import { Badge, Button, Card, GlassSurface } from '@/components/primitives';
 import { IMG } from '@/lib/atmosphere';
+
+// Sonar-Sweep-Ambient (Masterplan Phase 9) — liegt HINTER dem Voll-Glas-Panel,
+// das Glas blurrt den Sweep (One-Way-Glass-Metapher). Lazy, nur diese View.
+const MarcoAmbient = lazy(() => import('@/components/izure/MarcoAmbient'));
 
 interface Msg {
   role: 'house' | 'you' | 'marco';
@@ -44,12 +49,12 @@ export default function BarkeeperPage() {
 
   return (
     <div className="page-root" data-screen-label="07 Private · Barkeeper">
-      <section style={{ paddingTop: 140, paddingBottom: 40, position: 'relative' }}>
-        <GhostText left="-2vw" top="10vh" size="28vw" style={{ opacity: 0.045, fontStyle: 'italic' }}>
-          marco
-        </GhostText>
+      <Suspense fallback={null}>
+        <MarcoAmbient />
+      </Suspense>
+      <section style={{ paddingTop: 120, paddingBottom: 40, position: 'relative' }}>
         <div className="shell">
-          <div className="t-label" style={{ color: 'var(--accent)', marginBottom: 22 }}>
+          <div className="t-label" style={{ color: 'var(--accent-primary)', marginBottom: 22 }}>
             · Room 02 · The Barkeeper · In residence: Marco
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: '7fr 5fr', gap: 60, alignItems: 'end' }}>
@@ -59,17 +64,7 @@ export default function BarkeeperPage() {
               <span className="italic">drying glasses.</span>
             </h1>
             <div style={{ paddingBottom: 16 }}>
-              <span
-                className="t-label"
-                style={{
-                  background: 'rgba(176,141,87,0.1)',
-                  border: '1px solid var(--line-subtle)',
-                  padding: '6px 12px',
-                  color: 'var(--accent-light)',
-                }}
-              >
-                · OPENING SOON ·
-              </span>
+              <Badge>Opening soon</Badge>
               <p className="t-body" style={{ marginTop: 22, maxWidth: 380 }}>
                 The KI Barkeeper is in training. For now he answers in mood, not in facts — the full character comes
                 later, with you in the room.
@@ -81,30 +76,22 @@ export default function BarkeeperPage() {
 
       <section style={{ padding: '40px 0 120px' }}>
         <div className="shell">
-          <div style={{ display: 'grid', gridTemplateColumns: '5fr 7fr', gap: 40, alignItems: 'stretch' }}>
-            <div
-              style={{
-                background: 'var(--bg-card)',
-                border: '1px solid var(--line-subtle)',
-                padding: 0,
-                position: 'relative',
-                overflow: 'hidden',
-              }}
-            >
-              <div style={{ position: 'relative', aspectRatio: '4/5', overflow: 'hidden' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '5fr 7fr', gap: 12, alignItems: 'stretch', position: 'relative', zIndex: 1 }}>
+            <Card variant="default" style={{ padding: 0, overflow: 'hidden' }}>
+              <div style={{ position: 'relative', aspectRatio: '4/5', overflow: 'hidden', borderRadius: 8 }}>
                 <CineImg src={IMG.hero_bar} alt="Marco" style={{ position: 'absolute', inset: 0 }} />
                 <div
                   style={{
                     position: 'absolute',
                     inset: 0,
-                    background: 'linear-gradient(to top, rgba(22,15,10,0.95) 0%, transparent 60%)',
+                    background: 'linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 60%)',
                   }}
                 />
                 <div style={{ position: 'absolute', bottom: 24, left: 24, right: 24 }}>
-                  <div className="t-label" style={{ color: 'var(--accent)', marginBottom: 8 }}>
+                  <div className="t-label" style={{ color: 'var(--accent-primary)', marginBottom: 8 }}>
                     Bartender · since '78
                   </div>
-                  <h3 className="t-display italic" style={{ fontStyle: 'italic', fontSize: 44, lineHeight: 1.05 }}>
+                  <h3 style={{ fontFamily: 'Space Grotesk, sans-serif', fontWeight: 700, fontSize: 40, lineHeight: 1.05, color: '#F4F4F4' }}>
                     Marco
                   </h3>
                 </div>
@@ -132,21 +119,23 @@ export default function BarkeeperPage() {
                   ))}
                 </dl>
               </div>
-            </div>
+            </Card>
 
-            <div
+            {/* Marco-Interface: einziger Voll-Glas-Ort außerhalb von Modals
+                (Blueprint 6.1) — blickt auf den Sonar-Sweep dahinter. */}
+            <GlassSurface
+              variant="full"
               style={{
-                background: 'var(--bg-card)',
-                border: '1px solid var(--line-subtle)',
                 display: 'flex',
                 flexDirection: 'column',
                 minHeight: 560,
+                padding: 0,
               }}
             >
               <div
                 style={{
                   padding: '20px 28px',
-                  borderBottom: '1px solid var(--line-subtle)',
+                  borderBottom: '1px solid var(--border-hairline)',
                   display: 'flex',
                   justifyContent: 'space-between',
                   alignItems: 'center',
@@ -193,48 +182,33 @@ export default function BarkeeperPage() {
               <form
                 onSubmit={send}
                 style={{
-                  borderTop: '1px solid var(--line-subtle)',
+                  borderTop: '1px solid var(--border-hairline)',
                   padding: '16px 24px',
                   display: 'flex',
                   gap: 14,
                   alignItems: 'center',
                 }}
               >
-                <span style={{ color: 'var(--accent)', fontFamily: 'Space Grotesk, sans-serif', fontStyle: 'italic', fontSize: 22 }}>
-                  —
-                </span>
                 <input
                   type="text"
                   value={draft}
                   onChange={(e) => setDraft(e.target.value)}
                   placeholder="Ask him anything. Or nothing."
+                  aria-label="Nachricht an Marco"
                   style={{
                     flex: 1,
                     background: 'transparent',
                     border: 'none',
                     outline: 'none',
                     fontFamily: 'Space Grotesk, sans-serif',
-                    fontStyle: 'italic',
-                    fontSize: 19,
+                    fontSize: 16,
                     color: 'var(--text-primary)',
                     padding: '8px 0',
                   }}
                 />
-                <button
-                  type="submit"
-                  className="t-label"
-                  style={{
-                    color: 'var(--accent-light)',
-                    cursor: 'pointer',
-                    padding: '8px 14px',
-                    border: '1px solid var(--line-subtle)',
-                    background: 'none',
-                  }}
-                >
-                  Pour
-                </button>
+                <Button type="submit">Pour</Button>
               </form>
-            </div>
+            </GlassSurface>
           </div>
         </div>
       </section>

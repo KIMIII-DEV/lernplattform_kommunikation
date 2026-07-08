@@ -1,6 +1,10 @@
-import { useState } from 'react';
-import { CineImg, GhostText } from '@/components/izure/primitives';
+import { Suspense, lazy, useState } from 'react';
+import { CineImg } from '@/components/izure/primitives';
+import { Card, Stage } from '@/components/primitives';
 import { IMG } from '@/lib/atmosphere';
+
+// Aurora-/Farbwäsche-Ambient (Masterplan Phase 9) — lazy, nur auf dieser View.
+const WireAmbient = lazy(() => import('@/components/izure/WireAmbient'));
 
 const STORIES = [
   {
@@ -56,12 +60,12 @@ export default function WirePage() {
 
   return (
     <div className="page-root" data-screen-label="08 Private · News">
-      <section style={{ paddingTop: 140, paddingBottom: 40, position: 'relative' }}>
-        <GhostText right="-2vw" top="6vh" size="26vw" style={{ opacity: 0.05, fontStyle: 'italic' }}>
-          wire
-        </GhostText>
+      <Suspense fallback={null}>
+        <WireAmbient />
+      </Suspense>
+      <section style={{ paddingTop: 120, paddingBottom: 40, position: 'relative' }}>
         <div className="shell">
-          <div className="t-label" style={{ color: 'var(--accent)', marginBottom: 22 }}>
+          <div className="t-label" style={{ color: 'var(--accent-primary)', marginBottom: 22 }}>
             · Room 03 · The Wire · Edition · Tonight
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: '6fr 6fr', gap: 60, alignItems: 'end', marginBottom: 60 }}>
@@ -78,9 +82,9 @@ export default function WirePage() {
         </div>
       </section>
 
-      <section style={{ paddingBottom: 120 }}>
+      <section style={{ paddingBottom: 120, position: 'relative' }}>
         <div className="shell">
-          <div style={{ display: 'grid', gridTemplateColumns: '4fr 8fr', gap: 56 }}>
+          <Stage style={{ padding: '48px 44px', display: 'grid', gridTemplateColumns: '4fr 8fr', gap: 56 }}>
             <ul style={{ listStyle: 'none', borderTop: '1px solid var(--line-subtle)' }}>
               {STORIES.map((s, i) => (
                 <li
@@ -133,54 +137,65 @@ export default function WirePage() {
                 {story.body}
               </p>
 
-              <div
-                style={{
-                  padding: '28px 32px',
-                  background: 'var(--bg-card)',
-                  borderLeft: '2px solid var(--accent)',
-                  marginTop: 32,
-                }}
-              >
-                <div className="t-label" style={{ fontSize: 9, color: 'var(--accent-light)', marginBottom: 12 }}>
+              <Card variant="default" style={{ marginTop: 32 }}>
+                <div className="t-label" style={{ fontSize: 9, color: 'var(--accent-primary-bright)', marginBottom: 12 }}>
                   {story.take.split(' — ')[0]}
                 </div>
-                <p className="t-display italic" style={{ fontStyle: 'italic', fontSize: 22, lineHeight: 1.3 }}>
+                <p style={{ fontFamily: 'Space Grotesk, sans-serif', fontWeight: 500, fontSize: 19, lineHeight: 1.4, color: 'var(--text-primary)' }}>
                   {story.take.split(' — ')[1]}
                 </p>
-              </div>
+              </Card>
 
               <div
                 style={{
                   marginTop: 48,
                   paddingTop: 24,
-                  borderTop: '1px solid var(--line-subtle)',
+                  borderTop: '1px solid var(--border-hairline)',
                   display: 'flex',
                   justifyContent: 'space-between',
                 }}
               >
-                <button
+                <NavTextButton
+                  label="← Earlier"
                   onClick={() => setReading(Math.max(0, reading - 1))}
-                  className="btn-secondary"
                   disabled={reading === 0}
-                  style={{ opacity: reading === 0 ? 0.3 : 1 }}
-                >
-                  <span className="arrow">←</span>
-                  <span>Earlier</span>
-                </button>
-                <button
+                />
+                <NavTextButton
+                  label="Next →"
                   onClick={() => setReading(Math.min(STORIES.length - 1, reading + 1))}
-                  className="btn-secondary"
                   disabled={reading === STORIES.length - 1}
-                  style={{ opacity: reading === STORIES.length - 1 ? 0.3 : 1 }}
-                >
-                  <span>Next</span>
-                  <span className="arrow">→</span>
-                </button>
+                />
               </div>
             </article>
-          </div>
+          </Stage>
         </div>
       </section>
     </div>
+  );
+}
+
+function NavTextButton({ label, onClick, disabled }: { label: string; onClick: () => void; disabled?: boolean }) {
+  return (
+    <button
+      onClick={onClick}
+      disabled={disabled}
+      style={{
+        fontFamily: 'Space Grotesk, sans-serif',
+        fontSize: 10,
+        fontWeight: 600,
+        letterSpacing: '0.2em',
+        textTransform: 'uppercase',
+        color: 'var(--text-secondary)',
+        cursor: disabled ? 'default' : 'pointer',
+        opacity: disabled ? 0.3 : 1,
+        transition: 'color var(--motion-micro)',
+      }}
+      onMouseOver={(e) => {
+        if (!disabled) e.currentTarget.style.color = 'var(--text-primary)';
+      }}
+      onMouseOut={(e) => (e.currentTarget.style.color = 'var(--text-secondary)')}
+    >
+      {label}
+    </button>
   );
 }

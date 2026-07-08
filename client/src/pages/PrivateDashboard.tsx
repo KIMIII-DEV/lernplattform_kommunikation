@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { CineImg, GhostText } from '@/components/izure/primitives';
+import { CineImg } from '@/components/izure/primitives';
+import { Card } from '@/components/primitives';
 import { IMG } from '@/lib/atmosphere';
 
 export default function PrivateDashboard({ navigate }: { navigate: (to: string) => void }) {
@@ -58,16 +59,12 @@ export default function PrivateDashboard({ navigate }: { navigate: (to: string) 
           style={{
             position: 'absolute',
             inset: 0,
-            background: 'linear-gradient(to bottom, rgba(22,15,10,0.6), var(--bg-primary) 85%)',
+            background: 'linear-gradient(to bottom, rgba(0,0,0,0.55), var(--bg-base) 85%)',
           }}
         />
 
-        <GhostText right="-2vw" top="20%" size="28vw" style={{ opacity: 0.05, fontStyle: 'italic' }}>
-          {greet.split(' ')[0].toLowerCase()}
-        </GhostText>
-
         <div className="shell" style={{ position: 'relative', zIndex: 2 }}>
-          <div className="t-label" style={{ color: 'var(--accent)', marginBottom: 24 }}>
+          <div className="t-label" style={{ color: 'var(--accent-primary)', marginBottom: 24 }}>
             · The Backroom · Member since {now.getFullYear()}
           </div>
           <h1
@@ -87,98 +84,12 @@ export default function PrivateDashboard({ navigate }: { navigate: (to: string) 
 
       <section className="section-block" style={{ padding: '40px 0 80px' }}>
         <div className="shell">
-          <div className="gold-line" style={{ marginBottom: 56 }}>
-            <span>Three doors · choose one</span>
+          <div className="t-label" style={{ color: 'var(--text-secondary)', marginBottom: 40 }}>
+            Three doors · choose one
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 28 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 4 }}>
             {rooms.map((r, i) => (
-              <article
-                key={r.id}
-                onClick={() => navigate(r.id)}
-                style={{
-                  position: 'relative',
-                  background: 'var(--bg-card)',
-                  border: '1px solid var(--line-subtle)',
-                  padding: 0,
-                  cursor: 'pointer',
-                  transition: 'all 600ms var(--ease)',
-                  overflow: 'hidden',
-                  marginTop: (i % 2) * 24,
-                }}
-                onMouseOver={(e) => {
-                  e.currentTarget.style.borderColor = 'rgba(176,141,87,0.5)';
-                  e.currentTarget.style.transform = 'translateY(-4px)';
-                }}
-                onMouseOut={(e) => {
-                  e.currentTarget.style.borderColor = 'var(--line-subtle)';
-                  e.currentTarget.style.transform = 'translateY(0)';
-                }}
-              >
-                <div style={{ position: 'relative', aspectRatio: '4/3', overflow: 'hidden' }}>
-                  <CineImg src={r.img} alt={r.title} style={{ position: 'absolute', inset: 0 }} />
-                  <div
-                    style={{
-                      position: 'absolute',
-                      inset: 0,
-                      background: 'linear-gradient(to top, rgba(22,15,10,0.8), transparent 60%)',
-                    }}
-                  />
-                  <div
-                    style={{
-                      position: 'absolute',
-                      top: 16,
-                      left: 18,
-                      fontFamily: 'Space Grotesk, sans-serif',
-                      fontSize: 9,
-                      color: 'var(--accent-light)',
-                      letterSpacing: '0.3em',
-                    }}
-                  >
-                    {String(i + 1).padStart(2, '0')} — ROOM
-                  </div>
-                  <div
-                    style={{
-                      position: 'absolute',
-                      bottom: 16,
-                      right: 20,
-                      fontFamily: 'Space Grotesk, sans-serif',
-                      fontSize: 9,
-                      color: 'var(--text-secondary)',
-                      letterSpacing: '0.2em',
-                    }}
-                  >
-                    {r.meta}
-                  </div>
-                </div>
-                <div style={{ padding: '32px 28px 36px' }}>
-                  <div style={{ display: 'flex', alignItems: 'baseline', gap: 12, marginBottom: 12 }}>
-                    <h3 className="t-display" style={{ fontSize: 32 }}>
-                      {r.title}
-                    </h3>
-                    <span className="t-display italic" style={{ fontStyle: 'italic', color: 'var(--accent-light)' }}>
-                      {r.italic}
-                    </span>
-                  </div>
-                  <p className="t-body" style={{ fontSize: 14 }}>
-                    {r.body}
-                  </p>
-                  <div
-                    style={{
-                      marginTop: 28,
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: 10,
-                      color: 'var(--accent)',
-                      fontFamily: 'Space Grotesk, sans-serif',
-                      fontSize: 10,
-                      letterSpacing: '0.3em',
-                      textTransform: 'uppercase',
-                    }}
-                  >
-                    Enter <span>→</span>
-                  </div>
-                </div>
-              </article>
+              <RoomCard key={r.id} room={r} index={i} onOpen={() => navigate(r.id)} />
             ))}
           </div>
         </div>
@@ -186,21 +97,12 @@ export default function PrivateDashboard({ navigate }: { navigate: (to: string) 
 
       <section style={{ padding: '60px 0 120px' }}>
         <div className="shell">
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: '5fr 7fr',
-              gap: 60,
-              padding: '56px 0',
-              borderTop: '1px solid var(--line-subtle)',
-              borderBottom: '1px solid var(--line-subtle)',
-            }}
-          >
+          <Card variant="default" style={{ display: 'grid', gridTemplateColumns: '5fr 7fr', gap: 60, padding: '48px 44px' }}>
             <div>
-              <div className="t-label" style={{ color: 'var(--accent)', marginBottom: 16 }}>
+              <div className="t-label" style={{ color: 'var(--accent-primary)', marginBottom: 16 }}>
                 House note · {now.toLocaleDateString('en-GB', { day: 'numeric', month: 'long' })}
               </div>
-              <h3 className="t-display italic" style={{ fontStyle: 'italic', fontSize: 40, lineHeight: 1.1 }}>
+              <h3 style={{ fontFamily: 'Space Grotesk, sans-serif', fontWeight: 600, fontSize: 32, lineHeight: 1.15 }}>
                 Something about the
                 <br />
                 weather tonight.
@@ -216,9 +118,83 @@ export default function PrivateDashboard({ navigate }: { navigate: (to: string) 
                 signal the bell. We'll bring him an espresso and a magazine.
               </p>
             </div>
-          </div>
+          </Card>
         </div>
       </section>
     </div>
+  );
+}
+
+/* Türkarte — Hover ausschließlich über Farbe/Opacity (Blueprint 6.4: kein
+   scale(), kein translate; Bewegung ist dem Crossfade vorbehalten). */
+function RoomCard({
+  room: r,
+  index: i,
+  onOpen,
+}: {
+  room: { id: string; title: string; italic: string; img: string; meta: string; body: string };
+  index: number;
+  onOpen: () => void;
+}) {
+  const [hover, setHover] = useState(false);
+  return (
+    <Card
+      variant="default"
+      role="button"
+      tabIndex={0}
+      onClick={onOpen}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          onOpen();
+        }
+      }}
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
+      onFocus={() => setHover(true)}
+      onBlur={() => setHover(false)}
+      style={{ padding: 0, overflow: 'hidden', cursor: 'pointer' }}
+    >
+      <div style={{ position: 'relative', aspectRatio: '4/3', overflow: 'hidden', borderRadius: 8 }}>
+        <CineImg src={r.img} alt={r.title} style={{ position: 'absolute', inset: 0 }} />
+        <div
+          style={{
+            position: 'absolute',
+            inset: 0,
+            background: 'linear-gradient(to top, rgba(0,0,0,0.75), transparent 60%)',
+          }}
+        />
+        <div className="t-label" style={{ position: 'absolute', top: 16, left: 18, fontSize: 9, color: '#D8DADE' }}>
+          {String(i + 1).padStart(2, '0')} — Room
+        </div>
+        <div className="t-label" style={{ position: 'absolute', bottom: 14, right: 18, fontSize: 9, color: 'rgba(244,244,244,0.75)' }}>
+          {r.meta}
+        </div>
+      </div>
+      <div style={{ padding: '28px 26px 32px' }}>
+        <div style={{ display: 'flex', alignItems: 'baseline', gap: 10, marginBottom: 10, flexWrap: 'wrap' }}>
+          <h3 style={{ fontFamily: 'Space Grotesk, sans-serif', fontWeight: 600, fontSize: 26, color: 'var(--text-primary)' }}>
+            {r.title}
+          </h3>
+          <span style={{ fontFamily: 'Space Grotesk, sans-serif', fontSize: 14, color: 'var(--text-tertiary)' }}>
+            {r.italic}
+          </span>
+        </div>
+        <p className="t-body" style={{ fontSize: 14 }}>
+          {r.body}
+        </p>
+        <div
+          className="t-label"
+          style={{
+            marginTop: 24,
+            fontSize: 10,
+            color: hover ? 'var(--text-primary)' : 'var(--text-secondary)',
+            transition: 'color var(--motion-micro)',
+          }}
+        >
+          Enter →
+        </div>
+      </div>
+    </Card>
   );
 }
