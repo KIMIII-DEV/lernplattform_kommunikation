@@ -3,6 +3,7 @@ import { Home as HomeIcon, LayoutGrid, Lock, LogOut, UserRound } from 'lucide-re
 import { Footer, GrainFilter, GrainOverlay } from '@/components/izure/primitives';
 import IconRail, { IconRailItem, RailAction } from '@/components/shell/IconRail';
 import ThemeToggle from '@/components/shell/ThemeToggle';
+import { useIsMobile } from '@/components/shell/useIsMobile';
 import { Seal } from '@/components/primitives';
 import LandingPage from './Landing';
 import LoginPage from './Login';
@@ -21,6 +22,7 @@ export default function Home() {
   const [unlocked, setUnlocked] = useState<boolean>(() => sessionStorage.getItem('izure-unlocked') === '1');
   const [transitionBlack, setTransitionBlack] = useState(false);
   const [sealState, setSealState] = useState<'idle' | 'loading' | 'route-change'>('idle');
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     // Siegel (Blueprint Abschnitt 4): kurzer "Stempel-Impact" bei jedem
@@ -133,12 +135,17 @@ export default function Home() {
       {/* Rail 64px + Inset; wenn der aktive Zweig sein Kinder-Panel zeigt (private Routen),
           rückt der Content zusätzlich um die Panelbreite ein statt überdeckt zu werden.
           Kein Landing-Sonderfall mehr — die Flow-Landing (Phase 3) muss die Rail-Breite
-          genauso kompensieren (Masterplan v3, 4.1). */}
+          genauso kompensieren (Masterplan v3, 4.1).
+          Mobil (<768px): Rail dockt unten, Content bekommt Bottom- statt Left-Padding. */}
       <main
-        style={{
-          paddingLeft: isPrivate ? 276 : 88,
-          transition: 'padding-left var(--motion-micro)',
-        }}
+        style={
+          isMobile
+            ? { paddingLeft: 0, paddingBottom: 92 }
+            : {
+                paddingLeft: isPrivate ? 276 : 88,
+                transition: 'padding-left var(--motion-micro)',
+              }
+        }
       >
         {renderPage()}
       </main>

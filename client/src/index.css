@@ -573,6 +573,10 @@ button { background: none; border: none; color: inherit; cursor: pointer; font-f
   display: inline-flex;
   opacity: 0.55;
 }
+/* Mobil dockt die Rail unten (Masterplan 10.3) — Corner-Siegel weicht nach oben aus. */
+@media (max-width: 767px) {
+  .izure-seal:not(.izure-seal--standalone) { bottom: 92px; }
+}
 @media (prefers-reduced-motion: reduce) {
   /* 0ms-Infinite-Loop wäre degeneriert — explizit abschalten */
   .izure-seal--loading,

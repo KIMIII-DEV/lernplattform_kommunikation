@@ -226,7 +226,7 @@ export default function MoodboardsPage() {
                   marginTop: (i % 3) * 16,
                 }}
                 onMouseOver={(e) => {
-                  e.currentTarget.style.borderColor = 'rgba(176,141,87,0.5)';
+                  e.currentTarget.style.borderColor = 'var(--border-hairline-strong)';
                   e.currentTarget.style.transform = 'translateY(-4px)';
                 }}
                 onMouseOut={(e) => {
@@ -240,7 +240,7 @@ export default function MoodboardsPage() {
                     style={{
                       position: 'absolute',
                       inset: 0,
-                      background: 'linear-gradient(to top, rgba(22,15,10,0.85), transparent 55%)',
+                      background: 'linear-gradient(to top, rgba(0,0,0,0.8), transparent 55%)',
                     }}
                   />
                   <div

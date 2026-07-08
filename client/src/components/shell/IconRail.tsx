@@ -1,9 +1,12 @@
 import { CSSProperties, ReactNode, useState } from 'react';
 import type { LucideIcon } from 'lucide-react';
+import { useIsMobile } from './useIsMobile';
 
 /* IZURE Icon-Rail — Design Blueprint v2.1, Abschnitt 5.1 + Komponenten-Zeile "Sidebar/Rail".
    Fixe 64px-Spalte, nur Icons; der aktive Zweig zeigt seine children als
-   Ausklapp-Panel NEBEN der Rail (Teil der Shell, kein Overlay). */
+   Ausklapp-Panel NEBEN der Rail (Teil der Shell, kein Overlay).
+   Mobil (<768px, Masterplan Phase 10.3): dockt als horizontale Icon-Leiste
+   an den unteren Rand, das Kinder-Panel öffnet nach oben. */
 
 export interface IconRailItem {
   id: string;
@@ -26,33 +29,60 @@ function isBranchActive(item: IconRailItem, activeId: string): boolean {
 
 export default function IconRail({ items, activeId, onNavigate, bottom }: IconRailProps) {
   const expanded = items.find((i) => i.children?.length && isBranchActive(i, activeId));
+  const mobile = useIsMobile();
 
   return (
     <nav
       aria-label="IZURE Navigation"
-      style={{
-        position: 'fixed',
-        left: 12,
-        top: 12,
-        bottom: 12,
-        zIndex: 100,
-        display: 'flex',
-        alignItems: 'stretch',
-      }}
+      style={
+        mobile
+          ? {
+              position: 'fixed',
+              left: 12,
+              right: 12,
+              bottom: 12,
+              zIndex: 100,
+              display: 'flex',
+              flexDirection: 'column-reverse',
+              alignItems: 'stretch',
+            }
+          : {
+              position: 'fixed',
+              left: 12,
+              top: 12,
+              bottom: 12,
+              zIndex: 100,
+              display: 'flex',
+              alignItems: 'stretch',
+            }
+      }
     >
       <div
-        style={{
-          width: 64,
-          background: 'var(--bg-panel)',
-          borderRadius: 'var(--radius-outer)',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          padding: '20px 0',
-        }}
+        style={
+          mobile
+            ? {
+                height: 64,
+                background: 'var(--bg-panel)',
+                borderRadius: 'var(--radius-outer)',
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                padding: '0 20px',
+              }
+            : {
+                width: 64,
+                background: 'var(--bg-panel)',
+                borderRadius: 'var(--radius-outer)',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                padding: '20px 0',
+              }
+        }
       >
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10 }}>
+        <div style={{ display: 'flex', flexDirection: mobile ? 'row' : 'column', alignItems: 'center', gap: 10 }}>
           {items.map((item) => {
             const active = isBranchActive(item, activeId);
             const Icon = item.icon;
@@ -77,7 +107,7 @@ export default function IconRail({ items, activeId, onNavigate, bottom }: IconRa
           })}
         </div>
         {bottom && (
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10 }}>
+          <div style={{ display: 'flex', flexDirection: mobile ? 'row' : 'column', alignItems: 'center', gap: 10 }}>
             {bottom}
           </div>
         )}
@@ -85,18 +115,30 @@ export default function IconRail({ items, activeId, onNavigate, bottom }: IconRa
 
       {expanded?.children && (
         <div
-          style={{
-            width: 180,
-            marginLeft: 8,
-            alignSelf: 'flex-start',
-            marginTop: 20,
-            background: 'var(--bg-panel)',
-            borderRadius: 'var(--radius-card)',
-            padding: '18px 8px',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: 2,
-          }}
+          style={
+            mobile
+              ? {
+                  marginBottom: 8,
+                  background: 'var(--bg-panel)',
+                  borderRadius: 'var(--radius-card)',
+                  padding: '14px 8px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: 2,
+                }
+              : {
+                  width: 180,
+                  marginLeft: 8,
+                  alignSelf: 'flex-start',
+                  marginTop: 20,
+                  background: 'var(--bg-panel)',
+                  borderRadius: 'var(--radius-card)',
+                  padding: '18px 8px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: 2,
+                }
+          }
         >
           <div
             className="t-label"

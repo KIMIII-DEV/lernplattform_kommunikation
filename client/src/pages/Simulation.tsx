@@ -159,7 +159,7 @@ function DecisionFlow({
                   onClick={() => !revealed && setChosen(opt.id)}
                   disabled={revealed && !isChosen}
                   style={{
-                    background: isChosen ? 'rgba(176,141,87,0.08)' : 'var(--bg-card)',
+                    background: isChosen ? 'var(--bg-panel-raised)' : 'var(--bg-card)',
                     border: `1px solid ${isChosen ? 'var(--accent)' : 'var(--line-subtle)'}`,
                     padding: '20px 24px',
                     textAlign: 'left',
