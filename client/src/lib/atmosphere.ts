@@ -52,7 +52,7 @@ export const IMG = {
   priv_newspaper: 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=1200&q=80',
   priv_glass2: 'https://images.unsplash.com/photo-1568644396922-5c3bfae12521?w=1200&q=80',
 
-  about_portrait: 'https://images.unsplash.com/photo-1542178243-bc20204b769f?w=1400&q=80',
+  about_portrait: '/about/portrait.gif',
   about_desk: 'https://images.unsplash.com/photo-1499914485622-a88fac536970?w=1400&q=80',
 } as const;
 
