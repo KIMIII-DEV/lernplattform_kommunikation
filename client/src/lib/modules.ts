@@ -2,7 +2,7 @@
 
 import { topics, flashcards, quizQuestions, Topic, Flashcard, QuizQuestion } from './learningData';
 
-export type ModuleColor = 'gold' | 'bordeaux' | 'petrol' | 'olive';
+export type ModuleColor = 'gold' | 'bordeaux' | 'petrol' | 'olive' | 'rust';
 
 export interface ModuleSummary {
   id: string;
@@ -73,7 +73,7 @@ export const MODULES: ModuleSummary[] = [
     short: 'Bindung',
     intel: 'OPERATIV',
     duration: '80h · 2. Lehrjahr',
-    color: 'gold',
+    color: 'rust',
     summary: 'Beratungsgespräche, CRM, Beschwerde, Winback, Kennzahlen, Zahlungsverkehr, Logistik.',
     locked: false,
     lernfeld: 'LF5',

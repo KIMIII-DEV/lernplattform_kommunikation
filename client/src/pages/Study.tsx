@@ -30,6 +30,7 @@ const LF_COLOR: Record<ModuleColor, string> = {
   bordeaux: 'var(--accent-bordeaux-light)',
   petrol: 'var(--accent-petrol-light)',
   olive: 'var(--accent-olive)',
+  rust: 'var(--accent-rust-light)',
 };
 
 export default function StudyPage() {

@@ -129,6 +129,10 @@
   --accent-petrol:         #234048;
   --accent-petrol-light:   #2F5862;
   --accent-petrol-dim:     #18303A;
+  /* Fünfte LF-Farbe (Masterplan v3.2, Abschnitt 14): Rust/Terrakotta für LF-05 —
+     LF-01/LF-05 teilten sich Gold, das unterlief die Unterscheidbarkeit. */
+  --accent-rust:           #8A4A2E;
+  --accent-rust-light:     #B5623D;
 
   /* Aliases used by shadcn/Tailwind ui kit */
   --background: var(--bg-base);
@@ -598,6 +602,62 @@ button { background: none; border: none; color: inherit; cursor: pointer; font-f
 @keyframes izure-boot-fill {
   from { width: 0%; }
   to   { width: 100%; }
+}
+
+/* --- Markdown-Rendering (Topic-Content, Masterplan v3.2 Abschnitt 14.2) --- */
+.izure-md {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  margin-bottom: 22px;
+}
+.izure-md p { margin-bottom: 14px; }
+.izure-md strong { font-weight: 600; color: var(--text-primary); }
+.izure-md em { font-style: italic; }
+.izure-md ul, .izure-md ol { margin: 0 0 14px 18px; display: flex; flex-direction: column; gap: 6px; }
+.izure-md h1, .izure-md h2, .izure-md h3, .izure-md h4 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  margin: 22px 0 10px;
+}
+.izure-md table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 14px 0;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+.izure-md th, .izure-md td {
+  border: 1px solid var(--border-hairline);
+  padding: 8px 12px;
+  text-align: left;
+  vertical-align: top;
+}
+.izure-md th {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  background: var(--bg-panel-raised);
+}
+.izure-md code {
+  font-variant-numeric: tabular-nums;
+  background: var(--bg-panel-raised);
+  border-radius: 4px;
+  padding: 1px 6px;
+  font-size: 13px;
+}
+.izure-md hr { border: none; border-top: 1px solid var(--border-hairline); margin: 18px 0; }
+.izure-md blockquote {
+  border-left: 1px solid var(--border-hairline-strong);
+  padding-left: 14px;
+  margin-bottom: 14px;
 }
 
 /* Ghost-Headline: Wörter blenden gestaffelt ein, je +150–250ms Versatz

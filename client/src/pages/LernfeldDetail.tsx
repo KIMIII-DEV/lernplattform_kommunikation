@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { Suspense, lazy, useMemo, useState } from 'react';
 import {
   Accordion,
   AccordionContent,
@@ -21,6 +21,9 @@ import {
 import { useProgress } from '@/lib/useProgress';
 import FlashcardFocus from './FlashcardFocus';
 import QuizFocus from './QuizFocus';
+
+// Markdown-Renderer lazy (eigener Chunk) — Topic-Content ist Markdown (14.2).
+const MarkdownContent = lazy(() => import('@/components/izure/MarkdownContent'));
 
 /* IZURE Lernfeld-Dossier-View — Masterplan v3, Phase 6 (Blueprint 5.2).
    Accordion über die Topics als Kapitel-Ebene (nummerierte Marker = echte
@@ -188,9 +191,15 @@ export default function LernfeldDetail({
                   <p className="t-body" style={{ fontSize: 14, fontStyle: 'italic', marginBottom: 18 }}>
                     {t.description}
                   </p>
-                  <div className="t-body" style={{ fontSize: 14, lineHeight: 1.7, whiteSpace: 'pre-wrap', marginBottom: 22 }}>
-                    {t.content}
-                  </div>
+                  <Suspense
+                    fallback={
+                      <div className="t-body" style={{ fontSize: 14, lineHeight: 1.7, whiteSpace: 'pre-wrap', marginBottom: 22 }}>
+                        {t.content}
+                      </div>
+                    }
+                  >
+                    <MarkdownContent>{t.content}</MarkdownContent>
+                  </Suspense>
                   {t.keyPoints?.length > 0 && (
                     <>
                       <div className="t-label" style={{ fontSize: 9, color: 'var(--accent-primary)', marginBottom: 10 }}>
