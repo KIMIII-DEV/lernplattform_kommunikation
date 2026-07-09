@@ -3,435 +3,673 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* ============================================================
+   IZURE — Design Tokens v2.0 (Material-Revision)
+   Ref: IZURE_Design_Blueprint.md — Abschnitt 2 (Tokens), 3 (Typografie)
+   Theme-Switching: .dark-Klasse auf <html> (ThemeContext.tsx), nicht [data-theme]
+   ============================================================ */
+
 @theme inline {
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-destructive: var(--destructive);
-  --color-destructive-foreground: var(--destructive-foreground);
-  --color-border: var(--border);
-  --color-input: var(--input);
-  --color-ring: var(--ring);
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
-  --color-sidebar: var(--sidebar);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-ring: var(--sidebar-ring);
+  --radius-sm: 0;
+  --radius-md: 0;
+  --radius-lg: 0;
+  --radius-xl: 0;
+  --radius-outer: 30px;
+  --radius-card: 18px;
+  --radius-pill: 999px;
+
+  --color-background: var(--bg-base);
+  --color-foreground: var(--text-primary);
+  --color-card: var(--bg-card);
+  --color-card-foreground: var(--text-primary);
+  --color-popover: var(--bg-panel-raised);
+  --color-popover-foreground: var(--text-primary);
+  --color-primary: var(--accent-primary);
+  --color-primary-foreground: var(--bg-base);
+  --color-secondary: var(--bg-panel);
+  --color-secondary-foreground: var(--text-primary);
+  --color-muted: var(--bg-panel);
+  --color-muted-foreground: var(--text-tertiary);
+  --color-accent: var(--accent-primary);
+  --color-accent-foreground: var(--bg-base);
+  --color-destructive: var(--accent-critical);
+  --color-destructive-foreground: var(--text-primary);
+  --color-border: var(--border-hairline);
+  --color-input: var(--bg-card);
+  --color-ring: var(--accent-primary);
+
+  /* Blueprint-Namen als Tailwind-Utilities (bg-panel, text-ink, rounded-outer, …) */
+  --color-base: var(--bg-base);
+  --color-panel: var(--bg-panel);
+  --color-panel-raised: var(--bg-panel-raised);
+  --color-steel: var(--accent-primary);
+  --color-platinum: var(--accent-primary-bright);
+  --color-oxblood: var(--accent-critical);
+  --color-ink: var(--text-primary);
+  --color-ink-secondary: var(--text-secondary);
+  --color-ink-tertiary: var(--text-tertiary);
+
+  --font-sans: "Space Grotesk", sans-serif;
 }
 
 :root {
-  /* IZURE Tactical Palette */
-  --primary: #cc0000; /* Tactical red */
-  --primary-foreground: #e8e8e8;
-  --sidebar-primary: #cc0000;
-  --sidebar-primary-foreground: #e8e8e8;
+  /* Platinum Protocol — Light Mode (Default), Blueprint 2.2 */
+  --bg-base:         #F4F3F0;
+  --bg-panel:        #EAEAE7;
+  --bg-panel-raised: #FFFFFF;
+  --bg-card:         #F0EFEC;
+  --border-hairline:        rgba(26, 26, 28, 0.12);
+  --border-hairline-strong: rgba(26, 26, 28, 0.22);
 
-  /* Accents */
-  --chart-1: #cc0000; /* Red */
-  --chart-2: #c8a96a; /* Amber gold */
-  --chart-3: #8b0000; /* Dark red */
-  --chart-4: #390007; /* Deep red */
-  --chart-5: #ff4444; /* Alert red */
+  --accent-primary:        #4A4D55;
+  --accent-primary-bright: #2E3036;
+  --accent-critical:       #6E1B26;
 
-  --radius: 0; /* Zero radius — hard tactical edges */
+  --text-primary:   #16161A;
+  --text-secondary: #6B6E76;
+  --text-tertiary:  #97999E;
 
-  /* IZURE dark background */
-  --background: #0e0e0e;
-  --foreground: #e8e8e8;
-  --card: #1a0a0a;
-  --card-foreground: #e8e8e8;
-  --popover: #1a0a0a;
-  --popover-foreground: #e8e8e8;
+  --glass-bg:        rgba(255, 255, 255, 0.55);
+  --glass-blur:      18px;
+  --glass-border:    rgba(26, 26, 28, 0.14);
+  --glass-highlight: rgba(255, 255, 255, 0.35);
 
-  /* Secondary / muted */
-  --secondary: #c8a96a; /* Amber highlight */
-  --secondary-foreground: #0e0e0e;
-  --muted: #2a1010;
-  --muted-foreground: #888888;
-  --accent: #390007;
-  --accent-foreground: #e8e8e8;
-  --destructive: #ff4444;
-  --destructive-foreground: #0e0e0e;
-  --border: #390007;
-  --input: #1a0a0a;
-  --ring: #cc0000;
-  --sidebar: #0e0e0e;
-  --sidebar-foreground: #e8e8e8;
-  --sidebar-accent: #390007;
-  --sidebar-accent-foreground: #e8e8e8;
-  --sidebar-border: #390007;
-  --sidebar-ring: #cc0000;
+  --glass-subtle-bg:     rgba(255, 255, 255, 0.72);
+  --glass-subtle-blur:   6px;
+  --glass-subtle-border: rgba(26, 26, 28, 0.10);
+
+  /* Ghost-Headline-Text — Masterplan v3, 4.4: auf 2–3 % reduziert, damit die
+     Ghost-Ebene nicht mit dem Netzwerk-Graph-Ambient konkurriert. Je Theme gemappt. */
+  --ghost-text: rgba(0, 0, 0, 0.025);
+
+  /* Radius / Seam / Schatten — Blueprint 2.4 */
+  --seam: 10px;
+  --shadow-stage: 0 30px 80px rgba(0, 0, 0, 0.7);
+
+  /* Typ-Skala — Blueprint 3 */
+  --fs-hero:    clamp(3rem, 8vw, 6rem);
+  --fs-h1:      2rem;
+  --fs-h2:      1.5rem;
+  --fs-label:   0.75rem;
+  --fs-body:    1rem;
+  --fs-caption: 0.8125rem;
+  --fs-data:    0.8125rem;
+
+  /* Motion */
+  --motion-base:  600ms cubic-bezier(0.22, 1, 0.36, 1);
+  --motion-micro: 180ms ease-out;
+  --motion-seal:  450ms ease-out;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur: 600ms;
+
+  /* --- Übergangs-Brücke: alte Variablennamen auf neue Blueprint-Werte gemappt,
+     damit noch nicht migrierte Komponenten (Phasen 1–7) sofort die neuen
+     Farben bekommen, ohne dass jede Fundstelle einzeln angefasst werden muss. --- */
+  --bg-primary:   var(--bg-base);
+  --bg-secondary: var(--bg-panel);
+  --bg-private:   var(--bg-panel);
+  --line-subtle:  var(--border-hairline);
+  --line-color:   var(--border-hairline-strong);
+  --text-muted:   var(--text-tertiary);
+  --text-ghost:   var(--text-tertiary);
+  --accent:       var(--accent-primary);
+  --accent-light: var(--accent-primary-bright);
+  --accent-dim:   var(--accent-primary);
+
+  /* --- LF-Modul-Identität: bewusst AUSSERHALB der Blueprint "keine dritte Akzentfarbe"-Regel
+     belassen (Lernfeld-Farbcodierung ist bestehende Funktion, nicht Italian-Noir-Branding).
+     Siehe Rückfrage an den Menschen zu Abschnitt 6.4 / Dossier-Hover-Reveal. --- */
+  --accent-gold:           #B08D57;
+  --accent-gold-light:     #C9A96E;
+  --accent-gold-dim:       #7A6040;
+  --accent-bordeaux:       #5A1F22;
+  --accent-bordeaux-light: #7A2A2E;
+  --accent-bordeaux-dim:   #401418;
+  --accent-olive:          #4C5642;
+  --accent-petrol:         #234048;
+  --accent-petrol-light:   #2F5862;
+  --accent-petrol-dim:     #18303A;
+  /* Fünfte LF-Farbe (Masterplan v3.2, Abschnitt 14): Rust/Terrakotta für LF-05 —
+     LF-01/LF-05 teilten sich Gold, das unterlief die Unterscheidbarkeit. */
+  --accent-rust:           #8A4A2E;
+  --accent-rust-light:     #B5623D;
+
+  /* Aliases used by shadcn/Tailwind ui kit */
+  --background: var(--bg-base);
+  --foreground: var(--text-primary);
+  --card: var(--bg-card);
+  --card-foreground: var(--text-primary);
+  --popover: var(--bg-panel-raised);
+  --popover-foreground: var(--text-primary);
+  --primary: var(--accent-primary);
+  --primary-foreground: var(--bg-base);
+  --secondary: var(--bg-panel);
+  --secondary-foreground: var(--text-primary);
+  --muted: var(--bg-panel);
+  --muted-foreground: var(--text-tertiary);
+  --destructive: var(--accent-critical);
+  --destructive-foreground: var(--text-primary);
+  --border: var(--border-hairline);
+  --input: var(--bg-card);
+  --ring: var(--accent-primary);
+  --radius: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion-base: 0ms;
+    --motion-micro: 0ms;
+    --motion-seal: 0ms;
+  }
 }
 
 .dark {
-  /* IZURE dark mode (same as root — always dark) */
-  --primary: #cc0000;
-  --primary-foreground: #e8e8e8;
-  --sidebar-primary: #cc0000;
-  --sidebar-primary-foreground: #e8e8e8;
-  --background: #0e0e0e;
-  --foreground: #e8e8e8;
-  --card: #1a0a0a;
-  --card-foreground: #e8e8e8;
-  --popover: #1a0a0a;
-  --popover-foreground: #e8e8e8;
-  --secondary: #c8a96a;
-  --secondary-foreground: #0e0e0e;
-  --muted: #2a1010;
-  --muted-foreground: #888888;
-  --accent: #390007;
-  --accent-foreground: #e8e8e8;
-  --destructive: #ff4444;
-  --destructive-foreground: #0e0e0e;
-  --border: #390007;
-  --input: #1a0a0a;
-  --ring: #cc0000;
-  --chart-1: #cc0000;
-  --chart-2: #c8a96a;
-  --chart-3: #8b0000;
-  --chart-4: #390007;
-  --chart-5: #ff4444;
-  --sidebar: #0e0e0e;
-  --sidebar-foreground: #e8e8e8;
-  --sidebar-accent: #390007;
-  --sidebar-accent-foreground: #e8e8e8;
-  --sidebar-border: #390007;
-  --sidebar-ring: #cc0000;
+  /* Obsidian Protocol — Dark Mode (Default via ThemeContext), Blueprint 2.1 */
+  --bg-base:         #060606;
+  --bg-panel:        #101010;
+  --bg-panel-raised: #151515;
+  --bg-card:         #141414;
+  --border-hairline:        rgba(184, 188, 196, 0.12);
+  --border-hairline-strong: rgba(184, 188, 196, 0.24);
+
+  --accent-primary:        #B8BCC4;
+  --accent-primary-bright: #D8DADE;
+  --accent-critical:       #5A1620;
+
+  --text-primary:   #F4F4F4;
+  --text-secondary: #8F8F8F;
+  --text-tertiary:  #565656;
+
+  --glass-bg:        rgba(19, 19, 22, 0.55);
+  --glass-blur:      18px;
+  --glass-border:    rgba(184, 188, 196, 0.18);
+  --glass-highlight: rgba(216, 218, 222, 0.06);
+
+  --glass-subtle-bg:     rgba(19, 19, 22, 0.72);
+  --glass-subtle-blur:   6px;
+  --glass-subtle-border: rgba(184, 188, 196, 0.14);
+
+  --ghost-text: rgba(255, 255, 255, 0.025);
 }
 
-@layer base {
-  * {
-    @apply border-border outline-ring/50;
+/* Private layer override — auf neues Token-System gemappt */
+:root[data-layer="private"] {
+  --bg-base: var(--bg-panel);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg-base);
+  color: var(--text-primary);
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  filter: brightness(0.78) contrast(1.08) saturate(0.80) sepia(0.12);
+  transition: filter 800ms var(--ease), transform 800ms var(--ease);
+}
+img:hover { filter: brightness(0.85) contrast(1.08) saturate(0.82) sepia(0.10); }
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 300ms var(--ease), letter-spacing 300ms var(--ease);
+}
+
+button { background: none; border: none; color: inherit; cursor: pointer; font-family: inherit; }
+
+::selection { background: var(--accent-dim); color: var(--text-primary); }
+
+/* ----------------- Typography utilities ----------------- */
+.t-display  { font-family: 'Space Grotesk', sans-serif; font-weight: 700; line-height: 0.95; letter-spacing: -0.01em; }
+.t-display.italic { font-style: italic; }
+.t-section  { font-family: 'Space Grotesk', sans-serif; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; }
+.t-label    { font-family: 'Space Grotesk', sans-serif; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; font-size: 11px; }
+.t-body     { font-family: 'Space Grotesk', sans-serif; font-weight: 400; line-height: 1.75; font-size: 15px; color: var(--text-secondary); }
+.t-num      { font-family: 'Space Grotesk', sans-serif; font-weight: 500; letter-spacing: 0.1em; font-variant-numeric: tabular-nums; }
+
+/* ----------------- Page entry fade ----------------- */
+@keyframes pageFade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+.page-root {
+  animation: pageFade 800ms var(--ease) both;
+}
+@keyframes heroImg {
+  from { transform: scale(1.03); }
+  to   { transform: scale(1); }
+}
+
+/* ----------------- Grain overlay ----------------- */
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: var(--grain-opacity, 0.06);
+  mix-blend-mode: overlay;
+}
+.grain-overlay svg { width: 100%; height: 100%; }
+
+/* ----------------- Layout shell ----------------- */
+.shell {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 64px;
+}
+@media (max-width: 900px) { .shell { padding: 0 24px; } }
+
+.section-block { position: relative; padding: 120px 0; }
+.section-block + .section-block { border-top: none; }
+
+/* ----------------- Gold line separator ----------------- */
+.gold-line {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: var(--accent);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
+.gold-line::before, .gold-line::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--line-subtle);
+}
+.gold-line.left::before { display: none; }
+.gold-line.right::after { display: none; }
+
+/* ----------------- Ghost text ----------------- */
+.ghost-text {
+  position: absolute;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 300;
+  font-style: italic;
+  font-size: 22vw;
+  line-height: 0.85;
+  color: var(--text-ghost);
+  opacity: 0.10;
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+  letter-spacing: -0.04em;
+  z-index: 0;
+}
+
+/* ----------------- Buttons ----------------- */
+.btn-primary {
+  display: inline-block;
+  padding: 14px 32px;
+  border: 1px solid var(--accent);
+  color: var(--text-primary);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  transition: all 400ms var(--ease);
+  background: transparent;
+  cursor: pointer;
+}
+.btn-primary:hover {
+  background: rgba(176, 141, 87, 0.10);
+  color: var(--accent-light);
+  letter-spacing: 0.28em;
+}
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all 400ms var(--ease);
+  background: none;
+  border: none;
+}
+.btn-secondary:hover { color: var(--accent-light); gap: 18px; }
+.btn-secondary .arrow { color: var(--accent); transition: transform 400ms var(--ease); }
+.btn-secondary:hover .arrow { transform: translateX(4px); }
+
+/* ----------------- Card ----------------- */
+.izure-card {
+  position: relative;
+  background: var(--bg-card);
+  border: 1px solid var(--line-subtle);
+  padding: 40px 32px 36px;
+  transition: all 600ms var(--ease);
+}
+.izure-card:hover {
+  border-color: rgba(176,141,87,0.5);
+  transform: translateY(-4px);
+}
+.izure-card .num {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  color: var(--accent);
+  margin-bottom: 28px;
+}
+
+/* ----------------- Image treatment ----------------- */
+.img-fade {
+  mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+}
+.img-fade-r {
+  mask-image: linear-gradient(to right, black 70%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, black 70%, transparent 100%);
+}
+
+/* ----------------- Footer ----------------- */
+.footer {
+  padding: 80px 0 60px;
+  border-top: 1px solid var(--line-subtle);
+  margin-top: 80px;
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 80px;
+  align-items: end;
+}
+.footer-grid .links { display: flex; flex-direction: column; gap: 14px; }
+.footer-grid .links a {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+.footer-grid .links a:hover { color: var(--accent); }
+.footer .closing {
+  font-family: 'Space Grotesk', sans-serif;
+  font-style: italic;
+  font-size: 28px;
+  color: var(--text-primary);
+  line-height: 1.2;
+  max-width: 420px;
+}
+.footer .meta {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-top: 80px;
+  display: flex;
+  justify-content: space-between;
+  padding-top: 24px;
+  border-top: 1px solid var(--line-subtle);
+}
+@media (max-width: 900px) {
+  .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+}
+
+/* ----------------- Audio cue toggle ----------------- */
+.audio-toggle {
+  position: fixed;
+  bottom: 28px;
+  left: 28px;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border: 1px solid var(--line-subtle);
+  background: rgba(15,13,11,0.7);
+  backdrop-filter: blur(8px);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 300ms var(--ease);
+}
+.audio-toggle:hover { border-color: var(--accent); color: var(--text-primary); }
+.audio-toggle .dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--text-muted);
+  transition: all 300ms var(--ease);
+}
+.audio-toggle.on .dot { background: var(--accent); box-shadow: 0 0 8px var(--accent); }
+
+/* ----------------- Animations ----------------- */
+@keyframes lpSpin { to { transform: rotate(360deg); } }
+@keyframes thumbIn {
+  from { opacity: 0; transform: translateY(20px) rotate(var(--rot, 0deg)); }
+  to   { opacity: 1; transform: translateY(0) rotate(var(--rot, 0deg)); }
+}
+@keyframes brandIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeBlack {
+  0% { opacity: 0; }
+  50% { opacity: 1; }
+  100% { opacity: 0; }
+}
+@keyframes pulse { 0%, 80%, 100% { opacity: 0.2; } 40% { opacity: 1; } }
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-6px); }
+  40%, 80% { transform: translateX(6px); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================================
+   IZURE Primitives — Phase 2 (Glass-Fallback, Seal, Accordion)
+   Ref: IZURE_Design_Blueprint.md v2.1, Abschnitte 2.3, 2.4, 4, 6
+   ============================================================ */
+
+/* Akkordeon-Timing: Blueprint (400ms ease-out) gewinnt über Guide
+   (var(--motion-base) = 600ms) per Eskalationsregel. Als Token, damit
+   der prefers-reduced-motion-Block das bestehende Muster behält. */
+:root { --motion-accordion: 400ms ease-out; }
+@media (prefers-reduced-motion: reduce) {
+  :root { --motion-accordion: 0ms; }
+}
+
+/* --- GlassSurface: Fallback-Kaskade (Reihenfolge zwingend) ---
+   1) Basis = opak (Browser ohne backdrop-filter)
+   2) @supports → Glas-Tokens
+   3) prefers-reduced-transparency ZULETZT → schlägt Fähigkeit */
+.glass-full,
+.glass-subtle {
+  background: var(--bg-panel-raised);
+  border: 1px solid var(--border-hairline);
+}
+.glass-full   { border-radius: var(--radius-outer); position: relative; }
+.glass-subtle { border-radius: var(--radius-card); }
+
+@supports (backdrop-filter: blur(1px)) {
+  .glass-full {
+    background: var(--glass-bg);
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    backdrop-filter: blur(var(--glass-blur));
+    border-color: var(--glass-border);
   }
-  body {
-    @apply bg-background text-foreground font-sans;
-    font-family: 'Poppins', sans-serif;
+  .glass-subtle {
+    background: var(--glass-subtle-bg);
+    -webkit-backdrop-filter: blur(var(--glass-subtle-blur));
+    backdrop-filter: blur(var(--glass-subtle-blur));
+    border-color: var(--glass-subtle-border);
   }
-  h1, h2, h3, h4, h5, h6 {
-    font-family: 'Poppins', sans-serif;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-  }
-  p {
-    line-height: 1.6;
-  }
-  button:not(:disabled),
-  [role="button"]:not([aria-disabled="true"]),
-  [type="button"]:not(:disabled),
-  [type="submit"]:not(:disabled),
-  [type="reset"]:not(:disabled),
-  a[href],
-  select:not(:disabled),
-  input[type="checkbox"]:not(:disabled),
-  input[type="radio"]:not(:disabled) {
-    @apply cursor-pointer;
-  }
-  /* ADHS-friendly: Clear visual hierarchy */
-  .prose {
-    @apply text-base leading-relaxed;
-  }
-  .prose p {
-    @apply mb-4;
-  }
-  .prose strong {
-    @apply font-bold text-primary;
-  }
-  .prose ul, .prose ol {
-    @apply my-4 ml-4;
-  }
-  .prose li {
-    @apply mb-2;
+  /* Highlight-Streak: nur variant full (Blueprint 6.1: subtle ohne Streak) */
+  .glass-full::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 24px;
+    right: 24px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--glass-highlight), transparent);
+    pointer-events: none;
   }
 }
 
-@layer components {
-  /**
-   * Custom container utility that centers content and adds responsive padding.
-   *
-   * This overrides Tailwind's default container behavior to:
-   * - Auto-center content (mx-auto)
-   * - Add responsive horizontal padding
-   * - Set max-width for large screens
-   *
-   * Usage: <div className="container">...</div>
-   *
-   * For custom widths, use max-w-* utilities directly:
-   * <div className="max-w-6xl mx-auto px-4">...</div>
-   */
-  .container {
-    width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 1rem; /* 16px - mobile padding */
-    padding-right: 1rem;
+@media (prefers-reduced-transparency: reduce) {
+  .glass-full,
+  .glass-subtle {
+    background: var(--bg-panel-raised);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    border-color: var(--border-hairline);
   }
-
-  .flex {
-    min-height: 0;
-    min-width: 0;
-  }
-
-  @media (min-width: 640px) {
-    .container {
-      padding-left: 1.5rem; /* 24px - tablet padding */
-      padding-right: 1.5rem;
-    }
-  }
-
-  @media (min-width: 1024px) {
-    .container {
-      padding-left: 2rem; /* 32px - desktop padding */
-      padding-right: 2rem;
-      max-width: 1280px; /* Standard content width */
-    }
-  }
+  .glass-full::after { content: none; }
 }
 
-/* ===== IZURE TACTICAL DESIGN SYSTEM ===== */
+/* --- Accordion (Radix --radix-accordion-content-height) --- */
+@keyframes izure-accordion-down {
+  from { height: 0; }
+  to   { height: var(--radix-accordion-content-height); }
+}
+@keyframes izure-accordion-up {
+  from { height: var(--radix-accordion-content-height); }
+  to   { height: 0; }
+}
+.izure-accordion-content { overflow: hidden; }
+.izure-accordion-content[data-state='open']   { animation: izure-accordion-down var(--motion-accordion); }
+.izure-accordion-content[data-state='closed'] { animation: izure-accordion-up var(--motion-accordion); }
+.izure-accordion-chevron { transition: transform var(--motion-accordion); }
+.izure-accordion-trigger[data-state='open'] .izure-accordion-chevron { transform: rotate(90deg); }
 
-/* Button glow — tactical red */
-button, [role="button"], input[type="button"], input[type="submit"] {
-  transition: all 0.2s ease;
-  box-shadow: 0 0 8px rgba(57, 0, 7, 0.5);
+/* --- Seal (Siegel) --- */
+@keyframes izure-seal-loading {
+  from { transform: scale(0.92); }
+  to   { transform: scale(1); }
+}
+@keyframes izure-seal-route {
+  from { transform: scale(1.15); opacity: 0; }
+  to   { transform: scale(1); opacity: 0.4; }
+}
+.izure-seal {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 900;
+  opacity: 0.4;
+  pointer-events: none;
+}
+.izure-seal--loading { animation: izure-seal-loading var(--motion-seal) infinite alternate; }
+.izure-seal--route   { animation: izure-seal-route var(--motion-seal) both; }
+.izure-seal--standalone {
+  position: static;
+  display: inline-flex;
+  opacity: 0.55;
+}
+/* Mobil dockt die Rail unten (Masterplan 10.3) — Corner-Siegel weicht nach oben aus. */
+@media (max-width: 767px) {
+  .izure-seal:not(.izure-seal--standalone) { bottom: 92px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  /* 0ms-Infinite-Loop wäre degeneriert — explizit abschalten */
+  .izure-seal--loading,
+  .izure-seal--route { animation: none; }
 }
 
-button:hover, [role="button"]:hover, input[type="button"]:hover, input[type="submit"]:hover {
-  box-shadow: 0 0 16px rgba(204, 0, 0, 0.6);
-  transform: scale(1.02);
-}
-
-button:focus, [role="button"]:focus, input[type="button"]:focus, input[type="submit"]:focus {
-  box-shadow: 0 0 20px rgba(204, 0, 0, 0.8);
-  outline: 2px solid #cc0000;
+/* --- Button a11y --- */
+.izure-button:focus-visible {
+  outline: 1px solid var(--accent-primary);
   outline-offset: 2px;
 }
 
-/* Card — tactical border */
-.card, [role="card"] {
-  border: 1px solid rgba(57, 0, 7, 0.4);
-  box-shadow: 0 0 10px rgba(57, 0, 7, 0.15);
-  transition: all 0.3s ease;
+/* ============================================================
+   IZURE Phase 3 — Public-Landing-Page (Ghost-Headline, Boot-Sequenz)
+   Ref: IZURE_Design_Blueprint.md v2.1, Abschnitt 5.0
+   ============================================================ */
+
+/* Boot-Sequenz: Ladebalken füllt sich ~1,5–1,7s vor dem Hero-Reveal. */
+@keyframes izure-boot-fill {
+  from { width: 0%; }
+  to   { width: 100%; }
 }
 
-.card:hover, [role="card"]:hover {
-  border-color: rgba(204, 0, 0, 0.5);
-  box-shadow: 0 0 20px rgba(204, 0, 0, 0.2);
+/* --- Markdown-Rendering (Topic-Content, Masterplan v3.2 Abschnitt 14.2) --- */
+.izure-md {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  margin-bottom: 22px;
 }
-
-/* Text effects */
-.text-accent, .text-primary {
-  text-shadow: 0 0 8px rgba(204, 0, 0, 0.4);
-}
-
-.text-secondary {
-  text-shadow: 0 0 8px rgba(200, 169, 106, 0.3);
-}
-
-/* ===== IZURE STRUCTURED COMPONENTS ===== */
-
-.adhs-focus {
-  border: 2px solid #cc0000;
-  padding: 1.5rem;
-  background: rgba(57, 0, 7, 0.08);
-  margin: 1rem 0;
-}
-
-.adhs-section {
-  padding: 2rem;
-  margin: 1.5rem 0;
-  border-left: 4px solid #c8a96a;
-  background: rgba(200, 169, 106, 0.03);
-}
-
-.adhs-section-title {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #c8a96a;
-  margin-bottom: 1rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-}
-
-/* Progress indicator */
-.progress-indicator {
-  display: flex;
-  gap: 0.5rem;
-  margin: 1rem 0;
-}
-
-.progress-dot {
-  width: 12px;
-  height: 12px;
-  background: #2a1010;
-  border: 2px solid #390007;
-  transition: all 0.3s ease;
-}
-
-.progress-dot.active {
-  background: #cc0000;
-  border-color: #cc0000;
-  box-shadow: 0 0 8px rgba(204, 0, 0, 0.6);
-}
-
-.progress-dot.completed {
-  background: #c8a96a;
-  border-color: #c8a96a;
-  box-shadow: 0 0 8px rgba(200, 169, 106, 0.6);
-}
-
-/* Tactical card */
-.quiz-card {
-  background: #1a0a0a;
-  border: 2px solid #390007;
-  padding: 1.5rem;
-  margin: 1rem 0;
-  transition: all 0.3s ease;
-}
-
-.quiz-card:hover {
-  border-color: #cc0000;
-  box-shadow: 0 0 16px rgba(204, 0, 0, 0.2);
-}
-
-.quiz-card.correct {
-  border-color: #c8a96a;
-  background: rgba(200, 169, 106, 0.06);
-  box-shadow: 0 0 16px rgba(200, 169, 106, 0.3);
-}
-
-.quiz-card.incorrect {
-  border-color: #cc0000;
-  background: rgba(204, 0, 0, 0.06);
-  box-shadow: 0 0 16px rgba(204, 0, 0, 0.3);
-}
-
-/* Flashcard */
-.flashcard {
-  perspective: 1000px;
-  min-height: 200px;
-  background: linear-gradient(135deg, #1a0a0a 0%, #2a1010 100%);
-  border: 2px solid #390007;
-  padding: 2rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 0 12px rgba(57, 0, 7, 0.3);
-}
-
-.flashcard:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 0 24px rgba(204, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.6);
-  border-color: #cc0000;
-}
-
-.flashcard.flipped {
-  background: linear-gradient(135deg, #2a1010 0%, #1a0a0a 100%);
-  border-color: #c8a96a;
-  box-shadow: 0 0 20px rgba(200, 169, 106, 0.3);
-}
-
-/* Tab */
-.tab-button {
-  background: #1a0a0a;
-  border: 2px solid #390007;
-  color: #888888;
-  padding: 0.75rem 1.5rem;
-  margin-right: 0.5rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
+.izure-md p { margin-bottom: 14px; }
+.izure-md strong { font-weight: 600; color: var(--text-primary); }
+.izure-md em { font-style: italic; }
+.izure-md ul, .izure-md ol { margin: 0 0 14px 18px; display: flex; flex-direction: column; gap: 6px; }
+.izure-md h1, .izure-md h2, .izure-md h3, .izure-md h4 {
+  font-family: 'Space Grotesk', sans-serif;
   font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  color: var(--text-primary);
+  margin: 22px 0 10px;
 }
-
-.tab-button:hover {
-  border-color: #cc0000;
-  color: #e8e8e8;
+.izure-md table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 14px 0;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
 }
-
-.tab-button.active {
-  background: #390007;
-  border-color: #cc0000;
-  color: #e8e8e8;
-  box-shadow: 0 0 16px rgba(204, 0, 0, 0.4);
+.izure-md th, .izure-md td {
+  border: 1px solid var(--border-hairline);
+  padding: 8px 12px;
+  text-align: left;
+  vertical-align: top;
 }
-
-/* Input */
-input[type="text"],
-input[type="email"],
-input[type="password"],
-input[type="number"],
-textarea,
-select {
-  background: #1a0a0a;
-  border: 2px solid #390007;
-  color: #e8e8e8;
-  padding: 0.75rem;
-  transition: all 0.3s ease;
-}
-
-input[type="text"]:focus,
-input[type="email"]:focus,
-input[type="password"]:focus,
-input[type="number"]:focus,
-textarea:focus,
-select:focus {
-  border-color: #cc0000;
-  box-shadow: 0 0 12px rgba(204, 0, 0, 0.3);
-  outline: none;
-}
-
-/* Info blocks */
-.narrator {
-  padding: 1.5rem;
-  margin: 1.5rem 0;
-  border-left: 4px solid #c8a96a;
-  background: rgba(200, 169, 106, 0.04);
-  color: #e8e8e8;
-}
-
-.narrator-name {
-  font-weight: 700;
-  text-transform: uppercase;
+.izure-md th {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 11px;
   letter-spacing: 0.1em;
-  margin-bottom: 0.5rem;
-  font-style: normal;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  background: var(--bg-panel-raised);
+}
+.izure-md code {
+  font-variant-numeric: tabular-nums;
+  background: var(--bg-panel-raised);
+  border-radius: 4px;
+  padding: 1px 6px;
+  font-size: 13px;
+}
+.izure-md hr { border: none; border-top: 1px solid var(--border-hairline); margin: 18px 0; }
+.izure-md blockquote {
+  border-left: 1px solid var(--border-hairline-strong);
+  padding-left: 14px;
+  margin-bottom: 14px;
 }
 
-/* Smooth transitions */
-* {
-  transition-property: background-color, border-color, color, box-shadow;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
+/* Ghost-Headline: Wörter blenden gestaffelt ein, je +150–250ms Versatz
+   (Verzögerung wird pro Wort per --word-delay inline gesetzt). */
+@keyframes izure-ghost-word {
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
-
-/* Reduce motion for accessibility */
+.izure-ghost-word {
+  opacity: 0;
+  animation: izure-ghost-word var(--motion-base) var(--word-delay, 0ms) both;
+}
 @media (prefers-reduced-motion: reduce) {
-  * {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
+  .izure-ghost-word { opacity: 1; animation: none; }
 }
