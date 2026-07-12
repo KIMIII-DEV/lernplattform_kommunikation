@@ -1,5 +1,6 @@
 import { Suspense, lazy, useEffect, useState } from 'react';
 import { Seal, Button, StatChain } from '@/components/primitives';
+import '@/experience/experience.css'; // Chrome-Wortmark-Effekt (genehmigte Übernahme)
 
 // Netzwerk-Graph-Ambient (Masterplan v3, 4.4) — lazy: eigener Chunk,
 // lädt ausschließlich auf der Landing, nicht global.
@@ -189,19 +190,23 @@ export default function LandingPage({ navigate }: { navigate: (to: string) => vo
           >
             · A place, not a page ·
           </div>
-          <h1
-            style={{
-              fontFamily: 'Space Grotesk, sans-serif',
-              fontWeight: 700,
-              fontSize: 'clamp(64px, 9vw, 132px)',
-              lineHeight: 0.95,
-              letterSpacing: '-0.01em',
-              color: 'var(--text-primary)',
-              margin: '0 0 28px',
-            }}
-          >
-            IZURE
-          </h1>
+          {/* Chrome-Wortmark — aus der Experience übernommener Effekt (Phase 12,
+              genehmigte Landing-Übernahme: Chrome-Verlauf + wandernder Sheen) */}
+          <div style={{ position: 'relative', display: 'inline-block', margin: '0 0 28px' }}>
+            <h1
+              className="izx-chrome"
+              style={{ fontSize: 'clamp(64px, 9vw, 132px)', lineHeight: 0.95, letterSpacing: '-0.01em' }}
+            >
+              IZURE
+            </h1>
+            <span
+              className="izx-chrome-sheen"
+              aria-hidden="true"
+              style={{ fontSize: 'clamp(64px, 9vw, 132px)', fontWeight: 700, lineHeight: 0.95, letterSpacing: '-0.01em' }}
+            >
+              IZURE
+            </span>
+          </div>
           <p
             className="t-body"
             style={{ fontSize: 17, maxWidth: 460, marginBottom: 40 }}
