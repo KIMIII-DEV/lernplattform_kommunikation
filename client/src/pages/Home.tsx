@@ -93,6 +93,12 @@ export default function Home() {
   const isLanding = route === '/' || route === '';
   const showFooter = !route.startsWith('/private') && route !== '/login';
 
+  // Lernecke (Phase 12): die Experience bringt ihre eigene Rail mit —
+  // die globale Shell-Leiste entfällt hier komplett (doppelte Navigation
+  // war unübersichtlich). Exit in der Experience führt zurück zu /private,
+  // wo die globale Rail wieder greift.
+  const isLernecke = route === '/private/learn';
+
   // Blueprint 5.1 — globale Shell: eine Rail für beide Layer. Der Backroom-Zweig
   // trägt die drei privaten Räume als children (expandiert nur, wenn aktiv).
   const railItems: IconRailItem[] = [
@@ -120,17 +126,19 @@ export default function Home() {
           nie innerhalb einer Stage (deren filter wäre Containing-Block für fixed). */}
       <Seal state={sealState} onRouteAnimationEnd={() => setSealState('idle')} />
 
-      <IconRail
-        items={railItems}
-        activeId={route === '' ? '/' : route}
-        onNavigate={navigate}
-        bottom={
-          <>
-            <ThemeToggle />
-            {isPrivate && <RailAction label="Step out" icon={LogOut} onClick={lock} />}
-          </>
-        }
-      />
+      {!isLernecke && (
+        <IconRail
+          items={railItems}
+          activeId={route === '' ? '/' : route}
+          onNavigate={navigate}
+          bottom={
+            <>
+              <ThemeToggle />
+              {isPrivate && <RailAction label="Step out" icon={LogOut} onClick={lock} />}
+            </>
+          }
+        />
+      )}
 
       {/* Rail 64px + Inset; wenn der aktive Zweig sein Kinder-Panel zeigt (private Routen),
           rückt der Content zusätzlich um die Panelbreite ein statt überdeckt zu werden.
@@ -140,9 +148,9 @@ export default function Home() {
       <main
         style={
           isMobile
-            ? { paddingLeft: 0, paddingBottom: 92 }
+            ? { paddingLeft: 0, paddingBottom: isLernecke ? 0 : 92 }
             : {
-                paddingLeft: isPrivate ? 276 : 88,
+                paddingLeft: isLernecke ? 0 : isPrivate ? 276 : 88,
                 transition: 'padding-left var(--motion-micro)',
               }
         }
