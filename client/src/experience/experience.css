@@ -1,0 +1,559 @@
+/* ============================================================
+   IZURÉ Experience — Phase 12 (Master Plan)
+   Port des Original-Handoffs (exp.css aus dem Standalone-Bundle
+   extrahiert, NICHT aus Screenshot rekonstruiert), angepasst:
+   - Hex-Werte → bestehende Design-Tokens (.dark-Switching bleibt möglich)
+   - Light-Mode-Ableitungen nach Blueprint 2.1/2.2 (unten dokumentiert)
+   - Alles unter .izx-* gescopet — die vier genehmigten Ausnahmen
+     (Hover-Lifts, Card-Schatten, bordeaux-Fehler, kein reduced-motion)
+     können so nicht in abgenommene Views durchsickern
+   - Mobile <700px: Rail dockt unten (beschlossene Bottom-Dock-Lösung)
+     statt display:none
+   - Motion-Toggle entfällt (Anweisung: Animationen laufen immer)
+   ============================================================ */
+
+/* --- Experience-eigene Ableitungs-Tokens (Light-Basis, .dark-Override) --- */
+:root {
+  --izx-glass-strong: rgba(255, 255, 255, 0.82);
+  --izx-surface: rgba(0, 0, 0, 0.03);
+  --izx-surface-hi: rgba(0, 0, 0, 0.055);
+  --izx-on-accent: #F4F3F0;
+  --izx-accent-hover: #17181B;
+  --izx-glow1: rgba(74, 77, 85, 0.10);
+  --izx-glow2: rgba(46, 48, 54, 0.07);
+  --izx-vignette: rgba(0, 0, 0, 0.16);
+  --izx-ok-bg: rgba(46, 48, 54, 0.10);
+  --izx-wave-fade: rgba(74, 77, 85, 0.25);
+  --izx-halo: rgba(46, 48, 54, 0.3);
+  --izx-halo-hi: rgba(46, 48, 54, 0.6);
+  --izx-chrome: linear-gradient(178deg, #26282D 4%, #3E434C 24%, #7A808C 40%, #A6ABB5 51%, #4A4E58 63%, #191A1E 79%, #6E737E 98%);
+  --izx-spring: cubic-bezier(0.34, 1.35, 0.64, 1);
+}
+.dark {
+  --izx-glass-strong: rgba(16, 16, 19, 0.78);
+  --izx-surface: rgba(255, 255, 255, 0.025);
+  --izx-surface-hi: rgba(255, 255, 255, 0.05);
+  --izx-on-accent: #0A0A0A;
+  --izx-accent-hover: #FFFFFF;
+  --izx-glow1: rgba(184, 188, 196, 0.07);
+  --izx-glow2: rgba(216, 218, 222, 0.05);
+  --izx-vignette: rgba(0, 0, 0, 0.55);
+  --izx-ok-bg: rgba(216, 218, 222, 0.10);
+  --izx-wave-fade: rgba(184, 188, 196, 0.25);
+  --izx-halo: rgba(216, 218, 222, 0.3);
+  --izx-halo-hi: rgba(216, 218, 222, 0.6);
+  --izx-chrome: linear-gradient(178deg, #FDFDFE 4%, #E8EAEE 24%, #999EA9 40%, #5A5F6A 51%, #C6CAD3 63%, #F2F3F6 79%, #83878F 98%);
+}
+
+/* ============ AMBIENT ============ */
+.izx-bg { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+.izx-bg-fall {
+  position: absolute; inset: -60px;
+  filter: blur(5px);
+  opacity: 0.5;
+  animation: izxFall 150s linear infinite; /* Keyframes werden per JS injiziert */
+}
+.izx-bg-dots {
+  position: absolute; inset: 0;
+  background-image: radial-gradient(circle at 50% 50%, transparent 0, transparent 2px, var(--bg-base) 2.2px);
+  background-size: 7px 7px;
+}
+.izx-bg-glow { position: absolute; border-radius: 50%; filter: blur(90px); }
+.izx-bg-glow.g1 { width: 44vw; height: 44vw; left: -12vw; top: -18vw; background: var(--izx-glow1); }
+.izx-bg-glow.g2 { width: 36vw; height: 36vw; right: -10vw; bottom: -14vw; background: var(--izx-glow2); }
+.izx-bg-vignette {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 80% 70% at 50% 46%, transparent 40%, var(--izx-vignette) 100%);
+}
+.izx-bg-grain {
+  position: absolute; inset: 0; opacity: 0.05; mix-blend-mode: overlay;
+  /* Noise-Data-URI wird per JS gesetzt (Original-Verhalten) */
+}
+.izx-glint { position: absolute; width: 22px; height: 22px; color: var(--accent-primary-bright); opacity: 0; animation: izxGlintTw 7s ease-in-out infinite; }
+.izx-glint.gA { left: 12%; top: 20%; animation-delay: 1.2s; }
+.izx-glint.gB { right: 9%; top: 32%; width: 15px; height: 15px; animation-delay: 3.6s; }
+.izx-glint.gC { left: 22%; bottom: 14%; width: 12px; height: 12px; animation-delay: 5.4s; }
+@keyframes izxGlintTw {
+  0%, 100% { opacity: 0; transform: scale(0.3) rotate(0deg); }
+  8% { opacity: 0.9; transform: scale(1) rotate(24deg); }
+  16% { opacity: 0; transform: scale(0.3) rotate(45deg); }
+}
+
+/* ============ BOOT ============ */
+.izx-boot {
+  position: fixed; inset: 0; z-index: 150;
+  background: var(--bg-base);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px;
+}
+.izx-boot.done { opacity: 0; pointer-events: none; transition: opacity 550ms var(--ease); }
+.izx-boot-seal { color: var(--accent-primary); animation: izxSealPulse 450ms ease-out infinite alternate; }
+@keyframes izxSealPulse { from { transform: scale(0.92); opacity: 0.75; } to { transform: scale(1); opacity: 1; } }
+.izx-boot-bar { width: 160px; height: 2px; background: var(--border-hairline); }
+.izx-boot-bar i { display: block; height: 100%; width: 0; background: var(--accent-primary); }
+.izx-boot.run i { animation: izxBootFill 1450ms linear both; }
+@keyframes izxBootFill { from { width: 0; } to { width: 100%; } }
+.izx-boot-tag { color: var(--text-tertiary); }
+
+/* ============ VIEWPORT + PANEL ============ */
+.izx-viewport {
+  position: relative; z-index: 2;
+  height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  perspective: 1600px;
+  padding: clamp(12px, 3vh, 30px);
+}
+.izx-float { width: min(1380px, 100%); animation: izxLevitate 9s ease-in-out infinite alternate; }
+@keyframes izxLevitate { from { transform: translateY(-5px); } to { transform: translateY(6px); } }
+.izx-float.pre { opacity: 0; }
+.izx-float.ready { animation: izxPanelIn 950ms var(--ease) both, izxLevitate 9s ease-in-out 1s infinite alternate; }
+@keyframes izxPanelIn { from { opacity: 0; transform: translateY(26px) scale(0.965); } to { opacity: 1; transform: none; } }
+
+.izx-panel {
+  position: relative;
+  width: 100%;
+  height: min(830px, 92vh);
+  border-radius: var(--radius-outer);
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: blur(18px) saturate(130%);
+  backdrop-filter: blur(18px) saturate(130%);
+  border: 1px solid var(--glass-border);
+  filter: drop-shadow(0 40px 90px rgba(0, 0, 0, 0.75));
+  transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transition: transform 300ms ease-out;
+  display: grid;
+  grid-template-columns: 68px 1fr 292px;
+  gap: 14px;
+  padding: 16px;
+}
+.izx-sheen { position: absolute; inset: 0; border-radius: inherit; pointer-events: none; overflow: hidden; }
+.izx-sheen::before {
+  content: ''; position: absolute; top: 0; left: 30px; right: 30px; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--glass-highlight), transparent);
+}
+.izx-sheen::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(118deg, rgba(255, 255, 255, 0.045) 0%, rgba(255, 255, 255, 0.045) 26%, transparent 32%);
+}
+
+/* ============ RAIL (Szenen-Navigation im Panel) ============ */
+.izx-rail {
+  display: flex; flex-direction: column; align-items: center;
+  padding: 16px 0 12px;
+  background: var(--izx-surface);
+  border: 1px solid var(--border-hairline);
+  border-radius: 22px;
+}
+.izx-rail-mark { color: var(--accent-primary-bright); margin-bottom: 22px; }
+.izx-rail-icons { display: flex; flex-direction: column; gap: 8px; }
+.izx-ric {
+  width: 42px; height: 42px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--text-secondary);
+  border: 1px solid transparent;
+  transition: color 180ms ease-out, background 180ms ease-out, border-color 180ms ease-out, transform 300ms var(--izx-spring);
+}
+.izx-ric:hover { color: var(--text-primary); border-color: var(--border-hairline); transform: translateY(-2px); }
+.izx-ric.is-on { background: var(--accent-primary-bright); color: var(--izx-on-accent); border-color: var(--accent-primary-bright); }
+.izx-rail-exit { margin-top: auto; }
+
+/* ============ TOPBAR ============ */
+.izx-main { position: relative; display: flex; flex-direction: column; min-width: 0; }
+.izx-top {
+  display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+  padding: 6px 6px 14px;
+}
+.izx-pills { display: flex; gap: 6px; }
+.izx-pill {
+  font-size: 10px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--text-secondary);
+  padding: 8px 15px;
+  border: 1px solid var(--border-hairline);
+  border-radius: var(--radius-pill);
+  background: var(--izx-surface);
+  transition: color 180ms, border-color 180ms, background 180ms;
+}
+.izx-pill:hover { color: var(--text-primary); border-color: var(--border-hairline-strong); }
+.izx-pill.is-on { background: var(--accent-primary-bright); color: var(--izx-on-accent); border-color: var(--accent-primary-bright); }
+.izx-mark { font-weight: 700; font-size: 17px; letter-spacing: 0.03em; color: var(--text-primary); }
+.izx-mark span { color: var(--accent-primary); }
+.izx-top-actions { display: flex; justify-content: flex-end; gap: 6px; }
+
+/* ============ STAGE + SZENEN ============ */
+.izx-stage { position: relative; flex: 1; min-height: 0; border-radius: var(--radius-card); overflow: hidden; }
+.izx-scene { position: absolute; inset: 0; opacity: 0; pointer-events: none; }
+.izx-scene.is-active { opacity: 1; pointer-events: auto; }
+.izx-sv { opacity: 1; }
+.izx-scene.in .izx-sv {
+  animation: izxSvIn 720ms var(--ease) both;
+  animation-delay: calc(var(--i, 0) * 95ms + 60ms);
+}
+.izx-scene.out .izx-sv {
+  animation: izxSvOut 360ms ease-in both;
+  animation-delay: calc(var(--i, 0) * 36ms);
+}
+@keyframes izxSvIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: none; } }
+@keyframes izxSvOut { from { opacity: 1; transform: none; } to { opacity: 0; transform: translateY(-22px); } }
+
+.izx-ghost {
+  position: absolute; left: 50%; top: 54%;
+  transform: translate(-50%, -50%);
+  font-weight: 700; font-style: italic;
+  font-size: clamp(90px, 13vw, 190px);
+  letter-spacing: -0.04em;
+  color: var(--ghost-text);
+  white-space: nowrap; user-select: none; pointer-events: none;
+}
+
+/* --- Szene 1: Hero --- */
+.izx-hero {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; gap: 18px;
+  padding-bottom: 30px;
+}
+.izx-eyebrow { color: var(--accent-primary); }
+.izx-chrome-wrap { position: relative; }
+.izx-orbit {
+  position: absolute; left: 50%; top: 50%;
+  width: 130%; height: 210%;
+  transform: translate(-50%, -50%);
+  overflow: visible; pointer-events: none;
+}
+.izx-orbit ellipse {
+  fill: none; stroke: var(--border-hairline-strong);
+  stroke-width: 1; stroke-dasharray: 3 9;
+  animation: izxOrbitDash 26s linear infinite;
+}
+@keyframes izxOrbitDash { to { stroke-dashoffset: -600; } }
+.izx-orbit .orb-star { fill: var(--accent-primary-bright); animation: izxGlintTw 9s ease-in-out 2s infinite; transform-origin: center; }
+.izx-chrome {
+  position: relative;
+  font-size: clamp(76px, 10.5vw, 150px);
+  font-weight: 700; line-height: 0.94; letter-spacing: -0.015em;
+  background: var(--izx-chrome);
+  background-size: 100% 240%;
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  animation: izxChromeShift 8s ease-in-out infinite alternate;
+}
+@keyframes izxChromeShift { from { background-position: 50% 0%; } to { background-position: 50% 62%; } }
+.izx-chrome-sheen {
+  position: absolute; inset: 0;
+  font: inherit; letter-spacing: inherit; line-height: inherit;
+  background: linear-gradient(115deg, transparent 42%, rgba(255, 255, 255, 0.85) 50%, transparent 58%);
+  background-size: 260% 100%;
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  animation: izxSheenMove 5.6s var(--ease) 2.2s infinite;
+  pointer-events: none;
+}
+@keyframes izxSheenMove { 0% { background-position: 120% 0; } 34%, 100% { background-position: -60% 0; } }
+.izx-hero-sub { color: var(--text-secondary); font-size: 14.5px; line-height: 1.7; max-width: 460px; }
+.izx-ctas { display: flex; align-items: center; gap: 20px; }
+.izx-solid {
+  background: var(--accent-primary-bright); color: var(--izx-on-accent);
+  border-radius: var(--radius-pill);
+  padding: 12px 26px;
+  font-weight: 600; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+  transition: background 180ms, transform 300ms var(--izx-spring), box-shadow 300ms;
+}
+.izx-solid:hover { background: var(--izx-accent-hover); transform: translateY(-2px); box-shadow: 0 10px 30px rgba(216, 218, 222, 0.18); }
+.izx-solid.sm { padding: 9px 18px; }
+.izx-ghost-cta {
+  color: var(--text-secondary);
+  font-weight: 600; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+  display: inline-flex; align-items: center; gap: 9px;
+  transition: color 180ms;
+}
+.izx-ghost-cta:hover { color: var(--text-primary); }
+.izx-arr { display: inline-block; transition: transform 180ms ease-out; }
+.izx-ghost-cta:hover .izx-arr, .izx-solid:hover .izx-arr { transform: translateX(4px); }
+
+/* --- Szene 2: Lernfelder --- */
+.izx-lf-wrap {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; justify-content: center; gap: 22px;
+  padding: 0 30px 44px;
+}
+.izx-scene-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; }
+.izx-scene-head h2 { font-size: clamp(26px, 3vw, 40px); font-weight: 700; letter-spacing: -0.01em; color: var(--text-primary); }
+.izx-scene-head .t-label { color: var(--accent-primary); }
+.izx-lf-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+.izx-lf-card {
+  position: relative;
+  border-radius: var(--radius-card);
+  background: var(--izx-glass-strong);
+  border: 1px solid var(--border-hairline);
+  padding: 18px 16px 16px;
+  min-height: 210px;
+  display: flex; flex-direction: column; gap: 10px;
+  transition: transform 380ms var(--izx-spring), border-color 250ms, box-shadow 380ms;
+  cursor: pointer;
+  text-align: left;
+}
+.izx-lf-card::before {
+  content: ''; position: absolute; top: 0; left: 16px; right: 16px; height: 2px;
+  background: var(--lf, var(--accent-primary));
+  border-radius: 2px;
+  opacity: 0.9;
+}
+.izx-lf-card:hover {
+  transform: translateY(-7px);
+  border-color: var(--border-hairline-strong);
+  box-shadow: 0 22px 44px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(216, 218, 222, 0.06);
+}
+.izx-lf-code { color: var(--text-tertiary); font-size: 9.5px; }
+.izx-lf-name { font-size: 14.5px; font-weight: 600; line-height: 1.35; flex: 1; color: var(--text-primary); }
+.izx-lf-ring { position: relative; width: 46px; height: 46px; }
+.izx-lf-ring svg { transform: rotate(-90deg); width: 100%; height: 100%; display: block; }
+.izx-lf-ring .bgc { stroke: var(--border-hairline); }
+.izx-lf-ring .fgc { stroke: var(--lf, var(--accent-primary)); transition: stroke-dashoffset 900ms var(--ease); }
+.izx-lf-pct { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 10.5px; font-weight: 600; font-variant-numeric: tabular-nums; color: var(--text-primary); }
+.izx-lf-open { color: var(--text-tertiary); font-size: 9.5px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; display: flex; gap: 8px; align-items: center; }
+.izx-lf-card:hover .izx-lf-open { color: var(--text-secondary); }
+
+/* --- Szene 3: Karten --- */
+.izx-fc-wrap {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 24px;
+  padding-bottom: 40px;
+}
+.izx-fc-stage { perspective: 1400px; }
+.izx-fc {
+  position: relative;
+  width: min(520px, 74vw); height: 300px;
+  transform-style: preserve-3d;
+  transition: transform 750ms var(--izx-spring);
+  cursor: pointer;
+}
+.izx-fc.flipped { transform: rotateY(180deg); }
+.izx-fc-face {
+  position: absolute; inset: 0;
+  backface-visibility: hidden; -webkit-backface-visibility: hidden;
+  border-radius: var(--radius-card);
+  background: var(--izx-glass-strong);
+  border: 1px solid var(--glass-border);
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
+  gap: 16px; text-align: center; padding: 34px 40px;
+  overflow: hidden;
+}
+.izx-fc-face::before {
+  content: ''; position: absolute; top: 0; left: 22px; right: 22px; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--glass-highlight), transparent);
+}
+.izx-fc-back { transform: rotateY(180deg); }
+.izx-fc-tag { color: var(--accent-primary); }
+.izx-fc-q { font-size: clamp(19px, 2.2vw, 26px); font-weight: 600; line-height: 1.4; color: var(--text-primary); }
+.izx-fc-a { font-size: clamp(15px, 1.8vw, 19px); font-weight: 500; line-height: 1.5; color: var(--accent-primary-bright); }
+.izx-fc-src { color: var(--text-tertiary); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600; }
+.izx-fc-hint { color: var(--text-tertiary); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 600; }
+.izx-fc-nav { display: flex; align-items: center; gap: 18px; }
+.izx-fc-count { color: var(--text-secondary); font-size: 12px; font-variant-numeric: tabular-nums; letter-spacing: 0.14em; }
+.izx-cbtn {
+  width: 40px; height: 40px; border-radius: 50%;
+  border: 1px solid var(--border-hairline);
+  color: var(--text-secondary); font-size: 15px;
+  transition: color 180ms, border-color 180ms, transform 300ms var(--izx-spring);
+}
+.izx-cbtn:hover { color: var(--text-primary); border-color: var(--border-hairline-strong); transform: translateY(-2px); }
+.izx-fc.swap { animation: izxFcSwap 360ms var(--ease); }
+@keyframes izxFcSwap { 0% { opacity: 0; transform: translateX(34px); } 100% { opacity: 1; transform: none; } }
+
+/* --- Szene 4: Simulation --- */
+.izx-qz-wrap {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; justify-content: center; gap: 22px;
+  padding: 0 clamp(20px, 6vw, 90px) 44px;
+}
+.izx-qz-q { font-size: clamp(19px, 2.2vw, 27px); font-weight: 700; line-height: 1.35; max-width: 760px; color: var(--text-primary); }
+.izx-qz-opts { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; max-width: 780px; }
+.izx-qz-opt {
+  display: flex; align-items: center; gap: 14px;
+  text-align: left;
+  border: 1px solid var(--border-hairline);
+  border-radius: 14px;
+  background: var(--izx-surface);
+  padding: 15px 18px;
+  font-size: 13.5px; font-weight: 500;
+  color: var(--text-primary);
+  transition: border-color 180ms, background 180ms, transform 300ms var(--izx-spring);
+}
+.izx-qz-opt:not(:disabled):hover { border-color: var(--border-hairline-strong); background: var(--izx-surface-hi); transform: translateY(-2px); }
+.izx-qz-letter {
+  width: 26px; height: 26px; flex-shrink: 0;
+  border-radius: 50%;
+  border: 1px solid var(--border-hairline-strong);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10.5px; font-weight: 600; color: var(--text-secondary);
+}
+.izx-qz-opt.ok { border-color: var(--accent-primary-bright); background: var(--izx-ok-bg); }
+.izx-qz-opt.ok .izx-qz-letter { background: var(--accent-primary-bright); color: var(--izx-on-accent); border-color: var(--accent-primary-bright); }
+/* Genehmigte Ausnahme #3: Fehlerzustand nutzt in der Experience bewusst
+   die Bordeaux-Kategorienfarbe (Original-Design), NICHT --accent-critical.
+   Außerhalb der Experience gilt weiterhin Oxblood. */
+.izx-qz-opt.bad { border-color: var(--accent-bordeaux-light); animation: izxQzShake 340ms ease-in-out; }
+.izx-qz-opt.bad .izx-qz-letter { border-color: var(--accent-bordeaux-light); color: var(--accent-rust-light); }
+@keyframes izxQzShake { 0%, 100% { transform: none; } 25% { transform: translateX(-6px); } 60% { transform: translateX(5px); } }
+.izx-qz-foot { display: flex; align-items: center; gap: 20px; align-self: flex-end; }
+.izx-qz-meta { color: var(--text-secondary); font-size: 12px; letter-spacing: 0.14em; font-variant-numeric: tabular-nums; }
+.izx-qz-next { opacity: 0; pointer-events: none; transition: opacity 250ms; }
+.izx-qz-next.show { opacity: 1; pointer-events: auto; }
+
+/* ============ DOCK ============ */
+.izx-dock {
+  position: absolute; left: -15px; bottom: -15px; z-index: 8;
+  width: 330px;
+  border-radius: 20px;
+  background: var(--izx-glass-strong);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 26px 60px rgba(0, 0, 0, 0.6);
+  padding: 20px 22px 18px;
+  display: flex; flex-direction: column; gap: 8px;
+  transition: opacity 240ms ease, transform 240ms ease;
+}
+.izx-dock.swap { opacity: 0; transform: translateY(10px); }
+.izx-dock-kicker { color: var(--accent-primary); }
+.izx-dock-title { font-size: 21px; font-weight: 700; letter-spacing: -0.01em; color: var(--text-primary); }
+.izx-dock-text { color: var(--text-secondary); font-size: 12.5px; line-height: 1.65; }
+.izx-dock-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 8px; }
+.izx-dock-stat { color: var(--accent-primary-bright); font-weight: 600; font-size: 13px; font-variant-numeric: tabular-nums; }
+
+/* ============ DOTS + PFEILE ============ */
+.izx-dots {
+  position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%);
+  display: flex; gap: 8px; z-index: 6;
+}
+.izx-dot {
+  width: 7px; height: 7px; border-radius: var(--radius-pill);
+  background: var(--text-tertiary);
+  transition: width 340ms var(--izx-spring), background 250ms;
+}
+.izx-dot.is-on { width: 24px; background: var(--accent-primary-bright); }
+.izx-navarr { position: absolute; right: 6px; bottom: 6px; display: flex; gap: 8px; z-index: 6; }
+
+/* ============ SIDE COLUMN ============ */
+.izx-side { display: flex; flex-direction: column; gap: 14px; min-height: 0; }
+.izx-side-card {
+  flex: 1;
+  border-radius: var(--radius-card);
+  background: var(--izx-surface);
+  border: 1px solid var(--border-hairline);
+  padding: 18px 20px;
+  display: flex; flex-direction: column;
+  overflow: hidden; position: relative;
+}
+.izx-sc-label { color: var(--text-secondary); margin-bottom: 12px; }
+.izx-sc-meta { color: var(--text-tertiary); font-size: 11px; line-height: 1.6; margin-top: auto; }
+.izx-sc-meta b { color: var(--accent-primary-bright); font-weight: 600; font-size: 14px; }
+
+.izx-wave { flex: 1; display: flex; align-items: flex-end; gap: 3.5px; min-height: 70px; padding-bottom: 12px; }
+.izx-wave i {
+  flex: 1; height: var(--h, 40%);
+  background: linear-gradient(180deg, var(--accent-primary-bright), var(--izx-wave-fade));
+  border-radius: 2px;
+  transform-origin: bottom;
+  animation: izxWaveB 1.7s ease-in-out var(--d, 0s) infinite alternate;
+}
+@keyframes izxWaveB { from { transform: scaleY(0.22); opacity: 0.5; } to { transform: scaleY(1); opacity: 1; } }
+
+.izx-dial-card { align-items: center; }
+.izx-dial-card .izx-sc-label { align-self: flex-start; }
+.izx-dial { position: relative; width: min(170px, 100%); margin: auto; cursor: pointer; }
+.izx-dial svg { display: block; width: 100%; }
+.izx-d-ring { fill: none; stroke: var(--border-hairline); stroke-width: 1.5; }
+.izx-d-tick { stroke: var(--border-hairline); stroke-width: 1; }
+.izx-d-tick.major { stroke: var(--border-hairline-strong); stroke-width: 1.5; }
+.izx-d-rot { transition: transform 950ms var(--izx-spring); transform-origin: 100px 100px; }
+.izx-d-notch { fill: var(--accent-primary-bright); }
+.izx-d-notch-halo { fill: none; stroke: var(--izx-halo); stroke-width: 1; }
+.izx-dial-num {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 30px; font-weight: 700; font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em; color: var(--text-primary);
+}
+.izx-dial-num small { font-size: 12px; color: var(--text-tertiary); margin-left: 5px; font-weight: 600; }
+.izx-dial:hover .izx-d-notch-halo { stroke: var(--izx-halo-hi); }
+
+/* ============ BASELINE ============ */
+.izx-baseline {
+  position: fixed; bottom: 11px; left: 0; right: 0; z-index: 3;
+  text-align: center;
+  color: var(--text-tertiary);
+  font-size: 9px; font-weight: 600; letter-spacing: 0.24em; text-transform: uppercase;
+  pointer-events: none;
+}
+.izx-baseline b { color: var(--text-secondary); font-weight: 600; }
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 1150px) {
+  .izx-panel { grid-template-columns: 60px 1fr 250px; }
+}
+@media (max-width: 1080px) {
+  .izx-pill { padding: 7px 11px; font-size: 9px; letter-spacing: 0.08em; }
+  .izx-top { gap: 8px; }
+}
+@media (max-width: 980px) {
+  .izx-panel { grid-template-columns: 60px 1fr; }
+  .izx-side { display: none; }
+  .izx-lf-wrap { gap: 14px; padding: 0 22px 40px; justify-content: center; }
+  .izx-lf-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+  .izx-lf-card {
+    min-height: 0;
+    flex-direction: row; align-items: center; gap: 12px;
+    padding: 12px 16px;
+  }
+  .izx-lf-card::before { left: 0; right: auto; top: 14px; bottom: 14px; width: 2px; height: auto; }
+  .izx-lf-name { font-size: 13px; flex: 1; }
+  .izx-lf-code { display: none; }
+  .izx-lf-open { display: none; }
+  .izx-lf-ring { width: 34px; height: 34px; flex-shrink: 0; }
+  .izx-lf-pct { font-size: 9px; }
+  .izx-scene-head h2 { font-size: 24px; }
+}
+@media (max-width: 880px) {
+  .izx-pills { display: none; }
+}
+@media (max-width: 700px) {
+  /* Abweichung vom Original (dort: Rail display:none):
+     beschlossene Bottom-Dock-Lösung — Rail wird horizontale Leiste unten. */
+  .izx-panel { grid-template-columns: 1fr; grid-template-rows: 1fr auto; padding: 12px; }
+  .izx-rail {
+    grid-row: 2;
+    flex-direction: row; justify-content: space-between;
+    padding: 8px 14px;
+  }
+  .izx-rail-mark { margin-bottom: 0; display: flex; align-items: center; }
+  .izx-rail-icons { flex-direction: row; gap: 6px; }
+  .izx-rail-exit { margin-top: 0; margin-left: 8px; }
+  .izx-dock { left: 8px; bottom: 74px; width: calc(100% - 16px); }
+  .izx-qz-opts { grid-template-columns: 1fr; }
+}
+
+/* Flache Viewports */
+@media (max-height: 830px) {
+  .izx-dock { width: 300px; padding: 14px 18px 13px; gap: 5px; }
+  .izx-dock-text { display: none; }
+  .izx-dock-title { font-size: 17px; }
+  .izx-dock-row { margin-top: 2px; }
+  .izx-hero { padding-bottom: 84px; }
+  .izx-fc-wrap { padding-bottom: 64px; }
+  .izx-fc { height: 240px; }
+  .izx-fc-face { padding: 24px 30px; gap: 12px; }
+  .izx-lf-wrap { padding-bottom: 54px; }
+  .izx-qz-wrap { gap: 13px; padding-bottom: 60px; }
+  .izx-qz-opt { padding: 11px 15px; font-size: 13px; }
+  .izx-qz-q { font-size: clamp(17px, 2vw, 22px); }
+}
+@media (max-height: 640px) {
+  .izx-dock { flex-direction: row; align-items: center; gap: 14px; width: auto; max-width: 460px; padding: 10px 14px; }
+  .izx-dock-kicker, .izx-dock-stat { display: none; }
+  .izx-dock-title { font-size: 13.5px; white-space: nowrap; }
+  .izx-dock-row { margin-top: 0; }
+  .izx-hero { padding-bottom: 56px; }
+  .izx-fc-wrap { padding-bottom: 46px; }
+  .izx-lf-wrap { padding-bottom: 42px; }
+  .izx-qz-wrap { padding-bottom: 46px; }
+  .izx-chrome { font-size: clamp(60px, 9vw, 110px); }
+  .izx-boot-tag { display: none; }
+}
