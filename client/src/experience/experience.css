@@ -557,3 +557,75 @@
   .izx-chrome { font-size: clamp(60px, 9vw, 110px); }
   .izx-boot-tag { display: none; }
 }
+
+/* ============================================================
+   LANDING-PANEL (Phase 12b)
+   Öffentliche Startseite im Experience-Look: derselbe Ambient +
+   Glass-Panel (Levitation/Tilt/Sheen) wie die Lernecke, aber als
+   statischer Public-Hero — echte CTAs (Step inside → Login,
+   Who's pouring → About), keine gated/interaktive Navigation.
+   Reused: .izx-viewport .izx-float .izx-sheen .izx-hero .izx-eyebrow
+   .izx-chrome* .izx-hero-sub .izx-ctas .izx-solid .izx-ghost-cta
+   .izx-side .izx-side-card .izx-wave .izx-sc-label .izx-sc-meta
+   ============================================================ */
+.izx-lp-panel {
+  position: relative;
+  width: 100%;
+  height: min(760px, 88vh);
+  border-radius: var(--radius-outer);
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: blur(18px) saturate(130%);
+  backdrop-filter: blur(18px) saturate(130%);
+  border: 1px solid var(--glass-border);
+  filter: drop-shadow(0 40px 90px rgba(0, 0, 0, 0.75));
+  transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transition: transform 300ms ease-out;
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 14px;
+  padding: 16px;
+}
+.izx-lp-main {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  border-radius: var(--radius-card);
+  overflow: hidden;
+}
+.izx-lp-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 8px 10px 14px;
+}
+.izx-lp-mark { font-weight: 700; font-size: 17px; letter-spacing: 0.03em; color: var(--text-primary); }
+.izx-lp-mark span { color: var(--accent-primary); }
+.izx-lp-hero { position: relative; flex: 1; min-height: 0; }
+/* Der Seal im rechten "Navigator"-Echo */
+.izx-lp-seal {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  color: var(--accent-primary-bright);
+}
+.izx-lp-seal .izx-sc-meta { text-align: center; margin-top: 0; }
+
+@media (max-width: 1150px) {
+  .izx-lp-panel { grid-template-columns: 1fr 250px; }
+}
+@media (max-width: 980px) {
+  .izx-lp-panel { grid-template-columns: 1fr; }
+  .izx-lp-side { display: none; }
+}
+@media (max-width: 700px) {
+  .izx-lp-panel { height: min(680px, 86vh); padding: 12px; }
+  .izx-lp-top { padding: 6px 6px 10px; }
+}
+@media (max-height: 720px) {
+  .izx-lp-panel { height: 92vh; }
+}
