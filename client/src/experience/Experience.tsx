@@ -1,7 +1,9 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
+import { LayoutGrid, Moon, Sun, UserRound } from 'lucide-react';
 import { MODULES, ModuleColor, ModuleSummary } from '@/lib/modules';
 import { flashcards, quizQuestions } from '@/lib/learningData';
 import { useProgress } from '@/lib/useProgress';
+import { useTheme } from '@/contexts/ThemeContext';
 import IzxAmbient from './IzxAmbient';
 import './experience.css';
 
@@ -60,6 +62,7 @@ function shuffle<T>(arr: T[]): T[] {
 
 export default function Experience({ onOpenLf }: { onOpenLf: (m: ModuleSummary) => void }) {
   const { progress } = useProgress();
+  const { theme, toggleTheme, switchable } = useTheme();
   const [cur, setCur] = useState(0);
   const curRef = useRef(0);
   const busyRef = useRef(false);
@@ -243,7 +246,7 @@ export default function Experience({ onOpenLf }: { onOpenLf: (m: ModuleSummary) 
   const d = DOCK[dockScene];
 
   return (
-    <div className="page-root" data-screen-label="06 Private · Lernecke · Experience">
+    <div className="page-root" data-screen-label="Study OS · Cockpit">
       {/* Ambient (geteilt mit der Landing seit Phase 12b) */}
       <IzxAmbient />
 
@@ -279,11 +282,32 @@ export default function Experience({ onOpenLf }: { onOpenLf: (m: ModuleSummary) 
                   </button>
                 ))}
               </div>
-              <button className="izx-ric izx-rail-exit" aria-label="Zurück zum Backroom" title="Zurück zum Backroom" onClick={() => { location.hash = '/private'; }}>
-                <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M10 4.5 H5.5 V19.5 H10" /><path d="M15 8 L19 12 L15 16" /><path d="M19 12 H9.5" />
-                </svg>
-              </button>
+              {/* Bottom-Cluster: die globale Shell-Rail entfällt auf dem öffentlichen
+                  Cockpit, darum tragen wir hier Theme + Public-Nav + die Tür zum
+                  privaten Backroom (mit Login-Gate). */}
+              <div className="izx-rail-bottom">
+                {switchable && toggleTheme && (
+                  <button
+                    className="izx-ric"
+                    aria-label={theme === 'dark' ? 'Zu Light Mode wechseln' : 'Zu Dark Mode wechseln'}
+                    title="Theme"
+                    onClick={toggleTheme}
+                  >
+                    {theme === 'dark' ? <Sun size={17} strokeWidth={1.5} /> : <Moon size={17} strokeWidth={1.5} />}
+                  </button>
+                )}
+                <button className="izx-ric izx-rail-sec" aria-label="About" title="About" onClick={() => { location.hash = '/about'; }}>
+                  <UserRound size={17} strokeWidth={1.5} />
+                </button>
+                <button className="izx-ric izx-rail-sec" aria-label="Moods" title="Moods" onClick={() => { location.hash = '/moodboards'; }}>
+                  <LayoutGrid size={17} strokeWidth={1.5} />
+                </button>
+                <button className="izx-ric" aria-label="The Backroom" title="The Backroom" onClick={() => { location.hash = '/private'; }}>
+                  <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M10 4.5 H5.5 V19.5 H10" /><path d="M15 8 L19 12 L15 16" /><path d="M19 12 H9.5" />
+                  </svg>
+                </button>
+              </div>
             </nav>
 
             {/* Main */}

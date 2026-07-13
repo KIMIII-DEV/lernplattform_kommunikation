@@ -155,6 +155,7 @@
 .izx-ric:hover { color: var(--text-primary); border-color: var(--border-hairline); transform: translateY(-2px); }
 .izx-ric.is-on { background: var(--accent-primary-bright); color: var(--izx-on-accent); border-color: var(--accent-primary-bright); }
 .izx-rail-exit { margin-top: auto; }
+.izx-rail-bottom { margin-top: auto; display: flex; flex-direction: column; align-items: center; gap: 8px; }
 
 /* ============ TOPBAR ============ */
 .izx-main { position: relative; display: flex; flex-direction: column; min-width: 0; }
@@ -526,6 +527,10 @@
   .izx-rail-mark { margin-bottom: 0; display: flex; align-items: center; }
   .izx-rail-icons { flex-direction: row; gap: 6px; }
   .izx-rail-exit { margin-top: 0; margin-left: 8px; }
+  .izx-rail-bottom { margin-top: 0; margin-left: 8px; flex-direction: row; gap: 6px; }
+  /* Auf schmalen Panels die Sekundär-Nav (About/Moods) ausblenden — Theme +
+     Backroom-Tür bleiben; About/Moods sind mobil über den Backroom/URL erreichbar. */
+  .izx-rail-sec { display: none; }
   .izx-dock { left: 8px; bottom: 74px; width: calc(100% - 16px); }
   .izx-qz-opts { grid-template-columns: 1fr; }
 }

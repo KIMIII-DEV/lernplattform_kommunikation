@@ -211,6 +211,13 @@ html, body {
   overflow-x: hidden;
 }
 
+/* Cockpit = öffentliche Startseite: eine Vollbild-Bühne, die still steht
+   (Szenenwechsel statt Seiten-Scroll). Vertikaler Scroll wird gesperrt. */
+html.cockpit-lock, html.cockpit-lock body {
+  height: 100%;
+  overflow: hidden;
+}
+
 img {
   display: block;
   max-width: 100%;
