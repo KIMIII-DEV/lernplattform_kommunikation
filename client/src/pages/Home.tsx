@@ -1,11 +1,11 @@
 import { Suspense, lazy, useEffect, useState } from 'react';
-import { Home as HomeIcon, LayoutGrid, Lock, LogOut, UserRound } from 'lucide-react';
+import { Coffee, Home as HomeIcon, LayoutGrid, Lock, LogOut, TrendingUp, UserRound } from 'lucide-react';
 import { Footer, GrainFilter, GrainOverlay } from '@/components/izure/primitives';
 import IconRail, { IconRailItem, RailAction } from '@/components/shell/IconRail';
 import ThemeToggle from '@/components/shell/ThemeToggle';
 import { useIsMobile } from '@/components/shell/useIsMobile';
 import { Seal } from '@/components/primitives';
-import Experience from '@/experience/Experience';
+import LandingPage from './Landing';
 import LoginPage from './Login';
 import PrivateDashboard from './PrivateDashboard';
 import StudyPage from './Study';
@@ -13,6 +13,13 @@ import BarkeeperPage from './Barkeeper';
 import WirePage from './Wire';
 import AboutPage from './About';
 import MoodboardsPage from './Moodboards';
+import StocksPage from './Stocks';
+import CoffeePage from './Coffee';
+import ContactPage from './Contact';
+import ReportBugPage from './ReportBug';
+import SocialsPage from './Socials';
+import WeatherPage from './Weather';
+import AmbiancePage from './Ambiance';
 
 // DEV-Testbett für die Phase-2-Primitives — lazy, damit es nie im Prod-Bundle landet.
 const PreviewPage = lazy(() => import('./Preview'));
@@ -36,10 +43,9 @@ export default function Home() {
     return () => window.removeEventListener('hashchange', onHash);
   }, []);
 
-  // Das Study-OS-Cockpit trägt beide Enden: öffentlich als nicht-scrollbare
-  // Startseite (`/`, Showcase) UND privat als echte Study (`/private/learn`,
-  // hinter Login, mit Dossiers/getrackter Sim). Beide sind Vollbild-Cockpits:
-  // keine globale Rail, kein Footer, kein Scroll.
+  // Zwei Vollbild-Bühnen ohne globale Rail/Footer/Scroll (IMG_0405):
+  //  - `/`             = öffentliche Landing (Cockpit-Look-Hub, Musik + Pegelrad)
+  //  - `/private/learn`= private Lernecke (Study-Cockpit hinter Login)
   const isCockpit = route === '/' || route === '' || route === '/private/learn';
   const isPrivate = route.startsWith('/private');
 
@@ -84,24 +90,28 @@ export default function Home() {
   };
 
   const renderPage = () => {
-    // Öffentliches Cockpit = Showcase: alle Szenen frei durchblätterbar, aber
-    // der Sprung in die echte Study (Lernfeld-Dossier) führt über das Gate in
-    // den privaten Layer.
-    if (route === '/' || route === '') {
-      return <Experience onOpenLf={() => navigate('/private/learn')} />;
-    }
+    // --- Public Layer (IMG_0405) ---
+    if (route === '/' || route === '') return <LandingPage navigate={navigate} />;
     if (route === '/about') return <AboutPage />;
     if (route === '/moodboards') return <MoodboardsPage />;
+    if (route === '/stocks') return <StocksPage />;
+    if (route === '/coffee') return <CoffeePage />;
+    if (route === '/socials') return <SocialsPage />;
+    if (route === '/contact') return <ContactPage />;
+    if (route === '/report-bug') return <ReportBugPage />;
     if (route === '/login') return <LoginPage navigate={navigate} onUnlock={unlock} />;
     // Render-Gate (Defense-in-Depth): private Routen brauchen Unlock — greift auch,
-    // wenn der Hash direkt gesetzt wird (z. B. das Tür-Icon im Cockpit).
+    // wenn der Hash direkt gesetzt wird.
     if (route.startsWith('/private') && !unlocked) {
       return <LoginPage navigate={navigate} onUnlock={unlock} />;
     }
+    // --- Privat Layer (hinter Login) ---
     if (route === '/private') return <PrivateDashboard navigate={navigate} />;
     if (route === '/private/learn') return <StudyPage />;
     if (route === '/private/barkeeper') return <BarkeeperPage />;
     if (route === '/private/news') return <WirePage />;
+    if (route === '/private/weather') return <WeatherPage />;
+    if (route === '/private/ambiance') return <AmbiancePage />;
     if (import.meta.env.DEV && route === '/preview') {
       return (
         <Suspense fallback={null}>
@@ -109,27 +119,32 @@ export default function Home() {
         </Suspense>
       );
     }
-    return <Experience onOpenLf={() => navigate('/private/learn')} />;
+    return <LandingPage navigate={navigate} />;
   };
 
   // Auf dem Cockpit: keine globale Rail (es bringt seine eigene mit), kein Footer,
   // keine linke Einrückung — die Seite steht als ein Vollbild still.
   const showFooter = !isCockpit && !route.startsWith('/private') && route !== '/login';
 
-  // Blueprint 5.1 — globale Shell (auf allen Nicht-Cockpit-Views). Der Backroom-Zweig
-  // trägt die privaten Räume; „Study" zeigt jetzt auf das öffentliche Cockpit.
+  // Globale Shell nach IMG_0405: Public-Sektionen top-level, Utility-Links
+  // (Socials/Contact/Report-a-Bug) im Footer. Der gegatete Backroom-Zweig
+  // trägt die privaten Räume (Dashboard = der Zweig selbst).
   const railItems: IconRailItem[] = [
     { id: '/', icon: HomeIcon, label: 'Home' },
     { id: '/about', icon: UserRound, label: 'About' },
     { id: '/moodboards', icon: LayoutGrid, label: 'Moods' },
+    { id: '/stocks', icon: TrendingUp, label: 'Stocks' },
+    { id: '/coffee', icon: Coffee, label: 'Coffee' },
     {
       id: '/private',
       icon: Lock,
       label: 'The Backroom',
       children: [
         { id: '/private/learn', label: 'Study', href: '/private/learn' },
-        { id: '/private/barkeeper', label: 'The Barkeeper', href: '/private/barkeeper' },
+        { id: '/private/barkeeper', label: 'Marco', href: '/private/barkeeper' },
         { id: '/private/news', label: 'Wire', href: '/private/news' },
+        { id: '/private/weather', label: 'Wetter', href: '/private/weather' },
+        { id: '/private/ambiance', label: 'Ambiance', href: '/private/ambiance' },
       ],
     },
   ];

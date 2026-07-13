@@ -167,18 +167,18 @@ export function Footer() {
             <div className="t-label" style={{ color: 'var(--accent)', marginBottom: 8 }}>
               Channels
             </div>
-            <a href="#">Instagram</a>
-            <a href="#">Spotify</a>
-            <a href="#">Letterboxd</a>
-            <a href="#">Pinterest</a>
+            <a href="#/socials">Socials</a>
+            <a href="#/moodboards">Spotify Playlists</a>
+            <a href="#/stocks">Stocks</a>
+            <a href="#/coffee">Buy me a coffee</a>
           </div>
           <div className="links">
             <div className="t-label" style={{ color: 'var(--accent)', marginBottom: 8 }}>
               Etc.
             </div>
-            <a href="#">Press</a>
-            <a href="#">Contact</a>
-            <a href="#">Colophon</a>
+            <a href="#/contact">Contact</a>
+            <a href="#/report-bug">Report a Bug</a>
+            <a href="#/about">About Me</a>
           </div>
         </div>
         <div className="meta">

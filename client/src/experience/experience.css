@@ -620,6 +620,33 @@
 }
 .izx-lp-seal .izx-sc-meta { text-align: center; margin-top: 0; }
 
+/* Hub-Kacheln der öffentlichen Landing → Public-Sektionen */
+.izx-lp-hub {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  width: min(560px, 92%);
+  margin: 4px 0 4px;
+}
+.izx-lp-tile {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  text-align: left;
+  padding: 12px 14px;
+  border: 1px solid var(--border-hairline);
+  border-radius: 14px;
+  background: var(--izx-surface);
+  transition: border-color 180ms, background 180ms, transform 300ms var(--izx-spring);
+}
+.izx-lp-tile:hover {
+  border-color: var(--border-hairline-strong);
+  background: var(--izx-surface-hi);
+  transform: translateY(-2px);
+}
+.izx-lp-tile-label { font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 14px; color: var(--text-primary); }
+.izx-lp-tile-desc { font-size: 10.5px; letter-spacing: 0.06em; color: var(--text-tertiary); }
+
 @media (max-width: 1150px) {
   .izx-lp-panel { grid-template-columns: 1fr 250px; }
 }
@@ -630,6 +657,7 @@
 @media (max-width: 700px) {
   .izx-lp-panel { height: min(680px, 86vh); padding: 12px; }
   .izx-lp-top { padding: 6px 6px 10px; }
+  .izx-lp-hub { grid-template-columns: repeat(2, 1fr); width: 100%; }
 }
 @media (max-height: 720px) {
   .izx-lp-panel { height: 92vh; }
