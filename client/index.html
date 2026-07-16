@@ -12,10 +12,9 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
-    <script
-      defer
-      src="%VITE_ANALYTICS_ENDPOINT%/umami"
-      data-website-id="%VITE_ANALYTICS_WEBSITE_ID%"></script>
+    <!-- Analytics bewusst entfernt: der %VITE_…%-Platzhalter war nie gesetzt
+         und erzeugte bei jedem Aufruf eine fehlschlagende Anfrage. Bei Bedarf
+         mit echtem Endpoint wieder einsetzen. -->
   </body>
 
 </html>

@@ -1,0 +1,22 @@
+// IZURÉ auf Cloudflare Workers (Static Assets + Zero-Trust-Gate).
+// Deploy: npm run cf:deploy   ·   Lokal: npm run cf:dev
+// Zero-Trust-Einrichtung: siehe DEPLOY_CLOUDFLARE.md
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "izure",
+  "compatibility_date": "2026-07-16",
+  "main": "worker/index.ts",
+  "assets": {
+    "directory": "./dist/public",
+    "not_found_handling": "single-page-application",
+    "binding": "ASSETS",
+    // /auth/* geht immer zuerst an den Worker (Zero-Trust-Gate),
+    // alles andere wird direkt als statisches Asset ausgeliefert.
+    "run_worker_first": ["/auth/*"]
+  },
+  "routes": [
+    { "pattern": "izu-re.com", "custom_domain": true },
+    { "pattern": "www.izu-re.com", "custom_domain": true }
+  ],
+  "observability": { "enabled": true }
+}

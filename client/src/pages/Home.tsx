@@ -87,6 +87,9 @@ export default function Home() {
   const lock = () => {
     sessionStorage.removeItem('izure-unlocked');
     setUnlocked(false);
+    // Zero-Trust-Session (Cloudflare Access) mit beenden — fire-and-forget,
+    // lokal/ohne Access läuft der Aufruf ins Leere.
+    fetch('/cdn-cgi/access/logout', { redirect: 'manual' }).catch(() => {});
     navigate('/');
   };
 
