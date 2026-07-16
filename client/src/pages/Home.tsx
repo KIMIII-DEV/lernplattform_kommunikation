@@ -6,6 +6,7 @@ import ThemeToggle from '@/components/shell/ThemeToggle';
 import { useIsMobile } from '@/components/shell/useIsMobile';
 import { Seal } from '@/components/primitives';
 import Experience from '@/experience/Experience';
+import LandingPage from './Landing';
 import LoginPage from './Login';
 import PrivateDashboard from './PrivateDashboard';
 import StudyPage from './Study';
@@ -90,11 +91,11 @@ export default function Home() {
   };
 
   const renderPage = () => {
-    // --- Public Layer (IMG_0405) ---
-    // Öffentliche Startseite = das frühere Cockpit-Design (Study-OS-Look) als
-    // Showcase; der Sprung in die echte Study führt über das Gate in den
-    // privaten Layer.
-    if (route === '/' || route === '') return <Experience onOpenLf={() => navigate('/private/learn')} />;
+    // --- Public Layer (IMG_0409) ---
+    // Öffentliche Startseite = Public Cockpit: das Cockpit-DESIGN bleibt, der
+    // Inhalt ist public (Stocks, Pegelrad, direkte Public-Nav). Die Lernecke
+    // (Experience) lebt ausschließlich privat unter /private/learn.
+    if (route === '/' || route === '') return <LandingPage navigate={navigate} />;
     if (route === '/about') return <AboutPage />;
     if (route === '/moodboards') return <MoodboardsPage />;
     if (route === '/stocks') return <StocksPage />;
@@ -122,7 +123,7 @@ export default function Home() {
         </Suspense>
       );
     }
-    return <Experience onOpenLf={() => navigate('/private/learn')} />;
+    return <LandingPage navigate={navigate} />;
   };
 
   // Auf dem Cockpit: keine globale Rail (es bringt seine eigene mit), kein Footer,

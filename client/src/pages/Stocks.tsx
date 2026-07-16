@@ -1,25 +1,10 @@
 import { Stage, Card, Badge, StatChain } from '@/components/primitives';
 import { SectionHead } from '@/components/izure/primitives';
+import { WATCHLIST } from '@/lib/publicData';
 
 /* IZURE Stocks — Public Layer (IMG_0405). PLATZHALTER.
-   Später leicht ersetzbar: nur WATCHLIST füllen und in einem useEffect echte
-   Kurse laden (z. B. Finnhub/Alpha Vantage mit Key oder eine andere Quelle).
-   Bis dahin Demo-Werte + „Demo"-Badge, damit nichts Echtes vorgetäuscht wird. */
-
-interface Quote {
-  name: string;
-  ticker: string;
-  note: string;
-  price?: number; // wird später aus der API befüllt
-  changePct?: number;
-}
-
-// TODO(Phase B): echte Ticker + Datenquelle. Werte unten sind Demo/Platzhalter.
-const WATCHLIST: Quote[] = [
-  { name: 'Deutsche Telekom AG', ticker: 'DTE.DE', note: 'Xetra', price: undefined, changePct: undefined },
-  { name: 'MSCI ACWI ACC (ETF)', ticker: 'IE00B6R52259', note: 'iShares · thes.', price: undefined, changePct: undefined },
-  { name: 'Weitere folgen', ticker: '—', note: 'Watchlist erweiterbar', price: undefined, changePct: undefined },
-];
+   Datenquelle geteilt mit der Landing-Card: client/src/lib/publicData.ts.
+   Später leicht ersetzbar: WATCHLIST dort füllen / echte Kurse laden. */
 
 export default function StocksPage() {
   return (
