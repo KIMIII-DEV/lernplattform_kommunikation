@@ -3,7 +3,10 @@
 // Zero-Trust-Einrichtung: siehe DEPLOY_CLOUDFLARE.md
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "izure",
+  // Name muss dem in der Cloudflare-Git-Integration verbundenen Worker
+  // entsprechen (historisch "iruze"); rein internes Label, die Domain
+  // bleibt izu-re.com.
+  "name": "iruze",
   "compatibility_date": "2026-07-16",
   "main": "worker/index.ts",
   "assets": {
