@@ -87,9 +87,9 @@ export default function Home() {
   const lock = () => {
     sessionStorage.removeItem('izure-unlocked');
     setUnlocked(false);
-    // Zero-Trust-Session (Cloudflare Access) mit beenden — fire-and-forget,
-    // lokal/ohne Access läuft der Aufruf ins Leere.
-    fetch('/cdn-cgi/access/logout', { redirect: 'manual' }).catch(() => {});
+    // TOTP-Session-Cookie serverseitig löschen — fire-and-forget, lokal
+    // (reiner Vite-Dev-Server ohne Worker) läuft der Aufruf ins Leere.
+    fetch('/auth/logout', { method: 'POST' }).catch(() => {});
     navigate('/');
   };
 

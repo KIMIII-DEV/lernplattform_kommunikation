@@ -1,73 +1,102 @@
-# IZURÉ auf Cloudflare — Deploy + Zero Trust (izu-re.com)
+# IZURÉ auf Cloudflare — Deploy + TOTP-Login (izu-re.com)
 
 Die App läuft als **Cloudflare Worker mit Static Assets** (SPA aus `dist/public`,
-Worker nur für `/auth/*`). Der private Layer wird durch **Cloudflare Zero Trust
-(Access)** geschützt: Login per One-Time-PIN („Zero Trust Code") an erlaubte
-E-Mail-Adressen — das alte Codewort existiert nur noch als Dev-Fallback im
-lokalen Vite-Dev-Server.
+Worker nur für `/auth/*`). Der private Layer wird durch einen **TOTP-Login**
+geschützt — wie bei Google Authenticator/Authy: ein 6-stelliger Code, der
+alle 30 Sekunden rotiert (RFC 6238). Kein externer Identity-Provider, kein
+Cloudflare Access nötig. Der Worker selbst prüft den Code gegen ein Secret,
+das **niemals im Repo steht**, sondern nur als verschlüsseltes Worker-Secret
+im Cloudflare-Dashboard existiert.
 
-## 1) Einmalig: wrangler authentifizieren
+## 1) Git-Integration (einmalig, falls noch nicht eingerichtet)
+
+Dashboard → **Workers & Pages → Create → Workers → Import a repository**
+→ GitHub verbinden → Repo wählen → Branch `claude/izure-learning-platform-VSBfu`
+(oder `main`, falls dorthin gemerged) → Build command `npx vite build`,
+Deploy command `npx wrangler deploy`. Danach deployt jeder Push automatisch.
+
+## 2) TOTP-Secret erzeugen und im Dashboard eintragen
+
+Das Secret ist ein zufälliger Base32-String (RFC 4648), 20 Byte Entropie.
+Erzeuge eins lokal (oder lass es dir generieren):
 
 ```bash
-npx wrangler login          # öffnet den Browser (auf deinem Rechner)
-# ODER headless mit API-Token (Dashboard → My Profile → API Tokens →
-# Template „Edit Cloudflare Workers"):
-export CLOUDFLARE_API_TOKEN=…
+node -e "
+const { webcrypto: c } = require('node:crypto');
+const A = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567';
+const b = c.getRandomValues(new Uint8Array(20));
+let bits=''; for (const x of b) bits += x.toString(2).padStart(8,'0');
+let out=''; for (let i=0;i<bits.length;i+=5) out += A[parseInt(bits.slice(i,i+5).padEnd(5,'0'),2)];
+console.log(out);
+"
 ```
 
-## 2) Deploy
+Dann im Dashboard: **Workers & Pages → iruze → Settings → Variables and
+secrets → Add → Type: Secret** — Name **`TOTP_SECRET`**, Value = der oben
+erzeugte String. Speichern (löst einen Redeploy aus, das ist normal).
+
+**Wichtig:** dieses Secret ist der einzige Schlüssel zum Backroom. Nirgends
+committen, nicht in Screenshots teilen. Wer es hat, kann gültige Codes
+berechnen.
+
+## 3) Authenticator-App einrichten
+
+In Google Authenticator, Authy o. Ä.: **„Setup-Schlüssel manuell
+eingeben"** (nicht QR-Scan, dafür bräuchte es ein QR-Bild):
+
+- Konto-/Kontenname: `IZURÉ`
+- Ihr Schlüssel: der `TOTP_SECRET`-Wert aus Schritt 2
+- Typ: **Zeitbasiert** (Standard — Algorithmus SHA1, 6 Stellen, 30s sind
+  überall die Vorgabe, muss man i. d. R. nicht extra einstellen)
+
+Die App zeigt danach einen 6-stelligen Code, der alle 30 Sekunden wechselt.
+
+## 4) Deploy
 
 ```bash
-npm run cf:deploy           # baut (vite build) und deployt den Worker
+npm run cf:deploy
 ```
 
-Die Custom Domains `izu-re.com` und `www.izu-re.com` sind in `wrangler.jsonc`
-deklariert — beim ersten Deploy legt Cloudflare die DNS-Einträge automatisch
-an, weil die Zone dir gehört. (Falls `www` nicht gewünscht: den Eintrag in
-`wrangler.jsonc` unter `routes` entfernen.)
+(Oder einfach pushen — die Git-Integration baut automatisch.) Die Custom
+Domains `izu-re.com` und `www.izu-re.com` sind in `wrangler.jsonc` deklariert.
 
-Danach ist die Seite unter https://izu-re.com erreichbar. Der private Layer
-bleibt zu, bis Schritt 3 eingerichtet ist.
+## Wie der Login läuft
 
-## 3) Zero Trust einrichten (einmalig, ~5 Minuten im Dashboard)
-
-Dashboard → **Zero Trust** (one.dash.cloudflare.com) → ggf. Team-Namen wählen
-(Free-Plan reicht, bis 50 Nutzer):
-
-1. **Access → Applications → Add an application → Self-hosted**
-   - Application name: `IZURÉ Backroom`
-   - **Public hostname:** Domain `izu-re.com`, Path `auth` (schützt `izu-re.com/auth/*`)
-   - Optional zweiter Hostname: `www.izu-re.com`, Path `auth`
-2. **Policy** (gleich im Assistenten):
-   - Name: `Members`, Action: **Allow**
-   - Include → Selector **Emails** → deine E-Mail-Adresse(n) eintragen
-     (jede weitere erlaubte Person einfach ergänzen)
-3. **Authentication → Login methods:** sicherstellen, dass **One-time PIN**
-   aktiv ist (Standard). Das ist der „Zero Trust Code" per Mail.
-4. Speichern. Fertig.
-
-### Wie der Login dann läuft
-„Step inside" → `/auth/unlock` → Cloudflare Access fragt die E-Mail ab und
-schickt den Code → nach Eingabe zurück in die App → die App bestätigt die
-Session über `/auth/check` und öffnet den Backroom. „Step out" beendet auch
-die Access-Session (`/cdn-cgi/access/logout`).
+„Step inside" → 6-stelligen Code aus der Authenticator-App eintippen →
+automatischer Submit bei der 6. Ziffer → der Worker prüft den Code
+(`/auth/verify`) und setzt bei Erfolg ein signiertes, httpOnly Session-Cookie
+(12h gültig, ±30s Toleranz für Uhr-Drift) → die App fragt die Session über
+`/auth/check` ab und öffnet den Backroom. „Step out" löscht das Cookie
+(`/auth/logout`).
 
 ## Lokal testen
 
 ```bash
-npm run dev        # Vite-Dev-Server: Codewort-Fallback aktiv (kein Access lokal)
-npm run cf:dev     # wrangler dev (localhost): /auth/* mit Dev-Bypass → voller Flow
+npm run dev        # Vite-Dev-Server: Codewort-Fallback (kein Worker lokal)
+npm run cf:dev      # wrangler dev: DEV_BYPASS=1 → jeder Code / kein Cookie nötig
 ```
 
-Auf `*.workers.dev` (falls aktiviert) hängt **kein** Access vor `/auth/*` —
-dort bleibt der private Layer bewusst gesperrt (401), es gibt keinen Bypass.
+Auf jedem echten Deploy (izu-re.com, `*.workers.dev`) existiert `DEV_BYPASS`
+nicht — dort zählt ausschließlich ein gültiger TOTP-Code.
+
+## Empfohlen: Rate-Limit-Regel
+
+`/auth/verify` bremst falsche Versuche bewusst nicht künstlich aus (das
+würde bei korrekten Codes nur unnötig verzögern). Für zusätzlichen Schutz
+gegen automatisiertes Durchprobieren: Dashboard → **Security → WAF → Rate
+limiting rules** → Regel auf Pfad `/auth/verify`, z. B. „mehr als 10
+Anfragen pro Minute pro IP → blocken für 10 Minuten". Optional, aber sinnvoll.
 
 ## Hinweise
 - `vercel.json` bleibt vorerst im Repo, bis der Cloudflare-Betrieb steht;
   danach kann es zusammen mit `server/` (Express wird auf Cloudflare nicht
   genutzt) entfernt werden.
+- Secret rotieren: einfach einen neuen Wert erzeugen, im Dashboard
+  überschreiben, in der Authenticator-App neu einrichten — alte Sessions
+  bleiben bis zum Ablauf gültig (max. 12h), da die Signatur vom Secret
+  abhängt.
 - Ehrliche Grenze: Die Lerninhalte stecken als statische Daten im JS-Bundle.
-  Zero Trust schützt den **Zugang/Login** sauber; wer das Bundle analysiert,
+  Der TOTP-Login schützt den **Zugang** sauber; wer das Bundle analysiert,
   kann die Inhalte theoretisch lesen. Harte Inhalts-Trennung hieße, die
-  privaten Daten hinter Access-geschützte API-Pfade zu verlagern — möglich
-  als späterer Ausbau (der `/auth/*`-Worker ist die Basis dafür).
+  privaten Daten hinter `/auth`-geschützte API-Pfade zu verlagern — möglich
+  als späterer Ausbau.

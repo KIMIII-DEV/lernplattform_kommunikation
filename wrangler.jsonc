@@ -1,6 +1,6 @@
-// IZURÉ auf Cloudflare Workers (Static Assets + Zero-Trust-Gate).
+// IZURÉ auf Cloudflare Workers (Static Assets + TOTP-Login).
 // Deploy: npm run cf:deploy   ·   Lokal: npm run cf:dev
-// Zero-Trust-Einrichtung: siehe DEPLOY_CLOUDFLARE.md
+// Secret setzen + Authenticator-App einrichten: siehe DEPLOY_CLOUDFLARE.md
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   // Name muss dem in der Cloudflare-Git-Integration verbundenen Worker
@@ -13,7 +13,7 @@
     "directory": "./dist/public",
     "not_found_handling": "single-page-application",
     "binding": "ASSETS",
-    // /auth/* geht immer zuerst an den Worker (Zero-Trust-Gate),
+    // /auth/* geht immer zuerst an den Worker (TOTP-Verify/Session-Check),
     // alles andere wird direkt als statisches Asset ausgeliefert.
     "run_worker_first": ["/auth/*"]
   },
