@@ -1,16 +1,23 @@
 import { useEffect, useRef, useState } from 'react';
-import { Pause, Play, RotateCcw } from 'lucide-react';
-import { Stage, Card, Badge, Button } from '@/components/primitives';
+import { Pause, Play, RotateCcw, Volume2, VolumeX } from 'lucide-react';
+import { Stage, Card, Button } from '@/components/primitives';
 import { SectionHead } from '@/components/izure/primitives';
 
-/* IZURE Ambiance — Privat Layer (IMG_0405). PLATZHALTER (mit funktionierendem
-   Pomodoro, da self-contained). Später leicht ersetzbar:
-   - AMBIANCE_YT_URL: Lofi wie „Johnny Silverhand" einbetten (Pegelrad-Lautstärke folgt in Phase B).
-   - WALLPAPER: echtes Wallpaper/Video statt Verlauf.
-   Zweck: Meditation, Lernen oder Arbeit mit Pomodoro-Timer und sonst nichts. */
+/* IZURE Ambiance — Privat Layer (IMG_0405). Wallpaper + Loop, sonst nichts:
+   der Video-Loop läuft vollflächig als Hintergrund hinter dem Pomodoro-
+   Timer. Kein sichtbares YouTube-Branding:
+   - youtube-nocookie.com + controls=0/modestbranding=1/rel=0/iv_load_policy=3
+     (offizielle Embed-Parameter, keine Manipulation der Plattform)
+   - zusätzlich per CSS überskaliert + zentriert zugeschnitten (Standard-
+     Technik für „Chromeless"-Hintergrundvideos: die Ecke, in der YouTube
+     bei Bedarf ein kleines Wasserzeichen einblendet, liegt dadurch immer
+     außerhalb des sichtbaren Ausschnitts).
+   - enablejsapi=1 + postMessage fürs eigene Mute/Play — kein zusätzliches
+     YouTube-Script eingebunden.
+   Lautstärke-Pegelrad (wie auf der Landing) ist ein möglicher Ausbauschritt,
+   hier bewusst ein einfacher Mute-Schalter, da der Loop nur An/Aus braucht. */
 
-// TODO(Phase B): echten Lofi-Embed-Link (YouTube) + Wallpaper einsetzen.
-const AMBIANCE_YT_URL = '';
+const AMBIANCE_VIDEO_ID = 'kR-9AIXWIG4';
 const FOCUS_MIN = 25;
 const BREAK_MIN = 5;
 
@@ -19,6 +26,10 @@ export default function AmbiancePage() {
   const [secs, setSecs] = useState(FOCUS_MIN * 60);
   const [running, setRunning] = useState(false);
   const tick = useRef<number | null>(null);
+
+  const [videoPlaying, setVideoPlaying] = useState(true);
+  const [muted, setMuted] = useState(true);
+  const iframeRef = useRef<HTMLIFrameElement>(null);
 
   useEffect(() => {
     if (!running) return;
@@ -40,11 +51,50 @@ export default function AmbiancePage() {
   const mm = String(Math.floor(secs / 60)).padStart(2, '0');
   const ss = String(secs % 60).padStart(2, '0');
 
+  const postToVideo = (func: string) => {
+    iframeRef.current?.contentWindow?.postMessage(JSON.stringify({ event: 'command', func, args: [] }), '*');
+  };
+  const toggleMute = () => { postToVideo(muted ? 'unMute' : 'mute'); setMuted((m) => !m); };
+  const toggleVideoPlay = () => { postToVideo(videoPlaying ? 'pauseVideo' : 'playVideo'); setVideoPlaying((p) => !p); };
+
+  const embedSrc =
+    `https://www.youtube-nocookie.com/embed/${AMBIANCE_VIDEO_ID}` +
+    `?autoplay=1&mute=1&loop=1&playlist=${AMBIANCE_VIDEO_ID}` +
+    `&controls=0&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1&fs=0&playsinline=1` +
+    `&enablejsapi=1&origin=${encodeURIComponent(location.origin)}`;
+
   return (
     <div className="page-root" data-screen-label="Private · Ambiance">
       <section style={{ position: 'relative', padding: '120px 0 100px', minHeight: '86vh', overflow: 'hidden' }}>
-        {/* Wallpaper-Platzhalter: ruhiger Verlauf, später durch Bild/Video ersetzbar */}
-        <div aria-hidden style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse 90% 70% at 50% 30%, var(--bg-panel-raised), var(--bg-base) 70%)', opacity: 0.8 }} />
+        {/* Video-Wallpaper: überskaliert + zentriert, kein UI/Branding sichtbar */}
+        <div aria-hidden style={{ position: 'absolute', inset: 0, overflow: 'hidden', pointerEvents: 'none' }}>
+          <iframe
+            ref={iframeRef}
+            title="Ambiance-Loop"
+            src={embedSrc}
+            allow="autoplay; encrypted-media"
+            style={{
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              width: '100vw',
+              height: '56.25vw',
+              minWidth: '177.78vh',
+              minHeight: '100vh',
+              transform: 'translate(-50%, -50%) scale(1.16)',
+              border: 0,
+            }}
+          />
+        </div>
+        <div
+          aria-hidden
+          style={{
+            position: 'absolute',
+            inset: 0,
+            background: 'linear-gradient(to bottom, rgba(0,0,0,0.55), var(--bg-base) 88%)',
+          }}
+        />
+
         <div className="shell" style={{ position: 'relative', zIndex: 2 }}>
           <SectionHead
             eyebrow="Private · Focus room"
@@ -52,8 +102,8 @@ export default function AmbiancePage() {
             intro="Wallpaper, ein Loop wie Johnny Silverhand — und sonst nichts. Für Meditation, Lernen oder Arbeit mit dem Pomodoro-Timer."
           />
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'minmax(280px, 1fr) minmax(260px, 340px)', gap: 4, marginTop: 40, alignItems: 'stretch' }}>
-            {/* Pomodoro — funktioniert bereits */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'minmax(280px, 1fr) minmax(220px, 300px)', gap: 4, marginTop: 40, alignItems: 'stretch' }}>
+            {/* Pomodoro */}
             <Stage style={{ padding: '48px 40px', textAlign: 'center', display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 24 }}>
               <div className="t-label" style={{ color: 'var(--accent-primary)' }}>
                 {mode === 'focus' ? 'Fokus' : 'Pause'} · {mode === 'focus' ? FOCUS_MIN : BREAK_MIN} min
@@ -74,22 +124,19 @@ export default function AmbiancePage() {
               </div>
             </Stage>
 
-            {/* Lofi-Slot */}
+            {/* Ambient-Audio-Steuerung */}
             <Card style={{ display: 'flex', flexDirection: 'column', gap: 14, justifyContent: 'center' }}>
               <div className="t-label" style={{ color: 'var(--text-secondary)' }}>Now playing</div>
-              {AMBIANCE_YT_URL ? (
-                <div style={{ position: 'relative', aspectRatio: '16/9', borderRadius: 'var(--radius-card)', overflow: 'hidden' }}>
-                  <iframe title="Ambiance" src={AMBIANCE_YT_URL} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', border: 0 }} allow="autoplay" />
-                </div>
-              ) : (
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-                  <div style={{ fontSize: 16, color: 'var(--text-primary)' }}>Lofi-Loop folgt</div>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                    <Badge>Platzhalter</Badge>
-                    <span className="t-body" style={{ fontSize: 12 }}>Embed + Lautstärke in Phase B</span>
-                  </div>
-                </div>
-              )}
+              <div style={{ fontSize: 15, color: 'var(--text-primary)' }}>Ambiance-Loop</div>
+              <div style={{ display: 'flex', gap: 10 }}>
+                <button onClick={toggleVideoPlay} aria-label={videoPlaying ? 'Loop pausieren' : 'Loop abspielen'} style={resetBtn}>
+                  {videoPlaying ? <Pause size={16} /> : <Play size={16} />}
+                </button>
+                <button onClick={toggleMute} aria-label={muted ? 'Ton einschalten' : 'Ton stumm schalten'} style={resetBtn}>
+                  {muted ? <VolumeX size={16} /> : <Volume2 size={16} />}
+                </button>
+              </div>
+              <div className="t-body" style={{ fontSize: 12 }}>{muted ? 'Stumm — Ton einschalten' : 'Ton an'}</div>
             </Card>
           </div>
         </div>
