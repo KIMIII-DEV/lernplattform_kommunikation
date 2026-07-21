@@ -1,6 +1,8 @@
 import { Suspense, lazy, useEffect, useState } from 'react';
 import { Coffee, Home as HomeIcon, LayoutGrid, Lock, LogOut, TrendingUp, UserRound } from 'lucide-react';
 import { Footer, GrainFilter, GrainOverlay } from '@/components/izure/primitives';
+import AmbiancePlayer from '@/components/izure/AmbiancePlayer';
+import { AmbianceProvider, useAmbiance } from '@/contexts/AmbianceContext';
 import IconRail, { IconRailItem, RailAction } from '@/components/shell/IconRail';
 import ThemeToggle from '@/components/shell/ThemeToggle';
 import { useIsMobile } from '@/components/shell/useIsMobile';
@@ -26,6 +28,15 @@ import AmbiancePage from './Ambiance';
 const PreviewPage = lazy(() => import('./Preview'));
 
 export default function Home() {
+  return (
+    <AmbianceProvider>
+      <HomeShell />
+    </AmbianceProvider>
+  );
+}
+
+function HomeShell() {
+  const ambiance = useAmbiance();
   const [route, setRoute] = useState<string>(() => location.hash.slice(1) || '/');
   const [unlocked, setUnlocked] = useState<boolean>(() => sessionStorage.getItem('izure-unlocked') === '1');
   const [transitionBlack, setTransitionBlack] = useState(false);
@@ -90,6 +101,7 @@ export default function Home() {
     // TOTP-Session-Cookie serverseitig löschen — fire-and-forget, lokal
     // (reiner Vite-Dev-Server ohne Worker) läuft der Aufruf ins Leere.
     fetch('/auth/logout', { method: 'POST' }).catch(() => {});
+    ambiance.stop();
     navigate('/');
   };
 
@@ -164,6 +176,10 @@ export default function Home() {
       {/* Siegel Corner-Persistent (Blueprint Abschnitt 4) — auf Shell-Ebene,
           nie innerhalb einer Stage (deren filter wäre Containing-Block für fixed). */}
       <Seal state={sealState} onRouteAnimationEnd={() => setSealState('idle')} />
+
+      {/* Ambiance-Player: einmalig auf Shell-Ebene, überlebt jeden Routenwechsel.
+          Vollbild-Wallpaper nur auf /private/ambiance, sonst unsichtbar weiterlaufend. */}
+      <AmbiancePlayer fullBleed={route === '/private/ambiance'} />
 
       {!isCockpit && (
         <IconRail
