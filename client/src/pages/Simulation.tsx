@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { GhostText } from '@/components/izure/primitives';
 import { ModuleDeep, ModuleSummary } from '@/lib/modules';
-import type { SimResult } from './Study';
+import type { SimResult } from './PrivateOSPage';
 
 export default function Simulation({
   module: m,

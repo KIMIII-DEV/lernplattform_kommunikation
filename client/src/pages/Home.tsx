@@ -7,13 +7,9 @@ import IconRail, { IconRailItem, RailAction } from '@/components/shell/IconRail'
 import ThemeToggle from '@/components/shell/ThemeToggle';
 import { useIsMobile } from '@/components/shell/useIsMobile';
 import { Seal } from '@/components/primitives';
-import Experience from '@/experience/Experience';
 import LandingPage from './Landing';
 import LoginPage from './Login';
-import PrivateDashboard from './PrivateDashboard';
-import StudyPage from './Study';
-import BarkeeperPage from './Barkeeper';
-import WirePage from './Wire';
+import PrivateOSPage from './PrivateOSPage';
 import AboutPage from './About';
 import MoodboardsPage from './Moodboards';
 import StocksPage from './Stocks';
@@ -21,8 +17,6 @@ import CoffeePage from './Coffee';
 import ContactPage from './Contact';
 import ReportBugPage from './ReportBug';
 import SocialsPage from './Socials';
-import WeatherPage from './Weather';
-import AmbiancePage from './Ambiance';
 
 // DEV-Testbett für die Phase-2-Primitives — lazy, damit es nie im Prod-Bundle landet.
 const PreviewPage = lazy(() => import('./Preview'));
@@ -56,9 +50,10 @@ function HomeShell() {
   }, []);
 
   // Zwei Vollbild-Bühnen ohne globale Rail/Footer/Scroll (IMG_0405):
-  //  - `/`             = öffentliche Landing (Cockpit-Look-Hub, Musik + Pegelrad)
-  //  - `/private/learn`= private Lernecke (Study-Cockpit hinter Login)
-  const isCockpit = route === '/' || route === '' || route === '/private/learn';
+  //  - `/`         = öffentliche Landing (Cockpit-Look-Hub, Musik + Pegelrad)
+  //  - `/private/*`= der gesamte private Layer als eine PrivateOS-Shell
+  //    (eigene Rail + Command-Palette, kein Scroll) hinter dem Login.
+  const isCockpit = route === '/' || route === '' || route.startsWith('/private');
   const isPrivate = route.startsWith('/private');
 
   useEffect(() => {
@@ -124,13 +119,10 @@ function HomeShell() {
     if (route.startsWith('/private') && !unlocked) {
       return <LoginPage navigate={navigate} onUnlock={unlock} />;
     }
-    // --- Privat Layer (hinter Login) ---
-    if (route === '/private') return <PrivateDashboard navigate={navigate} />;
-    if (route === '/private/learn') return <StudyPage />;
-    if (route === '/private/barkeeper') return <BarkeeperPage />;
-    if (route === '/private/news') return <WirePage />;
-    if (route === '/private/weather') return <WeatherPage />;
-    if (route === '/private/ambiance') return <AmbiancePage />;
+    // --- Privat Layer (hinter Login): eine Shell für alle /private/*-Routen ---
+    if (route.startsWith('/private')) {
+      return <PrivateOSPage route={route} navigate={navigate} onExit={lock} />;
+    }
     if (import.meta.env.DEV && route === '/preview') {
       return (
         <Suspense fallback={null}>
@@ -146,26 +138,17 @@ function HomeShell() {
   const showFooter = !isCockpit && !route.startsWith('/private') && route !== '/login';
 
   // Globale Shell nach IMG_0405: Public-Sektionen top-level, Utility-Links
-  // (Socials/Contact/Report-a-Bug) im Footer. Der gegatete Backroom-Zweig
-  // trägt die privaten Räume (Dashboard = der Zweig selbst).
+  // (Socials/Contact/Report-a-Bug) im Footer. "The Backroom" führt in die
+  // PrivateOS-Shell hinein — die hat ihre eigene Rail/Navigation, darum
+  // kein Children-Flyout mehr nötig (isCockpit blendet die globale Rail
+  // ohnehin für jede /private/*-Route aus).
   const railItems: IconRailItem[] = [
     { id: '/', icon: HomeIcon, label: 'Home' },
     { id: '/about', icon: UserRound, label: 'About' },
     { id: '/moodboards', icon: LayoutGrid, label: 'Moods' },
     { id: '/stocks', icon: TrendingUp, label: 'Stocks' },
     { id: '/coffee', icon: Coffee, label: 'Coffee' },
-    {
-      id: '/private',
-      icon: Lock,
-      label: 'The Backroom',
-      children: [
-        { id: '/private/learn', label: 'Study', href: '/private/learn' },
-        { id: '/private/barkeeper', label: 'Marco', href: '/private/barkeeper' },
-        { id: '/private/news', label: 'Wire', href: '/private/news' },
-        { id: '/private/weather', label: 'Wetter', href: '/private/weather' },
-        { id: '/private/ambiance', label: 'Ambiance', href: '/private/ambiance' },
-      ],
-    },
+    { id: '/private', icon: Lock, label: 'The Backroom' },
   ];
 
   return (
