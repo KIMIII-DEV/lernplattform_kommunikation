@@ -145,7 +145,12 @@
    Video-Loop (globaler AmbiancePlayer, fullBleed, liegt dahinter auf
    z-index 0) sichtbar durchscheint statt vom opaken Panel verdeckt zu
    werden. */
-.private-os .po-panel.is-ambiance-active { background: linear-gradient(180deg, rgba(10,10,12,.5), rgba(6,6,7,.68)); backdrop-filter: blur(22px) saturate(120%); transition: background 500ms var(--po-ease); }
+.private-os .po-panel.po-ambiance-active { background: linear-gradient(180deg, rgba(10,10,12,.42), rgba(6,6,7,.58)); backdrop-filter: blur(16px) saturate(120%); transition: background 500ms var(--po-ease); }
+/* Damit der echte Video-Loop durchs milchige Panel überhaupt sichtbar wird,
+   muss auch die Hülle selbst (deckende Grundfarbe) UND das fast blickdichte
+   Punktmuster weg — beide lagen bislang zwischen Video und Panel. */
+.private-os.po-ambiance-active { background: transparent; }
+.private-os.po-ambiance-active .po-bg { opacity: 0; transition: opacity 400ms ease; }
 
 /* ============ RAIL ============ */
 .private-os .po-rail { position: relative; z-index: 30; display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 16px 0 14px; border-right: 1px solid var(--po-hair); background: linear-gradient(180deg, rgba(255,255,255,0.015), transparent); }
@@ -483,13 +488,21 @@
 .private-os .h-r em { font-style: normal; font-family: var(--po-f-mono); font-size: 11px; }
 
 /* ==================== AMBIANCE ==================== */
-.private-os .amb-grid { height: 100%; display: grid; grid-template-columns: 1fr; gap: 13px; }
-.private-os .amb-player { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; overflow: hidden; padding: 22px; height: 100%; }
-.private-os .amb-player::before { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 50% at 50% 34%, rgba(201,169,110,.12), transparent 70%); pointer-events: none; }
-.private-os .ap-meta { text-align: center; position: relative; }
-.private-os .ap-meta h2 { font-size: clamp(20px, 2.2vw, 28px); color: var(--po-chrome); margin: 3px 0; }
-.private-os .ap-artist { font-size: 11px; color: var(--po-txt-3); letter-spacing: .1em; }
-.private-os .ap-transport { display: flex; align-items: center; gap: 16px; position: relative; }
+.private-os .amb-grid { height: 100%; position: relative; }
+/* Bedienelemente unten links statt zentriert — das Video/Wallpaper soll
+   frei sichtbar bleiben, die Steuerung nur als kleiner Anker in der Ecke. */
+.private-os .amb-player-corner {
+  position: absolute; left: 0; bottom: 0;
+  display: flex; flex-direction: column; align-items: flex-start; gap: 14px;
+  padding: 18px 20px;
+  border-radius: var(--po-r-card);
+  background: var(--po-glass-subtle);
+  backdrop-filter: blur(var(--po-blur-sm));
+  border: 1px solid var(--po-hair);
+  max-width: 320px;
+}
+.private-os .ap-meta-corner h2 { font-size: clamp(17px, 1.8vw, 22px); color: var(--po-chrome); margin: 3px 0 0; }
+.private-os .ap-transport-corner { display: flex; align-items: center; gap: 12px; }
 
 /* ============ RESPONSIVE ============ */
 @media (max-height: 780px) {

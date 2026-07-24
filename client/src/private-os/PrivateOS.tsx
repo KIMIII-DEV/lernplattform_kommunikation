@@ -197,8 +197,12 @@ export default function PrivateOS({
   const meta = VIEWS.find((v) => v.id === view)!;
 
   return (
-    <div className={`private-os ${booted ? 'po-ready' : ''} ${motionOn ? '' : 'po-motion-off'}`} data-screen-label={`Private OS · ${meta.dossier}`}>
-      {/* Ambient */}
+    <div className={`private-os ${booted ? 'po-ready' : ''} ${motionOn ? '' : 'po-motion-off'} ${view === 'ambiance' ? 'po-ambiance-active' : ''}`} data-screen-label={`Private OS · ${meta.dossier}`}>
+      {/* Ambient — bei aktiver Ambiance-View ausgeblendet (siehe .po-ambiance-active
+          in private-os.css), damit der echte, global gerenderte Video-Loop
+          (AmbiancePlayer, liegt dahinter) tatsächlich sichtbar wird — sonst
+          verdecken die deckende Grundfarbe dieser Hülle UND das fast blick-
+          dichte Punktmuster (.po-bg-dots) das Video vollständig. */}
       <div className="po-bg" aria-hidden="true">
         <div className="po-bg-fall" ref={fallRef} />
         <div className="po-bg-dots" />
@@ -229,7 +233,7 @@ export default function PrivateOS({
 
       <main className="po-os">
         <div className="po-os-float">
-          <div className={`po-panel ${view === 'ambiance' ? 'is-ambiance-active' : ''}`} ref={panelRef}>
+          <div className={`po-panel ${view === 'ambiance' ? 'po-ambiance-active' : ''}`} ref={panelRef}>
             <div className="po-panel-sheen" />
 
             {/* RAIL */}
