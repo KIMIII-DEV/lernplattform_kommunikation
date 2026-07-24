@@ -145,7 +145,10 @@
    Video-Loop (globaler AmbiancePlayer, fullBleed, liegt dahinter auf
    z-index 0) sichtbar durchscheint statt vom opaken Panel verdeckt zu
    werden. */
-.private-os .po-panel.po-ambiance-active { background: linear-gradient(180deg, rgba(10,10,12,.42), rgba(6,6,7,.58)); backdrop-filter: blur(16px) saturate(120%); transition: background 500ms var(--po-ease); }
+/* Kein backdrop-filter/Blur hier — das Video soll scharf sichtbar bleiben.
+   Nur ein sehr leichtes Abdunkeln oben/unten, damit Topbar-Text und die
+   Bedienelemente unten links lesbar bleiben. */
+.private-os .po-panel.po-ambiance-active { background: linear-gradient(180deg, rgba(6,6,7,.32) 0%, transparent 18%, transparent 78%, rgba(6,6,7,.4) 100%); transition: background 500ms var(--po-ease); }
 /* Damit der echte Video-Loop durchs milchige Panel überhaupt sichtbar wird,
    muss auch die Hülle selbst (deckende Grundfarbe) UND das fast blickdichte
    Punktmuster weg — beide lagen bislang zwischen Video und Panel. */
